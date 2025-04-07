@@ -109,6 +109,9 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
 
 void DisconnectSessionProc(CSession* pSession)
 {
+    // 플레이어 반환
+    playerPool.Free((CPlayer*)pSession->pObj);
+
     return;
 }
 bool CS_CHAT(CSession* pSession, std::string message, std::string channel)

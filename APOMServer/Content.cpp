@@ -13,6 +13,10 @@
 
 #include "RoomManager.h"
 
+#include "ProtoStruct.h"
+
+#include "EncodingUtils.h"
+
 CObject* CreateAcceptObject(void)
 {
     // 오브젝트 생성
@@ -40,12 +44,14 @@ void LoginAcceptObject(CObject* pObj)
 
     // 3. 던전에 플레이어 추가
     // 던전 정보를 플레이어에 주입
-    // 처음엔 Waiting 쪽에 들어감. 플레이어가 참가한 던전의 정보를 보내기 시작. 방의 정보는 [ 새로 접속한 플레이어를 제외한 나머지 플레이어들의 정보, 키 입력 정보와 위치 정보 ]
+    // 처음엔 Waiting 쪽에 들어감
     if (!room->AddPlayer(pPlayer))
     {
         // 룸에 추가 실패 처리
         return;
     }
+    // active로 이동
+    room->MoveToActive(pPlayer->m_ID);
 
     // 4. 접속 성공
 
@@ -53,24 +59,48 @@ void LoginAcceptObject(CObject* pObj)
     // 4-1. 기존 던전에 있던 플레이어의 초기 정보를 새로 접속한 플레이어에게 전송
     //=====================================================================================================================================
 
-    //// 던전에 있던 activePlayer들의 정보를 새로 룸에 접속한 플레이어에게 전송
-    //float posX, posY, posZ;
-    //float rotationAxisX, rotationAxisY;
-    //KDAInfo kdaInfo;
-    //for (const auto& activePlayer : room->m_activePlayers)
-    //{
-    //    if (activePlayer)
-    //    {
-    //        activePlayer->getPosition(posX, posY, posZ);
-    //        activePlayer->GetRotationAxisXY(rotationAxisX, rotationAxisY);
-    //        activePlayer->GetKDAInfo(kdaInfo);
+    // 새로 접속한 플레이어에게 스스로 생성하라고 알림
+    PlayerInfo playerInfo;
+    playerInfo.playerJobIcon = 0;
+    playerInfo.playerMaxHp = 100;
+    playerInfo.playerMaxMp = 0;
+    playerInfo.playerNickname = "user" + std::to_string(pPlayer->m_ID);
 
-    //        SC_CREATE_OTHER_CHARACTER_FOR_SINGLE(
-    //            pSession, activePlayer->m_ID,
-    //            activePlayer->GetSpawnPosIndex(),
-    //            activePlayer->GetMaxHp(), activePlayer->GetCurHp(),
-    //            activePlayer->GetName(), kdaInfo,
-    //            activePlayer->GetWeaponInfo(), activePlayer->GetTeamId());
-    //    }
-    //}
+    std::wstring wideStr = Utf8ToWString(playerInfo.playerNickname);
+    pPlayer->SetName(WStringToUtf8(wideStr));
+
+    SC_SPAWN_CHARACTER_FOR_SINGLE(
+        pSession, pPlayer->m_ID,
+        0, 0,
+        0,
+        playerInfo
+    );
+
+
+    // 이미 있던 activePlayer들에게 새로 룸에 접속한 플레이어의 정보를 전송
+    SC_SPAWN_CHARACTER_FOR_All(pSession, pPlayer->m_ID,
+        0, 0,
+        0,
+        playerInfo);
+
+
+    // 새로 접속한 플레이어에게 이미 있던 activePlayer들 정보를 전송
+    float posX, posY, posZ;
+    float rotationAxisX, rotationAxisY;
+    for (const auto& activePlayer : room->m_activePlayers)
+    {
+        if (activePlayer)
+        {
+            activePlayer->getPosition(posX, posY, posZ);
+            activePlayer->GetRotationAxisXY(rotationAxisX, rotationAxisY);
+
+            SC_SPAWN_CHARACTER_FOR_SINGLE(
+                pSession, activePlayer->m_ID,
+                0, 0,
+                0,
+                playerInfo
+            );
+        }
+    }
+
 }
