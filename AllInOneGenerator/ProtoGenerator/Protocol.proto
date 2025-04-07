@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package game;
+
+enum PacketID {
+// Client → Server
+    CS_Chat = 0;
+    CS_Keyinfo = 1;
+    CS_LoginRequest = 2;
+    CS_PositionSync = 3;
+    CS_RegisterRequest = 4;
+
+// Server → Client
+    SC_Chat = 5;
+    SC_Keyinfo = 6;
+    SC_LoginResponse = 7;
+    SC_PositionSync = 8;
+    SC_RegisterResponse = 9;
+    SC_SpawnCharacter = 10;
+}
+
+message CS_CHAT {
+    string message = 1; // 채팅 메시지
+    string channel = 2; // 채널 이름, 해당 채널에만 출력하도록 함. 나중엔 uint32로 변경 예정
+}
+message CS_KEYINFO {
+    uint32 keyInfo = 1; // 키보드 입력시 관련 움직임 정보 전송
+    float cameraYaw = 2; // 카메라 회전값
+}
+message CS_LOGIN_REQUEST {
+    string userName = 1; // 로그인 시도
+    string password = 2;
+}
+message CS_POSITION_SYNC {
+    float posX = 1; // 위치 정보 동기화
+    float posY = 2;
+}
+message CS_REGISTER_REQUEST {
+    string userName = 1; // 회원가입 시도, 나중에 naver, gmail 등으로 인증용 기능 만들 예정
+    string password = 2;
+    string characterName = 3; // 캐릭터 이름
+}
+message PlayerInfo {
+    string playerNickname = 1; // 이름
+    uint32 playerMaxHp = 2; // 최대 hp
+    uint32 playerMaxMp = 3; // 최대 mp
+    uint32 playerJobIcon = 4; // 직업 아이콘
+}
+message SC_CHAT {
+    uint32 playerID = 1; // 채팅을 보낸 플레이어의 id
+    string message = 2; // 채팅 메시지
+    string channel = 3; // 채널 이름, 해당 채널에만 출력하도록 함. 나중엔 uint32로 변경 예정
+}
+message SC_KEYINFO {
+    uint32 playerID = 1; // 움직임을 보내는 플레이어의 id
+    uint32 keyInfo = 2; // 키보드 입력시 관련 움직임 정보 전송
+    float cameraYaw = 3; // 카메라 회전값
+}
+message SC_LOGIN_RESPONSE {
+    bool success = 1; // 로그인 성공 여부
+    uint32 playerID = 2; // 서버에서 할당한 플레이어 id(세션 id)
+    string characterName = 3; // 미리 설정해뒀던 캐릭터 이름
+}
+message SC_POSITION_SYNC {
+    uint32 playerID = 1; // 위치를 보내는 플레이어의 id
+    float posX = 2; // 위치 정보 동기화
+    float posY = 3;
+}
+message SC_REGISTER_RESPONSE {
+    bool success = 1; // 회원가입 성공 여부
+    string message = 2; // 이건 특별한 메시지를 보내고 싶을 경우 추가, 지금은 필요 없음
+}
+message SC_SPAWN_CHARACTER {
+    uint32 playerID = 1; // 플레이어의 id
+    float posX = 2; // 플레이어의 초기 위치. 나중에 가면 마지막에 로그아웃했던 위치로 변경 예정
+    float posY = 3;
+    float cameraYaw = 4; // 초기 카메라 y축 회전값. 이건 사용하지 않을 수 있으니 놔두기만 함
+    PlayerInfo playerInfo = 5; // 플레이어 정보
+}
