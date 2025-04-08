@@ -121,7 +121,18 @@ bool CS_CHAT(CSession* pSession, std::string message, std::string channel)
 
 bool CS_KEYINFO(CSession* pSession, UINT32 keyInfo, float cameraYaw)
 {
-    return false;
+    // 클라이언트로부터 키 정보가 온 경우, 모든 클라이언트에게 해당 키 정보를 뿌려줘야함
+    
+    // 1. 연결된 플레이어 추출
+    CPlayer* pPlayer = static_cast<CPlayer*>(pSession->pObj);
+
+    // 2. 방 정보 검색
+    CRoom* pRoom = roomManager.GetRoomById(pPlayer->GetRoomId());
+
+    // 3. 방에 있는 자신을 포함한 모든 플레이어들에게 패킷 전송.
+    SC_KEYINFO_FOR_AROUND(nullptr, pRoom, pPlayer->m_ID, keyInfo, cameraYaw);
+
+    return true;
 }
 
 bool CS_LOGIN_REQUEST(CSession* pSession, std::string userName, std::string password)
