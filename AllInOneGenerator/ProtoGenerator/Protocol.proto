@@ -17,7 +17,8 @@ enum PacketID {
     SC_LoginResponse = 8;
     SC_PositionSync = 9;
     SC_RegisterResponse = 10;
-    SC_SpawnCharacter = 11;
+    SC_RemoveCharacter = 11;
+    SC_SpawnCharacter = 12;
 }
 
 message CS_CHAT {
@@ -71,6 +72,9 @@ message SC_POSITION_SYNC {
 message SC_REGISTER_RESPONSE {
     bool success = 1; // 회원가입 성공 여부
     string message = 2; // 이건 특별한 메시지를 보내고 싶을 경우 추가, 지금은 필요 없음
+}
+message SC_REMOVE_CHARACTER {
+    uint32 playerID = 1; // 플레이어의 id
 }
 message SC_SPAWN_CHARACTER {
     uint32 playerID = 1; // 플레이어의 id

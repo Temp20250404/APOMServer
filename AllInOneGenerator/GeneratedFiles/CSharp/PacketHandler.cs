@@ -47,6 +47,14 @@ class PacketHandler
         // TODO: SC_RegisterResponse 패킷 처리 로직을 여기에 구현
     }
 
+    // SC_REMOVE_CHARACTER 패킷을 처리하는 함수
+    public static void SC_RemoveCharacter(PacketSession session, IMessage packet)
+    {
+        SC_REMOVE_CHARACTER removeCharacterPacket = packet as SC_REMOVE_CHARACTER;
+
+        // TODO: SC_RemoveCharacter 패킷 처리 로직을 여기에 구현
+    }
+
     // SC_SPAWN_CHARACTER 패킷을 처리하는 함수
     public static void SC_SpawnCharacter(PacketSession session, IMessage packet)
     {

@@ -193,6 +193,19 @@ struct SC_REGISTER_RESPONSEDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SC_REGISTER_RESPONSEDefaultTypeInternal _SC_REGISTER_RESPONSE_default_instance_;
+PROTOBUF_CONSTEXPR SC_REMOVE_CHARACTER::SC_REMOVE_CHARACTER(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.playerid_)*/0u
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct SC_REMOVE_CHARACTERDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SC_REMOVE_CHARACTERDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SC_REMOVE_CHARACTERDefaultTypeInternal() {}
+  union {
+    SC_REMOVE_CHARACTER _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SC_REMOVE_CHARACTERDefaultTypeInternal _SC_REMOVE_CHARACTER_default_instance_;
 PROTOBUF_CONSTEXPR SC_SPAWN_CHARACTER::SC_SPAWN_CHARACTER(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.playerinfo_)*/nullptr
@@ -211,7 +224,7 @@ struct SC_SPAWN_CHARACTERDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SC_SPAWN_CHARACTERDefaultTypeInternal _SC_SPAWN_CHARACTER_default_instance_;
 }  // namespace game
-static ::_pb::Metadata file_level_metadata_Protocol_2eproto[13];
+static ::_pb::Metadata file_level_metadata_Protocol_2eproto[14];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_Protocol_2eproto[1];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Protocol_2eproto = nullptr;
 
@@ -317,6 +330,13 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   PROTOBUF_FIELD_OFFSET(::game::SC_REGISTER_RESPONSE, _impl_.success_),
   PROTOBUF_FIELD_OFFSET(::game::SC_REGISTER_RESPONSE, _impl_.message_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::game::SC_REMOVE_CHARACTER, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::game::SC_REMOVE_CHARACTER, _impl_.playerid_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::game::SC_SPAWN_CHARACTER, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -341,7 +361,8 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 74, -1, -1, sizeof(::game::SC_LOGIN_RESPONSE)},
   { 83, -1, -1, sizeof(::game::SC_POSITION_SYNC)},
   { 92, -1, -1, sizeof(::game::SC_REGISTER_RESPONSE)},
-  { 100, -1, -1, sizeof(::game::SC_SPAWN_CHARACTER)},
+  { 100, -1, -1, sizeof(::game::SC_REMOVE_CHARACTER)},
+  { 107, -1, -1, sizeof(::game::SC_SPAWN_CHARACTER)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -357,6 +378,7 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::game::_SC_LOGIN_RESPONSE_default_instance_._instance,
   &::game::_SC_POSITION_SYNC_default_instance_._instance,
   &::game::_SC_REGISTER_RESPONSE_default_instance_._instance,
+  &::game::_SC_REMOVE_CHARACTER_default_instance_._instance,
   &::game::_SC_SPAWN_CHARACTER_default_instance_._instance,
 };
 
@@ -379,22 +401,24 @@ const char descriptor_table_protodef_Protocol_2eproto[] PROTOBUF_SECTION_VARIABL
   "rName\030\003 \001(\t\"@\n\020SC_POSITION_SYNC\022\020\n\010playe"
   "rID\030\001 \001(\r\022\014\n\004posX\030\002 \001(\002\022\014\n\004posY\030\003 \001(\002\"8\n"
   "\024SC_REGISTER_RESPONSE\022\017\n\007success\030\001 \001(\010\022\017"
-  "\n\007message\030\002 \001(\t\"{\n\022SC_SPAWN_CHARACTER\022\020\n"
-  "\010playerID\030\001 \001(\r\022\014\n\004posX\030\002 \001(\002\022\014\n\004posY\030\003 "
-  "\001(\002\022\021\n\tcameraYaw\030\004 \001(\002\022$\n\nplayerInfo\030\005 \001"
-  "(\0132\020.game.PlayerInfo*\366\001\n\010PacketID\022\013\n\007CS_"
-  "Chat\020\000\022\023\n\017CS_CheckTimeout\020\001\022\016\n\nCS_Keyinf"
-  "o\020\002\022\023\n\017CS_LoginRequest\020\003\022\023\n\017CS_PositionS"
-  "ync\020\004\022\026\n\022CS_RegisterRequest\020\005\022\013\n\007SC_Chat"
-  "\020\006\022\016\n\nSC_Keyinfo\020\007\022\024\n\020SC_LoginResponse\020\010"
-  "\022\023\n\017SC_PositionSync\020\t\022\027\n\023SC_RegisterResp"
-  "onse\020\n\022\025\n\021SC_SpawnCharacter\020\013b\006proto3"
+  "\n\007message\030\002 \001(\t\"\'\n\023SC_REMOVE_CHARACTER\022\020"
+  "\n\010playerID\030\001 \001(\r\"{\n\022SC_SPAWN_CHARACTER\022\020"
+  "\n\010playerID\030\001 \001(\r\022\014\n\004posX\030\002 \001(\002\022\014\n\004posY\030\003"
+  " \001(\002\022\021\n\tcameraYaw\030\004 \001(\002\022$\n\nplayerInfo\030\005 "
+  "\001(\0132\020.game.PlayerInfo*\216\002\n\010PacketID\022\013\n\007CS"
+  "_Chat\020\000\022\023\n\017CS_CheckTimeout\020\001\022\016\n\nCS_Keyin"
+  "fo\020\002\022\023\n\017CS_LoginRequest\020\003\022\023\n\017CS_Position"
+  "Sync\020\004\022\026\n\022CS_RegisterRequest\020\005\022\013\n\007SC_Cha"
+  "t\020\006\022\016\n\nSC_Keyinfo\020\007\022\024\n\020SC_LoginResponse\020"
+  "\010\022\023\n\017SC_PositionSync\020\t\022\027\n\023SC_RegisterRes"
+  "ponse\020\n\022\026\n\022SC_RemoveCharacter\020\013\022\025\n\021SC_Sp"
+  "awnCharacter\020\014b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Protocol_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Protocol_2eproto = {
-    false, false, 1117, descriptor_table_protodef_Protocol_2eproto,
+    false, false, 1182, descriptor_table_protodef_Protocol_2eproto,
     "Protocol.proto",
-    &descriptor_table_Protocol_2eproto_once, nullptr, 0, 13,
+    &descriptor_table_Protocol_2eproto_once, nullptr, 0, 14,
     schemas, file_default_instances, TableStruct_Protocol_2eproto::offsets,
     file_level_metadata_Protocol_2eproto, file_level_enum_descriptors_Protocol_2eproto,
     file_level_service_descriptors_Protocol_2eproto,
@@ -424,6 +448,7 @@ bool PacketID_IsValid(int value) {
     case 9:
     case 10:
     case 11:
+    case 12:
       return true;
     default:
       return false;
@@ -3344,6 +3369,184 @@ void SC_REGISTER_RESPONSE::InternalSwap(SC_REGISTER_RESPONSE* other) {
 
 // ===================================================================
 
+class SC_REMOVE_CHARACTER::_Internal {
+ public:
+};
+
+SC_REMOVE_CHARACTER::SC_REMOVE_CHARACTER(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:game.SC_REMOVE_CHARACTER)
+}
+SC_REMOVE_CHARACTER::SC_REMOVE_CHARACTER(const SC_REMOVE_CHARACTER& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  SC_REMOVE_CHARACTER* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.playerid_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_impl_.playerid_ = from._impl_.playerid_;
+  // @@protoc_insertion_point(copy_constructor:game.SC_REMOVE_CHARACTER)
+}
+
+inline void SC_REMOVE_CHARACTER::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.playerid_){0u}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+SC_REMOVE_CHARACTER::~SC_REMOVE_CHARACTER() {
+  // @@protoc_insertion_point(destructor:game.SC_REMOVE_CHARACTER)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void SC_REMOVE_CHARACTER::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
+
+void SC_REMOVE_CHARACTER::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void SC_REMOVE_CHARACTER::Clear() {
+// @@protoc_insertion_point(message_clear_start:game.SC_REMOVE_CHARACTER)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.playerid_ = 0u;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* SC_REMOVE_CHARACTER::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // uint32 playerID = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.playerid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* SC_REMOVE_CHARACTER::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:game.SC_REMOVE_CHARACTER)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint32 playerID = 1;
+  if (this->_internal_playerid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_playerid(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:game.SC_REMOVE_CHARACTER)
+  return target;
+}
+
+size_t SC_REMOVE_CHARACTER::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:game.SC_REMOVE_CHARACTER)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // uint32 playerID = 1;
+  if (this->_internal_playerid() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_playerid());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData SC_REMOVE_CHARACTER::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    SC_REMOVE_CHARACTER::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*SC_REMOVE_CHARACTER::GetClassData() const { return &_class_data_; }
+
+
+void SC_REMOVE_CHARACTER::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<SC_REMOVE_CHARACTER*>(&to_msg);
+  auto& from = static_cast<const SC_REMOVE_CHARACTER&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:game.SC_REMOVE_CHARACTER)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_playerid() != 0) {
+    _this->_internal_set_playerid(from._internal_playerid());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void SC_REMOVE_CHARACTER::CopyFrom(const SC_REMOVE_CHARACTER& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:game.SC_REMOVE_CHARACTER)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SC_REMOVE_CHARACTER::IsInitialized() const {
+  return true;
+}
+
+void SC_REMOVE_CHARACTER::InternalSwap(SC_REMOVE_CHARACTER* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.playerid_, other->_impl_.playerid_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata SC_REMOVE_CHARACTER::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
+      file_level_metadata_Protocol_2eproto[12]);
+}
+
+// ===================================================================
+
 class SC_SPAWN_CHARACTER::_Internal {
  public:
   static const ::game::PlayerInfo& playerinfo(const SC_SPAWN_CHARACTER* msg);
@@ -3675,7 +3878,7 @@ void SC_SPAWN_CHARACTER::InternalSwap(SC_SPAWN_CHARACTER* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata SC_SPAWN_CHARACTER::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[12]);
+      file_level_metadata_Protocol_2eproto[13]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -3728,6 +3931,10 @@ Arena::CreateMaybeMessage< ::game::SC_POSITION_SYNC >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::game::SC_REGISTER_RESPONSE*
 Arena::CreateMaybeMessage< ::game::SC_REGISTER_RESPONSE >(Arena* arena) {
   return Arena::CreateMessageInternal< ::game::SC_REGISTER_RESPONSE >(arena);
+}
+template<> PROTOBUF_NOINLINE ::game::SC_REMOVE_CHARACTER*
+Arena::CreateMaybeMessage< ::game::SC_REMOVE_CHARACTER >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::game::SC_REMOVE_CHARACTER >(arena);
 }
 template<> PROTOBUF_NOINLINE ::game::SC_SPAWN_CHARACTER*
 Arena::CreateMaybeMessage< ::game::SC_SPAWN_CHARACTER >(Arena* arena) {

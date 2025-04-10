@@ -25,6 +25,10 @@ void SC_REGISTER_RESPONSE_FOR_All(CSession* pSession, bool success, std::string 
 void SC_REGISTER_RESPONSE_FOR_SINGLE(CSession* pSession, bool success, std::string message);
 void SC_REGISTER_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool success, std::string message);
 
+void SC_REMOVE_CHARACTER_FOR_All(CSession* pSession, UINT32 playerID);
+void SC_REMOVE_CHARACTER_FOR_SINGLE(CSession* pSession, UINT32 playerID);
+void SC_REMOVE_CHARACTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID);
+
 void SC_SPAWN_CHARACTER_FOR_All(CSession* pSession, UINT32 playerID, float posX, float posY, float cameraYaw, PlayerInfo playerInfo);
 void SC_SPAWN_CHARACTER_FOR_SINGLE(CSession* pSession, UINT32 playerID, float posX, float posY, float cameraYaw, PlayerInfo playerInfo);
 void SC_SPAWN_CHARACTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, float posX, float posY, float cameraYaw, PlayerInfo playerInfo);

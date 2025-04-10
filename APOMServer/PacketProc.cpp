@@ -119,24 +119,27 @@ void DisconnectSessionProc(CSession* pSession)
 {
     // 나간 플레이어의 정보를 Room에서 나가도록 함
     CPlayer* pPlayer = (CPlayer*)pSession->pObj;
-    
-    CRoom* pRoom = roomManager.GetRoomById(pPlayer->m_ID);
+
+    CRoom* pRoom = roomManager.GetRoomById(pPlayer->GetRoomId());
 
     // 방이 존재한다면
     if (pRoom)
     {
         // 방에서 해당 플레이어 제거
         pRoom->RemovePlayer(pPlayer->m_ID);
+
+        // 방에 있는 모든 플레이어에게 해당 플레이어가 제거되었다고 알림
+        SC_REMOVE_CHARACTER_FOR_AROUND(pSession, pRoom, pPlayer->m_ID);
     }
 
     // 플레이어 반환
     playerPool.Free((CPlayer*)pSession->pObj);
 
-
     CNetIOManager::GetInstance().disconnectSessionCnt++;
 
     return;
 }
+
 bool CS_CHAT(CSession* pSession, std::string message, std::string channel)
 {
     return false;
@@ -200,14 +203,8 @@ bool CS_REGISTER_REQUEST(CSession* pSession, std::string userName)
         // 룸에 추가 실패 처리
         return false;
     }
-    // active로 이동
-    room->MoveToActive(pPlayer->m_ID);
 
     // 4. 접속 성공
-
-    //=====================================================================================================================================
-    // 4-1. 기존 던전에 있던 플레이어의 초기 정보를 새로 접속한 플레이어에게 전송
-    //=====================================================================================================================================
 
     // 새로 접속한 플레이어에게 스스로 생성하라고 알림
     PlayerInfo playerInfo;
@@ -223,9 +220,8 @@ bool CS_REGISTER_REQUEST(CSession* pSession, std::string userName)
         playerInfo
     );
 
-
     // 이미 있던 activePlayer들에게 새로 룸에 접속한 플레이어의 정보를 전송
-    SC_SPAWN_CHARACTER_FOR_All(pSession, pPlayer->m_ID,
+    SC_SPAWN_CHARACTER_FOR_AROUND(pSession, room, pPlayer->m_ID,
         0, 0,
         0,
         playerInfo);
@@ -249,6 +245,9 @@ bool CS_REGISTER_REQUEST(CSession* pSession, std::string userName)
             );
         }
     }
+
+    // active로 이동
+    room->MoveToActive(pPlayer->m_ID);
 
     return true;
 }

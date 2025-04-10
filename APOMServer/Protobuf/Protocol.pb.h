@@ -82,6 +82,9 @@ extern SC_POSITION_SYNCDefaultTypeInternal _SC_POSITION_SYNC_default_instance_;
 class SC_REGISTER_RESPONSE;
 struct SC_REGISTER_RESPONSEDefaultTypeInternal;
 extern SC_REGISTER_RESPONSEDefaultTypeInternal _SC_REGISTER_RESPONSE_default_instance_;
+class SC_REMOVE_CHARACTER;
+struct SC_REMOVE_CHARACTERDefaultTypeInternal;
+extern SC_REMOVE_CHARACTERDefaultTypeInternal _SC_REMOVE_CHARACTER_default_instance_;
 class SC_SPAWN_CHARACTER;
 struct SC_SPAWN_CHARACTERDefaultTypeInternal;
 extern SC_SPAWN_CHARACTERDefaultTypeInternal _SC_SPAWN_CHARACTER_default_instance_;
@@ -99,6 +102,7 @@ template<> ::game::SC_KEYINFO* Arena::CreateMaybeMessage<::game::SC_KEYINFO>(Are
 template<> ::game::SC_LOGIN_RESPONSE* Arena::CreateMaybeMessage<::game::SC_LOGIN_RESPONSE>(Arena*);
 template<> ::game::SC_POSITION_SYNC* Arena::CreateMaybeMessage<::game::SC_POSITION_SYNC>(Arena*);
 template<> ::game::SC_REGISTER_RESPONSE* Arena::CreateMaybeMessage<::game::SC_REGISTER_RESPONSE>(Arena*);
+template<> ::game::SC_REMOVE_CHARACTER* Arena::CreateMaybeMessage<::game::SC_REMOVE_CHARACTER>(Arena*);
 template<> ::game::SC_SPAWN_CHARACTER* Arena::CreateMaybeMessage<::game::SC_SPAWN_CHARACTER>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace game {
@@ -115,7 +119,8 @@ enum PacketID : int {
   SC_LoginResponse = 8,
   SC_PositionSync = 9,
   SC_RegisterResponse = 10,
-  SC_SpawnCharacter = 11,
+  SC_RemoveCharacter = 11,
+  SC_SpawnCharacter = 12,
   PacketID_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   PacketID_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
@@ -2142,6 +2147,154 @@ class SC_REGISTER_RESPONSE final :
 };
 // -------------------------------------------------------------------
 
+class SC_REMOVE_CHARACTER final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:game.SC_REMOVE_CHARACTER) */ {
+ public:
+  inline SC_REMOVE_CHARACTER() : SC_REMOVE_CHARACTER(nullptr) {}
+  ~SC_REMOVE_CHARACTER() override;
+  explicit PROTOBUF_CONSTEXPR SC_REMOVE_CHARACTER(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  SC_REMOVE_CHARACTER(const SC_REMOVE_CHARACTER& from);
+  SC_REMOVE_CHARACTER(SC_REMOVE_CHARACTER&& from) noexcept
+    : SC_REMOVE_CHARACTER() {
+    *this = ::std::move(from);
+  }
+
+  inline SC_REMOVE_CHARACTER& operator=(const SC_REMOVE_CHARACTER& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SC_REMOVE_CHARACTER& operator=(SC_REMOVE_CHARACTER&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const SC_REMOVE_CHARACTER& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const SC_REMOVE_CHARACTER* internal_default_instance() {
+    return reinterpret_cast<const SC_REMOVE_CHARACTER*>(
+               &_SC_REMOVE_CHARACTER_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    12;
+
+  friend void swap(SC_REMOVE_CHARACTER& a, SC_REMOVE_CHARACTER& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(SC_REMOVE_CHARACTER* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(SC_REMOVE_CHARACTER* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  SC_REMOVE_CHARACTER* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<SC_REMOVE_CHARACTER>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const SC_REMOVE_CHARACTER& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const SC_REMOVE_CHARACTER& from) {
+    SC_REMOVE_CHARACTER::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(SC_REMOVE_CHARACTER* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "game.SC_REMOVE_CHARACTER";
+  }
+  protected:
+  explicit SC_REMOVE_CHARACTER(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPlayerIDFieldNumber = 1,
+  };
+  // uint32 playerID = 1;
+  void clear_playerid();
+  uint32_t playerid() const;
+  void set_playerid(uint32_t value);
+  private:
+  uint32_t _internal_playerid() const;
+  void _internal_set_playerid(uint32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:game.SC_REMOVE_CHARACTER)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    uint32_t playerid_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Protocol_2eproto;
+};
+// -------------------------------------------------------------------
+
 class SC_SPAWN_CHARACTER final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:game.SC_SPAWN_CHARACTER) */ {
  public:
@@ -2190,7 +2343,7 @@ class SC_SPAWN_CHARACTER final :
                &_SC_SPAWN_CHARACTER_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    13;
 
   friend void swap(SC_SPAWN_CHARACTER& a, SC_SPAWN_CHARACTER& b) {
     a.Swap(&b);
@@ -3258,6 +3411,30 @@ inline void SC_REGISTER_RESPONSE::set_allocated_message(std::string* message) {
 
 // -------------------------------------------------------------------
 
+// SC_REMOVE_CHARACTER
+
+// uint32 playerID = 1;
+inline void SC_REMOVE_CHARACTER::clear_playerid() {
+  _impl_.playerid_ = 0u;
+}
+inline uint32_t SC_REMOVE_CHARACTER::_internal_playerid() const {
+  return _impl_.playerid_;
+}
+inline uint32_t SC_REMOVE_CHARACTER::playerid() const {
+  // @@protoc_insertion_point(field_get:game.SC_REMOVE_CHARACTER.playerID)
+  return _internal_playerid();
+}
+inline void SC_REMOVE_CHARACTER::_internal_set_playerid(uint32_t value) {
+  
+  _impl_.playerid_ = value;
+}
+inline void SC_REMOVE_CHARACTER::set_playerid(uint32_t value) {
+  _internal_set_playerid(value);
+  // @@protoc_insertion_point(field_set:game.SC_REMOVE_CHARACTER.playerID)
+}
+
+// -------------------------------------------------------------------
+
 // SC_SPAWN_CHARACTER
 
 // uint32 playerID = 1;
@@ -3433,6 +3610,8 @@ inline void SC_SPAWN_CHARACTER::set_allocated_playerinfo(::game::PlayerInfo* pla
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
