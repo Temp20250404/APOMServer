@@ -31,6 +31,8 @@ void CObject::Move()
 void CObject::Init(void)
 {
 	SetCurTimeout();
+
+	m_bDead = false;
 }
 
 void CObject::Update(void)
@@ -49,28 +51,11 @@ void CObject::CheckTimeout(void)
 	if (m_maxLastTimeoutCheckTime < (currSeverTime - m_lastTimeoutCheckTime))
 	{
 		m_maxLastTimeoutCheckTime = (currSeverTime - m_lastTimeoutCheckTime);
-		//std::cout << m_maxLastTimeoutCheckTime <<"\n";
-
-		/*logManager.LogDebug(
-			"Timeout Max Record\n",
-			"SessionID : ", m_pSession->SessionID,
-			"\nMaxLastTimeoutCheckTime : ", m_maxLastTimeoutCheckTime,
-			"Port : ", m_pSession->port
-		);*/
 	}
 
 	if ((currSeverTime - m_lastTimeoutCheckTime) > dfNETWORK_PACKET_RECV_TIMEOUT)
 	{
-		/*m_bDead = true;
-
-		logManager.LogDebug(
-			"Timeout Error!!!\n",
-			"SessionID : ", m_pSession->SessionID,
-			"\nMaxLastTimeoutCheckTime : ", m_maxLastTimeoutCheckTime,
-			"Port : ", m_pSession->port
-		);*/
-
-		//DebugBreak();
+		m_bDead = true;
 	}
 }
 

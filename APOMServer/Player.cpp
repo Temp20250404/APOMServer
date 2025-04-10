@@ -3,15 +3,8 @@
 #include "SessionManager.h"
 #include "MakePacket.h"
 
-CPlayer::CPlayer(float _x, float _y, float _z, UINT8 _hp) noexcept
-	: CObject{ _x, _y, _z }
+CPlayer::CPlayer() noexcept
 {
-    m_maxHp = _hp;
-    m_curHp = m_maxHp;
-
-    m_eCurPlayerGameState = PLAYER_GAME_STATE::END;
-
-    memset(&m_pressedKey, 0, sizeof(m_pressedKey));
 }
 
 CPlayer::~CPlayer()
@@ -28,33 +21,35 @@ void CPlayer::LateUpdate(void)
     __super::LateUpdate();
 }
 
-void CPlayer::Init(float _x, float _y, float _z, UINT8 _hp)
+void CPlayer::Init(float _x, float _y, float _z, UINT8 _hp, UINT8 _mp)
 {
     __super::Init();
+
+    m_maxHp = _hp;
+    m_curHp = m_maxHp;
+
+    m_maxMp = _mp;
+    m_curMp = m_maxMp;
+
+    m_eCurPlayerGameState = PLAYER_GAME_STATE::END;
+
+    memset(&m_pressedKey, 0, sizeof(m_pressedKey));
 
     m_x = _x;
     m_y = _y;
     m_z = _z;
 
-    m_maxHp = _hp;
-    m_curHp = m_maxHp;
-
-    //m_kdaInfo.kill = 0;
-    //m_kdaInfo.death = 0;
-    //m_kdaInfo.assist = 0;
-
     m_rotationAxisX = 0;      // x, y축 회전값
     m_rotationAxisY = 0;
 
     m_roomId = -1;
-    m_teamId = -1;
     m_spawnPosIndex = -1;
-
-    m_weaponInfo = 0;     // 가지고 있는 무기 번호
 
     memset(m_pressedKey, 0, sizeof(bool) * (int)PRESS_KEY::END);
 
     m_eCurPlayerGameState = PLAYER_GAME_STATE::END;
+
+    m_playerName = "";
 }
 
 std::array<bool, (int)PRESS_KEY::END> CPlayer::GetMovementKeys() const {

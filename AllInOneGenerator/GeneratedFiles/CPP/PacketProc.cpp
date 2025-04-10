@@ -39,6 +39,18 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         return CS_CHAT(pSession, message, channel);
     }
     break;
+    case game::PacketID::CS_CheckTimeout:
+    {
+        bool bCheck;
+
+        game::CS_CHECK_TIMEOUT pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        bCheck = pkt.bcheck();
+
+        return CS_CHECK_TIMEOUT(pSession, bCheck);
+    }
+    break;
     case game::PacketID::CS_Keyinfo:
     {
         UINT32 keyInfo;
@@ -84,17 +96,13 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     case game::PacketID::CS_RegisterRequest:
     {
         std::string userName;
-        std::string password;
-        std::string characterName;
 
         game::CS_REGISTER_REQUEST pkt;
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
         userName = pkt.username();
-        password = pkt.password();
-        characterName = pkt.charactername();
 
-        return CS_REGISTER_REQUEST(pSession, userName, password, characterName);
+        return CS_REGISTER_REQUEST(pSession, userName);
     }
     break;
     default:
@@ -108,6 +116,11 @@ void DisconnectSessionProc(CSession* pSession)
     return;
 }
 bool CS_CHAT(CSession* pSession, std::string message, std::string channel)
+{
+    return false;
+}
+
+bool CS_CHECK_TIMEOUT(CSession* pSession, bool bCheck)
 {
     return false;
 }
@@ -127,7 +140,7 @@ bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY)
     return false;
 }
 
-bool CS_REGISTER_REQUEST(CSession* pSession, std::string userName, std::string password, std::string characterName)
+bool CS_REGISTER_REQUEST(CSession* pSession, std::string userName)
 {
     return false;
 }

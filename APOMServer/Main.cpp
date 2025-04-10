@@ -38,6 +38,9 @@
 #include <conio.h>
 
 
+#include "Session.h"
+
+
 #include <process.h>
 #include "MemoryPoolManager.h"
 #include "LogManager.h"
@@ -83,9 +86,6 @@ unsigned int g_iFirst;
 
 ULONGLONG g_fpsCheck;
 //========================================
-
-
-
 
 
 
@@ -282,29 +282,34 @@ unsigned int WINAPI MonitorThread(void* pArg)
 {
     SystemMonitor monitor;
 
+    const CNetIOManager& netIOManager = CNetIOManager::GetInstance();
+
     while (true)
     {
-
-        std::wcout << L"======================================================" << std::endl;
-
-        monitor.PrintMonitoringData();
-        std::cout << "\n";
-
         UINT32 globalTime = InterlockedCompareExchange(&g_iTime, 0, 0);
         if (globalTime - g_iFpsCheck >= 1000)
         {
+            std::wcout << L"======================================================" << std::endl;
+
+            monitor.PrintMonitoringData();
+            std::cout << "\n";
+
             g_iFpsCheck += 1000;
 
             UINT32 netLoop = InterlockedExchange(&g_iNetworkLoop, 0);
             UINT32 fps = InterlockedExchange(&g_iFPS, 0);
 
-            printf("FPS & Network Loop Num : %d\n", fps);
-            printf("Main Loop : %u\n", netLoop);
-            printf("SyncCount : %d\n", g_iSyncCount);
+            std::cout << "FPS & Network Loop Num : " << fps << "\n";
+            std::cout << "Main Loop : " << netLoop << "\n";
+            std::cout << "SyncCount : " << g_iSyncCount << "\n";
+
+            std::wcout << L"======================================================" << std::endl;
+
+            std::cout << "Session Count" << "\n\n";
+            std::cout << "Connect : " << g_SessionHashMap.size() << "\n";
+            std::cout << "Accept : " << netIOManager.acceptSessionCnt << "\n";
+            std::cout << "Disconnect : " << netIOManager.disconnectSessionCnt << "\n";
         }
-
-
-        std::wcout << L"======================================================" << std::endl;
 
         // 1ÃÊ°£ Sleep
         Sleep(1000);

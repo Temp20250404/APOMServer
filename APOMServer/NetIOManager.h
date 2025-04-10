@@ -41,4 +41,8 @@ private:
     PacketProcCallback m_callbackPacketProc;
     AcceptCreateCallback m_callbackAcceptCreate;
     AcceptAfterCallback m_callbackAcceptAfter;
+
+public:
+    UINT32 acceptSessionCnt = 0;
+    UINT32 disconnectSessionCnt = 0;
 };

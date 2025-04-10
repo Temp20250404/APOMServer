@@ -47,6 +47,9 @@ void CSessionManager::Update(void)
             // 컨텐츠에서 넣어준 함수 호출
             m_callbackDisconnect((*it).second);
 
+            // 연결된 오브젝트 제거
+            objectManager.DeleteObject((*it).second->pObj);
+
             // 제거
             closesocket((*it).second->sock);
 

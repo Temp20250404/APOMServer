@@ -23,7 +23,6 @@ void MatchSystem::OnPlayerJoin(CPlayer* player) {
     // 饭靛 评老 版快
     if (m_red.size() <= m_blue.size()) {
         m_red.push_back(player);
-        player->SetTeamId(0);   // 饭靛 评老 版快 评 ID = 0
 
         player->SetSpawnPosIndex(m_redSpawnIndex.front());
         m_redSpawnIndex.pop();
@@ -32,7 +31,6 @@ void MatchSystem::OnPlayerJoin(CPlayer* player) {
     // 喉风 评老 版快
     else {
         m_blue.push_back(player);
-        player->SetTeamId(1);   // 喉风 评老 版快 评 ID = 1
 
         player->SetSpawnPosIndex(m_blueSpawnIndex.front());
         m_blueSpawnIndex.pop();

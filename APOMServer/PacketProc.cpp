@@ -43,6 +43,18 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         return CS_CHAT(pSession, message, channel);
     }
     break;
+    case game::PacketID::CS_CheckTimeout:
+    {
+        bool bCheck;
+
+        game::CS_CHECK_TIMEOUT pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        bCheck = pkt.bcheck();
+
+        return CS_CHECK_TIMEOUT(pSession, bCheck);
+    }
+    break;
     case game::PacketID::CS_Keyinfo:
     {
         UINT32 keyInfo;
@@ -88,17 +100,13 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     case game::PacketID::CS_RegisterRequest:
     {
         std::string userName;
-        std::string password;
-        std::string characterName;
 
         game::CS_REGISTER_REQUEST pkt;
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
         userName = pkt.username();
-        password = pkt.password();
-        characterName = pkt.charactername();
 
-        return CS_REGISTER_REQUEST(pSession, userName, password, characterName);
+        return CS_REGISTER_REQUEST(pSession, userName);
     }
     break;
     default:
@@ -109,14 +117,37 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
 
 void DisconnectSessionProc(CSession* pSession)
 {
+    // 나간 플레이어의 정보를 Room에서 나가도록 함
+    CPlayer* pPlayer = (CPlayer*)pSession->pObj;
+    
+    CRoom* pRoom = roomManager.GetRoomById(pPlayer->m_ID);
+
+    // 방이 존재한다면
+    if (pRoom)
+    {
+        // 방에서 해당 플레이어 제거
+        pRoom->RemovePlayer(pPlayer->m_ID);
+    }
+
     // 플레이어 반환
     playerPool.Free((CPlayer*)pSession->pObj);
+
+
+    CNetIOManager::GetInstance().disconnectSessionCnt++;
 
     return;
 }
 bool CS_CHAT(CSession* pSession, std::string message, std::string channel)
 {
     return false;
+}
+
+bool CS_CHECK_TIMEOUT(CSession* pSession, bool bCheck)
+{
+    // 해당 세션의 timeout 기간 증가
+    // 메시지가 온 것 자체로 이미 체크되는 시간이 갱신됨
+
+    return true;
 }
 
 bool CS_KEYINFO(CSession* pSession, UINT32 keyInfo, float cameraYaw)
@@ -145,9 +176,81 @@ bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY)
     return false;
 }
 
-bool CS_REGISTER_REQUEST(CSession* pSession, std::string userName, std::string password, std::string characterName)
+bool CS_REGISTER_REQUEST(CSession* pSession, std::string userName)
 {
-    return false;
+    // 1. 연결된 플레이어 객체 추출
+    CPlayer* pPlayer = static_cast<CPlayer*>(pSession->pObj);
+
+    // 플레이어 이름 적용
+    pPlayer->SetName(userName);
+
+    // 2. 빈 던전 찾기 - 일단 던전이라는 가정하에, 한 던전에는 최대 10명이 들어갈 수 있도록 한다.
+    CRoom* room = CRoomManager::GetInstance().FindAvailableDungeon();
+    if (!room)
+    {
+        // 서버 수용 인원 초과 처리
+        return false;
+    }
+
+    // 3. 던전에 플레이어 추가
+    // 던전 정보를 플레이어에 주입
+    // 처음엔 Waiting 쪽에 들어감
+    if (!room->AddPlayer(pPlayer))
+    {
+        // 룸에 추가 실패 처리
+        return false;
+    }
+    // active로 이동
+    room->MoveToActive(pPlayer->m_ID);
+
+    // 4. 접속 성공
+
+    //=====================================================================================================================================
+    // 4-1. 기존 던전에 있던 플레이어의 초기 정보를 새로 접속한 플레이어에게 전송
+    //=====================================================================================================================================
+
+    // 새로 접속한 플레이어에게 스스로 생성하라고 알림
+    PlayerInfo playerInfo;
+    playerInfo.playerJobIcon = 0;
+    playerInfo.playerMaxHp = pPlayer->GetMaxHp();
+    playerInfo.playerMaxMp = pPlayer->GetMaxMp();
+    playerInfo.playerNickname = pPlayer->GetName();
+
+    SC_SPAWN_CHARACTER_FOR_SINGLE(
+        pSession, pPlayer->m_ID,
+        0, 0,
+        0,
+        playerInfo
+    );
+
+
+    // 이미 있던 activePlayer들에게 새로 룸에 접속한 플레이어의 정보를 전송
+    SC_SPAWN_CHARACTER_FOR_All(pSession, pPlayer->m_ID,
+        0, 0,
+        0,
+        playerInfo);
+
+
+    // 새로 접속한 플레이어에게 이미 있던 activePlayer들 정보를 전송
+    float posX, posY, posZ;
+    float rotationAxisX, rotationAxisY;
+    for (const auto& activePlayer : room->m_activePlayers)
+    {
+        if (activePlayer)
+        {
+            activePlayer->getPosition(posX, posY, posZ);
+            activePlayer->GetRotationAxisXY(rotationAxisX, rotationAxisY);
+
+            SC_SPAWN_CHARACTER_FOR_SINGLE(
+                pSession, activePlayer->m_ID,
+                0, 0,
+                0,
+                playerInfo
+            );
+        }
+    }
+
+    return true;
 }
 
 
