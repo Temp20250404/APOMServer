@@ -5,9 +5,9 @@
 class CSession;
 class CRoom;
 
-void SC_CHAT_FOR_All(CSession* pSession, UINT32 playerID, std::string message, std::string channel);
-void SC_CHAT_FOR_SINGLE(CSession* pSession, UINT32 playerID, std::string message, std::string channel);
-void SC_CHAT_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, std::string message, std::string channel);
+void SC_CHAT_FOR_All(CSession* pSession, UINT32 playerID, std::string message, UINT32 channel);
+void SC_CHAT_FOR_SINGLE(CSession* pSession, UINT32 playerID, std::string message, UINT32 channel);
+void SC_CHAT_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, std::string message, UINT32 channel);
 
 void SC_KEYINFO_FOR_All(CSession* pSession, UINT32 playerID, UINT32 keyInfo, float cameraYaw);
 void SC_KEYINFO_FOR_SINGLE(CSession* pSession, UINT32 playerID, UINT32 keyInfo, float cameraYaw);

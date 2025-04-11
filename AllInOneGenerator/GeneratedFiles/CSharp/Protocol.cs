@@ -24,37 +24,37 @@ namespace Game {
     static ProtocolReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg5Qcm90b2NvbC5wcm90bxIEZ2FtZSIrCgdDU19DSEFUEg8KB21lc3NhZ2UY",
-            "ASABKAkSDwoHY2hhbm5lbBgCIAEoCSIiChBDU19DSEVDS19USU1FT1VUEg4K",
-            "BmJDaGVjaxgBIAEoCCIwCgpDU19LRVlJTkZPEg8KB2tleUluZm8YASABKA0S",
-            "EQoJY2FtZXJhWWF3GAIgASgCIjYKEENTX0xPR0lOX1JFUVVFU1QSEAoIdXNl",
-            "ck5hbWUYASABKAkSEAoIcGFzc3dvcmQYAiABKAkiLgoQQ1NfUE9TSVRJT05f",
-            "U1lOQxIMCgRwb3NYGAEgASgCEgwKBHBvc1kYAiABKAIiJwoTQ1NfUkVHSVNU",
-            "RVJfUkVRVUVTVBIQCgh1c2VyTmFtZRgBIAEoCSJlCgpQbGF5ZXJJbmZvEhYK",
-            "DnBsYXllck5pY2tuYW1lGAEgASgJEhMKC3BsYXllck1heEhwGAIgASgNEhMK",
-            "C3BsYXllck1heE1wGAMgASgNEhUKDXBsYXllckpvYkljb24YBCABKA0iPQoH",
-            "U0NfQ0hBVBIQCghwbGF5ZXJJRBgBIAEoDRIPCgdtZXNzYWdlGAIgASgJEg8K",
-            "B2NoYW5uZWwYAyABKAkiQgoKU0NfS0VZSU5GTxIQCghwbGF5ZXJJRBgBIAEo",
-            "DRIPCgdrZXlJbmZvGAIgASgNEhEKCWNhbWVyYVlhdxgDIAEoAiJNChFTQ19M",
-            "T0dJTl9SRVNQT05TRRIPCgdzdWNjZXNzGAEgASgIEhAKCHBsYXllcklEGAIg",
-            "ASgNEhUKDWNoYXJhY3Rlck5hbWUYAyABKAkiQAoQU0NfUE9TSVRJT05fU1lO",
-            "QxIQCghwbGF5ZXJJRBgBIAEoDRIMCgRwb3NYGAIgASgCEgwKBHBvc1kYAyAB",
-            "KAIiOAoUU0NfUkVHSVNURVJfUkVTUE9OU0USDwoHc3VjY2VzcxgBIAEoCBIP",
-            "CgdtZXNzYWdlGAIgASgJIicKE1NDX1JFTU9WRV9DSEFSQUNURVISEAoIcGxh",
-            "eWVySUQYASABKA0iewoSU0NfU1BBV05fQ0hBUkFDVEVSEhAKCHBsYXllcklE",
-            "GAEgASgNEgwKBHBvc1gYAiABKAISDAoEcG9zWRgDIAEoAhIRCgljYW1lcmFZ",
-            "YXcYBCABKAISJAoKcGxheWVySW5mbxgFIAEoCzIQLmdhbWUuUGxheWVySW5m",
-            "byqOAgoIUGFja2V0SUQSCwoHQ1NfQ2hhdBAAEhMKD0NTX0NoZWNrVGltZW91",
-            "dBABEg4KCkNTX0tleWluZm8QAhITCg9DU19Mb2dpblJlcXVlc3QQAxITCg9D",
-            "U19Qb3NpdGlvblN5bmMQBBIWChJDU19SZWdpc3RlclJlcXVlc3QQBRILCgdT",
-            "Q19DaGF0EAYSDgoKU0NfS2V5aW5mbxAHEhQKEFNDX0xvZ2luUmVzcG9uc2UQ",
-            "CBITCg9TQ19Qb3NpdGlvblN5bmMQCRIXChNTQ19SZWdpc3RlclJlc3BvbnNl",
-            "EAoSFgoSU0NfUmVtb3ZlQ2hhcmFjdGVyEAsSFQoRU0NfU3Bhd25DaGFyYWN0",
-            "ZXIQDGIGcHJvdG8z"));
+            "Cg5Qcm90b2NvbC5wcm90bxIEZ2FtZSI9CgdDU19DSEFUEhAKCHRhcmdldElE",
+            "GAEgASgNEg8KB21lc3NhZ2UYAiABKAkSDwoHY2hhbm5lbBgDIAEoDSIiChBD",
+            "U19DSEVDS19USU1FT1VUEg4KBmJDaGVjaxgBIAEoCCIwCgpDU19LRVlJTkZP",
+            "Eg8KB2tleUluZm8YASABKA0SEQoJY2FtZXJhWWF3GAIgASgCIjYKEENTX0xP",
+            "R0lOX1JFUVVFU1QSEAoIdXNlck5hbWUYASABKAkSEAoIcGFzc3dvcmQYAiAB",
+            "KAkiLgoQQ1NfUE9TSVRJT05fU1lOQxIMCgRwb3NYGAEgASgCEgwKBHBvc1kY",
+            "AiABKAIiJwoTQ1NfUkVHSVNURVJfUkVRVUVTVBIQCgh1c2VyTmFtZRgBIAEo",
+            "CSJlCgpQbGF5ZXJJbmZvEhYKDnBsYXllck5pY2tuYW1lGAEgASgJEhMKC3Bs",
+            "YXllck1heEhwGAIgASgNEhMKC3BsYXllck1heE1wGAMgASgNEhUKDXBsYXll",
+            "ckpvYkljb24YBCABKA0iPQoHU0NfQ0hBVBIQCghwbGF5ZXJJRBgBIAEoDRIP",
+            "CgdtZXNzYWdlGAIgASgJEg8KB2NoYW5uZWwYAyABKA0iQgoKU0NfS0VZSU5G",
+            "TxIQCghwbGF5ZXJJRBgBIAEoDRIPCgdrZXlJbmZvGAIgASgNEhEKCWNhbWVy",
+            "YVlhdxgDIAEoAiJNChFTQ19MT0dJTl9SRVNQT05TRRIPCgdzdWNjZXNzGAEg",
+            "ASgIEhAKCHBsYXllcklEGAIgASgNEhUKDWNoYXJhY3Rlck5hbWUYAyABKAki",
+            "QAoQU0NfUE9TSVRJT05fU1lOQxIQCghwbGF5ZXJJRBgBIAEoDRIMCgRwb3NY",
+            "GAIgASgCEgwKBHBvc1kYAyABKAIiOAoUU0NfUkVHSVNURVJfUkVTUE9OU0US",
+            "DwoHc3VjY2VzcxgBIAEoCBIPCgdtZXNzYWdlGAIgASgJIicKE1NDX1JFTU9W",
+            "RV9DSEFSQUNURVISEAoIcGxheWVySUQYASABKA0iewoSU0NfU1BBV05fQ0hB",
+            "UkFDVEVSEhAKCHBsYXllcklEGAEgASgNEgwKBHBvc1gYAiABKAISDAoEcG9z",
+            "WRgDIAEoAhIRCgljYW1lcmFZYXcYBCABKAISJAoKcGxheWVySW5mbxgFIAEo",
+            "CzIQLmdhbWUuUGxheWVySW5mbyqOAgoIUGFja2V0SUQSCwoHQ1NfQ2hhdBAA",
+            "EhMKD0NTX0NoZWNrVGltZW91dBABEg4KCkNTX0tleWluZm8QAhITCg9DU19M",
+            "b2dpblJlcXVlc3QQAxITCg9DU19Qb3NpdGlvblN5bmMQBBIWChJDU19SZWdp",
+            "c3RlclJlcXVlc3QQBRILCgdTQ19DaGF0EAYSDgoKU0NfS2V5aW5mbxAHEhQK",
+            "EFNDX0xvZ2luUmVzcG9uc2UQCBITCg9TQ19Qb3NpdGlvblN5bmMQCRIXChNT",
+            "Q19SZWdpc3RlclJlc3BvbnNlEAoSFgoSU0NfUmVtb3ZlQ2hhcmFjdGVyEAsS",
+            "FQoRU0NfU3Bhd25DaGFyYWN0ZXIQDGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Game.PacketID), }, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_CHAT), global::Game.CS_CHAT.Parser, new[]{ "Message", "Channel" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_CHAT), global::Game.CS_CHAT.Parser, new[]{ "TargetID", "Message", "Channel" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_CHECK_TIMEOUT), global::Game.CS_CHECK_TIMEOUT.Parser, new[]{ "BCheck" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_KEYINFO), global::Game.CS_KEYINFO.Parser, new[]{ "KeyInfo", "CameraYaw" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_LOGIN_REQUEST), global::Game.CS_LOGIN_REQUEST.Parser, new[]{ "UserName", "Password" }, null, null, null, null),
@@ -133,6 +133,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public CS_CHAT(CS_CHAT other) : this() {
+      targetID_ = other.targetID_;
       message_ = other.message_;
       channel_ = other.channel_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -144,8 +145,23 @@ namespace Game {
       return new CS_CHAT(this);
     }
 
+    /// <summary>Field number for the "targetID" field.</summary>
+    public const int TargetIDFieldNumber = 1;
+    private uint targetID_;
+    /// <summary>
+    /// 타겟이 되는 플레이어의 id
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint TargetID {
+      get { return targetID_; }
+      set {
+        targetID_ = value;
+      }
+    }
+
     /// <summary>Field number for the "message" field.</summary>
-    public const int MessageFieldNumber = 1;
+    public const int MessageFieldNumber = 2;
     private string message_ = "";
     /// <summary>
     /// 채팅 메시지
@@ -160,17 +176,17 @@ namespace Game {
     }
 
     /// <summary>Field number for the "channel" field.</summary>
-    public const int ChannelFieldNumber = 2;
-    private string channel_ = "";
+    public const int ChannelFieldNumber = 3;
+    private uint channel_;
     /// <summary>
-    /// 채널 이름, 해당 채널에만 출력하도록 함. 나중엔 uint32로 변경 예정
+    /// 채널 타입, 0번 : 전체, 1번 : 파티, 2번 : 귓속말. 2번일 경우에만 target 검사
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Channel {
+    public uint Channel {
       get { return channel_; }
       set {
-        channel_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        channel_ = value;
       }
     }
 
@@ -189,6 +205,7 @@ namespace Game {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (TargetID != other.TargetID) return false;
       if (Message != other.Message) return false;
       if (Channel != other.Channel) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -198,8 +215,9 @@ namespace Game {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (TargetID != 0) hash ^= TargetID.GetHashCode();
       if (Message.Length != 0) hash ^= Message.GetHashCode();
-      if (Channel.Length != 0) hash ^= Channel.GetHashCode();
+      if (Channel != 0) hash ^= Channel.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -218,13 +236,17 @@ namespace Game {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (TargetID != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(TargetID);
+      }
       if (Message.Length != 0) {
-        output.WriteRawTag(10);
+        output.WriteRawTag(18);
         output.WriteString(Message);
       }
-      if (Channel.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Channel);
+      if (Channel != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(Channel);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -236,13 +258,17 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (TargetID != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(TargetID);
+      }
       if (Message.Length != 0) {
-        output.WriteRawTag(10);
+        output.WriteRawTag(18);
         output.WriteString(Message);
       }
-      if (Channel.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Channel);
+      if (Channel != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(Channel);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -254,11 +280,14 @@ namespace Game {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (TargetID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(TargetID);
+      }
       if (Message.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
       }
-      if (Channel.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Channel);
+      if (Channel != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Channel);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -272,10 +301,13 @@ namespace Game {
       if (other == null) {
         return;
       }
+      if (other.TargetID != 0) {
+        TargetID = other.TargetID;
+      }
       if (other.Message.Length != 0) {
         Message = other.Message;
       }
-      if (other.Channel.Length != 0) {
+      if (other.Channel != 0) {
         Channel = other.Channel;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -293,12 +325,16 @@ namespace Game {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            Message = input.ReadString();
+          case 8: {
+            TargetID = input.ReadUInt32();
             break;
           }
           case 18: {
-            Channel = input.ReadString();
+            Message = input.ReadString();
+            break;
+          }
+          case 24: {
+            Channel = input.ReadUInt32();
             break;
           }
         }
@@ -316,12 +352,16 @@ namespace Game {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 10: {
-            Message = input.ReadString();
+          case 8: {
+            TargetID = input.ReadUInt32();
             break;
           }
           case 18: {
-            Channel = input.ReadString();
+            Message = input.ReadString();
+            break;
+          }
+          case 24: {
+            Channel = input.ReadUInt32();
             break;
           }
         }
@@ -1795,16 +1835,16 @@ namespace Game {
 
     /// <summary>Field number for the "channel" field.</summary>
     public const int ChannelFieldNumber = 3;
-    private string channel_ = "";
+    private uint channel_;
     /// <summary>
-    /// 채널 이름, 해당 채널에만 출력하도록 함. 나중엔 uint32로 변경 예정
+    /// 채널 타입
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Channel {
+    public uint Channel {
       get { return channel_; }
       set {
-        channel_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        channel_ = value;
       }
     }
 
@@ -1835,7 +1875,7 @@ namespace Game {
       int hash = 1;
       if (PlayerID != 0) hash ^= PlayerID.GetHashCode();
       if (Message.Length != 0) hash ^= Message.GetHashCode();
-      if (Channel.Length != 0) hash ^= Channel.GetHashCode();
+      if (Channel != 0) hash ^= Channel.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1862,9 +1902,9 @@ namespace Game {
         output.WriteRawTag(18);
         output.WriteString(Message);
       }
-      if (Channel.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Channel);
+      if (Channel != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(Channel);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1884,9 +1924,9 @@ namespace Game {
         output.WriteRawTag(18);
         output.WriteString(Message);
       }
-      if (Channel.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Channel);
+      if (Channel != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(Channel);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -1904,8 +1944,8 @@ namespace Game {
       if (Message.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
       }
-      if (Channel.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Channel);
+      if (Channel != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Channel);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1925,7 +1965,7 @@ namespace Game {
       if (other.Message.Length != 0) {
         Message = other.Message;
       }
-      if (other.Channel.Length != 0) {
+      if (other.Channel != 0) {
         Channel = other.Channel;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -1951,8 +1991,8 @@ namespace Game {
             Message = input.ReadString();
             break;
           }
-          case 26: {
-            Channel = input.ReadString();
+          case 24: {
+            Channel = input.ReadUInt32();
             break;
           }
         }
@@ -1978,8 +2018,8 @@ namespace Game {
             Message = input.ReadString();
             break;
           }
-          case 26: {
-            Channel = input.ReadString();
+          case 24: {
+            Channel = input.ReadUInt32();
             break;
           }
         }

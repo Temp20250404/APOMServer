@@ -7,7 +7,7 @@
 #include "MemoryPoolManager.h"
 #include "Protobuf/Protocol.pb.h"
 
-void SC_CHAT_FOR_All(CSession* pSession, UINT32 playerID, std::string message, std::string channel)
+void SC_CHAT_FOR_All(CSession* pSession, UINT32 playerID, std::string message, UINT32 channel)
 {
     game::SC_CHAT pkt;
 
@@ -34,7 +34,7 @@ void SC_CHAT_FOR_All(CSession* pSession, UINT32 playerID, std::string message, s
     packetPool.Free(Packet);
 }
 
-void SC_CHAT_FOR_SINGLE(CSession* pSession, UINT32 playerID, std::string message, std::string channel)
+void SC_CHAT_FOR_SINGLE(CSession* pSession, UINT32 playerID, std::string message, UINT32 channel)
 {
     game::SC_CHAT pkt;
 
@@ -61,7 +61,7 @@ void SC_CHAT_FOR_SINGLE(CSession* pSession, UINT32 playerID, std::string message
     packetPool.Free(Packet);
 }
 
-void SC_CHAT_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, std::string message, std::string channel)
+void SC_CHAT_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, std::string message, UINT32 channel)
 {
     game::SC_CHAT pkt;
 

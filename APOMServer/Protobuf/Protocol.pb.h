@@ -266,10 +266,11 @@ class CS_CHAT final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMessageFieldNumber = 1,
-    kChannelFieldNumber = 2,
+    kMessageFieldNumber = 2,
+    kTargetIDFieldNumber = 1,
+    kChannelFieldNumber = 3,
   };
-  // string message = 1;
+  // string message = 2;
   void clear_message();
   const std::string& message() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -283,18 +284,22 @@ class CS_CHAT final :
   std::string* _internal_mutable_message();
   public:
 
-  // string channel = 2;
-  void clear_channel();
-  const std::string& channel() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_channel(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_channel();
-  PROTOBUF_NODISCARD std::string* release_channel();
-  void set_allocated_channel(std::string* channel);
+  // uint32 targetID = 1;
+  void clear_targetid();
+  uint32_t targetid() const;
+  void set_targetid(uint32_t value);
   private:
-  const std::string& _internal_channel() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_channel(const std::string& value);
-  std::string* _internal_mutable_channel();
+  uint32_t _internal_targetid() const;
+  void _internal_set_targetid(uint32_t value);
+  public:
+
+  // uint32 channel = 3;
+  void clear_channel();
+  uint32_t channel() const;
+  void set_channel(uint32_t value);
+  private:
+  uint32_t _internal_channel() const;
+  void _internal_set_channel(uint32_t value);
   public:
 
   // @@protoc_insertion_point(class_scope:game.CS_CHAT)
@@ -306,7 +311,8 @@ class CS_CHAT final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr message_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr channel_;
+    uint32_t targetid_;
+    uint32_t channel_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1410,8 +1416,8 @@ class SC_CHAT final :
 
   enum : int {
     kMessageFieldNumber = 2,
-    kChannelFieldNumber = 3,
     kPlayerIDFieldNumber = 1,
+    kChannelFieldNumber = 3,
   };
   // string message = 2;
   void clear_message();
@@ -1427,20 +1433,6 @@ class SC_CHAT final :
   std::string* _internal_mutable_message();
   public:
 
-  // string channel = 3;
-  void clear_channel();
-  const std::string& channel() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_channel(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_channel();
-  PROTOBUF_NODISCARD std::string* release_channel();
-  void set_allocated_channel(std::string* channel);
-  private:
-  const std::string& _internal_channel() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_channel(const std::string& value);
-  std::string* _internal_mutable_channel();
-  public:
-
   // uint32 playerID = 1;
   void clear_playerid();
   uint32_t playerid() const;
@@ -1448,6 +1440,15 @@ class SC_CHAT final :
   private:
   uint32_t _internal_playerid() const;
   void _internal_set_playerid(uint32_t value);
+  public:
+
+  // uint32 channel = 3;
+  void clear_channel();
+  uint32_t channel() const;
+  void set_channel(uint32_t value);
+  private:
+  uint32_t _internal_channel() const;
+  void _internal_set_channel(uint32_t value);
   public:
 
   // @@protoc_insertion_point(class_scope:game.SC_CHAT)
@@ -1459,8 +1460,8 @@ class SC_CHAT final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr message_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr channel_;
     uint32_t playerid_;
+    uint32_t channel_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2505,7 +2506,27 @@ class SC_SPAWN_CHARACTER final :
 #endif  // __GNUC__
 // CS_CHAT
 
-// string message = 1;
+// uint32 targetID = 1;
+inline void CS_CHAT::clear_targetid() {
+  _impl_.targetid_ = 0u;
+}
+inline uint32_t CS_CHAT::_internal_targetid() const {
+  return _impl_.targetid_;
+}
+inline uint32_t CS_CHAT::targetid() const {
+  // @@protoc_insertion_point(field_get:game.CS_CHAT.targetID)
+  return _internal_targetid();
+}
+inline void CS_CHAT::_internal_set_targetid(uint32_t value) {
+  
+  _impl_.targetid_ = value;
+}
+inline void CS_CHAT::set_targetid(uint32_t value) {
+  _internal_set_targetid(value);
+  // @@protoc_insertion_point(field_set:game.CS_CHAT.targetID)
+}
+
+// string message = 2;
 inline void CS_CHAT::clear_message() {
   _impl_.message_.ClearToEmpty();
 }
@@ -2555,54 +2576,24 @@ inline void CS_CHAT::set_allocated_message(std::string* message) {
   // @@protoc_insertion_point(field_set_allocated:game.CS_CHAT.message)
 }
 
-// string channel = 2;
+// uint32 channel = 3;
 inline void CS_CHAT::clear_channel() {
-  _impl_.channel_.ClearToEmpty();
+  _impl_.channel_ = 0u;
 }
-inline const std::string& CS_CHAT::channel() const {
+inline uint32_t CS_CHAT::_internal_channel() const {
+  return _impl_.channel_;
+}
+inline uint32_t CS_CHAT::channel() const {
   // @@protoc_insertion_point(field_get:game.CS_CHAT.channel)
   return _internal_channel();
 }
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void CS_CHAT::set_channel(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.channel_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+inline void CS_CHAT::_internal_set_channel(uint32_t value) {
+  
+  _impl_.channel_ = value;
+}
+inline void CS_CHAT::set_channel(uint32_t value) {
+  _internal_set_channel(value);
   // @@protoc_insertion_point(field_set:game.CS_CHAT.channel)
-}
-inline std::string* CS_CHAT::mutable_channel() {
-  std::string* _s = _internal_mutable_channel();
-  // @@protoc_insertion_point(field_mutable:game.CS_CHAT.channel)
-  return _s;
-}
-inline const std::string& CS_CHAT::_internal_channel() const {
-  return _impl_.channel_.Get();
-}
-inline void CS_CHAT::_internal_set_channel(const std::string& value) {
-  
-  _impl_.channel_.Set(value, GetArenaForAllocation());
-}
-inline std::string* CS_CHAT::_internal_mutable_channel() {
-  
-  return _impl_.channel_.Mutable(GetArenaForAllocation());
-}
-inline std::string* CS_CHAT::release_channel() {
-  // @@protoc_insertion_point(field_release:game.CS_CHAT.channel)
-  return _impl_.channel_.Release();
-}
-inline void CS_CHAT::set_allocated_channel(std::string* channel) {
-  if (channel != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.channel_.SetAllocated(channel, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.channel_.IsDefault()) {
-    _impl_.channel_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:game.CS_CHAT.channel)
 }
 
 // -------------------------------------------------------------------
@@ -3063,54 +3054,24 @@ inline void SC_CHAT::set_allocated_message(std::string* message) {
   // @@protoc_insertion_point(field_set_allocated:game.SC_CHAT.message)
 }
 
-// string channel = 3;
+// uint32 channel = 3;
 inline void SC_CHAT::clear_channel() {
-  _impl_.channel_.ClearToEmpty();
+  _impl_.channel_ = 0u;
 }
-inline const std::string& SC_CHAT::channel() const {
+inline uint32_t SC_CHAT::_internal_channel() const {
+  return _impl_.channel_;
+}
+inline uint32_t SC_CHAT::channel() const {
   // @@protoc_insertion_point(field_get:game.SC_CHAT.channel)
   return _internal_channel();
 }
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void SC_CHAT::set_channel(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.channel_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+inline void SC_CHAT::_internal_set_channel(uint32_t value) {
+  
+  _impl_.channel_ = value;
+}
+inline void SC_CHAT::set_channel(uint32_t value) {
+  _internal_set_channel(value);
   // @@protoc_insertion_point(field_set:game.SC_CHAT.channel)
-}
-inline std::string* SC_CHAT::mutable_channel() {
-  std::string* _s = _internal_mutable_channel();
-  // @@protoc_insertion_point(field_mutable:game.SC_CHAT.channel)
-  return _s;
-}
-inline const std::string& SC_CHAT::_internal_channel() const {
-  return _impl_.channel_.Get();
-}
-inline void SC_CHAT::_internal_set_channel(const std::string& value) {
-  
-  _impl_.channel_.Set(value, GetArenaForAllocation());
-}
-inline std::string* SC_CHAT::_internal_mutable_channel() {
-  
-  return _impl_.channel_.Mutable(GetArenaForAllocation());
-}
-inline std::string* SC_CHAT::release_channel() {
-  // @@protoc_insertion_point(field_release:game.SC_CHAT.channel)
-  return _impl_.channel_.Release();
-}
-inline void SC_CHAT::set_allocated_channel(std::string* channel) {
-  if (channel != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.channel_.SetAllocated(channel, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.channel_.IsDefault()) {
-    _impl_.channel_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:game.SC_CHAT.channel)
 }
 
 // -------------------------------------------------------------------

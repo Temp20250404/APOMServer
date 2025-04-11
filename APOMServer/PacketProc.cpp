@@ -31,16 +31,18 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     {
     case game::PacketID::CS_Chat:
     {
+        UINT32 targetID;
         std::string message;
-        std::string channel;
+        UINT32 channel;
 
         game::CS_CHAT pkt;
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
+        targetID = pkt.targetid();
         message = pkt.message();
         channel = pkt.channel();
 
-        return CS_CHAT(pSession, message, channel);
+        return CS_CHAT(pSession, targetID, message, channel);
     }
     break;
     case game::PacketID::CS_CheckTimeout:
@@ -140,7 +142,7 @@ void DisconnectSessionProc(CSession* pSession)
     return;
 }
 
-bool CS_CHAT(CSession* pSession, std::string message, std::string channel)
+bool CS_CHAT(CSession* pSession, UINT32 targetID, std::string message, UINT32 channel)
 {
     CPlayer* pPlayer = (CPlayer*)pSession->pObj;
 

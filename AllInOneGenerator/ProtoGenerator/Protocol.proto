@@ -22,8 +22,9 @@ enum PacketID {
 }
 
 message CS_CHAT {
-    string message = 1; // 채팅 메시지
-    string channel = 2; // 채널 이름, 해당 채널에만 출력하도록 함. 나중엔 uint32로 변경 예정
+    uint32 targetID = 1; // 타겟이 되는 플레이어의 id
+    string message = 2; // 채팅 메시지
+    uint32 channel = 3; // 채널 타입, 0번 : 전체, 1번 : 파티, 2번 : 귓속말. 2번일 경우에만 target 검사
 }
 message CS_CHECK_TIMEOUT {
     bool bCheck = 1; // L7에서 timeout 체크용. 일정 주기마다 한번씩 서버에 전송
@@ -52,7 +53,7 @@ message PlayerInfo {
 message SC_CHAT {
     uint32 playerID = 1; // 채팅을 보낸 플레이어의 id
     string message = 2; // 채팅 메시지
-    string channel = 3; // 채널 이름, 해당 채널에만 출력하도록 함. 나중엔 uint32로 변경 예정
+    uint32 channel = 3; // 채널 타입
 }
 message SC_KEYINFO {
     uint32 playerID = 1; // 움직임을 보내는 플레이어의 id
