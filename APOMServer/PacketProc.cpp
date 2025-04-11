@@ -142,7 +142,13 @@ void DisconnectSessionProc(CSession* pSession)
 
 bool CS_CHAT(CSession* pSession, std::string message, std::string channel)
 {
-    return false;
+    CPlayer* pPlayer = (CPlayer*)pSession->pObj;
+
+    CRoom* pRoom = roomManager.GetRoomById(pPlayer->GetRoomId());
+
+    SC_CHAT_FOR_AROUND(nullptr, pRoom, pPlayer->m_ID, message, channel);
+
+    return true;
 }
 
 bool CS_CHECK_TIMEOUT(CSession* pSession, bool bCheck)
