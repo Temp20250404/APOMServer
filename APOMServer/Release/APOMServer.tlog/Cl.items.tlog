@@ -10,6 +10,7 @@ G:\Sparta\APOMServer\APOMServer\EncodingUtils.cpp;G:\Sparta\APOMServer\APOMServe
 G:\Sparta\APOMServer\APOMServer\Item.cpp;G:\Sparta\APOMServer\APOMServer\Release\Item.obj
 G:\Sparta\APOMServer\APOMServer\ItemSpawner.cpp;G:\Sparta\APOMServer\APOMServer\Release\ItemSpawner.obj
 G:\Sparta\APOMServer\APOMServer\MatchSystem.cpp;G:\Sparta\APOMServer\APOMServer\Release\MatchSystem.obj
+G:\Sparta\APOMServer\APOMServer\MathUtils.cpp;G:\Sparta\APOMServer\APOMServer\Release\MathUtils.obj
 G:\Sparta\APOMServer\APOMServer\Room.cpp;G:\Sparta\APOMServer\APOMServer\Release\Room.obj
 G:\Sparta\APOMServer\APOMServer\CustomException.cpp;G:\Sparta\APOMServer\APOMServer\Release\CustomException.obj
 G:\Sparta\APOMServer\APOMServer\LogManager.cpp;G:\Sparta\APOMServer\APOMServer\Release\LogManager.obj

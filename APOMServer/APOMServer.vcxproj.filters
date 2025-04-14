@@ -156,6 +156,12 @@
     <Filter Include="소스 파일\07. AI\Scripts">
       <UniqueIdentifier>{c06beeea-c83c-4820-bdf2-0c9cf6a778f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\99. Etc\08. Utils\Encoding">
+      <UniqueIdentifier>{a431c0f2-6950-46a6-af97-299074d476e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99. Etc\08. Utils\Math">
+      <UniqueIdentifier>{1aa65239-c24d-45be-b83d-a889abef9c5a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CustomException.cpp">
@@ -254,9 +260,6 @@
     <ClCompile Include="SessionManager.cpp">
       <Filter>소스 파일\01. Manager\03. SessionMgr</Filter>
     </ClCompile>
-    <ClCompile Include="EncodingUtils.cpp">
-      <Filter>소스 파일\99. Etc\08. Utils</Filter>
-    </ClCompile>
     <ClCompile Include="BehaviourTree.cpp">
       <Filter>소스 파일\07. AI\BehaviourTree</Filter>
     </ClCompile>
@@ -268,6 +271,12 @@
     </ClCompile>
     <ClCompile Include="Script_Boss.cpp">
       <Filter>소스 파일\07. AI\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="EncodingUtils.cpp">
+      <Filter>소스 파일\99. Etc\08. Utils\Encoding</Filter>
+    </ClCompile>
+    <ClCompile Include="MathUtils.cpp">
+      <Filter>소스 파일\99. Etc\08. Utils\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -385,9 +394,6 @@
     <ClInclude Include="SessionManager.h">
       <Filter>소스 파일\01. Manager\03. SessionMgr</Filter>
     </ClInclude>
-    <ClInclude Include="EncodingUtils.h">
-      <Filter>소스 파일\99. Etc\08. Utils</Filter>
-    </ClInclude>
     <ClInclude Include="BehaviourTree.h">
       <Filter>소스 파일\07. AI\BehaviourTree</Filter>
     </ClInclude>
@@ -402,6 +408,12 @@
     </ClInclude>
     <ClInclude Include="Script_Boss.h">
       <Filter>소스 파일\07. AI\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="EncodingUtils.h">
+      <Filter>소스 파일\99. Etc\08. Utils\Encoding</Filter>
+    </ClInclude>
+    <ClInclude Include="MathUtils.h">
+      <Filter>소스 파일\99. Etc\08. Utils\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

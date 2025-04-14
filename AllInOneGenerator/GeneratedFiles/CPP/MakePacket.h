@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ProtoStruct.h"
+#include "Protobuf/Protocol.pb.h"
 
 class CSession;
 class CRoom;
@@ -33,6 +34,6 @@ void SC_SPAWN_CHARACTER_FOR_All(CSession* pSession, UINT32 playerID, float posX,
 void SC_SPAWN_CHARACTER_FOR_SINGLE(CSession* pSession, UINT32 playerID, float posX, float posY, float cameraYaw, PlayerInfo playerInfo);
 void SC_SPAWN_CHARACTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, float posX, float posY, float cameraYaw, PlayerInfo playerInfo);
 
-void SC_BOSS_PHASE_FOR_All(CSession* pSession, UINT32 bossID, game::BOSS_PHASE currentPhase, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, UINT32 targetPlayerID, float distanceToPlayer);
-void SC_BOSS_PHASE_FOR_SINGLE(CSession* pSession, UINT32 bossID, game::BOSS_PHASE currentPhase, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, UINT32 targetPlayerID, float distanceToPlayer);
-void SC_BOSS_PHASE_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 bossID, game::BOSS_PHASE currentPhase, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, UINT32 targetPlayerID, float distanceToPlayer);
+void SC_BOSS_PHASE_FOR_All(CSession* pSession, UINT32 bossID, game::BOSS_PHASE currentPhase, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, UINT32 targetPlayerID, float distanceToPlayer, Position bossPos);
+void SC_BOSS_PHASE_FOR_SINGLE(CSession* pSession, UINT32 bossID, game::BOSS_PHASE currentPhase, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, UINT32 targetPlayerID, float distanceToPlayer, Position bossPos);
+void SC_BOSS_PHASE_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 bossID, game::BOSS_PHASE currentPhase, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, UINT32 targetPlayerID, float distanceToPlayer, Position bossPos);

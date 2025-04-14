@@ -25,6 +25,8 @@ public:
 
     CPlayer* FindPlayerById(int playerId);
 
+    const std::vector<CPlayer*>& GetActivePlayers(void) { return m_activePlayers; }
+
 public:
     std::vector<CPlayer*> m_activePlayers;
     std::vector<CPlayer*> m_waitingPlayers;

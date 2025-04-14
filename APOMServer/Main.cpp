@@ -165,6 +165,11 @@ int main()
     timerManager.InitTimer(25);
 
 
+    //=====================================================================================================================================
+    // 룸 매니저 초기화
+    //=====================================================================================================================================
+    CRoomManager& roomManager = CRoomManager::GetInstance();
+    roomManager.InitRooms();
 
 
 
@@ -178,24 +183,27 @@ int main()
     AIContext context;
     context.maxHP = 100;             // 초기 체력
     context.currentHP = context.maxHP;
-    context.distanceToPlayer = 12.0f; // 초기 플레이어와의 거리 (감지 범위 내)
     context.attackRange = 5.0f;
     context.moveSpeed = 1.0f;
     context.detectionRange = 15.0f;
 
-    // AIEntity 인스턴스 생성
-    AIEntity* pAIEntity = new AIEntity(context, builder);
+    AIEntity* pAIEntity;
+    for (int i = 0; i < 10; ++i)
+    {
+        // context에 방 정보 삽입
+        CRoom* pRoom = roomManager.GetRoomById(i);
+        context.ptargetRoom = pRoom;
 
-    for (int i = 0; i < 1000; ++i)
+        // AIEntity 인스턴스 생성
+        pAIEntity = new AIEntity(context, builder);
+
+        // 고유 ID 추가
+        context.ID = pAIEntity->GetID();
+
+        // AI 매니저에 AI 객체 등록
         aiManager.AddEntity(pAIEntity);
+    }
 
-
-
-    //=====================================================================================================================================
-    // 룸 매니저 초기화
-    //=====================================================================================================================================
-    CRoomManager& roomManager = CRoomManager::GetInstance();
-    roomManager.InitRooms();
 
 
 

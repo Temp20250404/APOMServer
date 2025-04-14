@@ -231,6 +231,7 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORIT
 PROTOBUF_CONSTEXPR SC_BOSS_PHASE::SC_BOSS_PHASE(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.targetmovementpos_)*/nullptr
+  , /*decltype(_impl_.bosspos_)*/nullptr
   , /*decltype(_impl_.bossid_)*/0u
   , /*decltype(_impl_.currentphase_)*/0
   , /*decltype(_impl_.currenthp_)*/0u
@@ -402,6 +403,7 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   PROTOBUF_FIELD_OFFSET(::game::SC_BOSS_PHASE, _impl_.targetmovementpos_),
   PROTOBUF_FIELD_OFFSET(::game::SC_BOSS_PHASE, _impl_.targetplayerid_),
   PROTOBUF_FIELD_OFFSET(::game::SC_BOSS_PHASE, _impl_.distancetoplayer_),
+  PROTOBUF_FIELD_OFFSET(::game::SC_BOSS_PHASE, _impl_.bosspos_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::game::CS_CHECK_TIMEOUT, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -426,7 +428,7 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 105, -1, -1, sizeof(::game::SC_REMOVE_CHARACTER)},
   { 112, -1, -1, sizeof(::game::SC_SPAWN_CHARACTER)},
   { 123, -1, -1, sizeof(::game::SC_BOSS_PHASE)},
-  { 136, -1, -1, sizeof(::game::CS_CHECK_TIMEOUT)},
+  { 137, -1, -1, sizeof(::game::CS_CHECK_TIMEOUT)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -473,26 +475,29 @@ const char descriptor_table_protodef_Protocol_2eproto[] PROTOBUF_SECTION_VARIABL
   "erID\030\001 \001(\r\"{\n\022SC_SPAWN_CHARACTER\022\020\n\010play"
   "erID\030\001 \001(\r\022\014\n\004posX\030\002 \001(\002\022\014\n\004posY\030\003 \001(\002\022\021"
   "\n\tcameraYaw\030\004 \001(\002\022$\n\nplayerInfo\030\005 \001(\0132\020."
-  "game.PlayerInfo\"\306\001\n\rSC_BOSS_PHASE\022\016\n\006bos"
+  "game.PlayerInfo\"\347\001\n\rSC_BOSS_PHASE\022\016\n\006bos"
   "sID\030\001 \001(\r\022&\n\014currentPhase\030\002 \001(\0162\020.game.B"
   "OSS_PHASE\022\021\n\tcurrentHp\030\003 \001(\r\022\r\n\005maxHp\030\004 "
   "\001(\r\022)\n\021targetMovementPos\030\005 \001(\0132\016.game.Po"
   "sition\022\026\n\016targetPlayerID\030\006 \001(\r\022\030\n\020distan"
-  "ceToPlayer\030\007 \001(\002\"\"\n\020CS_CHECK_TIMEOUT\022\016\n\006"
-  "bCheck\030\001 \001(\010*\240\002\n\010PacketID\022\013\n\007CS_Chat\020\000\022\023"
-  "\n\017CS_CheckTimeout\020\001\022\016\n\nCS_Keyinfo\020\002\022\023\n\017C"
-  "S_LoginRequest\020\003\022\023\n\017CS_PositionSync\020\004\022\026\n"
-  "\022CS_RegisterRequest\020\005\022\020\n\014SC_BossPhase\020\006\022"
-  "\013\n\007SC_Chat\020\007\022\016\n\nSC_Keyinfo\020\010\022\024\n\020SC_Login"
-  "Response\020\t\022\023\n\017SC_PositionSync\020\n\022\027\n\023SC_Re"
-  "gisterResponse\020\013\022\026\n\022SC_RemoveCharacter\020\014"
-  "\022\025\n\021SC_SpawnCharacter\020\r*N\n\nBOSS_PHASE\022\025\n"
-  "\021BOSS_PHASE_ATTACK\020\000\022\024\n\020BOSS_PHASE_DEATH"
-  "\020\001\022\023\n\017BOSS_PHASE_IDLE\020\002b\006proto3"
+  "ceToPlayer\030\007 \001(\002\022\037\n\007bossPos\030\010 \001(\0132\016.game"
+  ".Position\"\"\n\020CS_CHECK_TIMEOUT\022\016\n\006bCheck\030"
+  "\001 \001(\010*\240\002\n\010PacketID\022\013\n\007CS_Chat\020\000\022\023\n\017CS_Ch"
+  "eckTimeout\020\001\022\016\n\nCS_Keyinfo\020\002\022\023\n\017CS_Login"
+  "Request\020\003\022\023\n\017CS_PositionSync\020\004\022\026\n\022CS_Reg"
+  "isterRequest\020\005\022\020\n\014SC_BossPhase\020\006\022\013\n\007SC_C"
+  "hat\020\007\022\016\n\nSC_Keyinfo\020\010\022\024\n\020SC_LoginRespons"
+  "e\020\t\022\023\n\017SC_PositionSync\020\n\022\027\n\023SC_RegisterR"
+  "esponse\020\013\022\026\n\022SC_RemoveCharacter\020\014\022\025\n\021SC_"
+  "SpawnCharacter\020\r*\206\001\n\nBOSS_PHASE\022\025\n\021BOSS_"
+  "PHASE_ATTACK\020\000\022\026\n\022BOSS_PHASE_BERSERK\020\001\022\024"
+  "\n\020BOSS_PHASE_DEATH\020\002\022\023\n\017BOSS_PHASE_IDLE\020"
+  "\003\022\036\n\032BOSS_PHASE_RECONFIGURATION\020\004b\006proto"
+  "3"
   ;
 static ::_pbi::once_flag descriptor_table_Protocol_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Protocol_2eproto = {
-    false, false, 1591, descriptor_table_protodef_Protocol_2eproto,
+    false, false, 1681, descriptor_table_protodef_Protocol_2eproto,
     "Protocol.proto",
     &descriptor_table_Protocol_2eproto_once, nullptr, 0, 16,
     schemas, file_default_instances, TableStruct_Protocol_2eproto::offsets,
@@ -541,6 +546,8 @@ bool BOSS_PHASE_IsValid(int value) {
     case 0:
     case 1:
     case 2:
+    case 3:
+    case 4:
       return true;
     default:
       return false;
@@ -4136,11 +4143,16 @@ void SC_SPAWN_CHARACTER::InternalSwap(SC_SPAWN_CHARACTER* other) {
 class SC_BOSS_PHASE::_Internal {
  public:
   static const ::game::Position& targetmovementpos(const SC_BOSS_PHASE* msg);
+  static const ::game::Position& bosspos(const SC_BOSS_PHASE* msg);
 };
 
 const ::game::Position&
 SC_BOSS_PHASE::_Internal::targetmovementpos(const SC_BOSS_PHASE* msg) {
   return *msg->_impl_.targetmovementpos_;
+}
+const ::game::Position&
+SC_BOSS_PHASE::_Internal::bosspos(const SC_BOSS_PHASE* msg) {
+  return *msg->_impl_.bosspos_;
 }
 SC_BOSS_PHASE::SC_BOSS_PHASE(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -4153,6 +4165,7 @@ SC_BOSS_PHASE::SC_BOSS_PHASE(const SC_BOSS_PHASE& from)
   SC_BOSS_PHASE* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.targetmovementpos_){nullptr}
+    , decltype(_impl_.bosspos_){nullptr}
     , decltype(_impl_.bossid_){}
     , decltype(_impl_.currentphase_){}
     , decltype(_impl_.currenthp_){}
@@ -4164,6 +4177,9 @@ SC_BOSS_PHASE::SC_BOSS_PHASE(const SC_BOSS_PHASE& from)
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_targetmovementpos()) {
     _this->_impl_.targetmovementpos_ = new ::game::Position(*from._impl_.targetmovementpos_);
+  }
+  if (from._internal_has_bosspos()) {
+    _this->_impl_.bosspos_ = new ::game::Position(*from._impl_.bosspos_);
   }
   ::memcpy(&_impl_.bossid_, &from._impl_.bossid_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.distancetoplayer_) -
@@ -4177,6 +4193,7 @@ inline void SC_BOSS_PHASE::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.targetmovementpos_){nullptr}
+    , decltype(_impl_.bosspos_){nullptr}
     , decltype(_impl_.bossid_){0u}
     , decltype(_impl_.currentphase_){0}
     , decltype(_impl_.currenthp_){0u}
@@ -4199,6 +4216,7 @@ SC_BOSS_PHASE::~SC_BOSS_PHASE() {
 inline void SC_BOSS_PHASE::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   if (this != internal_default_instance()) delete _impl_.targetmovementpos_;
+  if (this != internal_default_instance()) delete _impl_.bosspos_;
 }
 
 void SC_BOSS_PHASE::SetCachedSize(int size) const {
@@ -4215,6 +4233,10 @@ void SC_BOSS_PHASE::Clear() {
     delete _impl_.targetmovementpos_;
   }
   _impl_.targetmovementpos_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.bosspos_ != nullptr) {
+    delete _impl_.bosspos_;
+  }
+  _impl_.bosspos_ = nullptr;
   ::memset(&_impl_.bossid_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&_impl_.distancetoplayer_) -
       reinterpret_cast<char*>(&_impl_.bossid_)) + sizeof(_impl_.distancetoplayer_));
@@ -4281,6 +4303,14 @@ const char* SC_BOSS_PHASE::_InternalParse(const char* ptr, ::_pbi::ParseContext*
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 61)) {
           _impl_.distancetoplayer_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
+        } else
+          goto handle_unusual;
+        continue;
+      // .game.Position bossPos = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
+          ptr = ctx->ParseMessage(_internal_mutable_bosspos(), ptr);
+          CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
@@ -4361,6 +4391,13 @@ uint8_t* SC_BOSS_PHASE::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteFloatToArray(7, this->_internal_distancetoplayer(), target);
   }
 
+  // .game.Position bossPos = 8;
+  if (this->_internal_has_bosspos()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(8, _Internal::bosspos(this),
+        _Internal::bosspos(this).GetCachedSize(), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -4382,6 +4419,13 @@ size_t SC_BOSS_PHASE::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *_impl_.targetmovementpos_);
+  }
+
+  // .game.Position bossPos = 8;
+  if (this->_internal_has_bosspos()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.bosspos_);
   }
 
   // uint32 bossID = 1;
@@ -4440,6 +4484,10 @@ void SC_BOSS_PHASE::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
   if (from._internal_has_targetmovementpos()) {
     _this->_internal_mutable_targetmovementpos()->::game::Position::MergeFrom(
         from._internal_targetmovementpos());
+  }
+  if (from._internal_has_bosspos()) {
+    _this->_internal_mutable_bosspos()->::game::Position::MergeFrom(
+        from._internal_bosspos());
   }
   if (from._internal_bossid() != 0) {
     _this->_internal_set_bossid(from._internal_bossid());

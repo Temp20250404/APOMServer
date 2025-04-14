@@ -154,14 +154,16 @@ inline bool PacketID_Parse(
 }
 enum BOSS_PHASE : int {
   BOSS_PHASE_ATTACK = 0,
-  BOSS_PHASE_DEATH = 1,
-  BOSS_PHASE_IDLE = 2,
+  BOSS_PHASE_BERSERK = 1,
+  BOSS_PHASE_DEATH = 2,
+  BOSS_PHASE_IDLE = 3,
+  BOSS_PHASE_RECONFIGURATION = 4,
   BOSS_PHASE_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   BOSS_PHASE_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
 bool BOSS_PHASE_IsValid(int value);
 constexpr BOSS_PHASE BOSS_PHASE_MIN = BOSS_PHASE_ATTACK;
-constexpr BOSS_PHASE BOSS_PHASE_MAX = BOSS_PHASE_IDLE;
+constexpr BOSS_PHASE BOSS_PHASE_MAX = BOSS_PHASE_RECONFIGURATION;
 constexpr int BOSS_PHASE_ARRAYSIZE = BOSS_PHASE_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* BOSS_PHASE_descriptor();
@@ -2698,6 +2700,7 @@ class SC_BOSS_PHASE final :
 
   enum : int {
     kTargetMovementPosFieldNumber = 5,
+    kBossPosFieldNumber = 8,
     kBossIDFieldNumber = 1,
     kCurrentPhaseFieldNumber = 2,
     kCurrentHpFieldNumber = 3,
@@ -2722,6 +2725,24 @@ class SC_BOSS_PHASE final :
   void unsafe_arena_set_allocated_targetmovementpos(
       ::game::Position* targetmovementpos);
   ::game::Position* unsafe_arena_release_targetmovementpos();
+
+  // .game.Position bossPos = 8;
+  bool has_bosspos() const;
+  private:
+  bool _internal_has_bosspos() const;
+  public:
+  void clear_bosspos();
+  const ::game::Position& bosspos() const;
+  PROTOBUF_NODISCARD ::game::Position* release_bosspos();
+  ::game::Position* mutable_bosspos();
+  void set_allocated_bosspos(::game::Position* bosspos);
+  private:
+  const ::game::Position& _internal_bosspos() const;
+  ::game::Position* _internal_mutable_bosspos();
+  public:
+  void unsafe_arena_set_allocated_bosspos(
+      ::game::Position* bosspos);
+  ::game::Position* unsafe_arena_release_bosspos();
 
   // uint32 bossID = 1;
   void clear_bossid();
@@ -2786,6 +2807,7 @@ class SC_BOSS_PHASE final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::game::Position* targetmovementpos_;
+    ::game::Position* bosspos_;
     uint32_t bossid_;
     int currentphase_;
     uint32_t currenthp_;
@@ -4310,6 +4332,96 @@ inline void SC_BOSS_PHASE::_internal_set_distancetoplayer(float value) {
 inline void SC_BOSS_PHASE::set_distancetoplayer(float value) {
   _internal_set_distancetoplayer(value);
   // @@protoc_insertion_point(field_set:game.SC_BOSS_PHASE.distanceToPlayer)
+}
+
+// .game.Position bossPos = 8;
+inline bool SC_BOSS_PHASE::_internal_has_bosspos() const {
+  return this != internal_default_instance() && _impl_.bosspos_ != nullptr;
+}
+inline bool SC_BOSS_PHASE::has_bosspos() const {
+  return _internal_has_bosspos();
+}
+inline void SC_BOSS_PHASE::clear_bosspos() {
+  if (GetArenaForAllocation() == nullptr && _impl_.bosspos_ != nullptr) {
+    delete _impl_.bosspos_;
+  }
+  _impl_.bosspos_ = nullptr;
+}
+inline const ::game::Position& SC_BOSS_PHASE::_internal_bosspos() const {
+  const ::game::Position* p = _impl_.bosspos_;
+  return p != nullptr ? *p : reinterpret_cast<const ::game::Position&>(
+      ::game::_Position_default_instance_);
+}
+inline const ::game::Position& SC_BOSS_PHASE::bosspos() const {
+  // @@protoc_insertion_point(field_get:game.SC_BOSS_PHASE.bossPos)
+  return _internal_bosspos();
+}
+inline void SC_BOSS_PHASE::unsafe_arena_set_allocated_bosspos(
+    ::game::Position* bosspos) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.bosspos_);
+  }
+  _impl_.bosspos_ = bosspos;
+  if (bosspos) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:game.SC_BOSS_PHASE.bossPos)
+}
+inline ::game::Position* SC_BOSS_PHASE::release_bosspos() {
+  
+  ::game::Position* temp = _impl_.bosspos_;
+  _impl_.bosspos_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::game::Position* SC_BOSS_PHASE::unsafe_arena_release_bosspos() {
+  // @@protoc_insertion_point(field_release:game.SC_BOSS_PHASE.bossPos)
+  
+  ::game::Position* temp = _impl_.bosspos_;
+  _impl_.bosspos_ = nullptr;
+  return temp;
+}
+inline ::game::Position* SC_BOSS_PHASE::_internal_mutable_bosspos() {
+  
+  if (_impl_.bosspos_ == nullptr) {
+    auto* p = CreateMaybeMessage<::game::Position>(GetArenaForAllocation());
+    _impl_.bosspos_ = p;
+  }
+  return _impl_.bosspos_;
+}
+inline ::game::Position* SC_BOSS_PHASE::mutable_bosspos() {
+  ::game::Position* _msg = _internal_mutable_bosspos();
+  // @@protoc_insertion_point(field_mutable:game.SC_BOSS_PHASE.bossPos)
+  return _msg;
+}
+inline void SC_BOSS_PHASE::set_allocated_bosspos(::game::Position* bosspos) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.bosspos_;
+  }
+  if (bosspos) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(bosspos);
+    if (message_arena != submessage_arena) {
+      bosspos = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, bosspos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  _impl_.bosspos_ = bosspos;
+  // @@protoc_insertion_point(field_set_allocated:game.SC_BOSS_PHASE.bossPos)
 }
 
 // -------------------------------------------------------------------

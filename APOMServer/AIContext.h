@@ -1,15 +1,18 @@
 #pragma once
 
+class CRoom;
+class CPlayer;
+
 // 언리얼에서 blackboard라 불리는 AI 정보를 컨트롤하는 구조체
 struct AIContext {
+    // 고유 ID
+    UINT32 ID = -1;
+
     // 체력 관련
     float currentHP = 100.0f;    // 현재 체력
     float maxHP = 100.0f;        // 최대 체력
 
     bool bDeath = false;         // 체력이 0 이하가 되면 true
-
-    // 플레이어와의 거리
-    float distanceToPlayer = 30.0f; // 초기값은 30m로 가정
 
     // 이동/공격 관련
     float moveSpeed = 1.0f;      // 보스 이동 속도
@@ -22,4 +25,11 @@ struct AIContext {
     float phase4HPPercent = 0.5f;  // 체력이 50% 이하가 되면 페이즈4
 
     float detectionRange = 15.0f; // 플레이어 감지 범위
+
+    CRoom* ptargetRoom = nullptr;   // 현재 AI가 존재하는 방에 대한 정보
+    CPlayer* pTargetPlayer = nullptr;   // 현재 AI가 타게팅한 플레이어의 정보
+
+    float posX = 0.f;     // 보스의 현재 위치
+    float posY = 0.f;
+    float posZ = 0.f;
 };

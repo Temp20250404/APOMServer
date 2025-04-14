@@ -45,21 +45,23 @@ namespace Game {
             "JwoTU0NfUkVNT1ZFX0NIQVJBQ1RFUhIQCghwbGF5ZXJJRBgBIAEoDSJ7ChJT",
             "Q19TUEFXTl9DSEFSQUNURVISEAoIcGxheWVySUQYASABKA0SDAoEcG9zWBgC",
             "IAEoAhIMCgRwb3NZGAMgASgCEhEKCWNhbWVyYVlhdxgEIAEoAhIkCgpwbGF5",
-            "ZXJJbmZvGAUgASgLMhAuZ2FtZS5QbGF5ZXJJbmZvIsYBCg1TQ19CT1NTX1BI",
+            "ZXJJbmZvGAUgASgLMhAuZ2FtZS5QbGF5ZXJJbmZvIucBCg1TQ19CT1NTX1BI",
             "QVNFEg4KBmJvc3NJRBgBIAEoDRImCgxjdXJyZW50UGhhc2UYAiABKA4yEC5n",
             "YW1lLkJPU1NfUEhBU0USEQoJY3VycmVudEhwGAMgASgNEg0KBW1heEhwGAQg",
             "ASgNEikKEXRhcmdldE1vdmVtZW50UG9zGAUgASgLMg4uZ2FtZS5Qb3NpdGlv",
             "bhIWCg50YXJnZXRQbGF5ZXJJRBgGIAEoDRIYChBkaXN0YW5jZVRvUGxheWVy",
-            "GAcgASgCIiIKEENTX0NIRUNLX1RJTUVPVVQSDgoGYkNoZWNrGAEgASgIKqAC",
-            "CghQYWNrZXRJRBILCgdDU19DaGF0EAASEwoPQ1NfQ2hlY2tUaW1lb3V0EAES",
-            "DgoKQ1NfS2V5aW5mbxACEhMKD0NTX0xvZ2luUmVxdWVzdBADEhMKD0NTX1Bv",
-            "c2l0aW9uU3luYxAEEhYKEkNTX1JlZ2lzdGVyUmVxdWVzdBAFEhAKDFNDX0Jv",
-            "c3NQaGFzZRAGEgsKB1NDX0NoYXQQBxIOCgpTQ19LZXlpbmZvEAgSFAoQU0Nf",
-            "TG9naW5SZXNwb25zZRAJEhMKD1NDX1Bvc2l0aW9uU3luYxAKEhcKE1NDX1Jl",
-            "Z2lzdGVyUmVzcG9uc2UQCxIWChJTQ19SZW1vdmVDaGFyYWN0ZXIQDBIVChFT",
-            "Q19TcGF3bkNoYXJhY3RlchANKk4KCkJPU1NfUEhBU0USFQoRQk9TU19QSEFT",
-            "RV9BVFRBQ0sQABIUChBCT1NTX1BIQVNFX0RFQVRIEAESEwoPQk9TU19QSEFT",
-            "RV9JRExFEAJiBnByb3RvMw=="));
+            "GAcgASgCEh8KB2Jvc3NQb3MYCCABKAsyDi5nYW1lLlBvc2l0aW9uIiIKEENT",
+            "X0NIRUNLX1RJTUVPVVQSDgoGYkNoZWNrGAEgASgIKqACCghQYWNrZXRJRBIL",
+            "CgdDU19DaGF0EAASEwoPQ1NfQ2hlY2tUaW1lb3V0EAESDgoKQ1NfS2V5aW5m",
+            "bxACEhMKD0NTX0xvZ2luUmVxdWVzdBADEhMKD0NTX1Bvc2l0aW9uU3luYxAE",
+            "EhYKEkNTX1JlZ2lzdGVyUmVxdWVzdBAFEhAKDFNDX0Jvc3NQaGFzZRAGEgsK",
+            "B1NDX0NoYXQQBxIOCgpTQ19LZXlpbmZvEAgSFAoQU0NfTG9naW5SZXNwb25z",
+            "ZRAJEhMKD1NDX1Bvc2l0aW9uU3luYxAKEhcKE1NDX1JlZ2lzdGVyUmVzcG9u",
+            "c2UQCxIWChJTQ19SZW1vdmVDaGFyYWN0ZXIQDBIVChFTQ19TcGF3bkNoYXJh",
+            "Y3RlchANKoYBCgpCT1NTX1BIQVNFEhUKEUJPU1NfUEhBU0VfQVRUQUNLEAAS",
+            "FgoSQk9TU19QSEFTRV9CRVJTRVJLEAESFAoQQk9TU19QSEFTRV9ERUFUSBAC",
+            "EhMKD0JPU1NfUEhBU0VfSURMRRADEh4KGkJPU1NfUEhBU0VfUkVDT05GSUdV",
+            "UkFUSU9OEARiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Game.PacketID), typeof(global::Game.BOSS_PHASE), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -77,7 +79,7 @@ namespace Game {
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_POSITION_SYNC), global::Game.SC_POSITION_SYNC.Parser, new[]{ "PlayerID", "PosX", "PosY", "CameraYaw" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_REMOVE_CHARACTER), global::Game.SC_REMOVE_CHARACTER.Parser, new[]{ "PlayerID" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_SPAWN_CHARACTER), global::Game.SC_SPAWN_CHARACTER.Parser, new[]{ "PlayerID", "PosX", "PosY", "CameraYaw", "PlayerInfo" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_BOSS_PHASE), global::Game.SC_BOSS_PHASE.Parser, new[]{ "BossID", "CurrentPhase", "CurrentHp", "MaxHp", "TargetMovementPos", "TargetPlayerID", "DistanceToPlayer" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_BOSS_PHASE), global::Game.SC_BOSS_PHASE.Parser, new[]{ "BossID", "CurrentPhase", "CurrentHp", "MaxHp", "TargetMovementPos", "TargetPlayerID", "DistanceToPlayer", "BossPos" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_CHECK_TIMEOUT), global::Game.CS_CHECK_TIMEOUT.Parser, new[]{ "BCheck" }, null, null, null, null)
           }));
     }
@@ -110,17 +112,25 @@ namespace Game {
 
   public enum BOSS_PHASE {
     /// <summary>
-    /// 공격
+    /// 공격 상태 (플레이어에게 접근하거나 공격 중)
     /// </summary>
     [pbr::OriginalName("BOSS_PHASE_ATTACK")] Attack = 0,
     /// <summary>
-    /// 죽음
+    /// 광폭화 상태 (체력이 50% 이하일 때)
     /// </summary>
-    [pbr::OriginalName("BOSS_PHASE_DEATH")] Death = 1,
+    [pbr::OriginalName("BOSS_PHASE_BERSERK")] Berserk = 1,
     /// <summary>
-    /// 기본
+    /// 보스가 사망한 상태
     /// </summary>
-    [pbr::OriginalName("BOSS_PHASE_IDLE")] Idle = 2,
+    [pbr::OriginalName("BOSS_PHASE_DEATH")] Death = 2,
+    /// <summary>
+    /// 대기 상태 (그 외의 경우)
+    /// </summary>
+    [pbr::OriginalName("BOSS_PHASE_IDLE")] Idle = 3,
+    /// <summary>
+    /// 패턴 재정비 상태 (체력이 80% 이하일 때)
+    /// </summary>
+    [pbr::OriginalName("BOSS_PHASE_RECONFIGURATION")] Reconfiguration = 4,
   }
 
   #endregion
@@ -3846,6 +3856,7 @@ namespace Game {
       targetMovementPos_ = other.targetMovementPos_ != null ? other.targetMovementPos_.Clone() : null;
       targetPlayerID_ = other.targetPlayerID_;
       distanceToPlayer_ = other.distanceToPlayer_;
+      bossPos_ = other.bossPos_ != null ? other.bossPos_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3960,6 +3971,21 @@ namespace Game {
       }
     }
 
+    /// <summary>Field number for the "bossPos" field.</summary>
+    public const int BossPosFieldNumber = 8;
+    private global::Game.Position bossPos_;
+    /// <summary>
+    /// 현재 보스의 위치
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Game.Position BossPos {
+      get { return bossPos_; }
+      set {
+        bossPos_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3982,6 +4008,7 @@ namespace Game {
       if (!object.Equals(TargetMovementPos, other.TargetMovementPos)) return false;
       if (TargetPlayerID != other.TargetPlayerID) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(DistanceToPlayer, other.DistanceToPlayer)) return false;
+      if (!object.Equals(BossPos, other.BossPos)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3996,6 +4023,7 @@ namespace Game {
       if (targetMovementPos_ != null) hash ^= TargetMovementPos.GetHashCode();
       if (TargetPlayerID != 0) hash ^= TargetPlayerID.GetHashCode();
       if (DistanceToPlayer != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(DistanceToPlayer);
+      if (bossPos_ != null) hash ^= BossPos.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4042,6 +4070,10 @@ namespace Game {
         output.WriteRawTag(61);
         output.WriteFloat(DistanceToPlayer);
       }
+      if (bossPos_ != null) {
+        output.WriteRawTag(66);
+        output.WriteMessage(BossPos);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -4080,6 +4112,10 @@ namespace Game {
         output.WriteRawTag(61);
         output.WriteFloat(DistanceToPlayer);
       }
+      if (bossPos_ != null) {
+        output.WriteRawTag(66);
+        output.WriteMessage(BossPos);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -4110,6 +4146,9 @@ namespace Game {
       }
       if (DistanceToPlayer != 0F) {
         size += 1 + 4;
+      }
+      if (bossPos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(BossPos);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -4146,6 +4185,12 @@ namespace Game {
       }
       if (other.DistanceToPlayer != 0F) {
         DistanceToPlayer = other.DistanceToPlayer;
+      }
+      if (other.bossPos_ != null) {
+        if (bossPos_ == null) {
+          BossPos = new global::Game.Position();
+        }
+        BossPos.MergeFrom(other.BossPos);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -4193,6 +4238,13 @@ namespace Game {
             DistanceToPlayer = input.ReadFloat();
             break;
           }
+          case 66: {
+            if (bossPos_ == null) {
+              BossPos = new global::Game.Position();
+            }
+            input.ReadMessage(BossPos);
+            break;
+          }
         }
       }
     #endif
@@ -4237,6 +4289,13 @@ namespace Game {
           }
           case 61: {
             DistanceToPlayer = input.ReadFloat();
+            break;
+          }
+          case 66: {
+            if (bossPos_ == null) {
+              BossPos = new global::Game.Position();
+            }
+            input.ReadMessage(BossPos);
             break;
           }
         }

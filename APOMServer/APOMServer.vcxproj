@@ -183,6 +183,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemSpawner.cpp" />
     <ClCompile Include="MatchSystem.cpp" />
+    <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="CustomException.cpp" />
     <ClCompile Include="LogManager.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemSpawner.h" />
     <ClInclude Include="MatchSystem.h" />
+    <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="CustomException.h" />
     <ClInclude Include="DebugDefines.h" />
