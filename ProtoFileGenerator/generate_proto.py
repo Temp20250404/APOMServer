@@ -42,6 +42,11 @@ except Exception as e:
 # 모든 메시지 정의를 저장할 딕셔너리
 messages = {}
 
+# 열거형(enum) 정의를 저장할 딕셔너리 생성
+# 이 딕셔너리는 MessageName이 'ENUM_'으로 시작하는 경우의 데이터를 별도로 저장하여
+# 이후 enum 문으로 처리할 때 사용됩니다.
+enums = {}
+
 # SC_, CS_로 시작하는 메시지를 따로 모아 PacketID enum 생성용으로 사용
 packet_names_set = set()
 
@@ -55,12 +60,15 @@ for sheet_name, df in all_sheets.items():
         for name, group in grouped:
             if name in defined_message_names:
                 error_exit(f"[중복 메시지 이름 오류] '{name}' 이(가) 시트 '{sheet_name}'에서 중복 정의되었습니다.")
-
             defined_message_names.add(name)
-            messages[name] = group.to_dict(orient="records")
-
-            if name.startswith("SC_") or name.startswith("CS_"):
-                packet_names_set.add(name)
+            # 새로 추가된 부분: MessageName이 ENUM_으로 시작하면 일반 메시지 대신 열거형(enum) 정의로 처리함.
+            if name.startswith("ENUM_"):
+                # 기존 'ENUM_' 접두어를 제외한 나머지를 enum의 이름으로 사용함.
+                enums[name[5:]] = group.to_dict(orient="records")
+            else:
+                messages[name] = group.to_dict(orient="records")
+                if name.startswith("SC_") or name.startswith("CS_"):
+                    packet_names_set.add(name)
 
 # PacketID enum 항목들을 PascalCase로 변환
 def format_packet_name(name):
@@ -75,6 +83,30 @@ def format_packet_name(name):
 # PacketID enum 항목들을 알파벳 순 정렬 후 번호 부여 (0부터 시작)
 packet_enum = [{"name": format_packet_name(name), "value": i} for i, name in enumerate(sorted(packet_names_set))]
 
+# 새로 추가된 부분: 열거형(enum) 정의 처리
+# 각 열거형에 대해 enum 항목을 생성하고, 항목 이름은 열거형 이름과 FieldName을 결합하여 만듦.
+# 그리고 생성된 항목들을 이름 기준으로 정렬한 후, 0번부터 순차적으로 번호를 부여합니다.
+enum_definitions = {}  # 실제 .proto 파일에 출력할 enum 정의 정보 저장 (키: enum 이름, 값: 항목 리스트)
+for enum_name, records in enums.items():
+    # 열거형 항목을 임시 저장할 리스트
+    enum_items = []
+    for record in records:
+        # 각 행의 FieldName과 Comment를 사용하여 열거형 항목을 구성합니다.
+        # Comment가 NaN인 경우에는 빈 문자열로 처리하여 주석으로 출력되지 않도록 합니다.
+        field_name = record["FieldName"]
+        comment = record.get("Comment", "")
+        comment = "" if pd.isna(comment) else str(comment)
+        # 열거형 항목 이름 생성: enum 이름과 FieldName을 언더바(_)로 결합하여 생성합니다.
+        full_enum_field_name = enum_name + "_" + field_name
+        enum_items.append({"name": full_enum_field_name, "comment": comment})
+    # 열거형 항목들을 이름(전체 항목 이름)을 기준으로 정렬합니다.
+    enum_items_sorted = sorted(enum_items, key=lambda x: x["name"])
+    # 정렬된 항목에 대해 0번부터 순차적으로 번호를 부여합니다.
+    for i, item in enumerate(enum_items_sorted):
+        item["value"] = i
+    # 처리된 열거형 정의를 enum_definitions에 저장합니다.
+    enum_definitions[enum_name] = enum_items_sorted
+
 # Jinja2 템플릿 환경 설정
 env = Environment(
     trim_blocks=True,
@@ -82,6 +114,7 @@ env = Environment(
 )
 
 # 템플릿 정의 (.proto 포맷)
+# 기존 템플릿에 enum_definitions 처리를 위한 블록을 추가하였습니다.
 proto_template = env.from_string('''syntax = "proto3";
 
 package game;
@@ -98,6 +131,14 @@ enum PacketID {
 {% endfor %}
 }
 
+{% for enum_name, items in enum_definitions.items() %}
+enum {{ enum_name }} {
+{% for item in items %}
+    {{ item.name }} = {{ item.value }};{{ " // " + item.comment if item.comment else "" }}
+{% endfor %}
+}
+{% endfor %}
+
 {% for message_name, fields in messages.items() %}
 message {{ message_name }} {
 {% for field in fields %}
@@ -112,11 +153,17 @@ for field_list in messages.values():
     for field in field_list:
         comment = field.get("Comment", "")
         field["Comment"] = "" if pd.isna(comment) else str(comment)
+# 열거형(enum) 데이터의 Comment도 NaN이면 빈 문자열로 치환 (혹시 모를 누락 방지 처리)
+for records in enums.values():
+    for record in records:
+        comment = record.get("Comment", "")
+        record["Comment"] = "" if pd.isna(comment) else str(comment)
 
 # 템플릿에 실제 데이터 주입하여 문자열 생성
 rendered_proto = proto_template.render(
     packet_enum=packet_enum,
-    messages=messages
+    messages=messages,
+    enum_definitions=enum_definitions
 )
 
 # 생성된 .proto 내용을 파일로 저장

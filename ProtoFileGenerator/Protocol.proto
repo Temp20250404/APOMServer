@@ -4,186 +4,96 @@ package game;
 
 enum PacketID {
 // Client → Server
-    CS_Attack = 0;
-    CS_ChangeWeapon = 1;
-    CS_GrenadeExplositionPos = 2;
-    CS_ItemPicked = 3;
-    CS_KeyInput = 4;
-    CS_PosInterpolation = 5;
-    CS_RequestRestart = 6;
-    CS_SendMessage = 7;
-    CS_SendNickname = 8;
-    CS_ShotHit = 9;
-    CS_ThrowGrenade = 10;
+    CS_Chat = 0;
+    CS_CheckTimeout = 1;
+    CS_Keyinfo = 2;
+    CS_LoginRequest = 3;
+    CS_PositionSync = 4;
+    CS_RegisterRequest = 5;
 
 // Server → Client
-    SC_Attack = 11;
-    SC_ChangeWeapon = 12;
-    SC_CharacterDown = 13;
-    SC_CharacterKillLog = 14;
-    SC_CreateMyCharacter = 15;
-    SC_CreateOtherCharacter = 16;
-    SC_GrenadeExplositionPos = 17;
-    SC_ItemPickFail = 18;
-    SC_ItemPickSuccess = 19;
-    SC_ItemSpawned = 20;
-    SC_KeyInput = 21;
-    SC_OnAccept = 22;
-    SC_PosInterpolation = 23;
-    SC_SendMessage = 24;
-    SC_ShotHit = 25;
-    SC_ThrowGrenade = 26;
+    SC_Chat = 6;
+    SC_Keyinfo = 7;
+    SC_LoginResponse = 8;
+    SC_PositionSync = 9;
+    SC_RegisterResponse = 10;
+    SC_RemoveCharacter = 11;
+    SC_SpawnCharacter = 12;
 }
 
-message CS_ATTACK {
-    bool bAttack = 1; // 임의의 변수, 의미 없음.
-    uint32 normalX = 2; // 이펙트의 노멀 벡터
-    uint32 normalY = 3;
-    uint32 normalZ = 4;
-    uint32 posX = 5; // 이펙트가 터질 위치
-    uint32 posY = 6;
-    uint32 posZ = 7;
+enum BOSS_PHASE {
+    BOSS_PHASE_ATTACK = 0; // 공격
+    BOSS_PHASE_DEATH = 1; // 죽음
+    BOSS_PHASE_IDLE = 2; // 기본
 }
-message CS_CHANGE_WEAPON {
-    uint32 weapon = 1; // 무기 교체
+enum BOSS_TEST {
+    BOSS_TEST_ATTACK = 0; // 공격
+    BOSS_TEST_DEATH = 1; // 죽음
+    BOSS_TEST_IDLE = 2; // 기본
 }
-message CS_GRENADE_EXPLOSITION_POS {
-    uint32 posX = 1; // 터질 위치
-    uint32 posY = 2;
-    uint32 posZ = 3;
+
+message CS_CHAT {
+    uint32 targetID = 1; // 타겟이 되는 플레이어의 id
+    string message = 2; // 채팅 메시지
+    uint32 channel = 3; // 채널 타입, 0번 : 전체, 1번 : 파티, 2번 : 귓속말. 2번일 경우에만 target 검사
 }
-message CS_ITEM_PICKED {
-    uint32 itemId = 1; // 획득 시도한 아이템의 정보
+message CS_CHECK_TIMEOUT {
+    bool bCheck = 1; // L7에서 timeout 체크용. 일정 주기마다 한번씩 서버에 전송
 }
-message CS_KEY_INPUT {
-    uint32 keyW = 1; // 키(WASD)
-    uint32 keyA = 2;
-    uint32 keyS = 3;
-    uint32 keyD = 4;
-    fixed32 rotateAxisX = 5; // 마우스 X축 회전값
-    fixed32 rotateAxisY = 6; // 마우스 Y축 회전값
-    uint32 Jump = 7; // 점프 여부
+message CS_KEYINFO {
+    uint32 keyInfo = 1; // 키보드 입력시 관련 움직임 정보 전송
+    float cameraYaw = 2; // 카메라 회전값
 }
-message CS_POS_INTERPOLATION {
-    uint32 posX = 1; // 플레이어의 현재 위치
-    uint32 posY = 2;
-    uint32 posZ = 3;
+message CS_LOGIN_REQUEST {
+    string userName = 1; // 로그인 시도
+    string password = 2;
 }
-message CS_REQUEST_RESTART {
-    uint32 playerId = 1; // 플레이어의 고유 ID
-    uint32 weapon = 2; // 들고 있는 무기 정보
+message CS_POSITION_SYNC {
+    float posX = 1; // 위치 정보 동기화
+    float posY = 2;
+    float cameraYaw = 3; // 카메라 회전값
 }
-message CS_SEND_MESSAGE {
-    uint32 playerId = 1; // 플레이어의 고유 ID
-}
-message CS_SEND_NICKNAME {
-    string name = 1; // 최대 20자 유니코드 문자열 (실제 제한은 코드로 처리, 제한은 필요할때 늘리면 됨)
-}
-message CS_SHOT_HIT {
-    uint32 playerId = 1; // 피격 대상
-    uint32 hp = 2; // 피격 대상의 남은 HP
-}
-message CS_THROW_GRENADE {
-    uint32 posX = 1; // 던지기 시작 위치
-    uint32 posY = 2;
-    uint32 posZ = 3;
-    fixed32 dirX = 4; // 던지는 방향
-    fixed32 dirY = 5;
-    fixed32 dirZ = 6;
-}
-message KDAInfo {
-    uint32 kill = 1;
-    uint32 death = 2;
-    uint32 assist = 3;
+message CS_REGISTER_REQUEST {
+    string userName = 1; // 회원가입 시도, 나중에 naver, gmail 등으로 인증용 기능 만들 예정
 }
 message PlayerInfo {
-    uint32 playerId = 1;
-    KDAInfo kda = 2;
+    string playerNickname = 1; // 이름
+    uint32 playerMaxHp = 2; // 최대 hp
+    uint32 playerMaxMp = 3; // 최대 mp
+    uint32 playerJobIcon = 4; // 직업 아이콘
 }
-message SC_ATTACK {
-    uint32 playerId = 1; // CS_ATTACK을 전송한 플레이어 Id를 방에 있는 모든 플레이어들에게 전송
-    uint32 normalX = 2; // 이펙트의 노멀 벡터
-    uint32 normalY = 3;
-    uint32 normalZ = 4;
-    uint32 posX = 5; // 이펙트가 터질 위치
-    uint32 posY = 6;
-    uint32 posZ = 7;
+message SC_CHAT {
+    uint32 playerID = 1; // 채팅을 보낸 플레이어의 id
+    string message = 2; // 채팅 메시지
+    uint32 channel = 3; // 채널 타입
 }
-message SC_CHANGE_WEAPON {
-    uint32 playerId = 1; // 다른 캐릭터 ID
-    uint32 weapon = 2; // 무기 교체
+message SC_KEYINFO {
+    uint32 playerID = 1; // 움직임을 보내는 플레이어의 id
+    uint32 keyInfo = 2; // 키보드 입력시 관련 움직임 정보 전송
+    float cameraYaw = 3; // 카메라 회전값
 }
-message SC_CHARACTER_DOWN {
-    uint32 playerId = 1; // 서버로 부터 부여받은 ID
-    uint32 teamID = 2; // 접속한 팀 ID
+message SC_LOGIN_RESPONSE {
+    bool success = 1; // 로그인 성공 여부
+    uint32 playerID = 2; // 서버에서 할당한 플레이어 id(세션 id)
+    string characterName = 3; // 미리 설정해뒀던 캐릭터 이름
 }
-message SC_CHARACTER_KILL_LOG {
-    repeated PlayerInfo playerInfoList = 1; // 모든 플레이어들의 KDA 정보
+message SC_POSITION_SYNC {
+    uint32 playerID = 1; // 위치를 보내는 플레이어의 id
+    float posX = 2; // 위치 정보 동기화
+    float posY = 3;
+    float cameraYaw = 4; // 카메라 회전값
 }
-message SC_CREATE_MY_CHARACTER {
-    uint32 playerId = 1; // 서버로 부터 부여받은 ID
-    uint32 posIndex = 2; // 생성될 위치 인덱스 정보
-    uint32 maxHP = 3; // 최대 Hp
-    uint32 teamID = 4; // 접속한 팀 ID
+message SC_REGISTER_RESPONSE {
+    bool success = 1; // 회원가입 성공 여부
+    string message = 2; // 이건 특별한 메시지를 보내고 싶을 경우 추가, 지금은 필요 없음
 }
-message SC_CREATE_OTHER_CHARACTER {
-    uint32 playerId = 1; // 서버로 부터 부여받은 ID
-    uint32 posIndex = 2; // 생성될 위치 인덱스 정보
-    uint32 maxHP = 3; // Hp
-    uint32 curHP = 4;
-    string name = 5; // 이름
-    KDAInfo kdaInfo = 6; // KDA 정보
-    uint32 weapon = 7; // 들고 있는 무기 정보
-    uint32 teamID = 8; // 접속한 팀 ID
+message SC_REMOVE_CHARACTER {
+    uint32 playerID = 1; // 플레이어의 id
 }
-message SC_GRENADE_EXPLOSITION_POS {
-    uint32 posX = 1; // 터질 위치
-    uint32 posY = 2;
-    uint32 posZ = 3;
-}
-message SC_ITEM_PICK_FAIL {
-    uint32 playerId = 1; // 획득 실패한 플레이어의 고유 ID
-    uint32 itemId = 2; // 아이템의 고유 ID
-}
-message SC_ITEM_PICK_SUCCESS {
-    uint32 playerId = 1; // 획득한 플레이어의 고유 ID
-    uint32 itemId = 2; // 아이템의 고유 ID
-}
-message SC_ITEM_SPAWNED {
-    uint32 itemId = 1; // 생성될 아이템의 고유 ID
-    uint32 itemType = 2; // 생성될 아이템의 타입
-    uint32 itemPosIndex = 3; // 아이템이 생성될 장소에 대한 정보
-}
-message SC_KEY_INPUT {
-    uint32 playerId = 1;
-    uint32 keyW = 2; // 키(WASD)
-    uint32 keyA = 3;
-    uint32 keyS = 4;
-    uint32 keyD = 5;
-    fixed32 rotateAxisX = 6; // 마우스 X축 회전값
-    fixed32 rotateAxisY = 7; // 마우스 Y축 회전값
-    uint32 Jump = 8; // 점프 여부
-}
-message SC_ON_ACCEPT {
-    uint32 playerId = 1; // 서버로 부터 부여받은 ID
-}
-message SC_POS_INTERPOLATION {
-    uint32 posX = 1; // 플레이어의 현재 위치
-    uint32 posY = 2;
-    uint32 posZ = 3;
-}
-message SC_SEND_MESSAGE {
-    uint32 playerId = 1; // 플레이어의 고유 ID
-}
-message SC_SHOT_HIT {
-    uint32 playerId = 1; // 피격 대상
-    uint32 hp = 2; // 피격 대상의 남은 HP
-}
-message SC_THROW_GRENADE {
-    uint32 posX = 1; // 던지기 시작 위치
-    uint32 posY = 2;
-    uint32 posZ = 3;
-    fixed32 dirX = 4; // 던지는 방향
-    fixed32 dirY = 5;
-    fixed32 dirZ = 6;
+message SC_SPAWN_CHARACTER {
+    uint32 playerID = 1; // 플레이어의 id
+    float posX = 2; // 플레이어의 초기 위치. 나중에 가면 마지막에 로그아웃했던 위치로 변경 예정
+    float posY = 3;
+    float cameraYaw = 4; // 초기 카메라 y축 회전값. 이건 사용하지 않을 수 있으니 놔두기만 함
+    PlayerInfo playerInfo = 5; // 플레이어 정보
 }
