@@ -138,6 +138,24 @@
     <Filter Include="소스 파일\99. Etc\08. Utils">
       <UniqueIdentifier>{3c2b8da2-bbc2-46ad-8018-8b6774ef3434}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\07. AI">
+      <UniqueIdentifier>{ae1db576-9bc3-488d-8931-1ed6c58a34fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\07. AI\BehaviourTree">
+      <UniqueIdentifier>{e645d56a-d6c0-4679-a817-6c21271499c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\07. AI\AIContext">
+      <UniqueIdentifier>{dc1519ae-9fdb-4cbe-b902-374f7df17767}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\07. AI\AIEntity">
+      <UniqueIdentifier>{deadc39b-3d65-48dc-acf3-bf924ed9a003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\07. AI\AIMgr">
+      <UniqueIdentifier>{2c6f5edc-049c-45a7-93d9-8474db7341d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\07. AI\Scripts">
+      <UniqueIdentifier>{c06beeea-c83c-4820-bdf2-0c9cf6a778f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CustomException.cpp">
@@ -238,6 +256,18 @@
     </ClCompile>
     <ClCompile Include="EncodingUtils.cpp">
       <Filter>소스 파일\99. Etc\08. Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviourTree.cpp">
+      <Filter>소스 파일\07. AI\BehaviourTree</Filter>
+    </ClCompile>
+    <ClCompile Include="AIEntity.cpp">
+      <Filter>소스 파일\07. AI\AIEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="AIContext.cpp">
+      <Filter>소스 파일\07. AI\AIContext</Filter>
+    </ClCompile>
+    <ClCompile Include="Script_Boss.cpp">
+      <Filter>소스 파일\07. AI\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -357,6 +387,21 @@
     </ClInclude>
     <ClInclude Include="EncodingUtils.h">
       <Filter>소스 파일\99. Etc\08. Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourTree.h">
+      <Filter>소스 파일\07. AI\BehaviourTree</Filter>
+    </ClInclude>
+    <ClInclude Include="AIManager.h">
+      <Filter>소스 파일\07. AI\AIMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="AIEntity.h">
+      <Filter>소스 파일\07. AI\AIEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="AIContext.h">
+      <Filter>소스 파일\07. AI\AIContext</Filter>
+    </ClInclude>
+    <ClInclude Include="Script_Boss.h">
+      <Filter>소스 파일\07. AI\Scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -37,17 +37,40 @@
 //===================================================
 #include <conio.h>
 
+//===================================================
+// AI 관련
+//===================================================
+#include "AIManager.h"
+#include "Script_Boss.h"
 
+//===================================================
+// 네트워크 관련
+//===================================================
 #include "Session.h"
 
-
+//===================================================
+// 스레드 관련
+//===================================================
 #include <process.h>
+
+//===================================================
+// 메모리 관련
+//===================================================
 #include "MemoryPoolManager.h"
+
+//===================================================
+// 로그 관련
+//===================================================
 #include "LogManager.h"
 
-
+//===================================================
+// 모니터링 관련
+//===================================================
 #include "SystemMonitor.h"
 
+//===================================================
+// protobuf 관련
+//===================================================
 #ifdef _DEBUG
 #pragma comment(lib, "Protobuf/Debug/libprotobufd.lib")
 #else
@@ -56,18 +79,23 @@
 
 #include "Protobuf/Protocol.pb.h"
 
-
+//===================================================
+// dump 관련
+//===================================================
 CCrashDump dump;
 
+
+
+
+
+
+//========================================
 bool g_bShutdown = false;
 
 void Update(void);
 void ServerControl(void);
 void Monitor(void);
-
-
 //========================================
-
 constexpr int TICK_PER_FRAME = 40;
 constexpr int FRAME_PER_SECONDS = (1000) / TICK_PER_FRAME;
 
@@ -87,6 +115,11 @@ unsigned int g_iFirst;
 ULONGLONG g_fpsCheck;
 //========================================
 
+
+CObjectManager& objectManager = CObjectManager::GetInstance();
+CSessionManager& sessionManager = CSessionManager::GetInstance();
+LogManager& logManager = LogManager::GetInstance();
+AIManager& aiManager = AIManager::GetInstance();
 
 
 unsigned int WINAPI MonitorThread(void* pArg);
@@ -131,6 +164,30 @@ int main()
 
     timerManager.InitTimer(25);
 
+
+
+
+
+    //=====================================================================================================================================
+    // AI 정보 추가, 내용이 많아질 예정이니 나중에 다른곳에서 하도록 수정 예정
+    //=====================================================================================================================================
+
+    BTBuilder builder = CreateBossBT;
+
+    // 초기 AIContext 설정
+    AIContext context;
+    context.maxHP = 100;             // 초기 체력
+    context.currentHP = context.maxHP;
+    context.distanceToPlayer = 12.0f; // 초기 플레이어와의 거리 (감지 범위 내)
+    context.attackRange = 5.0f;
+    context.moveSpeed = 1.0f;
+    context.detectionRange = 15.0f;
+
+    // AIEntity 인스턴스 생성
+    AIEntity* pAIEntity = new AIEntity(context, builder);
+
+    for (int i = 0; i < 1000; ++i)
+        aiManager.AddEntity(pAIEntity);
 
 
 
@@ -198,16 +255,13 @@ int main()
 // 메인 로직
 void Update(void)
 {
-    CObjectManager& objectManager = CObjectManager::GetInstance();
-    CSessionManager& sessionManager = CSessionManager::GetInstance();
-    LogManager& logManager = LogManager::GetInstance();
-
     objectManager.Update();
     objectManager.LateUpdate();
 
     sessionManager.Update();
+    aiManager.UpdateAll();
 
-    logManager.saveLog();
+    //logManager.saveLog();
 }
 
 bool PressKey(WCHAR checkKey, WCHAR input)
