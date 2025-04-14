@@ -28,6 +28,18 @@ enum BOSS_PHASE {
     BOSS_PHASE_IDLE = 2; // 기본
 }
 
+message PlayerInfo {
+    string playerNickname = 1; // 이름
+    uint32 playerMaxHp = 2; // 최대 hp
+    uint32 playerMaxMp = 3; // 최대 mp
+    uint32 playerJobIcon = 4; // 직업 아이콘
+}
+message Position {
+    float posX = 1; // 위치
+    float posY = 2;
+    float posZ = 3;
+}
+
 message CS_LOGIN_REQUEST {
     string userName = 1; // 로그인 시도
     string password = 2;
@@ -92,17 +104,6 @@ message SC_BOSS_PHASE {
     Position targetMovementPos = 5; // 보스가 이동해야 하는 목표 위치
     uint32 targetPlayerID = 6; // 타겟 플레이어의 고유 ID
     float distanceToPlayer = 7; // 플레이어와의 현재 거리
-}
-message PlayerInfo {
-    string playerNickname = 1; // 이름
-    uint32 playerMaxHp = 2; // 최대 hp
-    uint32 playerMaxMp = 3; // 최대 mp
-    uint32 playerJobIcon = 4; // 직업 아이콘
-}
-message Position {
-    float posX = 1; // 위치
-    float posY = 2;
-    float posZ = 3;
 }
 message CS_CHECK_TIMEOUT {
     bool bCheck = 1; // L7에서 timeout 체크용. 일정 주기마다 한번씩 서버에 전송
