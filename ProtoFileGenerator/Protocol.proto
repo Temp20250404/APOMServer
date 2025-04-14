@@ -12,13 +12,14 @@ enum PacketID {
     CS_RegisterRequest = 5;
 
 // Server → Client
-    SC_Chat = 6;
-    SC_Keyinfo = 7;
-    SC_LoginResponse = 8;
-    SC_PositionSync = 9;
-    SC_RegisterResponse = 10;
-    SC_RemoveCharacter = 11;
-    SC_SpawnCharacter = 12;
+    SC_BossPhase = 6;
+    SC_Chat = 7;
+    SC_Keyinfo = 8;
+    SC_LoginResponse = 9;
+    SC_PositionSync = 10;
+    SC_RegisterResponse = 11;
+    SC_RemoveCharacter = 12;
+    SC_SpawnCharacter = 13;
 }
 
 enum BOSS_PHASE {
@@ -26,41 +27,48 @@ enum BOSS_PHASE {
     BOSS_PHASE_DEATH = 1; // 죽음
     BOSS_PHASE_IDLE = 2; // 기본
 }
-enum BOSS_TEST {
-    BOSS_TEST_ATTACK = 0; // 공격
-    BOSS_TEST_DEATH = 1; // 죽음
-    BOSS_TEST_IDLE = 2; // 기본
-}
 
-message CS_CHAT {
-    uint32 targetID = 1; // 타겟이 되는 플레이어의 id
-    string message = 2; // 채팅 메시지
-    uint32 channel = 3; // 채널 타입, 0번 : 전체, 1번 : 파티, 2번 : 귓속말. 2번일 경우에만 target 검사
-}
-message CS_CHECK_TIMEOUT {
-    bool bCheck = 1; // L7에서 timeout 체크용. 일정 주기마다 한번씩 서버에 전송
-}
-message CS_KEYINFO {
-    uint32 keyInfo = 1; // 키보드 입력시 관련 움직임 정보 전송
-    float cameraYaw = 2; // 카메라 회전값
-}
-message CS_LOGIN_REQUEST {
-    string userName = 1; // 로그인 시도
-    string password = 2;
-}
-message CS_POSITION_SYNC {
-    float posX = 1; // 위치 정보 동기화
-    float posY = 2;
-    float cameraYaw = 3; // 카메라 회전값
-}
-message CS_REGISTER_REQUEST {
-    string userName = 1; // 회원가입 시도, 나중에 naver, gmail 등으로 인증용 기능 만들 예정
-}
 message PlayerInfo {
     string playerNickname = 1; // 이름
     uint32 playerMaxHp = 2; // 최대 hp
     uint32 playerMaxMp = 3; // 최대 mp
     uint32 playerJobIcon = 4; // 직업 아이콘
+}
+message Position {
+    float posX = 1; // 위치
+    float posY = 2;
+    float posZ = 3;
+}
+
+message CS_LOGIN_REQUEST {
+    string userName = 1; // 로그인 시도
+    string password = 2;
+}
+message CS_REGISTER_REQUEST {
+    string userName = 1; // 회원가입 시도, 나중에 naver, gmail 등으로 인증용 기능 만들 예정
+}
+message SC_LOGIN_RESPONSE {
+    bool success = 1; // 로그인 성공 여부
+    uint32 playerID = 2; // 서버에서 할당한 플레이어 id(세션 id)
+    string characterName = 3; // 미리 설정해뒀던 캐릭터 이름
+}
+message SC_REGISTER_RESPONSE {
+    bool success = 1; // 회원가입 성공 여부
+    string message = 2; // 이건 특별한 메시지를 보내고 싶을 경우 추가, 지금은 필요 없음
+}
+message CS_CHAT {
+    uint32 targetID = 1; // 타겟이 되는 플레이어의 id
+    string message = 2; // 채팅 메시지
+    uint32 channel = 3; // 채널 타입, 0번 : 전체, 1번 : 파티, 2번 : 귓속말. 2번일 경우에만 target 검사
+}
+message CS_KEYINFO {
+    uint32 keyInfo = 1; // 키보드 입력시 관련 움직임 정보 전송
+    float cameraYaw = 2; // 카메라 회전값
+}
+message CS_POSITION_SYNC {
+    float posX = 1; // 위치 정보 동기화
+    float posY = 2;
+    float cameraYaw = 3; // 카메라 회전값
 }
 message SC_CHAT {
     uint32 playerID = 1; // 채팅을 보낸 플레이어의 id
@@ -72,20 +80,11 @@ message SC_KEYINFO {
     uint32 keyInfo = 2; // 키보드 입력시 관련 움직임 정보 전송
     float cameraYaw = 3; // 카메라 회전값
 }
-message SC_LOGIN_RESPONSE {
-    bool success = 1; // 로그인 성공 여부
-    uint32 playerID = 2; // 서버에서 할당한 플레이어 id(세션 id)
-    string characterName = 3; // 미리 설정해뒀던 캐릭터 이름
-}
 message SC_POSITION_SYNC {
     uint32 playerID = 1; // 위치를 보내는 플레이어의 id
     float posX = 2; // 위치 정보 동기화
     float posY = 3;
     float cameraYaw = 4; // 카메라 회전값
-}
-message SC_REGISTER_RESPONSE {
-    bool success = 1; // 회원가입 성공 여부
-    string message = 2; // 이건 특별한 메시지를 보내고 싶을 경우 추가, 지금은 필요 없음
 }
 message SC_REMOVE_CHARACTER {
     uint32 playerID = 1; // 플레이어의 id
@@ -96,4 +95,16 @@ message SC_SPAWN_CHARACTER {
     float posY = 3;
     float cameraYaw = 4; // 초기 카메라 y축 회전값. 이건 사용하지 않을 수 있으니 놔두기만 함
     PlayerInfo playerInfo = 5; // 플레이어 정보
+}
+message SC_BOSS_PHASE {
+    uint32 bossID = 1; // 보스의 고유 ID
+    BOSS_PHASE currentPhase  = 2; // 현재 보스의 페이즈
+    uint32 currentHp = 3; // 보스의 현재 체력
+    uint32 maxHp = 4; // 보스의 최대 체력
+    Position targetMovementPos = 5; // 보스가 이동해야 하는 목표 위치
+    uint32 targetPlayerID = 6; // 타겟 플레이어의 고유 ID
+    float distanceToPlayer = 7; // 플레이어와의 현재 거리
+}
+message CS_CHECK_TIMEOUT {
+    bool bCheck = 1; // L7에서 timeout 체크용. 일정 주기마다 한번씩 서버에 전송
 }

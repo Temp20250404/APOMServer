@@ -43,7 +43,7 @@ except Exception as e:
 messages = {}
 
 # 열거형(enum) 정의를 저장할 딕셔너리 생성
-# 이 딕셔너리는 MessageName이 'ENUM_'으로 시작하는 경우의 데이터를 별도로 저장하여
+# 이 딕셔너리는 Type이 "enum"인 경우의 데이터를 별도로 저장하여
 # 이후 enum 문으로 처리할 때 사용됩니다.
 enums = {}
 
@@ -61,10 +61,15 @@ for sheet_name, df in all_sheets.items():
             if name in defined_message_names:
                 error_exit(f"[중복 메시지 이름 오류] '{name}' 이(가) 시트 '{sheet_name}'에서 중복 정의되었습니다.")
             defined_message_names.add(name)
-            # 새로 추가된 부분: MessageName이 ENUM_으로 시작하면 일반 메시지 대신 열거형(enum) 정의로 처리함.
-            if name.startswith("ENUM_"):
-                # 기존 'ENUM_' 접두어를 제외한 나머지를 enum의 이름으로 사용함.
-                enums[name[5:]] = group.to_dict(orient="records")
+            # 새로 추가된 부분:
+            # 각 메시지 그룹의 첫 번째 행의 Type 필드가 "enum"이면,
+            # 이 그룹을 일반 메시지 정의 대신 열거형(enum) 정의로 처리합니다.
+            # 그리고 MessageName에 "ENUM_" 접두어가 있을 경우, 제거한 값을 enum 이름으로 사용합니다.
+            if str(group.iloc[0]["Type"]).lower() == "enum":
+                enum_key = name
+                if enum_key.startswith("ENUM_"):
+                    enum_key = enum_key[5:]
+                enums[enum_key] = group.to_dict(orient="records")
             else:
                 messages[name] = group.to_dict(orient="records")
                 if name.startswith("SC_") or name.startswith("CS_"):
@@ -84,8 +89,8 @@ def format_packet_name(name):
 packet_enum = [{"name": format_packet_name(name), "value": i} for i, name in enumerate(sorted(packet_names_set))]
 
 # 새로 추가된 부분: 열거형(enum) 정의 처리
-# 각 열거형에 대해 enum 항목을 생성하고, 항목 이름은 열거형 이름과 FieldName을 결합하여 만듦.
-# 그리고 생성된 항목들을 이름 기준으로 정렬한 후, 0번부터 순차적으로 번호를 부여합니다.
+# enums 딕셔너리에 저장된 각 enum 그룹에 대해, 각 행의 FieldName과 Comment를 이용하여
+# 열거형 항목 이름은 (enum 이름 + "_" + FieldName) 형식으로 생성되고, 번호는 알파벳 순 정렬 후 0번부터 순차적으로 부여됩니다.
 enum_definitions = {}  # 실제 .proto 파일에 출력할 enum 정의 정보 저장 (키: enum 이름, 값: 항목 리스트)
 for enum_name, records in enums.items():
     # 열거형 항목을 임시 저장할 리스트
@@ -114,7 +119,10 @@ env = Environment(
 )
 
 # 템플릿 정의 (.proto 포맷)
-# 기존 템플릿에 enum_definitions 처리를 위한 블록을 추가하였습니다.
+# 새로 추가된 부분:
+# 1. enum_definitions가 가장 먼저 출력되도록 합니다.
+# 2. 메시지는 CS_나 SC_ 접두어가 붙지 않은 message를 먼저 출력한 후,
+#    이후 CS_나 SC_ 접두어가 붙은 message를 출력하도록 두 번의 for문으로 분리했습니다.
 proto_template = env.from_string('''syntax = "proto3";
 
 package game;
@@ -139,7 +147,20 @@ enum {{ enum_name }} {
 }
 {% endfor %}
 
-{% for message_name, fields in messages.items() %}
+{# 
+    아래 부분은 메시지(message) 정의입니다.
+    - 먼저 CS_나 SC_가 붙지 않은 message들을 출력합니다.
+    - 이후 CS_나 SC_가 붙은 message들을 출력합니다.
+   #}
+{% for message_name, fields in messages.items() if not (message_name.startswith("CS_") or message_name.startswith("SC_")) %}
+message {{ message_name }} {
+{% for field in fields %}
+    {{ field["Type"] }} {{ field["FieldName"] }} = {{ loop.index }};{{ " // " + field["Comment"] if "Comment" in field and field["Comment"] else "" }}
+{% endfor %}
+}
+{% endfor %}
+
+{% for message_name, fields in messages.items() if (message_name.startswith("CS_") or message_name.startswith("SC_")) %}
 message {{ message_name }} {
 {% for field in fields %}
     {{ field["Type"] }} {{ field["FieldName"] }} = {{ loop.index }};{{ " // " + field["Comment"] if "Comment" in field and field["Comment"] else "" }}
