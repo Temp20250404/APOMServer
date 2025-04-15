@@ -181,7 +181,15 @@ bool CS_KEYINFO(CSession* pSession, UINT32 keyInfo, float cameraYaw)
 
 bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float cameraYaw)
 {
-    return false;
+    // 1. 연결된 플레이어 추출
+    CPlayer* pPlayer = static_cast<CPlayer*>(pSession->pObj);
+
+    // 2. 방 정보 검색
+    CRoom* pRoom = roomManager.GetRoomById(pPlayer->GetRoomId());
+
+    SC_POSITION_SYNC_FOR_AROUND(pSession, pRoom, pPlayer->m_ID, posX, posY, cameraYaw);
+
+    return true;
 }
 
 bool CS_LOGIN_REQUEST(CSession* pSession, std::string userName, std::string password)
