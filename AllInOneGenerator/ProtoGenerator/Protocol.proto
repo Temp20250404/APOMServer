@@ -22,12 +22,15 @@ enum PacketID {
     SC_SpawnCharacter = 13;
 }
 
-enum BOSS_PHASE {
-    BOSS_PHASE_ATTACK = 0; // 공격 상태 (플레이어에게 접근하거나 공격 중)
-    BOSS_PHASE_BERSERK = 1; // 광폭화 상태 (체력이 50% 이하일 때)
-    BOSS_PHASE_DEATH = 2; // 보스가 사망한 상태
-    BOSS_PHASE_IDLE = 3; // 대기 상태 (그 외의 경우)
-    BOSS_PHASE_RECONFIGURATION = 4; // 패턴 재정비 상태 (체력이 80% 이하일 때)
+enum BOSS_STATE {
+    BOSS_STATE_ATTACK = 0; // 공격
+    BOSS_STATE_CHASE = 1; // 추적
+    BOSS_STATE_DIE = 2; // 죽음
+    BOSS_STATE_IDLE = 3; // 대기
+    BOSS_STATE_SKILL1 = 4; // 스킬
+    BOSS_STATE_SKILL2 = 5; // 스킬1
+    BOSS_STATE_SKILL3 = 6; // 스킬2
+    BOSS_STATE_WALK = 7; // 걷기
 }
 
 message PlayerInfo {
@@ -100,13 +103,12 @@ message SC_SPAWN_CHARACTER {
 }
 message SC_BOSS_PHASE {
     uint32 bossID = 1; // 보스의 고유 ID
-    BOSS_PHASE currentPhase  = 2; // 현재 보스의 페이즈
-    uint32 currentHp = 3; // 보스의 현재 체력
-    uint32 maxHp = 4; // 보스의 최대 체력
-    Position targetMovementPos = 5; // 보스가 이동해야 하는 목표 위치
-    uint32 targetPlayerID = 6; // 타겟 플레이어의 고유 ID
-    float distanceToPlayer = 7; // 플레이어와의 현재 거리
-    Position bossPos = 8; // 현재 보스의 위치
+    uint32 currentHp = 2; // 보스의 현재 체력
+    uint32 maxHp = 3; // 보스의 최대 체력
+    Position targetMovementPos = 4; // 보스가 이동해야 하는 목표 위치
+    Position bossPos = 5; // 현재 보스의 위치
+    BOSS_STATE bossState = 6; // 보스의 현재 상태
+    float curSpeed = 7; // 현재 이동속도
 }
 message CS_CHECK_TIMEOUT {
     bool bCheck = 1; // L7에서 timeout 체크용. 일정 주기마다 한번씩 서버에 전송

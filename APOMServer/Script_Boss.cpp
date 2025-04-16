@@ -13,301 +13,413 @@
 Behavior Tree 구성도:
 ------------------------
 Root (Selector)
-├─ [Sequence] Death Branch
-│       ├─ [Condition] 보스가 사망 상태인가? (context.bDeath == true)
-│       └─ [Action] 사망 처리: 사망 애니메이션 실행 후 삭제하고, 패킷 송신
-├─ [Sequence] Phase4 Branch (광폭화)
-│       ├─ [Condition] 보스 체력이 최대 체력의 50% 이하인가? (context.currentHP / context.maxHP <= phase4HPPercent)
-│       └─ [Action] 광폭화 발동: 공격력과 이동속도 증가 후 패킷 송신
-├─ [Sequence] Phase3 Branch (패턴 재정비)
-│       ├─ [Condition] 보스 체력이 최대 체력의 80% 이하인가? (context.currentHP / context.maxHP <= phase3HPPercent)
-│       └─ [DynamicAction] 재정비 애니메이션 실행 및 패킷 송신
-│                    - 만약 타겟이 사라지거나 중단 조건이 충족되면 애니메이션 실행 중지
-├─ [Sequence] Phase2 Branch (습격/일반 공격)
-│       ├─ [Condition] 플레이어와의 거리가 phase2Distance 이하인가? (실제 거리 <= phase2Distance)
-│       └─ [DynamicAction] 접근 및 공격 실행:
-│                    - 공격 사거리보다 멀면 플레이어 쪽으로 접근하고 패킷 송신 (RUNNING)
-│                    - 공격 사거리 내면 공격 실행하고 패킷 송신 (SUCCESS)
-│                    - 중간에 타겟이 사라지면 애니메이션 중단
-└─ [Action] Phase1 Branch (대기, Idle)
-        └─ [Action] 그 외의 상황(타겟 없음 등)일 때 Idle 상태 유지하고 패킷 송신
+├─ [Sequence] DIE Branch
+│       ├─ [Condition] if currentHP <= 0
+│       └─ [Action] SC_BOSS_PHASE 호출. 사망 애니메이션 재생 시간동안 RUNNING 상태 유지. 이후 bDeath를 true로 변경
+
+├─ [Sequence] SKILL3 Branch
+│       ├─ [Condition] if currentHP / maxHP <= 0.2  // 전체 체력의 20% 이하일 경우
+│       └─ [Action] SC_BOSS_PHASE 호출. 1회만 호출
+
+├─ [Sequence] SKILL2 Branch
+│       ├─ [Condition] if currentHP / maxHP <= 0.5  // 전체 체력의 50% 이하일 경우
+│       └─ [Action] SC_BOSS_PHASE 호출. 1회만 호출
+
+├─ [Sequence] SKILL1 Branch
+│       ├─ [Condition] if currentHP / maxHP <= 0.8  // 전체 체력의 80% 이하일 경우
+│       └─ [Action] SC_BOSS_PHASE 호출. 1회만 호출
+
+├─ [Sequence] ATTACK Branch
+│       ├─ [Condition] if 플레이어가 공격 거리 내에 있을 경우
+│       └─ [Action] 공격. 공격 애니메이션 재생시간 동안은 RUNNING 상태 유지
+
+├─ [Sequence] CHASE Branch
+│       ├─ [Condition] if 타겟 플레이어가 존재할 경우, 공격 가능 거리보다 거리가 멀 경우
+│       └─ [Action] 이동속도에 맞게, 해당 플레이어 위치로 이동
+
+├─ [Sequence] WALK Branch
+│       ├─ [Condition] if 타겟 플레이어가 없을 경우, IDLE TIME이 0 이하인 경우
+│       └─ [Action] 목표 위치로 이동. 목표 위치로 이동하면 IDLE TIME = 3초 설정
+
+└─ [Action] IDLE
+│       ├─ [Condition] IDLE TIME이 0 이상인 경우
+        └─ [Action] IDLE TIME이 0이 되면 새로운 목표 위치를 설정
 */
 
 BTNode* CreateBossBT(AIContext& context)
 {
-    // ---------------------------
-    // 1. Death Branch
-    //    - 조건: 보스가 사망 상태인지 확인 (context.bDeath)
-    //    - 액션: 사망 애니메이션 실행 후 보스 삭제, 관련 패킷 전송
-    // ---------------------------
-    std::vector<BTNode*> deathBranch;
+    // ==========================================================================  
+    // [헬퍼: updateTarget 검사]  
+    // = 매 프레임 타겟 업데이트는 별도로 처리되므로,  
+    // = 단순히 pTargetPlayer가 nullptr이 아닌지만 검사하여 타겟의 존재 여부를 판단함  
+    // ==========================================================================  
+    auto hasValidTarget = [&context]() -> bool {
+        return (context.pTargetPlayer != nullptr);
+        };
+    // ==========================================================================  
 
-    deathBranch.push_back(new ConditionNode([&context]() -> bool {
-        // 보스가 사망 상태이면 true 반환
-        return context.bDeath;
-        }));
+    // ==========================================================================  
+    // 보스의 현재 위치를 Position 형식으로 생성  
+    // = 보스의 위치는 context.posX, posY, posZ에서 가져옴  
+    // = 이후 여러 단계에서 보스의 위치(bossPos)를 패킷 전송 인자로 사용함  
+    // ==========================================================================  
+    Position bossPos = { context.posX, context.posY, context.posZ };
+    // ==========================================================================  
 
-    deathBranch.push_back(new ActionNode([&context]() -> NodeStatus {
-        // 사망 처리 실행: 타겟이 있을 경우 타겟과의 거리 계산
-        float distance = 0.f;
-        UINT32 targetID = 0;
+    // ==========================================================================  
+    // [DIE Branch 시작] : 사망 브랜치  
+    // = 보스가 사망하는 경우를 처리하는 분기  
+    // = 조건: currentHP가 0이면 보스가 사망했다고 판단  
+    // = 액션: 사망 애니메이션(dieAnimTime) 동안 phaseTimer를 통해 애니메이션 재생을 유지하며,  
+    // =         최초 애니메이션 시작 시 패킷 전송(SC_BOSS_PHASE_FOR_AROUND 호출)  
+    // =         애니메이션 종료 시 bDeath를 true로 설정하고, 최종 상태를 패킷으로 전송함  
+    // ==========================================================================  
+    std::vector<BTNode*> dieBranch;
 
-        if (context.pTargetPlayer)
-        {
-            float px, py, pz;
-            // 타겟 플레이어의 위치를 가져옴
-            context.pTargetPlayer->getPosition(px, py, pz);
+    // 조건 노드: currentHP가 0이면 SUCCESS, 그렇지 않으면 FAILURE 반환
+    dieBranch.push_back(
+        new ConditionNode([&context]() -> bool {
+            return context.currentHP == 0;
+            })
+    );
 
-            // 보스와 타겟 플레이어 사이의 유클리드 거리 계산
-            distance = CalculateDistance(context.posX, context.posY, context.posZ, px, py, pz);
+    // 액션 노드: 사망 애니메이션 실행 및 패킷 전송  
+    dieBranch.push_back(
+        new ActionNode([&context, bossPos]() -> NodeStatus {
+            float initTime = context.dieAnimTime;   // 애니메이션 시작 시간(초)
 
-            targetID = context.pTargetPlayer->GetId();
-        }
+            // phaseTimer가 초기화되지 않았다면 초기화
+            if (context.phaseTimer <= 0)
+                context.phaseTimer = initTime;
 
-        // 보스의 현재 위치를 Position 구조체로 생성
-        Position currentPos = { context.posX, context.posY, context.posZ };
-
-        // 패킷 전송 함수 호출: 보스 사망 상태 전송
-        SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID, game::BOSS_PHASE_DEATH,
-            static_cast<UINT32>(context.currentHP), static_cast<UINT32>(context.maxHP),
-            currentPos, targetID, distance);
-
-        return NodeStatus::SUCCESS;
-        }));
-
-    BTNode* deathSequence = new SequenceNode(deathBranch);
-
-
-
-    // ---------------------------
-    // 2. Phase4 Branch (광폭화 / Berserk)
-    //    - 조건: 보스 체력이 최대 체력의 50% 이하인지 확인
-    //    - 액션: 광폭화 발동 (공격력 및 이동속도 증가) 후 패킷 전송
-    // ---------------------------
-    std::vector<BTNode*> phase4Branch;
-
-    phase4Branch.push_back(new ConditionNode([&context]() -> bool {
-        float hpPercent = context.currentHP / context.maxHP;
-        return (hpPercent <= context.phase4HPPercent);  // 예: 0.5 이하이면 광폭화
-        }));
-
-    phase4Branch.push_back(new ActionNode([&context]() -> NodeStatus {
-        // 광폭화 발동: 공격력과 이동속도를 1.2배로 증가
-        context.baseDamage *= 1.2f;
-        context.moveSpeed *= 1.2f;
-
-        float distance = 0.f;
-        UINT32 targetID = 0;
-
-        // 타겟 플레이어가 있을 경우 거리를 계산
-        if (context.pTargetPlayer)
-        {
-            float px, py, pz;
-            context.pTargetPlayer->getPosition(px, py, pz);
-            distance = CalculateDistance(context.posX, context.posY, context.posZ, px, py, pz);
-            targetID = context.pTargetPlayer->GetId();
-        }
-
-        Position currentPos = { context.posX, context.posY, context.posZ };
-
-        // 광폭화 상태 패킷 전송
-        SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID, game::BOSS_PHASE_BERSERK,
-            static_cast<UINT32>(context.currentHP), static_cast<UINT32>(context.maxHP),
-            currentPos, targetID, distance);
-
-        return NodeStatus::SUCCESS;
-        }));
-
-    BTNode* phase4Sequence = new SequenceNode(phase4Branch);
-
-
-
-    // ---------------------------
-    // 3. Phase3 Branch (패턴 재정비 / Reconfiguration)
-    //    - 조건: 보스 체력이 최대 체력의 80% 이하인지 확인
-    //    - 액션: 재정비 애니메이션 실행 중 (애니메이션이 완료될 때까지 RUNNING 상태 유지)
-    //            중간에 타겟이 없거나 중단 조건이 발생하면 애니메이션 중단하고 SUCCESS 반환
-    //    - DynamicActionNode 사용하여 매 Tick마다 조건 체크
-    // ---------------------------
-    std::vector<BTNode*> phase3Branch;
-
-    phase3Branch.push_back(new ConditionNode([&context]() -> bool {
-        float hpPercent = context.currentHP / context.maxHP;
-        return (hpPercent <= context.phase3HPPercent);  // 예: 0.8 이하이면 재정비 실행
-        }));
-
-    phase3Branch.push_back(new DynamicActionNode(
-        // 중단 조건: 타겟 플레이어가 없으면 (또는 다른 중단 조건 추가 가능)
-        [&context]() -> bool {
-            return (context.pTargetPlayer == nullptr);
-        },
-
-        // primaryActionFunc: 재정비 애니메이션 실행 (애니메이션이 진행 중이면 계속 RUNNING)
-        [&context]() -> NodeStatus {
-            float distance = 0.f;
-            UINT32 targetID = 0;
-
-            if (context.pTargetPlayer)
+            // 애니메이션이 갓 시작하는 경우, 즉 phaseTimer가 초기값과 같을 때
+            if (context.phaseTimer == initTime)
             {
-                float px, py, pz;
-                context.pTargetPlayer->getPosition(px, py, pz);
-                distance = CalculateDistance(context.posX, context.posY, context.posZ, px, py, pz);
-                targetID = context.pTargetPlayer->GetId();
+                // 사망 패킷 전송: 보스의 사망 상태를 클라이언트에 알림
+                SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
+                    context.currentHP, context.maxHP,
+                    bossPos, bossPos, game::BOSS_STATE_DIE, 0);
             }
 
-            Position currentPos = { context.posX, context.posY, context.posZ };
-
-            // 재정비 상태 패킷 전송
-            SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID, game::BOSS_PHASE_RECONFIGURATION,
-                static_cast<UINT32>(context.currentHP), static_cast<UINT32>(context.maxHP),
-                currentPos, targetID, distance);
-
-            // 애니메이션이 진행중이므로 계속 RUNNING 반환
-            return NodeStatus::RUNNING;
-        },
-
-        // alternativeActionFunc: 중단 조건이 충족되면 애니메이션 중단하고 SUCCESS 반환
-        [&context]() -> NodeStatus {
-            return NodeStatus::SUCCESS;
-        }
-    ));
-
-    BTNode* phase3Sequence = new SequenceNode(phase3Branch);
-
-
-
-    // ---------------------------
-    // 4. Phase2 Branch (습격/일반 공격 / Attack)
-    //    - 조건: 타겟 플레이어가 존재하며, 보스와 플레이어 간의 거리가 phase2Distance 이하인지 확인
-    //    - 액션: DynamicActionNode를 사용하여,
-    //              - 공격 사거리(distance) 비교에 따라 접근 또는 공격 실행
-    //              - 공격 사거리보다 멀면 플레이어 쪽으로 접근하고 패킷 전송 (RUNNING)
-    //              - 공격 사거리 내면 실제 공격 실행하고 패킷 전송 (SUCCESS)
-    //              - 중간에 타겟이 사라지면 애니메이션 중단하고 SUCCESS 반환
-    // ---------------------------
-    std::vector<BTNode*> phase2Branch;
-
-    phase2Branch.push_back(new ConditionNode([&context]() -> bool {
-        // 타겟 플레이어가 없으면 조건 불충족
-        if (!context.pTargetPlayer)
-            return false;
-
-        float px, py, pz;
-        context.pTargetPlayer->getPosition(px, py, pz);
-
-        // 보스와 타겟 플레이어 간 거리 계산
-        float distance = CalculateDistance(context.posX, context.posY, context.posZ, px, py, pz);
-
-        return (distance <= context.phase2Distance);  // 예: 20m 이하이면 조건 충족
-        }));
-
-    phase2Branch.push_back(new DynamicActionNode(
-        // 중단 조건: 타겟 플레이어가 없으면 (또는 다른 중단 조건 추가 가능)
-        [&context]() -> bool {
-            return (context.pTargetPlayer == nullptr);
-        },
-
-        // primaryActionFunc: 타겟이 존재하면, 공격 사거리(distance) 비교에 따라 접근 또는 공격 실행
-        [&context]() -> NodeStatus {
-            float px, py, pz;
-            context.pTargetPlayer->getPosition(px, py, pz);
-
-            // 보스와 타겟 사이의 거리 계산
-            float distance = CalculateDistance(context.posX, context.posY, context.posZ, px, py, pz);
-
-            UINT32 targetID = context.pTargetPlayer->GetId();
-
-            if (distance > context.attackRange)
+            // 애니메이션 실행 중이면 phaseTimer 값을 감소시키고 RUNNING 상태 반환
+            if (context.phaseTimer > 0)
             {
-                // 공격 사거리보다 멀면 플레이어에게 접근 (이동) 처리
-                float dx = px - context.posX;
-                float dy = py - context.posY;
-                float dz = pz - context.posZ;
-
-                float length = std::sqrt(dx * dx + dy * dy + dz * dz);
-
-                if (length > 0.f)
-                {
-                    // 보스의 위치를 moveSpeed에 따라 갱신 (플레이어 방향으로 이동)
-                    context.posX += (dx / length) * context.moveSpeed;
-                    context.posY += (dy / length) * context.moveSpeed;
-                    context.posZ += (dz / length) * context.moveSpeed;
-                }
-
-                Position currentPos = { context.posX, context.posY, context.posZ };
-
-                // 접근 중 상태 패킷 전송 (ATTACK 상태)
-                SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID, game::BOSS_PHASE_ATTACK,
-                    static_cast<UINT32>(context.currentHP), static_cast<UINT32>(context.maxHP),
-                    currentPos, targetID, distance);
-
+                context.phaseTimer -= context.deltaTime;
                 return NodeStatus::RUNNING;
             }
-            else
-            {
-                // 공격 사거리 내에 들어오면 실제 공격 실행
-                Position currentPos = { context.posX, context.posY, context.posZ };
 
-                SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID, game::BOSS_PHASE_ATTACK,
-                    static_cast<UINT32>(context.currentHP), static_cast<UINT32>(context.maxHP),
-                    currentPos, targetID, distance);
-
-                return NodeStatus::SUCCESS;
-            }
-        },
-
-        // alternativeActionFunc: 타겟이 없으면 바로 SUCCESS 처리
-        [&context]() -> NodeStatus {
+            // 애니메이션 실행이 완료된 경우, 보스의 사망 상태로 전환
+            context.bDeath = true;
+            // 최종 상태를 클라이언트에 전송 (추가 전송하지 않아도 되지만 상태 동기화를 위해 다시 한번 전송)
+            SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
+                context.currentHP, context.maxHP,
+                bossPos, bossPos, game::BOSS_STATE_DIE, 0);
             return NodeStatus::SUCCESS;
-        }
-    ));
+            })
+    );
 
-    BTNode* phase2Sequence = new SequenceNode(phase2Branch);
+    BTNode* dieSequence = new SequenceNode(dieBranch);
+    // ==========================================================================  
 
+    // ==========================================================================  
+    // [SKILL3 Branch 시작] : 스킬3 발동 브랜치  
+    // = 보스의 HP가 전체의 20% 이하이며 스킬3을 사용하지 않은 경우 처리  
+    // = 액션: skill3AnimTime 동안 스킬3 애니메이션을 실행하고,  
+    // =         애니메이션 시작 시에만 패킷 전송하며,  
+    // =         애니메이션이 끝나면 usedSkill3를 true로 설정함  
+    // ==========================================================================  
+    std::vector<BTNode*> skill3Branch;
 
+    skill3Branch.push_back(
+        new ConditionNode([&context]() -> bool {
+            return (static_cast<float>(context.currentHP) / context.maxHP <= 0.2f)
+                && (!context.usedSkill3);
+            })
+    );
 
-    // ---------------------------
-    // 5. Phase1 Branch (Idle)
-    //    - 그 외의 상황(타겟 없음 등)일 때 Idle 상태 유지하며, 패킷 전송
-    // ---------------------------
-    BTNode* phase1Action = new ActionNode([&context]() -> NodeStatus {
-        float distance = 0.f;
-        UINT32 targetID = 0;
+    skill3Branch.push_back(
+        new ActionNode([&context, bossPos]() -> NodeStatus {
+            float initTime = context.skill3AnimTime;
+            if (context.phaseTimer <= 0)
+                context.phaseTimer = initTime;
 
-        if (context.pTargetPlayer)
+            if (context.phaseTimer == initTime)
+            {
+                SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
+                    context.currentHP, context.maxHP,
+                    bossPos, bossPos, game::BOSS_STATE_SKILL3, 0);
+            }
+
+            if (context.phaseTimer > 0)
+            {
+                context.phaseTimer -= context.deltaTime;
+                return NodeStatus::RUNNING;
+            }
+
+            context.usedSkill3 = true;
+            return NodeStatus::SUCCESS;
+            })
+    );
+
+    BTNode* skill3Sequence = new SequenceNode(skill3Branch);
+    // ==========================================================================  
+
+    // ==========================================================================  
+    // [SKILL2 Branch 시작] : 스킬2 발동 브랜치  
+    // = 보스의 HP가 전체의 50% 이하이며 스킬2을 사용하지 않은 경우 처리  
+    // = 액션: skill2AnimTime 동안 스킬2 애니메이션을 실행하고,  
+    // =         애니메이션 시작 시에만 패킷 전송하며,  
+    // =         애니메이션 종료 시 usedSkill2를 true로 설정함  
+    // ==========================================================================  
+    std::vector<BTNode*> skill2Branch;
+
+    skill2Branch.push_back(
+        new ConditionNode([&context]() -> bool {
+            return (static_cast<float>(context.currentHP) / context.maxHP <= 0.5f)
+                && (!context.usedSkill2);
+            })
+    );
+
+    skill2Branch.push_back(
+        new ActionNode([&context, bossPos]() -> NodeStatus {
+            float initTime = context.skill2AnimTime;
+            if (context.phaseTimer <= 0)
+                context.phaseTimer = initTime;
+
+            if (context.phaseTimer == initTime)
+            {
+                SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
+                    context.currentHP, context.maxHP,
+                    bossPos, bossPos, game::BOSS_STATE_SKILL2, 0);
+            }
+
+            if (context.phaseTimer > 0)
+            {
+                context.phaseTimer -= context.deltaTime;
+                return NodeStatus::RUNNING;
+            }
+
+            context.usedSkill2 = true;
+            return NodeStatus::SUCCESS;
+            })
+    );
+
+    BTNode* skill2Sequence = new SequenceNode(skill2Branch);
+    // ==========================================================================  
+
+    // ==========================================================================  
+    // [SKILL1 Branch 시작] : 스킬1 발동 브랜치  
+    // = 보스의 HP가 전체의 80% 이하이며 스킬1을 사용하지 않은 경우 처리  
+    // = 액션: skill1AnimTime 동안 스킬1 애니메이션을 실행하고,  
+    // =         애니메이션 시작 시에만 패킷 전송하며,  
+    // =         애니메이션 종료 시 usedSkill1을 true로 설정함  
+    // ==========================================================================  
+    std::vector<BTNode*> skill1Branch;
+
+    skill1Branch.push_back(
+        new ConditionNode([&context]() -> bool {
+            return (static_cast<float>(context.currentHP) / context.maxHP <= 0.8f)
+                && (!context.usedSkill1);
+            })
+    );
+
+    skill1Branch.push_back(
+        new ActionNode([&context, bossPos]() -> NodeStatus {
+            float initTime = context.skill1AnimTime;
+            if (context.phaseTimer <= 0)
+                context.phaseTimer = initTime;
+
+            if (context.phaseTimer == initTime)
+            {
+                SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
+                    context.currentHP, context.maxHP,
+                    bossPos, bossPos, game::BOSS_STATE_SKILL1, 0);
+            }
+
+            if (context.phaseTimer > 0)
+            {
+                context.phaseTimer -= context.deltaTime;
+                return NodeStatus::RUNNING;
+            }
+
+            context.usedSkill1 = true;
+            return NodeStatus::SUCCESS;
+            })
+    );
+
+    BTNode* skill1Sequence = new SequenceNode(skill1Branch);
+    // ==========================================================================  
+
+    // ==========================================================================  
+    // [ATTACK Branch 시작] : 공격 브랜치  
+    // = 조건: 타겟 플레이어가 존재하며, 보스와의 거리가 공격 범위 이하일 경우  
+    // = 액션: attackAnimTime 동안 공격 애니메이션을 실행하며,  
+    //         타겟 플레이어의 위치(targetMovementPos)를 전송(패킷 전송은 애니메이션 시작 시에만 수행)  
+    // ==========================================================================  
+    std::vector<BTNode*> attackBranch;
+
+    attackBranch.push_back(
+        new ConditionNode([&context]() -> bool {
+            return context.hasTargetPlayer && (context.playerDistance <= context.attackRange);
+            })
+    );
+
+    attackBranch.push_back(
+        new ActionNode([&context, bossPos]() -> NodeStatus {
+            // 타겟 플레이어 위치를 계산. 타겟이 없으면 보스 위치를 기본값으로 사용
+            Position targetPos = bossPos;
+            if (context.pTargetPlayer)
+            {
+                float tx, ty, tz;
+                context.pTargetPlayer->getPosition(tx, ty, tz);
+                targetPos = { tx, ty, tz };
+            }
+
+            float initTime = context.attackAnimTime;
+            if (context.phaseTimer <= 0)
+                context.phaseTimer = initTime;
+
+            if (context.phaseTimer == initTime)
+            {
+                SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
+                    context.currentHP, context.maxHP,
+                    targetPos, bossPos, game::BOSS_STATE_ATTACK, 0);
+            }
+
+            if (context.phaseTimer > 0)
+            {
+                context.phaseTimer -= context.deltaTime;
+                return NodeStatus::RUNNING;
+            }
+
+            SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
+                context.currentHP, context.maxHP,
+                targetPos, bossPos, game::BOSS_STATE_ATTACK, 0);
+            return NodeStatus::SUCCESS;
+            })
+    );
+
+    BTNode* attackSequence = new SequenceNode(attackBranch);
+    // ==========================================================================  
+
+    // ==========================================================================  
+    // [CHASE Branch 시작] : 추적 브랜치  
+    // = 조건: 타겟 플레이어가 존재하지만, 보스와의 거리가 공격 범위보다 클 경우  
+    // = 액션: 보스가 플레이어를 향해 이동하며, playerDistance를 감소시키고,  
+    //         이동 속도(context.moveSpeed)를 전송 (패킷 전송은 애니메이션 시작 시에만 수행, bossState: BOSS_STATE_CHASE)  
+    // ==========================================================================  
+    std::vector<BTNode*> chaseBranch;
+
+    chaseBranch.push_back(
+        new ConditionNode([&context]() -> bool {
+            return context.hasTargetPlayer && (context.playerDistance > context.attackRange);
+            })
+    );
+
+    chaseBranch.push_back(
+        new ActionNode([&context, bossPos]() -> NodeStatus {
+            Position targetPos = bossPos;
+            if (context.pTargetPlayer)
+            {
+                float tx, ty, tz;
+                context.pTargetPlayer->getPosition(tx, ty, tz);
+                targetPos = { tx, ty, tz };
+            }
+
+            // 보스가 타겟을 향해 추적하면서, 플레이어와의 거리를 감소시킴
+            context.playerDistance -= context.moveSpeed;
+
+            float initSpeed = context.moveSpeed;
+            // 추적 애니메이션의 시작 시점에만 패킷 전송
+            if (context.phaseTimer <= 0)
+                context.phaseTimer = context.attackAnimTime;  // 임시로 attackAnimTime 사용
+
+            if (context.phaseTimer == context.attackAnimTime)
+            {
+                SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
+                    context.currentHP, context.maxHP,
+                    targetPos, bossPos, game::BOSS_STATE_CHASE, initSpeed);
+            }
+
+            if (context.playerDistance <= context.attackRange)
+                return NodeStatus::SUCCESS;
+
+            if (context.phaseTimer > 0)
+            {
+                context.phaseTimer -= context.deltaTime;
+                return NodeStatus::RUNNING;
+            }
+
+            return NodeStatus::RUNNING;
+            })
+    );
+
+    BTNode* chaseSequence = new SequenceNode(chaseBranch);
+    // ==========================================================================  
+
+    // ==========================================================================  
+    // [WALK Branch 시작] : 이동 브랜치  
+    // = 조건: 타겟 플레이어가 없고, idleTime이 0 이하일 경우  
+    // = 액션: 새로운 목표 위치로 이동했다고 가정하고, idleTime을 idleResetTime으로 재설정하며 패킷 전송 (bossState: BOSS_STATE_WALK)  
+    // ==========================================================================  
+    std::vector<BTNode*> walkBranch;
+
+    walkBranch.push_back(
+        new ConditionNode([&context]() -> bool {
+            return (!context.hasTargetPlayer) && (context.idleTime <= 0);
+            })
+    );
+
+    walkBranch.push_back(
+        new ActionNode([&context, bossPos]() -> NodeStatus {
+            context.idleTime = context.idleResetTime;
+            SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
+                context.currentHP, context.maxHP,
+                bossPos, bossPos, game::BOSS_STATE_WALK, 0);
+            return NodeStatus::SUCCESS;
+            })
+    );
+
+    BTNode* walkSequence = new SequenceNode(walkBranch);
+    // ==========================================================================  
+
+    // ==========================================================================  
+    // [IDLE Action 시작] : 대기 브랜치 (Fallback)  
+    // = 조건: idleTime이 0 이상이면 Idle 상태 유지하며 idleTime을 감소시킴  
+    // = idleTime이 0 이하가 되면 SUCCESS 반환하여 새로운 목표 위치 설정 기회 제공 (bossState: BOSS_STATE_IDLE)  
+    // ==========================================================================  
+    BTNode* idleAction = new ActionNode([&context, bossPos]() -> NodeStatus {
+        if (context.idleTime > 0)
         {
-            float px, py, pz;
-            context.pTargetPlayer->getPosition(px, py, pz);
-            distance = CalculateDistance(context.posX, context.posY, context.posZ, px, py, pz);
-            targetID = context.pTargetPlayer->GetId();
+            // Idle 애니메이션이 시작될 때만 패킷 전송 (idleTime이 idleResetTime과 같을 때)
+            if (context.idleTime == context.idleResetTime)
+            {
+                SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
+                    context.currentHP, context.maxHP,
+                    bossPos, bossPos, game::BOSS_STATE_IDLE, 0);
+            }
+            context.idleTime -= context.deltaTime;
+            return NodeStatus::RUNNING;
         }
-
-        Position currentPos = { context.posX, context.posY, context.posZ };
-
-        // Idle 상태 패킷 전송
-        SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID, game::BOSS_PHASE_IDLE,
-            static_cast<UINT32>(context.currentHP), static_cast<UINT32>(context.maxHP),
-            currentPos, targetID, distance);
-
         return NodeStatus::SUCCESS;
         });
+    // ==========================================================================  
 
-
-
-    // ---------------------------
-    // 6. Root Selector 구성
-    //    - 우선순위 (상위부터 평가): Death > Phase4 > Phase3 > Phase2 > Phase1
-    // ---------------------------
+    // ==========================================================================  
+    // [Root Selector 시작] : 전체 Behavior Tree의 루트 노드  
+    // = 우선순위: DIE → SKILL3 → SKILL2 → SKILL1 → ATTACK → CHASE → WALK → IDLE  
+    // ==========================================================================  
     std::vector<BTNode*> rootChildren;
 
-    rootChildren.push_back(deathSequence);
-    rootChildren.push_back(phase4Sequence);
-    rootChildren.push_back(phase3Sequence);
-    rootChildren.push_back(phase2Sequence);
-    rootChildren.push_back(phase1Action);
+    rootChildren.push_back(dieSequence);
+    rootChildren.push_back(skill3Sequence);
+    rootChildren.push_back(skill2Sequence);
+    rootChildren.push_back(skill1Sequence);
+    rootChildren.push_back(attackSequence);
+    rootChildren.push_back(chaseSequence);
+    rootChildren.push_back(walkSequence);
+    rootChildren.push_back(idleAction);
+    // ==========================================================================  
 
-
-
-    // 최종적으로 Root Selector 노드를 생성하여 반환
     return new SelectorNode(rootChildren);
 }

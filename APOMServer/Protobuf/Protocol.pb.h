@@ -152,33 +152,36 @@ inline bool PacketID_Parse(
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<PacketID>(
     PacketID_descriptor(), name, value);
 }
-enum BOSS_PHASE : int {
-  BOSS_PHASE_ATTACK = 0,
-  BOSS_PHASE_BERSERK = 1,
-  BOSS_PHASE_DEATH = 2,
-  BOSS_PHASE_IDLE = 3,
-  BOSS_PHASE_RECONFIGURATION = 4,
-  BOSS_PHASE_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
-  BOSS_PHASE_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+enum BOSS_STATE : int {
+  BOSS_STATE_ATTACK = 0,
+  BOSS_STATE_CHASE = 1,
+  BOSS_STATE_DIE = 2,
+  BOSS_STATE_IDLE = 3,
+  BOSS_STATE_SKILL1 = 4,
+  BOSS_STATE_SKILL2 = 5,
+  BOSS_STATE_SKILL3 = 6,
+  BOSS_STATE_WALK = 7,
+  BOSS_STATE_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
+  BOSS_STATE_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
-bool BOSS_PHASE_IsValid(int value);
-constexpr BOSS_PHASE BOSS_PHASE_MIN = BOSS_PHASE_ATTACK;
-constexpr BOSS_PHASE BOSS_PHASE_MAX = BOSS_PHASE_RECONFIGURATION;
-constexpr int BOSS_PHASE_ARRAYSIZE = BOSS_PHASE_MAX + 1;
+bool BOSS_STATE_IsValid(int value);
+constexpr BOSS_STATE BOSS_STATE_MIN = BOSS_STATE_ATTACK;
+constexpr BOSS_STATE BOSS_STATE_MAX = BOSS_STATE_WALK;
+constexpr int BOSS_STATE_ARRAYSIZE = BOSS_STATE_MAX + 1;
 
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* BOSS_PHASE_descriptor();
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* BOSS_STATE_descriptor();
 template<typename T>
-inline const std::string& BOSS_PHASE_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, BOSS_PHASE>::value ||
+inline const std::string& BOSS_STATE_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, BOSS_STATE>::value ||
     ::std::is_integral<T>::value,
-    "Incorrect type passed to function BOSS_PHASE_Name.");
+    "Incorrect type passed to function BOSS_STATE_Name.");
   return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    BOSS_PHASE_descriptor(), enum_t_value);
+    BOSS_STATE_descriptor(), enum_t_value);
 }
-inline bool BOSS_PHASE_Parse(
-    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, BOSS_PHASE* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<BOSS_PHASE>(
-    BOSS_PHASE_descriptor(), name, value);
+inline bool BOSS_STATE_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, BOSS_STATE* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<BOSS_STATE>(
+    BOSS_STATE_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -2699,16 +2702,15 @@ class SC_BOSS_PHASE final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kTargetMovementPosFieldNumber = 5,
-    kBossPosFieldNumber = 8,
+    kTargetMovementPosFieldNumber = 4,
+    kBossPosFieldNumber = 5,
     kBossIDFieldNumber = 1,
-    kCurrentPhaseFieldNumber = 2,
-    kCurrentHpFieldNumber = 3,
-    kMaxHpFieldNumber = 4,
-    kTargetPlayerIDFieldNumber = 6,
-    kDistanceToPlayerFieldNumber = 7,
+    kCurrentHpFieldNumber = 2,
+    kMaxHpFieldNumber = 3,
+    kBossStateFieldNumber = 6,
+    kCurSpeedFieldNumber = 7,
   };
-  // .game.Position targetMovementPos = 5;
+  // .game.Position targetMovementPos = 4;
   bool has_targetmovementpos() const;
   private:
   bool _internal_has_targetmovementpos() const;
@@ -2726,7 +2728,7 @@ class SC_BOSS_PHASE final :
       ::game::Position* targetmovementpos);
   ::game::Position* unsafe_arena_release_targetmovementpos();
 
-  // .game.Position bossPos = 8;
+  // .game.Position bossPos = 5;
   bool has_bosspos() const;
   private:
   bool _internal_has_bosspos() const;
@@ -2753,16 +2755,7 @@ class SC_BOSS_PHASE final :
   void _internal_set_bossid(uint32_t value);
   public:
 
-  // .game.BOSS_PHASE currentPhase = 2;
-  void clear_currentphase();
-  ::game::BOSS_PHASE currentphase() const;
-  void set_currentphase(::game::BOSS_PHASE value);
-  private:
-  ::game::BOSS_PHASE _internal_currentphase() const;
-  void _internal_set_currentphase(::game::BOSS_PHASE value);
-  public:
-
-  // uint32 currentHp = 3;
+  // uint32 currentHp = 2;
   void clear_currenthp();
   uint32_t currenthp() const;
   void set_currenthp(uint32_t value);
@@ -2771,7 +2764,7 @@ class SC_BOSS_PHASE final :
   void _internal_set_currenthp(uint32_t value);
   public:
 
-  // uint32 maxHp = 4;
+  // uint32 maxHp = 3;
   void clear_maxhp();
   uint32_t maxhp() const;
   void set_maxhp(uint32_t value);
@@ -2780,22 +2773,22 @@ class SC_BOSS_PHASE final :
   void _internal_set_maxhp(uint32_t value);
   public:
 
-  // uint32 targetPlayerID = 6;
-  void clear_targetplayerid();
-  uint32_t targetplayerid() const;
-  void set_targetplayerid(uint32_t value);
+  // .game.BOSS_STATE bossState = 6;
+  void clear_bossstate();
+  ::game::BOSS_STATE bossstate() const;
+  void set_bossstate(::game::BOSS_STATE value);
   private:
-  uint32_t _internal_targetplayerid() const;
-  void _internal_set_targetplayerid(uint32_t value);
+  ::game::BOSS_STATE _internal_bossstate() const;
+  void _internal_set_bossstate(::game::BOSS_STATE value);
   public:
 
-  // float distanceToPlayer = 7;
-  void clear_distancetoplayer();
-  float distancetoplayer() const;
-  void set_distancetoplayer(float value);
+  // float curSpeed = 7;
+  void clear_curspeed();
+  float curspeed() const;
+  void set_curspeed(float value);
   private:
-  float _internal_distancetoplayer() const;
-  void _internal_set_distancetoplayer(float value);
+  float _internal_curspeed() const;
+  void _internal_set_curspeed(float value);
   public:
 
   // @@protoc_insertion_point(class_scope:game.SC_BOSS_PHASE)
@@ -2809,11 +2802,10 @@ class SC_BOSS_PHASE final :
     ::game::Position* targetmovementpos_;
     ::game::Position* bosspos_;
     uint32_t bossid_;
-    int currentphase_;
     uint32_t currenthp_;
     uint32_t maxhp_;
-    uint32_t targetplayerid_;
-    float distancetoplayer_;
+    int bossstate_;
+    float curspeed_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -4144,27 +4136,7 @@ inline void SC_BOSS_PHASE::set_bossid(uint32_t value) {
   // @@protoc_insertion_point(field_set:game.SC_BOSS_PHASE.bossID)
 }
 
-// .game.BOSS_PHASE currentPhase = 2;
-inline void SC_BOSS_PHASE::clear_currentphase() {
-  _impl_.currentphase_ = 0;
-}
-inline ::game::BOSS_PHASE SC_BOSS_PHASE::_internal_currentphase() const {
-  return static_cast< ::game::BOSS_PHASE >(_impl_.currentphase_);
-}
-inline ::game::BOSS_PHASE SC_BOSS_PHASE::currentphase() const {
-  // @@protoc_insertion_point(field_get:game.SC_BOSS_PHASE.currentPhase)
-  return _internal_currentphase();
-}
-inline void SC_BOSS_PHASE::_internal_set_currentphase(::game::BOSS_PHASE value) {
-  
-  _impl_.currentphase_ = value;
-}
-inline void SC_BOSS_PHASE::set_currentphase(::game::BOSS_PHASE value) {
-  _internal_set_currentphase(value);
-  // @@protoc_insertion_point(field_set:game.SC_BOSS_PHASE.currentPhase)
-}
-
-// uint32 currentHp = 3;
+// uint32 currentHp = 2;
 inline void SC_BOSS_PHASE::clear_currenthp() {
   _impl_.currenthp_ = 0u;
 }
@@ -4184,7 +4156,7 @@ inline void SC_BOSS_PHASE::set_currenthp(uint32_t value) {
   // @@protoc_insertion_point(field_set:game.SC_BOSS_PHASE.currentHp)
 }
 
-// uint32 maxHp = 4;
+// uint32 maxHp = 3;
 inline void SC_BOSS_PHASE::clear_maxhp() {
   _impl_.maxhp_ = 0u;
 }
@@ -4204,7 +4176,7 @@ inline void SC_BOSS_PHASE::set_maxhp(uint32_t value) {
   // @@protoc_insertion_point(field_set:game.SC_BOSS_PHASE.maxHp)
 }
 
-// .game.Position targetMovementPos = 5;
+// .game.Position targetMovementPos = 4;
 inline bool SC_BOSS_PHASE::_internal_has_targetmovementpos() const {
   return this != internal_default_instance() && _impl_.targetmovementpos_ != nullptr;
 }
@@ -4294,47 +4266,7 @@ inline void SC_BOSS_PHASE::set_allocated_targetmovementpos(::game::Position* tar
   // @@protoc_insertion_point(field_set_allocated:game.SC_BOSS_PHASE.targetMovementPos)
 }
 
-// uint32 targetPlayerID = 6;
-inline void SC_BOSS_PHASE::clear_targetplayerid() {
-  _impl_.targetplayerid_ = 0u;
-}
-inline uint32_t SC_BOSS_PHASE::_internal_targetplayerid() const {
-  return _impl_.targetplayerid_;
-}
-inline uint32_t SC_BOSS_PHASE::targetplayerid() const {
-  // @@protoc_insertion_point(field_get:game.SC_BOSS_PHASE.targetPlayerID)
-  return _internal_targetplayerid();
-}
-inline void SC_BOSS_PHASE::_internal_set_targetplayerid(uint32_t value) {
-  
-  _impl_.targetplayerid_ = value;
-}
-inline void SC_BOSS_PHASE::set_targetplayerid(uint32_t value) {
-  _internal_set_targetplayerid(value);
-  // @@protoc_insertion_point(field_set:game.SC_BOSS_PHASE.targetPlayerID)
-}
-
-// float distanceToPlayer = 7;
-inline void SC_BOSS_PHASE::clear_distancetoplayer() {
-  _impl_.distancetoplayer_ = 0;
-}
-inline float SC_BOSS_PHASE::_internal_distancetoplayer() const {
-  return _impl_.distancetoplayer_;
-}
-inline float SC_BOSS_PHASE::distancetoplayer() const {
-  // @@protoc_insertion_point(field_get:game.SC_BOSS_PHASE.distanceToPlayer)
-  return _internal_distancetoplayer();
-}
-inline void SC_BOSS_PHASE::_internal_set_distancetoplayer(float value) {
-  
-  _impl_.distancetoplayer_ = value;
-}
-inline void SC_BOSS_PHASE::set_distancetoplayer(float value) {
-  _internal_set_distancetoplayer(value);
-  // @@protoc_insertion_point(field_set:game.SC_BOSS_PHASE.distanceToPlayer)
-}
-
-// .game.Position bossPos = 8;
+// .game.Position bossPos = 5;
 inline bool SC_BOSS_PHASE::_internal_has_bosspos() const {
   return this != internal_default_instance() && _impl_.bosspos_ != nullptr;
 }
@@ -4424,6 +4356,46 @@ inline void SC_BOSS_PHASE::set_allocated_bosspos(::game::Position* bosspos) {
   // @@protoc_insertion_point(field_set_allocated:game.SC_BOSS_PHASE.bossPos)
 }
 
+// .game.BOSS_STATE bossState = 6;
+inline void SC_BOSS_PHASE::clear_bossstate() {
+  _impl_.bossstate_ = 0;
+}
+inline ::game::BOSS_STATE SC_BOSS_PHASE::_internal_bossstate() const {
+  return static_cast< ::game::BOSS_STATE >(_impl_.bossstate_);
+}
+inline ::game::BOSS_STATE SC_BOSS_PHASE::bossstate() const {
+  // @@protoc_insertion_point(field_get:game.SC_BOSS_PHASE.bossState)
+  return _internal_bossstate();
+}
+inline void SC_BOSS_PHASE::_internal_set_bossstate(::game::BOSS_STATE value) {
+  
+  _impl_.bossstate_ = value;
+}
+inline void SC_BOSS_PHASE::set_bossstate(::game::BOSS_STATE value) {
+  _internal_set_bossstate(value);
+  // @@protoc_insertion_point(field_set:game.SC_BOSS_PHASE.bossState)
+}
+
+// float curSpeed = 7;
+inline void SC_BOSS_PHASE::clear_curspeed() {
+  _impl_.curspeed_ = 0;
+}
+inline float SC_BOSS_PHASE::_internal_curspeed() const {
+  return _impl_.curspeed_;
+}
+inline float SC_BOSS_PHASE::curspeed() const {
+  // @@protoc_insertion_point(field_get:game.SC_BOSS_PHASE.curSpeed)
+  return _internal_curspeed();
+}
+inline void SC_BOSS_PHASE::_internal_set_curspeed(float value) {
+  
+  _impl_.curspeed_ = value;
+}
+inline void SC_BOSS_PHASE::set_curspeed(float value) {
+  _internal_set_curspeed(value);
+  // @@protoc_insertion_point(field_set:game.SC_BOSS_PHASE.curSpeed)
+}
+
 // -------------------------------------------------------------------
 
 // CS_CHECK_TIMEOUT
@@ -4493,10 +4465,10 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::game::PacketID>() {
   return ::game::PacketID_descriptor();
 }
-template <> struct is_proto_enum< ::game::BOSS_PHASE> : ::std::true_type {};
+template <> struct is_proto_enum< ::game::BOSS_STATE> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::game::BOSS_PHASE>() {
-  return ::game::BOSS_PHASE_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::game::BOSS_STATE>() {
+  return ::game::BOSS_STATE_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

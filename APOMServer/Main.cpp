@@ -179,26 +179,51 @@ int main()
 
     BTBuilder builder = CreateBossBT;
 
-    // 초기 AIContext 설정
-    AIContext context;
-    context.maxHP = 100;             // 초기 체력
-    context.currentHP = context.maxHP;
-    context.attackRange = 5.0f;
-    context.moveSpeed = 1.0f;
-    context.detectionRange = 15.0f;
+    // AIContext 초기화 (보스 상태)
+    AIContext boss;
+    boss.ID = 1;  // 고유 ID 설정
+
+    boss.currentHP = 100.0f;
+    boss.maxHP = 100.0f;
+    boss.bDeath = false;
+
+    boss.usedSkill1 = false;
+    boss.usedSkill2 = false;
+    boss.usedSkill3 = false;
+
+    boss.attackAnimTime = 1.2f;  // 공격 애니메이션 1.2초
+    boss.dieAnimTime = 2.5f;     // 사망 애니메이션 2.5초
+    boss.skill1AnimTime = 1.0f;  // 스킬1 애니메이션 1.0초
+    boss.skill2AnimTime = 1.5f;  // 스킬2 애니메이션 1.5초
+    boss.skill3AnimTime = 2.0f;  // 스킬3 애니메이션 2.0초
+    boss.phaseTimer = 0;
+
+    boss.hasTargetPlayer = false;
+    boss.playerDistance = 0;
+
+    boss.idleTime = 0;
+
+    // 상수 값들
+    boss.attackRange = 5.0f;
+    boss.moveSpeed = 0.8f;
+    boss.idleResetTime = 3.0f;
+    boss.deltaTime = 0.3f;
+
+    // 보스의 현재 위치 (예시)
+    boss.posX = 0.f; boss.posY = 0.f; boss.posZ = 0.f;
 
     AIEntity* pAIEntity;
     for (int i = 0; i < 10; ++i)
     {
         // context에 방 정보 삽입
         CRoom* pRoom = roomManager.GetRoomById(i);
-        context.ptargetRoom = pRoom;
+        boss.ptargetRoom = pRoom;
 
         // AIEntity 인스턴스 생성
-        pAIEntity = new AIEntity(context, builder);
+        pAIEntity = new AIEntity(boss, builder);
 
         // 고유 ID 추가
-        context.ID = pAIEntity->GetID();
+        boss.ID = pAIEntity->GetID();
 
         // AI 매니저에 AI 객체 등록
         aiManager.AddEntity(pAIEntity);

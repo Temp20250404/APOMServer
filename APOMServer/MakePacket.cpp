@@ -627,12 +627,11 @@ void SC_SPAWN_CHARACTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 play
     packetPool.Free(Packet);
 }
 
-void SC_BOSS_PHASE_FOR_All(CSession* pSession, UINT32 bossID, game::BOSS_PHASE currentPhase, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, UINT32 targetPlayerID, float distanceToPlayer)
+void SC_BOSS_PHASE_FOR_All(CSession* pSession, UINT32 bossID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, game::BOSS_STATE bossState, float curSpeed)
 {
     game::SC_BOSS_PHASE pkt;
 
     pkt.set_bossid(bossID);
-    pkt.set_currentphase(currentPhase);
     pkt.set_currenthp(currentHp);
     pkt.set_maxhp(maxHp);
     {
@@ -641,8 +640,14 @@ void SC_BOSS_PHASE_FOR_All(CSession* pSession, UINT32 bossID, game::BOSS_PHASE c
         sub->set_posy(targetMovementPos.posY);
         sub->set_posz(targetMovementPos.posZ);
     }
-    pkt.set_targetplayerid(targetPlayerID);
-    pkt.set_distancetoplayer(distanceToPlayer);
+    {
+        game::Position* sub = pkt.mutable_bosspos();
+        sub->set_posx(bossPos.posX);
+        sub->set_posy(bossPos.posY);
+        sub->set_posz(bossPos.posZ);
+    }
+    pkt.set_bossstate(bossState);
+    pkt.set_curspeed(curSpeed);
 
     int pktSize = pkt.ByteSizeLong();
 
@@ -663,12 +668,11 @@ void SC_BOSS_PHASE_FOR_All(CSession* pSession, UINT32 bossID, game::BOSS_PHASE c
     packetPool.Free(Packet);
 }
 
-void SC_BOSS_PHASE_FOR_SINGLE(CSession* pSession, UINT32 bossID, game::BOSS_PHASE currentPhase, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, UINT32 targetPlayerID, float distanceToPlayer)
+void SC_BOSS_PHASE_FOR_SINGLE(CSession* pSession, UINT32 bossID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, game::BOSS_STATE bossState, float curSpeed)
 {
     game::SC_BOSS_PHASE pkt;
 
     pkt.set_bossid(bossID);
-    pkt.set_currentphase(currentPhase);
     pkt.set_currenthp(currentHp);
     pkt.set_maxhp(maxHp);
     {
@@ -677,8 +681,14 @@ void SC_BOSS_PHASE_FOR_SINGLE(CSession* pSession, UINT32 bossID, game::BOSS_PHAS
         sub->set_posy(targetMovementPos.posY);
         sub->set_posz(targetMovementPos.posZ);
     }
-    pkt.set_targetplayerid(targetPlayerID);
-    pkt.set_distancetoplayer(distanceToPlayer);
+    {
+        game::Position* sub = pkt.mutable_bosspos();
+        sub->set_posx(bossPos.posX);
+        sub->set_posy(bossPos.posY);
+        sub->set_posz(bossPos.posZ);
+    }
+    pkt.set_bossstate(bossState);
+    pkt.set_curspeed(curSpeed);
 
     int pktSize = pkt.ByteSizeLong();
 
@@ -699,12 +709,11 @@ void SC_BOSS_PHASE_FOR_SINGLE(CSession* pSession, UINT32 bossID, game::BOSS_PHAS
     packetPool.Free(Packet);
 }
 
-void SC_BOSS_PHASE_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 bossID, game::BOSS_PHASE currentPhase, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, UINT32 targetPlayerID, float distanceToPlayer)
+void SC_BOSS_PHASE_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 bossID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, game::BOSS_STATE bossState, float curSpeed)
 {
     game::SC_BOSS_PHASE pkt;
 
     pkt.set_bossid(bossID);
-    pkt.set_currentphase(currentPhase);
     pkt.set_currenthp(currentHp);
     pkt.set_maxhp(maxHp);
     {
@@ -713,8 +722,14 @@ void SC_BOSS_PHASE_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 bossID, g
         sub->set_posy(targetMovementPos.posY);
         sub->set_posz(targetMovementPos.posZ);
     }
-    pkt.set_targetplayerid(targetPlayerID);
-    pkt.set_distancetoplayer(distanceToPlayer);
+    {
+        game::Position* sub = pkt.mutable_bosspos();
+        sub->set_posx(bossPos.posX);
+        sub->set_posy(bossPos.posY);
+        sub->set_posz(bossPos.posZ);
+    }
+    pkt.set_bossstate(bossState);
+    pkt.set_curspeed(curSpeed);
 
     int pktSize = pkt.ByteSizeLong();
 
