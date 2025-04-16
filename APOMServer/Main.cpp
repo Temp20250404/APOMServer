@@ -236,6 +236,9 @@ int main()
 
         // AI 매니저에 AI 객체 등록
         aiManager.AddEntity(pAIEntity);
+
+        // 방에 AI 객체 정보 등록
+        pRoom->AddEntity(pAIEntity);
     }
 
 

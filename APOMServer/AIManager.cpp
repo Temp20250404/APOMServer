@@ -1,4 +1,5 @@
 #include "AIManager.h"
+#include "Room.h"
 
 CAIManager::CAIManager() noexcept
 {
@@ -41,6 +42,11 @@ void CAIManager::UpdateAll() {
         if (!ai->IsAlive()) {
             std::cout << "[AIManager] Removing dead AI (ID: " << ai->GetID() << ")\n";
 
+            // 방에서 해당 ai 정보 제거
+            CRoom* pTargetRoom = ai->GetContext().ptargetRoom;
+            pTargetRoom->RemoveEntity(ai);
+
+            // 매니저에서 ai 정보 삭제
             UINT32 deadId = ai->GetID();
             delete ai;
 

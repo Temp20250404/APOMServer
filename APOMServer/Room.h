@@ -4,6 +4,8 @@
 #include "MatchSystem.h"
 #include "ItemSpawner.h"
 
+class AIEntity;
+
 class CRoom {
 public:
     CRoom(int id);
@@ -28,8 +30,15 @@ public:
     const std::vector<CPlayer*>& GetActivePlayers(void) { return m_activePlayers; }
 
 public:
+    const std::vector<AIEntity*>& GetEntities(void) { return m_pEntities; }
+    void AddEntity(AIEntity* pEntity) { m_pEntities.push_back(pEntity); }
+    void RemoveEntity(AIEntity* pEntity);
+
+public:
     std::vector<CPlayer*> m_activePlayers;
     std::vector<CPlayer*> m_waitingPlayers;
+
+    std::vector<AIEntity*> m_pEntities;
 
 private:
     static constexpr int MAX_PLAYERS = 10;

@@ -422,5 +422,16 @@ bool CS_REGISTER_REQUEST(CSession* pSession, std::string userName)
     // active로 이동
     room->MoveToActive(pPlayer->m_ID);
 
+    
+    // 방에 있는 ai를 모두 생성하는 패킷 전송
+    for (const auto& entity : room->GetEntities())
+    {
+        if (entity)
+        {
+            const AIContext& context = entity->GetContext();
+            SC_CREATE_MONSTER_FOR_SINGLE(pSession, context.ID, 0, Position{ context.posX, context.posY, context.posZ });
+        }
+    }
+
     return true;
 }

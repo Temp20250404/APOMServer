@@ -123,3 +123,11 @@ CPlayer* CRoom::FindPlayerById(int playerId) {
     }
     return nullptr;
 }
+
+void CRoom::RemoveEntity(AIEntity* pEntity)
+{
+    auto it = std::find(m_pEntities.begin(), m_pEntities.end(), pEntity);
+    if (it != m_pEntities.end()) {
+        m_pEntities.erase(it);
+    }
+}
