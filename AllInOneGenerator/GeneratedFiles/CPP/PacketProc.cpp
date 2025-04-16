@@ -81,6 +81,20 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         return CS_KEYINFO(pSession, keyInfo, cameraYaw);
     }
     break;
+    case game::PacketID::CS_PlayerAttack:
+    {
+        UINT32 aiID;
+        UINT32 attackType;
+
+        game::CS_PLAYER_ATTACK pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        aiID = pkt.aiid();
+        attackType = pkt.attacktype();
+
+        return CS_PLAYER_ATTACK(pSession, aiID, attackType);
+    }
+    break;
     case game::PacketID::CS_PositionSync:
     {
         float posX;
@@ -135,6 +149,11 @@ bool CS_CHAT(CSession* pSession, UINT32 targetID, std::string message, UINT32 ch
 }
 
 bool CS_KEYINFO(CSession* pSession, UINT32 keyInfo, float cameraYaw)
+{
+    return false;
+}
+
+bool CS_PLAYER_ATTACK(CSession* pSession, UINT32 aiID, UINT32 attackType)
 {
     return false;
 }

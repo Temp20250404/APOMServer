@@ -23,6 +23,22 @@ class PacketHandler
         // TODO: SC_RegisterResponse 패킷 처리 로직을 여기에 구현
     }
 
+    // SC_REMOVE_CHARACTER 패킷을 처리하는 함수
+    public static void SC_RemoveCharacter(PacketSession session, IMessage packet)
+    {
+        SC_REMOVE_CHARACTER removeCharacterPacket = packet as SC_REMOVE_CHARACTER;
+
+        // TODO: SC_RemoveCharacter 패킷 처리 로직을 여기에 구현
+    }
+
+    // SC_SPAWN_CHARACTER 패킷을 처리하는 함수
+    public static void SC_SpawnCharacter(PacketSession session, IMessage packet)
+    {
+        SC_SPAWN_CHARACTER spawnCharacterPacket = packet as SC_SPAWN_CHARACTER;
+
+        // TODO: SC_SpawnCharacter 패킷 처리 로직을 여기에 구현
+    }
+
     // SC_CHAT 패킷을 처리하는 함수
     public static void SC_Chat(PacketSession session, IMessage packet)
     {
@@ -39,28 +55,36 @@ class PacketHandler
         // TODO: SC_Keyinfo 패킷 처리 로직을 여기에 구현
     }
 
+    // SC_PLAYER_ATTACK 패킷을 처리하는 함수
+    public static void SC_PlayerAttack(PacketSession session, IMessage packet)
+    {
+        SC_PLAYER_ATTACK playerAttackPacket = packet as SC_PLAYER_ATTACK;
+
+        // TODO: SC_PlayerAttack 패킷 처리 로직을 여기에 구현
+    }
+
+    // SC_PLAYER_DAMAGED 패킷을 처리하는 함수
+    public static void SC_PlayerDamaged(PacketSession session, IMessage packet)
+    {
+        SC_PLAYER_DAMAGED playerDamagedPacket = packet as SC_PLAYER_DAMAGED;
+
+        // TODO: SC_PlayerDamaged 패킷 처리 로직을 여기에 구현
+    }
+
+    // SC_PLAYER_DIE 패킷을 처리하는 함수
+    public static void SC_PlayerDie(PacketSession session, IMessage packet)
+    {
+        SC_PLAYER_DIE playerDiePacket = packet as SC_PLAYER_DIE;
+
+        // TODO: SC_PlayerDie 패킷 처리 로직을 여기에 구현
+    }
+
     // SC_POSITION_SYNC 패킷을 처리하는 함수
     public static void SC_PositionSync(PacketSession session, IMessage packet)
     {
         SC_POSITION_SYNC positionSyncPacket = packet as SC_POSITION_SYNC;
 
         // TODO: SC_PositionSync 패킷 처리 로직을 여기에 구현
-    }
-
-    // SC_REMOVE_CHARACTER 패킷을 처리하는 함수
-    public static void SC_RemoveCharacter(PacketSession session, IMessage packet)
-    {
-        SC_REMOVE_CHARACTER removeCharacterPacket = packet as SC_REMOVE_CHARACTER;
-
-        // TODO: SC_RemoveCharacter 패킷 처리 로직을 여기에 구현
-    }
-
-    // SC_SPAWN_CHARACTER 패킷을 처리하는 함수
-    public static void SC_SpawnCharacter(PacketSession session, IMessage packet)
-    {
-        SC_SPAWN_CHARACTER spawnCharacterPacket = packet as SC_SPAWN_CHARACTER;
-
-        // TODO: SC_SpawnCharacter 패킷 처리 로직을 여기에 구현
     }
 
     // SC_BOSS_PHASE 패킷을 처리하는 함수

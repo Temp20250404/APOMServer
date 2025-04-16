@@ -179,9 +179,8 @@ int main()
 
     BTBuilder builder = CreateBossBT;
 
-    // AIContext 초기화 (보스 상태)
+    // AIContext (보스)
     AIContext boss;
-    boss.ID = 1;  // 고유 ID 설정
 
     boss.currentHP = 100.0f;
     boss.maxHP = 100.0f;
@@ -191,11 +190,11 @@ int main()
     boss.usedSkill2 = false;
     boss.usedSkill3 = false;
 
-    boss.attackAnimTime = 1.2f;  // 공격 애니메이션 1.2초
-    boss.dieAnimTime = 2.5f;     // 사망 애니메이션 2.5초
-    boss.skill1AnimTime = 1.0f;  // 스킬1 애니메이션 1.0초
-    boss.skill2AnimTime = 1.5f;  // 스킬2 애니메이션 1.5초
-    boss.skill3AnimTime = 2.0f;  // 스킬3 애니메이션 2.0초
+    boss.attackAnimTime = 1.f;  // 공격 애니메이션
+    boss.dieAnimTime = 2.f;     // 사망 애니메이션
+    boss.skill1AnimTime = 1.0f;  // 스킬1 애니메이션
+    boss.skill2AnimTime = 1.5f;  // 스킬2 애니메이션
+    boss.skill3AnimTime = 2.0f;  // 스킬3 애니메이션
     boss.phaseTimer = 0;
 
     boss.hasTargetPlayer = false;
@@ -209,7 +208,7 @@ int main()
     boss.idleResetTime = 3.0f;
     boss.deltaTime = 0.3f;
 
-    // 보스의 현재 위치 (예시)
+    // 보스의 현재 위치
     boss.posX = 0.f; boss.posY = 0.f; boss.posZ = 0.f;
 
     AIEntity* pAIEntity;
