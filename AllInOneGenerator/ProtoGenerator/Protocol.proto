@@ -6,24 +6,30 @@ enum PacketID {
 // Client → Server
     CS_Chat = 0;
     CS_CheckTimeout = 1;
-    CS_Keyinfo = 2;
-    CS_LoginRequest = 3;
-    CS_PlayerAttack = 4;
-    CS_PositionSync = 5;
-    CS_RegisterRequest = 6;
+    CS_FindIdRequest = 2;
+    CS_FindPwRequest = 3;
+    CS_Keyinfo = 4;
+    CS_LoginRequest = 5;
+    CS_PlayerAttack = 6;
+    CS_PositionSync = 7;
+    CS_SignupRequest = 8;
 
 // Server → Client
-    SC_BossPhase = 7;
-    SC_Chat = 8;
-    SC_Keyinfo = 9;
-    SC_LoginResponse = 10;
-    SC_PlayerAttack = 11;
-    SC_PlayerDamaged = 12;
-    SC_PlayerDie = 13;
-    SC_PositionSync = 14;
-    SC_RegisterResponse = 15;
-    SC_RemoveCharacter = 16;
-    SC_SpawnCharacter = 17;
+    SC_BossPhase = 9;
+    SC_Chat = 10;
+    SC_CreateMonster = 11;
+    SC_FindIdResponse = 12;
+    SC_FindPwResponse = 13;
+    SC_Keyinfo = 14;
+    SC_LoginResponse = 15;
+    SC_PlayerAttack = 16;
+    SC_PlayerDamaged = 17;
+    SC_PlayerDie = 18;
+    SC_PositionSync = 19;
+    SC_RemoveCharacter = 20;
+    SC_SignupResponse = 21;
+    SC_SpawnCharacter = 22;
+    SC_TransferCharacterInfo = 23;
 }
 
 enum BOSS_STATE {
@@ -49,31 +55,54 @@ message Position {
     float posZ = 3;
 }
 
+message CS_FIND_ID_REQUEST {
+    string email = 1;
+}
+message CS_FIND_PW_REQUEST {
+    string id = 1;
+    string email = 2;
+}
 message CS_LOGIN_REQUEST {
-    string userName = 1; // 로그인 시도
+    string id = 1;
     string password = 2;
 }
-message CS_REGISTER_REQUEST {
-    string userName = 1; // 회원가입 시도, 나중에 naver, gmail 등으로 인증용 기능 만들 예정
+message CS_SIGNUP_REQUEST {
+    string id = 1;
+    string email = 2; // 회원가입시 사용하는  이메일. naver, gmail 등으로 인증용 기능 만들 예정
+    string password = 3;
+}
+message SC_FIND_ID_RESPONSE {
+    bool success = 1;
+    string id = 2;
+}
+message SC_FIND_PW_RESPONSE {
+    bool success = 1;
+    string id = 2;
 }
 message SC_LOGIN_RESPONSE {
-    bool success = 1; // 로그인 성공 여부
-    uint32 playerID = 2; // 서버에서 할당한 플레이어 id(세션 id)
-    string characterName = 3; // 미리 설정해뒀던 캐릭터 이름
+    bool success = 1;
+    uint32 errorCode = 2; // 에러코드 1: ID 존재하지 않음, 2: 비밀번호 불일치
 }
-message SC_REGISTER_RESPONSE {
-    bool success = 1; // 회원가입 성공 여부
-    string message = 2; // 이건 특별한 메시지를 보내고 싶을 경우 추가, 지금은 필요 없음
+message SC_SIGNUP_RESPONSE {
+    bool success = 1; // 성공 여부
+    uint32 errorCode = 2; // 에러코드 1: 이미 존재하는 ID or 이메일, 2: 존재하지 않는 ID or 이메일
+}
+message SC_TRANSFER_CHARACTER_INFO {
+    PlayerInfo playerInfo = 1; // 플레이어 정보
+}
+message SC_CREATE_MONSTER {
+    uint32 aiID = 1; // AI 고유 ID
+    uint32 monsterTypeID = 2; // 생성될 몬스터 타입 ID
+    Position monsterPos = 3; // 몬스터의 초기 위치
 }
 message SC_REMOVE_CHARACTER {
     uint32 playerID = 1; // 플레이어의 id
 }
 message SC_SPAWN_CHARACTER {
     uint32 playerID = 1; // 플레이어의 id
-    float posX = 2; // 플레이어의 초기 위치. 나중에 가면 마지막에 로그아웃했던 위치로 변경 예정
-    float posY = 3;
-    float cameraYaw = 4; // 초기 카메라 y축 회전값. 이건 사용하지 않을 수 있으니 놔두기만 함
-    PlayerInfo playerInfo = 5; // 플레이어 정보
+    Position playerPos = 2; // 플레이어의 초기 위치. 나중에 가면 마지막에 로그아웃했던 위치로 변경 예정
+    float cameraYaw = 3; // 초기 카메라 y축 회전값. 이건 사용하지 않을 수 있으니 놔두기만 함
+    PlayerInfo playerInfo = 4; // 플레이어 정보
 }
 message CS_CHAT {
     uint32 targetID = 1; // 타겟이 되는 플레이어의 id

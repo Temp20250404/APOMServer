@@ -14,6 +14,7 @@
 #include "NetIOManager.h"
 #include "ObjectManager.h"
 #include "RoomManager.h"
+#include "LoginManager.h"
 
 //===================================================
 // 오브젝트 관련
@@ -119,7 +120,7 @@ ULONGLONG g_fpsCheck;
 CObjectManager& objectManager = CObjectManager::GetInstance();
 CSessionManager& sessionManager = CSessionManager::GetInstance();
 LogManager& logManager = LogManager::GetInstance();
-AIManager& aiManager = AIManager::GetInstance();
+CAIManager& aiManager = CAIManager::GetInstance();
 
 
 unsigned int WINAPI MonitorThread(void* pArg);
@@ -172,6 +173,15 @@ int main()
     roomManager.InitRooms();
 
 
+    //=====================================================================================================================================
+    // 로그인 정보 불러오기
+    //=====================================================================================================================================
+    CLoginManager& loginManager = CLoginManager::GetInstance();
+    if(!loginManager.LoadFromFile("logins.json"))
+    {
+        std::cout << "파일을 불러오지 못했습니다.\n";
+        std::system("pause");
+    }
 
     //=====================================================================================================================================
     // AI 정보 추가, 내용이 많아질 예정이니 나중에 다른곳에서 하도록 수정 예정
@@ -278,6 +288,9 @@ int main()
     }
 
     // 종료시 현재 서버에 있는 정보 안전하게 DB등에 저장
+
+    // 로그인 데이터 저장
+    loginManager.SaveToFile("logins.json");
 
     // 윈도우 소켓 매니저 정리
     winSockManager.Cleanup();

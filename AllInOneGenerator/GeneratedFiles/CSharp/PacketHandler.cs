@@ -7,6 +7,22 @@ using UnityEngine;
 
 class PacketHandler
 {
+    // SC_FIND_ID_RESPONSE 패킷을 처리하는 함수
+    public static void SC_FindIdResponse(PacketSession session, IMessage packet)
+    {
+        SC_FIND_ID_RESPONSE findIdResponsePacket = packet as SC_FIND_ID_RESPONSE;
+
+        // TODO: SC_FindIdResponse 패킷 처리 로직을 여기에 구현
+    }
+
+    // SC_FIND_PW_RESPONSE 패킷을 처리하는 함수
+    public static void SC_FindPwResponse(PacketSession session, IMessage packet)
+    {
+        SC_FIND_PW_RESPONSE findPwResponsePacket = packet as SC_FIND_PW_RESPONSE;
+
+        // TODO: SC_FindPwResponse 패킷 처리 로직을 여기에 구현
+    }
+
     // SC_LOGIN_RESPONSE 패킷을 처리하는 함수
     public static void SC_LoginResponse(PacketSession session, IMessage packet)
     {
@@ -15,12 +31,28 @@ class PacketHandler
         // TODO: SC_LoginResponse 패킷 처리 로직을 여기에 구현
     }
 
-    // SC_REGISTER_RESPONSE 패킷을 처리하는 함수
-    public static void SC_RegisterResponse(PacketSession session, IMessage packet)
+    // SC_SIGNUP_RESPONSE 패킷을 처리하는 함수
+    public static void SC_SignupResponse(PacketSession session, IMessage packet)
     {
-        SC_REGISTER_RESPONSE registerResponsePacket = packet as SC_REGISTER_RESPONSE;
+        SC_SIGNUP_RESPONSE signupResponsePacket = packet as SC_SIGNUP_RESPONSE;
 
-        // TODO: SC_RegisterResponse 패킷 처리 로직을 여기에 구현
+        // TODO: SC_SignupResponse 패킷 처리 로직을 여기에 구현
+    }
+
+    // SC_TRANSFER_CHARACTER_INFO 패킷을 처리하는 함수
+    public static void SC_TransferCharacterInfo(PacketSession session, IMessage packet)
+    {
+        SC_TRANSFER_CHARACTER_INFO transferCharacterInfoPacket = packet as SC_TRANSFER_CHARACTER_INFO;
+
+        // TODO: SC_TransferCharacterInfo 패킷 처리 로직을 여기에 구현
+    }
+
+    // SC_CREATE_MONSTER 패킷을 처리하는 함수
+    public static void SC_CreateMonster(PacketSession session, IMessage packet)
+    {
+        SC_CREATE_MONSTER createMonsterPacket = packet as SC_CREATE_MONSTER;
+
+        // TODO: SC_CreateMonster 패킷 처리 로직을 여기에 구현
     }
 
     // SC_REMOVE_CHARACTER 패킷을 처리하는 함수

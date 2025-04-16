@@ -86,4 +86,6 @@ private:
     PLAYER_GAME_STATE m_eCurPlayerGameState;  // 시작 관련 정보, 처음이나 죽었을 때 WAITING 상태, 게임 플레이 중이면 ACTIVE로 변경됨
 
     std::string m_playerName;
+
+    UINT32 playerJobID;     // 임시로 정의한 플레이어 직업 정보
 };

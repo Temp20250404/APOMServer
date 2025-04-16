@@ -24,6 +24,13 @@ public:
 
     void UpdateTarget();
 
+    const AIContext& GetContext(void) const {
+        return m_context;
+    }
+
+public:
+    void GetDamaged(UINT damage);
+
 private:
     int m_id;
     AIContext m_context;

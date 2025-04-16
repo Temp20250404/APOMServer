@@ -6,21 +6,37 @@
 class CSession;
 class CRoom;
 
-void SC_LOGIN_RESPONSE_FOR_All(CSession* pSession, bool success, UINT32 playerID, std::string characterName);
-void SC_LOGIN_RESPONSE_FOR_SINGLE(CSession* pSession, bool success, UINT32 playerID, std::string characterName);
-void SC_LOGIN_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool success, UINT32 playerID, std::string characterName);
+void SC_FIND_ID_RESPONSE_FOR_All(CSession* pSession, bool success, std::string id);
+void SC_FIND_ID_RESPONSE_FOR_SINGLE(CSession* pSession, bool success, std::string id);
+void SC_FIND_ID_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool success, std::string id);
 
-void SC_REGISTER_RESPONSE_FOR_All(CSession* pSession, bool success, std::string message);
-void SC_REGISTER_RESPONSE_FOR_SINGLE(CSession* pSession, bool success, std::string message);
-void SC_REGISTER_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool success, std::string message);
+void SC_FIND_PW_RESPONSE_FOR_All(CSession* pSession, bool success, std::string id);
+void SC_FIND_PW_RESPONSE_FOR_SINGLE(CSession* pSession, bool success, std::string id);
+void SC_FIND_PW_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool success, std::string id);
+
+void SC_LOGIN_RESPONSE_FOR_All(CSession* pSession, bool success, UINT32 errorCode);
+void SC_LOGIN_RESPONSE_FOR_SINGLE(CSession* pSession, bool success, UINT32 errorCode);
+void SC_LOGIN_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool success, UINT32 errorCode);
+
+void SC_SIGNUP_RESPONSE_FOR_All(CSession* pSession, bool success, UINT32 errorCode);
+void SC_SIGNUP_RESPONSE_FOR_SINGLE(CSession* pSession, bool success, UINT32 errorCode);
+void SC_SIGNUP_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool success, UINT32 errorCode);
+
+void SC_TRANSFER_CHARACTER_INFO_FOR_All(CSession* pSession, PlayerInfo playerInfo);
+void SC_TRANSFER_CHARACTER_INFO_FOR_SINGLE(CSession* pSession, PlayerInfo playerInfo);
+void SC_TRANSFER_CHARACTER_INFO_FOR_AROUND(CSession* pSession, CRoom* pRoom, PlayerInfo playerInfo);
+
+void SC_CREATE_MONSTER_FOR_All(CSession* pSession, UINT32 aiID, UINT32 monsterTypeID, Position monsterPos);
+void SC_CREATE_MONSTER_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 monsterTypeID, Position monsterPos);
+void SC_CREATE_MONSTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, UINT32 monsterTypeID, Position monsterPos);
 
 void SC_REMOVE_CHARACTER_FOR_All(CSession* pSession, UINT32 playerID);
 void SC_REMOVE_CHARACTER_FOR_SINGLE(CSession* pSession, UINT32 playerID);
 void SC_REMOVE_CHARACTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID);
 
-void SC_SPAWN_CHARACTER_FOR_All(CSession* pSession, UINT32 playerID, float posX, float posY, float cameraYaw, PlayerInfo playerInfo);
-void SC_SPAWN_CHARACTER_FOR_SINGLE(CSession* pSession, UINT32 playerID, float posX, float posY, float cameraYaw, PlayerInfo playerInfo);
-void SC_SPAWN_CHARACTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, float posX, float posY, float cameraYaw, PlayerInfo playerInfo);
+void SC_SPAWN_CHARACTER_FOR_All(CSession* pSession, UINT32 playerID, Position playerPos, float cameraYaw, PlayerInfo playerInfo);
+void SC_SPAWN_CHARACTER_FOR_SINGLE(CSession* pSession, UINT32 playerID, Position playerPos, float cameraYaw, PlayerInfo playerInfo);
+void SC_SPAWN_CHARACTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, Position playerPos, float cameraYaw, PlayerInfo playerInfo);
 
 void SC_CHAT_FOR_All(CSession* pSession, UINT32 playerID, std::string message, UINT32 channel);
 void SC_CHAT_FOR_SINGLE(CSession* pSession, UINT32 playerID, std::string message, UINT32 channel);

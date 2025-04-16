@@ -5,63 +5,28 @@
 #include "AIEntity.h"
 
 // 나중에 UpdateAll을 멀티스레드로 뺄 예정. 이건 테스트하면서 [ 스레드 갯수, AI 갯수 ]를 조건으로 가장 성능이 좋은 값을 찾아야함.
-class AIManager : public SingletonBase<AIManager> {
-public:
-    ~AIManager() {
-        for (AIEntity* entity : m_entities) {
-            delete entity;
-        }
-        m_entities.clear();
-        m_idToIndex.clear();
-    }
+class CAIManager : public SingletonBase<CAIManager> {
+    friend class SingletonBase<CAIManager>;
 
+public:
+    explicit CAIManager() noexcept;
+    ~CAIManager() noexcept;
+
+    // 복사 생성자와 대입 연산자를 삭제하여 복사 방지
+    CAIManager(const CAIManager&) = delete;
+    CAIManager& operator=(const CAIManager&) = delete;
+
+public:
     // 새로운 AI를 추가하고, id와 인덱스를 보조 인덱스에 등록
-    void AddEntity(AIEntity* entity) {
-        int id = entity->GetID();
-        m_entities.push_back(entity);
-        m_idToIndex[id] = m_entities.size() - 1;
-    }
+    void AddEntity(AIEntity* entity);
 
     // id를 통해 AIEntity를 빠르게 찾는 함수
-    AIEntity* FindEntityByID(int id) {
-        auto it = m_idToIndex.find(id);
-        if (it != m_idToIndex.end()) {
-            size_t index = it->second;
-            return m_entities[index];
-        }
-        return nullptr;
-    }
+    AIEntity* FindEntityByID(UINT32 id);
 
     // 모든 AI를 업데이트하고, 죽은 AI는 swap-and-pop 기법으로 리스트에서 제거
-    void UpdateAll() {
-        for (size_t i = 0; i < m_entities.size(); ) {
-            AIEntity* ai = m_entities[i];
-            ai->Update();
-            if (!ai->IsAlive()) {
-                std::cout << "[AIManager] Removing dead AI (ID: " << ai->GetID() << ")\n";
-                int deadId = ai->GetID();
-                delete ai;
-
-                size_t lastIndex = m_entities.size() - 1;
-                if (i != lastIndex) {
-                    // 마지막 요소를 현재 요소와 교환
-                    AIEntity* swappedEntity = m_entities.back();
-                    m_entities[i] = swappedEntity;
-                    // 교환된 요소의 index를 업데이트
-                    m_idToIndex[swappedEntity->GetID()] = i;
-                }
-                // 마지막 요소를 제거하고, 보조 인덱스에서도 제거
-                m_entities.pop_back();
-                m_idToIndex.erase(deadId);
-                // 교환된 요소가 i번째에 들어왔으므로, i는 증가시키지 않음
-            }
-            else {
-                ++i;
-            }
-        }
-    }
+    void UpdateAll();
 
 private:
     std::vector<AIEntity*> m_entities;
-    std::unordered_map<int, size_t> m_idToIndex;
+    std::unordered_map<UINT32, size_t> m_idToIndex;
 };

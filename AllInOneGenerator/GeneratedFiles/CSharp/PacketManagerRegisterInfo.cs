@@ -3,11 +3,23 @@ public class PacketManagerRegisterInfo
     // 패킷 수신 및 핸들러를 등록하는 메서드입니다.
     public void Register()
     {
+        _onRecv.Add((ushort)Game.PacketID.ScFindIdResponse, MakePacket<SC_FIND_ID_RESPONSE>);
+        _handler.Add((ushort)Game.PacketID.ScFindIdResponse, PacketHandler.SC_FindIdResponse);
+
+        _onRecv.Add((ushort)Game.PacketID.ScFindPwResponse, MakePacket<SC_FIND_PW_RESPONSE>);
+        _handler.Add((ushort)Game.PacketID.ScFindPwResponse, PacketHandler.SC_FindPwResponse);
+
         _onRecv.Add((ushort)Game.PacketID.ScLoginResponse, MakePacket<SC_LOGIN_RESPONSE>);
         _handler.Add((ushort)Game.PacketID.ScLoginResponse, PacketHandler.SC_LoginResponse);
 
-        _onRecv.Add((ushort)Game.PacketID.ScRegisterResponse, MakePacket<SC_REGISTER_RESPONSE>);
-        _handler.Add((ushort)Game.PacketID.ScRegisterResponse, PacketHandler.SC_RegisterResponse);
+        _onRecv.Add((ushort)Game.PacketID.ScSignupResponse, MakePacket<SC_SIGNUP_RESPONSE>);
+        _handler.Add((ushort)Game.PacketID.ScSignupResponse, PacketHandler.SC_SignupResponse);
+
+        _onRecv.Add((ushort)Game.PacketID.ScTransferCharacterInfo, MakePacket<SC_TRANSFER_CHARACTER_INFO>);
+        _handler.Add((ushort)Game.PacketID.ScTransferCharacterInfo, PacketHandler.SC_TransferCharacterInfo);
+
+        _onRecv.Add((ushort)Game.PacketID.ScCreateMonster, MakePacket<SC_CREATE_MONSTER>);
+        _handler.Add((ushort)Game.PacketID.ScCreateMonster, PacketHandler.SC_CreateMonster);
 
         _onRecv.Add((ushort)Game.PacketID.ScRemoveCharacter, MakePacket<SC_REMOVE_CHARACTER>);
         _handler.Add((ushort)Game.PacketID.ScRemoveCharacter, PacketHandler.SC_RemoveCharacter);

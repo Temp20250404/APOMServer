@@ -173,6 +173,7 @@
   <ItemGroup>
     <ClCompile Include="AIContext.cpp" />
     <ClCompile Include="AIEntity.cpp" />
+    <ClCompile Include="AIManager.cpp" />
     <ClCompile Include="BehaviourTree.cpp" />
     <ClCompile Include="CircularQueue.cpp" />
     <ClCompile Include="Content.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="EncodingUtils.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemSpawner.cpp" />
+    <ClCompile Include="LoginManager.cpp" />
     <ClCompile Include="MatchSystem.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Room.cpp" />
@@ -223,6 +225,9 @@
     <ClInclude Include="EncodingUtils.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemSpawner.h" />
+    <ClInclude Include="json.hpp" />
+    <ClInclude Include="LoginInfo.h" />
+    <ClInclude Include="LoginManager.h" />
     <ClInclude Include="MatchSystem.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Room.h" />

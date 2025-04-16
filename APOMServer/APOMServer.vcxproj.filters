@@ -162,6 +162,12 @@
     <Filter Include="소스 파일\99. Etc\08. Utils\Math">
       <UniqueIdentifier>{1aa65239-c24d-45be-b83d-a889abef9c5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\06. Content\01. Managers\01. LoginMgr">
+      <UniqueIdentifier>{4ac57eb1-904c-4bfd-a429-43f32861093d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99. Etc\09. Json">
+      <UniqueIdentifier>{cc9343be-221d-44a5-8db2-f868bcf59649}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CustomException.cpp">
@@ -277,6 +283,12 @@
     </ClCompile>
     <ClCompile Include="MathUtils.cpp">
       <Filter>소스 파일\99. Etc\08. Utils\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginManager.cpp">
+      <Filter>소스 파일\06. Content\01. Managers\01. LoginMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="AIManager.cpp">
+      <Filter>소스 파일\07. AI\AIMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -414,6 +426,15 @@
     </ClInclude>
     <ClInclude Include="MathUtils.h">
       <Filter>소스 파일\99. Etc\08. Utils\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginManager.h">
+      <Filter>소스 파일\06. Content\01. Managers\01. LoginMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>소스 파일\99. Etc\09. Json</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginInfo.h">
+      <Filter>소스 파일\06. Content\01. Managers\01. LoginMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

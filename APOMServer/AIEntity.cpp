@@ -62,3 +62,11 @@ void AIEntity::UpdateTarget()
     // 가장 가까운 플레이어를 타겟으로 설정
     m_context.pTargetPlayer = closestPlayer;
 }
+
+void AIEntity::GetDamaged(UINT damage)
+{
+    m_context.currentHP -= damage;
+
+    if (m_context.currentHP <= 0)
+        m_context.currentHP = 0;
+}

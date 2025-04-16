@@ -25,30 +25,60 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
 {
     switch (packetType)
     {
+    case game::PacketID::CS_FindIdRequest:
+    {
+        std::string email;
+
+        game::CS_FIND_ID_REQUEST pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        email = pkt.email();
+
+        return CS_FIND_ID_REQUEST(pSession, email);
+    }
+    break;
+    case game::PacketID::CS_FindPwRequest:
+    {
+        std::string id;
+        std::string email;
+
+        game::CS_FIND_PW_REQUEST pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        id = pkt.id();
+        email = pkt.email();
+
+        return CS_FIND_PW_REQUEST(pSession, id, email);
+    }
+    break;
     case game::PacketID::CS_LoginRequest:
     {
-        std::string userName;
+        std::string id;
         std::string password;
 
         game::CS_LOGIN_REQUEST pkt;
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
-        userName = pkt.username();
+        id = pkt.id();
         password = pkt.password();
 
-        return CS_LOGIN_REQUEST(pSession, userName, password);
+        return CS_LOGIN_REQUEST(pSession, id, password);
     }
     break;
-    case game::PacketID::CS_RegisterRequest:
+    case game::PacketID::CS_SignupRequest:
     {
-        std::string userName;
+        std::string id;
+        std::string email;
+        std::string password;
 
-        game::CS_REGISTER_REQUEST pkt;
+        game::CS_SIGNUP_REQUEST pkt;
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
-        userName = pkt.username();
+        id = pkt.id();
+        email = pkt.email();
+        password = pkt.password();
 
-        return CS_REGISTER_REQUEST(pSession, userName);
+        return CS_SIGNUP_REQUEST(pSession, id, email, password);
     }
     break;
     case game::PacketID::CS_Chat:
@@ -133,12 +163,22 @@ void DisconnectSessionProc(CSession* pSession)
 {
     return;
 }
-bool CS_LOGIN_REQUEST(CSession* pSession, std::string userName, std::string password)
+bool CS_FIND_ID_REQUEST(CSession* pSession, std::string email)
 {
     return false;
 }
 
-bool CS_REGISTER_REQUEST(CSession* pSession, std::string userName)
+bool CS_FIND_PW_REQUEST(CSession* pSession, std::string id, std::string email)
+{
+    return false;
+}
+
+bool CS_LOGIN_REQUEST(CSession* pSession, std::string id, std::string password)
+{
+    return false;
+}
+
+bool CS_SIGNUP_REQUEST(CSession* pSession, std::string id, std::string email, std::string password)
 {
     return false;
 }
