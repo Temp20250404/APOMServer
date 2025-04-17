@@ -275,6 +275,13 @@ BTNode* CreateBossBT(AIContext& context)
     attackBranch.push_back(
         new ActionNode([&context, bossPos]() -> NodeStatus {
 
+            if (context.phaseTimer > 0)
+            {
+                context.phaseTimer -= context.deltaTime;
+                std::cout << "공격 애니메이션 실행중. 남은 지속 시간 : " << context.phaseTimer << "\n";
+                return NodeStatus::RUNNING;
+            }
+
             if (context.eCurState != game::BOSS_STATE_ATTACK)
             {
                 SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
@@ -286,13 +293,12 @@ BTNode* CreateBossBT(AIContext& context)
                 context.phaseTimer = context.attackAnimTime;
                 std::cout << "공격 실행 " << context.phaseTimer << "초 만큼 공격 애니메이션 실행 진행\n";
             }
-
-            if (context.phaseTimer > 0)
+            else
             {
-                context.phaseTimer -= context.deltaTime;
-                std::cout << "공격 애니메이션 실행중. 남은 지속 시간 : " << context.phaseTimer << "\n";
-                return NodeStatus::RUNNING;
+                context.phaseTimer = context.attackAnimTime;
+                std::cout << "재공격 " << context.phaseTimer << "초 만큼 공격 애니메이션 실행 진행\n";
             }
+
 
             return NodeStatus::SUCCESS;
             })
