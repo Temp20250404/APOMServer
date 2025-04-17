@@ -1,0 +1,15 @@
+[
+    {
+        "login": {
+            "email": "",
+            "id": "default",
+            "pw": ""
+        },
+        "player": {
+            "playerJobIcon": 0,
+            "playerMaxHp": 100,
+            "playerMaxMp": 100,
+            "playerNickname": "default"
+        }
+    }
+]

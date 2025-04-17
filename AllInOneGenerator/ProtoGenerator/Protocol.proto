@@ -12,24 +12,25 @@ enum PacketID {
     CS_LoginRequest = 5;
     CS_PlayerAttack = 6;
     CS_PositionSync = 7;
-    CS_SignupRequest = 8;
+    CS_RegisterRequest = 8;
+    CS_SignupRequest = 9;
 
 // Server → Client
-    SC_BossPhase = 9;
-    SC_Chat = 10;
-    SC_CreateMonster = 11;
-    SC_FindIdResponse = 12;
-    SC_FindPwResponse = 13;
-    SC_Keyinfo = 14;
-    SC_LoginResponse = 15;
-    SC_PlayerAttack = 16;
-    SC_PlayerDamaged = 17;
-    SC_PlayerDie = 18;
-    SC_PositionSync = 19;
-    SC_RemoveCharacter = 20;
-    SC_SignupResponse = 21;
-    SC_SpawnCharacter = 22;
-    SC_TransferCharacterInfo = 23;
+    SC_BossPhase = 10;
+    SC_Chat = 11;
+    SC_CreateMonster = 12;
+    SC_FindIdResponse = 13;
+    SC_FindPwResponse = 14;
+    SC_Keyinfo = 15;
+    SC_LoginResponse = 16;
+    SC_PlayerAttack = 17;
+    SC_PlayerDamaged = 18;
+    SC_PlayerDie = 19;
+    SC_PositionSync = 20;
+    SC_RemoveCharacter = 21;
+    SC_SignupResponse = 22;
+    SC_SpawnCharacter = 23;
+    SC_TransferCharacterInfo = 24;
 }
 
 enum BOSS_STATE {
@@ -59,7 +60,7 @@ message CS_FIND_ID_REQUEST {
     string email = 1;
 }
 message CS_FIND_PW_REQUEST {
-    string id = 1;
+    string pw = 1;
     string email = 2;
 }
 message CS_LOGIN_REQUEST {
@@ -85,10 +86,13 @@ message SC_LOGIN_RESPONSE {
 }
 message SC_SIGNUP_RESPONSE {
     bool success = 1; // 성공 여부
-    uint32 errorCode = 2; // 에러코드 1: 이미 존재하는 ID or 이메일, 2: 존재하지 않는 ID or 이메일
+    uint32 errorCode = 2; // 에러코드 1: 이미 존재하는 ID, 2: 이미 존재하는 이메일
 }
 message SC_TRANSFER_CHARACTER_INFO {
     PlayerInfo playerInfo = 1; // 플레이어 정보
+}
+message CS_REGISTER_REQUEST {
+    string userName = 1;
 }
 message SC_CREATE_MONSTER {
     uint32 aiID = 1; // AI 고유 ID

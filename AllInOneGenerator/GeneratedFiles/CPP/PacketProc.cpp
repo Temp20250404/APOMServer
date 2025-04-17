@@ -39,16 +39,16 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     break;
     case game::PacketID::CS_FindPwRequest:
     {
-        std::string id;
+        std::string pw;
         std::string email;
 
         game::CS_FIND_PW_REQUEST pkt;
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
-        id = pkt.id();
+        pw = pkt.pw();
         email = pkt.email();
 
-        return CS_FIND_PW_REQUEST(pSession, id, email);
+        return CS_FIND_PW_REQUEST(pSession, pw, email);
     }
     break;
     case game::PacketID::CS_LoginRequest:
@@ -79,6 +79,18 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         password = pkt.password();
 
         return CS_SIGNUP_REQUEST(pSession, id, email, password);
+    }
+    break;
+    case game::PacketID::CS_RegisterRequest:
+    {
+        std::string userName;
+
+        game::CS_REGISTER_REQUEST pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        userName = pkt.username();
+
+        return CS_REGISTER_REQUEST(pSession, userName);
     }
     break;
     case game::PacketID::CS_Chat:
@@ -168,7 +180,7 @@ bool CS_FIND_ID_REQUEST(CSession* pSession, std::string email)
     return false;
 }
 
-bool CS_FIND_PW_REQUEST(CSession* pSession, std::string id, std::string email)
+bool CS_FIND_PW_REQUEST(CSession* pSession, std::string pw, std::string email)
 {
     return false;
 }
@@ -179,6 +191,11 @@ bool CS_LOGIN_REQUEST(CSession* pSession, std::string id, std::string password)
 }
 
 bool CS_SIGNUP_REQUEST(CSession* pSession, std::string id, std::string email, std::string password)
+{
+    return false;
+}
+
+bool CS_REGISTER_REQUEST(CSession* pSession, std::string userName)
 {
     return false;
 }
