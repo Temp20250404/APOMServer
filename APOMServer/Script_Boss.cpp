@@ -91,7 +91,7 @@ BTNode* CreateBossBT(AIContext& context)
             {
                 SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
                     context.currentHP, context.maxHP,
-                    context.targetPos, context.currentPos, game::BOSS_STATE_DIE, 0);
+                    context.targetPos, context.currentPos, game::BOSS_STATE_DIE, context.moveSpeed);
 
                 context.eCurState = game::BOSS_STATE_DIE;
             }
@@ -142,7 +142,7 @@ BTNode* CreateBossBT(AIContext& context)
             {
                 SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
                     context.currentHP, context.maxHP,
-                    context.targetPos, context.currentPos, game::BOSS_STATE_SKILL3, 0);
+                    context.targetPos, context.currentPos, game::BOSS_STATE_SKILL3, context.moveSpeed);
 
                 context.eCurState = game::BOSS_STATE_SKILL3;
             }
@@ -188,7 +188,7 @@ BTNode* CreateBossBT(AIContext& context)
             {
                 SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
                     context.currentHP, context.maxHP,
-                    context.targetPos, context.currentPos, game::BOSS_STATE_SKILL2, 0);
+                    context.targetPos, context.currentPos, game::BOSS_STATE_SKILL2, context.moveSpeed);
 
                 context.eCurState = game::BOSS_STATE_SKILL2;
             }
@@ -234,7 +234,7 @@ BTNode* CreateBossBT(AIContext& context)
             {
                 SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
                     context.currentHP, context.maxHP,
-                    context.targetPos, context.currentPos, game::BOSS_STATE_SKILL1, 0);
+                    context.targetPos, context.currentPos, game::BOSS_STATE_SKILL1, context.moveSpeed);
 
                 context.eCurState = game::BOSS_STATE_SKILL1;
             }
@@ -325,7 +325,7 @@ BTNode* CreateBossBT(AIContext& context)
 
                 SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
                     context.currentHP, context.maxHP,
-                    context.targetPos, context.currentPos, game::BOSS_STATE_CHASE, 0);
+                    context.targetPos, context.currentPos, game::BOSS_STATE_CHASE, context.moveSpeed);
 
                 context.eCurState = game::BOSS_STATE_CHASE;
             }
@@ -335,7 +335,7 @@ BTNode* CreateBossBT(AIContext& context)
 
                 SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
                     context.currentHP, context.maxHP,
-                    context.targetPos, context.currentPos, game::BOSS_STATE_CHASE, 0);
+                    context.targetPos, context.currentPos, game::BOSS_STATE_CHASE, context.moveSpeed);
             }
 
             // --- 이동 로직 추가 부분 ---
@@ -406,7 +406,7 @@ BTNode* CreateBossBT(AIContext& context)
             {
                 SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
                     context.currentHP, context.maxHP,
-                    context.targetPos, context.currentPos, game::BOSS_STATE_WALK, 0);
+                    context.targetPos, context.currentPos, game::BOSS_STATE_WALK, context.moveSpeed);
 
                 context.eCurState = game::BOSS_STATE_WALK;
             }
@@ -473,7 +473,7 @@ BTNode* CreateBossBT(AIContext& context)
             {
                 SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
                     context.currentHP, context.maxHP,
-                    context.targetPos, context.currentPos, game::BOSS_STATE_IDLE, 0);
+                    context.targetPos, context.currentPos, game::BOSS_STATE_IDLE, context.moveSpeed);
 
                 context.eCurState = game::BOSS_STATE_IDLE;
             }
@@ -485,8 +485,8 @@ BTNode* CreateBossBT(AIContext& context)
         // 시간이 다 지났으므로 랜덤한 새로운 위치를 목표로 움직이도록 한다.
         else
         {
-            float randomMoveX = RandomRange(3.f, 4.f);
-            float randomMoveZ = RandomRange(3.f, 4.f);
+            float randomMoveX = RandomRange(-1.f, 1.f) * 4;
+            float randomMoveZ = RandomRange(-1.f, 1.f) * 4;
 
             context.targetPos.posX += randomMoveX;
             context.targetPos.posZ += randomMoveZ;
