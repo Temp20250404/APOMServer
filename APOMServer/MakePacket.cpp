@@ -1343,6 +1343,47 @@ void SC_BOSS_PHASE_FOR_SINGLE(CSession* pSession, UINT32 bossID, UINT32 currentH
 
 void SC_BOSS_PHASE_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 bossID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, game::BOSS_STATE bossState, float curSpeed)
 {
+    std::cout << "=== SC_BOSS_PHASE_FOR_AROUND ===" << std::endl;
+    std::cout << "Boss ID: " << bossID << std::endl;
+    std::cout << "Current HP: " << currentHp << std::endl;
+    std::cout << "Max HP: " << maxHp << std::endl;
+    std::cout << "Target Movement Pos: (" << targetMovementPos.posX << ", " << targetMovementPos.posY << ", " << targetMovementPos.posZ << ")" << std::endl;
+    std::cout << "Boss Position: (" << bossPos.posX << ", " << bossPos.posY<< ", " << bossPos.posZ << ")" << std::endl;
+    std::cout << "Boss State: ";
+    
+    switch (bossState)
+    {
+    case game::BOSS_STATE_ATTACK:
+        std::cout << "ATTACK";
+        break;
+    case game::BOSS_STATE_CHASE:
+        std::cout << "CHASE";
+        break;
+    case game::BOSS_STATE_DIE:
+        std::cout << "DIE";
+        break;
+    case game::BOSS_STATE_IDLE:
+        std::cout << "IDLE";
+        break;
+    case game::BOSS_STATE_SKILL1:
+        std::cout << "SKILL1";
+        break;
+    case game::BOSS_STATE_SKILL2:
+        std::cout << "SKILL2";
+        break;
+    case game::BOSS_STATE_SKILL3:
+        std::cout << "SKILL3";
+        break;
+    case game::BOSS_STATE_WALK:
+        std::cout << "WALK";
+        break;
+    default:
+        break;
+    }
+    std::cout << "\n";
+
+    std::cout << "Current Speed: " << curSpeed << std::endl;
+
     game::SC_BOSS_PHASE pkt;
 
     pkt.set_bossid(bossID);

@@ -36,9 +36,9 @@ void AIEntity::UpdateTarget()
         return;
 
     // 보스의 현재 위치
-    float bossX = m_context.posX;
-    float bossY = m_context.posY;
-    float bossZ = m_context.posZ;
+    float bossX = m_context.currentPos.posX;
+    float bossY = m_context.currentPos.posY;
+    float bossZ = m_context.currentPos.posZ;
 
     float closestDistance = FLT_MAX;
     CPlayer* closestPlayer = nullptr;
@@ -49,19 +49,46 @@ void AIEntity::UpdateTarget()
     {
         float px, py, pz;
         player->getPosition(px, py, pz);
+
         // 유클리드 거리를 계산
         float distance = std::sqrt((bossX - px) * (bossX - px) +
             (bossY - py) * (bossY - py) +
             (bossZ - pz) * (bossZ - pz));
-        if (distance < closestDistance)
+
+        // 인지 범위보다 플레이어와의 거리가 짧다면
+        if (m_context.detectionRange > distance)
         {
-            closestDistance = distance;
-            closestPlayer = player;
+            // 갱신
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestPlayer = player;
+            }
         }
     }
 
     // 가장 가까운 플레이어를 타겟으로 설정
     m_context.pTargetPlayer = closestPlayer;
+
+    if (m_context.pTargetPlayer)
+    {
+        std::cout << "플레이어 감지됨. 거리 : " << closestDistance << "\n";
+
+        m_context.hasTargetPlayer = true;
+        m_context.playerDistance = closestDistance;
+
+        float px, py, pz;
+        m_context.pTargetPlayer->getPosition(px, py, pz);
+        m_context.targetPos = Position{ px, py, pz };
+        std::cout << "타겟 위치 갱신 : " << px << ", " << py << ", " << pz << "\n";
+    }
+    else
+    {
+        std::cout << "플레이어 감지되지 않음\n";
+
+        m_context.hasTargetPlayer = false;
+        m_context.playerDistance = FLT_MAX;
+    }
 }
 
 void AIEntity::GetDamaged(UINT damage)

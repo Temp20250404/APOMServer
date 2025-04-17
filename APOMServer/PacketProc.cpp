@@ -360,6 +360,9 @@ bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float cameraYa
 
     SC_POSITION_SYNC_FOR_AROUND(pSession, pRoom, pPlayer->m_ID, posX, posY, cameraYaw);
 
+    // 위치 세팅
+    pPlayer->SetPosition(posX, 0, posY);
+
     return true;
 }
 
@@ -441,7 +444,7 @@ bool CS_REGISTER_REQUEST(CSession* pSession, std::string userName)
         if (entity)
         {
             const AIContext& context = entity->GetContext();
-            SC_CREATE_MONSTER_FOR_SINGLE(pSession, context.ID, 1, Position{ context.posX, context.posY, context.posZ });
+            SC_CREATE_MONSTER_FOR_SINGLE(pSession, context.ID, 1, context.currentPos);
         }
     }
 
