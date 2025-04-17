@@ -443,8 +443,9 @@ bool CS_REGISTER_REQUEST(CSession* pSession, std::string userName)
     {
         if (entity)
         {
-            const AIContext& context = entity->GetContext();
-            SC_CREATE_MONSTER_FOR_SINGLE(pSession, context.ID, 1, context.currentPos);
+            const AIContext& ctx = entity->GetContext();
+
+            SC_CREATE_MONSTER_FOR_SINGLE(pSession, ctx.ID, 1, ctx.currentPos);
         }
     }
 

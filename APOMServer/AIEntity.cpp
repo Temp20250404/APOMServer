@@ -6,10 +6,14 @@
 UINT32 AIEntity::g_id = 1;
 
 AIEntity::AIEntity(const AIContext& aiContext, BTBuilder builder)
+    : m_id(g_id++)
+    , m_context(aiContext)
+    , m_behaviorTree(nullptr)
 {
-    m_id = g_id++;
-    m_context = aiContext;
     m_context.ID = m_id;
+
+    //m_context.ptargetRoom = aiContext.ptargetRoom;
+
     // 전달받은 builder 함수를 사용하여 행동 트리 생성
     m_behaviorTree = builder(m_context);
 }
@@ -87,7 +91,7 @@ void AIEntity::UpdateTarget()
         std::cout << "플레이어 감지되지 않음\n";
 
         m_context.hasTargetPlayer = false;
-        m_context.playerDistance = FLT_MAX;
+        m_context.playerDistance = 0.f;
     }
 }
 

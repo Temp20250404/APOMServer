@@ -430,7 +430,7 @@ BTNode* CreateBossBT(AIContext& context)
                 // 도착 처리
                 // 목표 위치에 도착했으니 잠시 idle 상태로 전환하기 위해 context.idleTime을 context.idleResetTime로 설정
                 context.idleTime = context.idleResetTime;
-                
+
                 std::cout << "목표 위치 도착\n";
 
                 return NodeStatus::SUCCESS;
@@ -447,17 +447,15 @@ BTNode* CreateBossBT(AIContext& context)
             // 만약 목표까지의 거리가 moveDistance보다 작다면, 목표 지점에 도달
             if (moveDistance >= distance) {
                 context.currentPos = context.targetPos;
-
-                std::cout << "현재 위치 : " << context.currentPos.posX << ", " << context.currentPos.posY << ", " << context.currentPos.posZ << "근처 도달함\n";
             }
             else {
                 // 방향 * 이동 거리 만큼 이동
                 context.currentPos.posX += dirX * moveDistance;
                 context.currentPos.posY += dirY * moveDistance;
                 context.currentPos.posZ += dirZ * moveDistance;
-
-                std::cout << "현재 위치 : " << context.currentPos.posX << ", " << context.currentPos.posY << ", " << context.currentPos.posZ << "\n";
             }
+
+            std::cout << "현재 위치 : " << context.currentPos.posX << ", " << context.currentPos.posY << ", " << context.currentPos.posZ << "\n";
 
             return NodeStatus::RUNNING;
             })

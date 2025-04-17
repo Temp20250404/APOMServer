@@ -190,7 +190,7 @@ int main()
     BTBuilder builder = CreateBossBT;
 
     // AIContext (º¸½º)
-    AIContext boss;
+    AIContext boss{};
 
     boss.currentHP = 100.0f;
     boss.maxHP = 100.0f;

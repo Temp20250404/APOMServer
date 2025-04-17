@@ -33,6 +33,7 @@ struct AIContext {
     bool hasTargetPlayer;   // 타겟 플레이어 존재 여부
     float playerDistance;   // 타겟 플레이어와의 거리
 
+
     // Idle 관련
     float idleTime;         // 대기 상태(Idle) 시간
 
@@ -43,9 +44,11 @@ struct AIContext {
     float deltaTime;        // 각 Tick 간 시간 (초)
     float detectionRange;   // 플레이어 인지 범위. 인지 범위 내에 들어온 플레이어가 있다면 해당 플레이어를 타게팅
 
+
     // 추가 정보: 방 및 타겟 플레이어 정보
     CRoom* ptargetRoom = nullptr;      // 현재 AI가 속한 방 (방 정보를 통해 방 안의 플레이어 목록 등 접근)
     CPlayer* pTargetPlayer = nullptr;    // 현재 AI가 타겟팅한 플레이어의 정보
+
 
     // 위치 정보
     Position currentPos{ 0.f, 0.f, 0.f };   // 현재 AI(보스)의 위치 (월드 좌표)

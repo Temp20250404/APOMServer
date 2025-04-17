@@ -1,5 +1,6 @@
 G:\Sparta\APOMServer\APOMServer\AIContext.cpp;G:\Sparta\APOMServer\APOMServer\Release\AIContext.obj
 G:\Sparta\APOMServer\APOMServer\AIEntity.cpp;G:\Sparta\APOMServer\APOMServer\Release\AIEntity.obj
+G:\Sparta\APOMServer\APOMServer\AIManager.cpp;G:\Sparta\APOMServer\APOMServer\Release\AIManager.obj
 G:\Sparta\APOMServer\APOMServer\BehaviourTree.cpp;G:\Sparta\APOMServer\APOMServer\Release\BehaviourTree.obj
 G:\Sparta\APOMServer\APOMServer\CircularQueue.cpp;G:\Sparta\APOMServer\APOMServer\Release\CircularQueue.obj
 G:\Sparta\APOMServer\APOMServer\Content.cpp;G:\Sparta\APOMServer\APOMServer\Release\Content.obj
@@ -9,6 +10,7 @@ G:\Sparta\APOMServer\APOMServer\DamageTracker.cpp;G:\Sparta\APOMServer\APOMServe
 G:\Sparta\APOMServer\APOMServer\EncodingUtils.cpp;G:\Sparta\APOMServer\APOMServer\Release\EncodingUtils.obj
 G:\Sparta\APOMServer\APOMServer\Item.cpp;G:\Sparta\APOMServer\APOMServer\Release\Item.obj
 G:\Sparta\APOMServer\APOMServer\ItemSpawner.cpp;G:\Sparta\APOMServer\APOMServer\Release\ItemSpawner.obj
+G:\Sparta\APOMServer\APOMServer\LoginManager.cpp;G:\Sparta\APOMServer\APOMServer\Release\LoginManager.obj
 G:\Sparta\APOMServer\APOMServer\MatchSystem.cpp;G:\Sparta\APOMServer\APOMServer\Release\MatchSystem.obj
 G:\Sparta\APOMServer\APOMServer\MathUtils.cpp;G:\Sparta\APOMServer\APOMServer\Release\MathUtils.obj
 G:\Sparta\APOMServer\APOMServer\Room.cpp;G:\Sparta\APOMServer\APOMServer\Release\Room.obj
