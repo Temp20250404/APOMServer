@@ -76,7 +76,6 @@ void AIEntity::UpdateTarget()
 
     if (m_context.pTargetPlayer)
     {
-        std::cout << "플레이어 감지됨. 거리 : " << closestDistance << "\n";
 
         m_context.hasTargetPlayer = true;
         m_context.playerDistance = closestDistance;
@@ -84,6 +83,10 @@ void AIEntity::UpdateTarget()
         // 1) 플레이어 실제 위치
         float px, py, pz;
         m_context.pTargetPlayer->getPosition(px, py, pz);
+
+        std::cout << "\n현재 플레이어의 위치 : " << px << ", " << py << ", " << pz << "\n";
+        std::cout << "현재 보스의 위치 : " << bossX << ", " << bossY << ", " << bossZ << "\n";
+        std::cout << "플레이어와 보스의 거리 : " << m_context.playerDistance << "\n";
 
         // 2) currentPos → playerPos 방향 벡터
         const auto& cur = m_context.currentPos;
@@ -95,7 +98,9 @@ void AIEntity::UpdateTarget()
         float dist = std::sqrtf(dx * dx + dy * dy + dz * dz);
 
         // 4) 이동해야 할 거리 = (전체 거리 - 공격 사거리)
-        float moveDist = dist - m_context.attackRange;
+        float moveDist = dist - m_context.attackRange * 0.8f;
+
+        std::cout << "보스가 이동해야하는 거리 : " << moveDist << "\n\n";
         if (moveDist <= 0.0f)
         {
             // 이미 사거리 이내라면 현재 위치 유지

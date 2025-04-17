@@ -267,6 +267,12 @@ BTNode* CreateBossBT(AIContext& context)
 
     attackBranch.push_back(
         new ConditionNode([&context]() -> bool {
+
+            if (context.hasTargetPlayer)
+            {
+                std::cout << "PlayerDistance : " << context.playerDistance << "\n";
+            }
+
             // 타겟 플레이어가 존재하고, 해당 플레이어와의 거리가 공격 범위내에 존재할 경우 
             return context.hasTargetPlayer && (context.playerDistance <= context.attackRange);
             })
@@ -352,8 +358,7 @@ BTNode* CreateBossBT(AIContext& context)
             float dz = targetPos.posZ - context.currentPos.posZ;
 
             // 2) 거리 계산
-            float distance = std::sqrt(dx * dx + dy * dy + dz * dz);
-            context.playerDistance = distance;  // 거리 업데이트
+            float distance = context.playerDistance; //std::sqrt(dx * dx + dy * dy + dz * dz);
 
             // 3) 공격 범위에 들어오면 완료
             if (distance <= context.attackRange)

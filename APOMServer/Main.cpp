@@ -213,11 +213,11 @@ int main()
     boss.idleTime = 0;
 
     // 상수 값들
-    boss.attackRange = 1.0f;
-    boss.moveSpeed = 0.6f;          // 1회동안 0.6만큼 이동. 현재 25프레임에 1회씩 작동하니 1초에 0.6만큼 움직임
+    boss.attackRange = 3.0f;
+    boss.moveSpeed = 0.4f;          // 1회동안 0.6만큼 이동. 현재 25프레임에 1회씩 작동하니 1초에 0.6만큼 움직임
     boss.idleResetTime = 3.0f;
     boss.deltaTime = 1.f;           // 현재 ai가 25프레임에 1번씩 작동하고, 서버는 1초에 25프레임 움직인다. 그러므로 1 대입
-    boss.detectionRange = 5.0f;     // 플레이어 감지 범위
+    boss.detectionRange = 15.0f;     // 플레이어 감지 범위
 
     // 보스의 현재 위치
     boss.currentPos.posX = 0.f; boss.currentPos.posY = 0.f; boss.currentPos.posZ = 0.f;
@@ -279,7 +279,7 @@ int main()
                 Update();
 
                 AIFrameCnt++;
-                if (AIFrameCnt >= 25)
+                if (AIFrameCnt >= 5)
                 {
                     aiManager.UpdateAll();
                     AIFrameCnt = 0;
