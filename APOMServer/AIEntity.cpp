@@ -6,10 +6,14 @@
 UINT32 AIEntity::g_id = 1;
 
 AIEntity::AIEntity(const AIContext& aiContext, BTBuilder builder)
+    : m_id(g_id++)
+    , m_context(aiContext)
+    , m_behaviorTree(nullptr)
 {
-    m_id = g_id++;
-    m_context = aiContext;
     m_context.ID = m_id;
+
+    //m_context.ptargetRoom = aiContext.ptargetRoom;
+
     // 전달받은 builder 함수를 사용하여 행동 트리 생성
     m_behaviorTree = builder(m_context);
 }
@@ -36,9 +40,9 @@ void AIEntity::UpdateTarget()
         return;
 
     // 보스의 현재 위치
-    float bossX = m_context.posX;
-    float bossY = m_context.posY;
-    float bossZ = m_context.posZ;
+    float bossX = m_context.currentPos.posX;
+    float bossY = m_context.currentPos.posY;
+    float bossZ = m_context.currentPos.posZ;
 
     float closestDistance = FLT_MAX;
     CPlayer* closestPlayer = nullptr;
@@ -49,19 +53,87 @@ void AIEntity::UpdateTarget()
     {
         float px, py, pz;
         player->getPosition(px, py, pz);
+
         // 유클리드 거리를 계산
         float distance = std::sqrt((bossX - px) * (bossX - px) +
             (bossY - py) * (bossY - py) +
             (bossZ - pz) * (bossZ - pz));
-        if (distance < closestDistance)
+
+        // 인지 범위보다 플레이어와의 거리가 짧다면
+        if (m_context.detectionRange > distance)
         {
-            closestDistance = distance;
-            closestPlayer = player;
+            // 갱신
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestPlayer = player;
+            }
         }
     }
 
     // 가장 가까운 플레이어를 타겟으로 설정
     m_context.pTargetPlayer = closestPlayer;
+
+    if (m_context.pTargetPlayer)
+    {
+
+        m_context.hasTargetPlayer = true;
+        m_context.playerDistance = closestDistance;
+
+        // 1) 플레이어 실제 위치
+        float px, py, pz;
+        m_context.pTargetPlayer->getPosition(px, py, pz);
+
+        std::cout << "\n현재 플레이어의 위치 : " << px << ", " << py << ", " << pz << "\n";
+        std::cout << "현재 보스의 위치 : " << bossX << ", " << bossY << ", " << bossZ << "\n";
+        std::cout << "플레이어와 보스의 거리 : " << m_context.playerDistance << "\n";
+
+        // 2) currentPos → playerPos 방향 벡터
+        const auto& cur = m_context.currentPos;
+        float dx = px - cur.posX;
+        float dy = py - cur.posY;
+        float dz = pz - cur.posZ;
+
+        // 3) 전체 거리(디버깅 값과 동일하게 closestDistance 사용해도 무방)
+        float dist = std::sqrtf(dx * dx + dy * dy + dz * dz);
+
+        // 4) 이동해야 할 거리 = (전체 거리 - 공격 사거리)
+        float moveDist = dist - m_context.attackRange * 0.8f;
+
+        std::cout << "보스가 이동해야하는 거리 : " << moveDist << "\n\n";
+        if (moveDist <= 0.0f)
+        {
+            // 이미 사거리 이내라면 현재 위치 유지
+            m_context.targetPos = cur;
+        }
+        else
+        {
+            // 5) 단위 벡터(normalize)
+            float invDist = 1.0f / dist;
+            dx *= invDist;
+            dy *= invDist;
+            dz *= invDist;
+
+            // 6) 최종 목표 위치 계산
+            m_context.targetPos.posX = cur.posX + dx * moveDist;
+            m_context.targetPos.posY = cur.posY + dy * moveDist;
+            m_context.targetPos.posZ = cur.posZ + dz * moveDist;
+        }
+
+        // 7) 디버그 출력: 실제 설정된 targetPos
+        const auto& tp = m_context.targetPos;
+        std::cout << "타겟 위치 갱신 : "
+            << tp.posX << ", "
+            << tp.posY << ", "
+            << tp.posZ << "\n";
+    }
+    else
+    {
+        std::cout << "플레이어 감지되지 않음\n";
+
+        m_context.hasTargetPlayer = false;
+        m_context.playerDistance = 0.f;
+    }
 }
 
 void AIEntity::GetDamaged(UINT damage)

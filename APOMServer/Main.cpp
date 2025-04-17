@@ -190,7 +190,7 @@ int main()
     BTBuilder builder = CreateBossBT;
 
     // AIContext (보스)
-    AIContext boss;
+    AIContext boss{};
 
     boss.currentHP = 100.0f;
     boss.maxHP = 100.0f;
@@ -213,16 +213,17 @@ int main()
     boss.idleTime = 0;
 
     // 상수 값들
-    boss.attackRange = 5.0f;
-    boss.moveSpeed = 0.8f;
+    boss.attackRange = 3.0f;
+    boss.moveSpeed = 0.4f;          // 1회동안 0.6만큼 이동. 현재 25프레임에 1회씩 작동하니 1초에 0.6만큼 움직임
     boss.idleResetTime = 3.0f;
-    boss.deltaTime = 0.3f;
+    boss.deltaTime = 1.f;           // 현재 ai가 25프레임에 1번씩 작동하고, 서버는 1초에 25프레임 움직인다. 그러므로 1 대입
+    boss.detectionRange = 15.0f;     // 플레이어 감지 범위
 
     // 보스의 현재 위치
-    boss.posX = 0.f; boss.posY = 0.f; boss.posZ = 0.f;
+    boss.currentPos.posX = 0.f; boss.currentPos.posY = 0.f; boss.currentPos.posZ = 0.f;
 
     AIEntity* pAIEntity;
-    for (int i = 0; i < 10; ++i)
+    for (int i = 0; i < 1; ++i)
     {
         // context에 방 정보 삽입
         CRoom* pRoom = roomManager.GetRoomById(i);
@@ -263,6 +264,8 @@ int main()
     //=====================================================================================================================================
     // 메인 로직
     //=====================================================================================================================================
+    int AIFrameCnt = 0;
+
     while (!g_bShutdown)
     {
         try
@@ -274,6 +277,13 @@ int main()
 
                 // 게임 로직 업데이트
                 Update();
+
+                AIFrameCnt++;
+                if (AIFrameCnt >= 5)
+                {
+                    aiManager.UpdateAll();
+                    AIFrameCnt = 0;
+                }
             }
 
             // 키보드 입력을 통해 게임을 제어할 시 사용
@@ -307,7 +317,7 @@ void Update(void)
     objectManager.LateUpdate();
 
     sessionManager.Update();
-    aiManager.UpdateAll();
+    //aiManager.UpdateAll();
 
     //logManager.saveLog();
 }
@@ -391,26 +401,26 @@ unsigned int WINAPI MonitorThread(void* pArg)
         UINT32 globalTime = InterlockedCompareExchange(&g_iTime, 0, 0);
         if (globalTime - g_iFpsCheck >= 1000)
         {
-            std::wcout << L"======================================================" << std::endl;
+        //    std::wcout << L"======================================================" << std::endl;
 
-            monitor.PrintMonitoringData();
-            std::cout << "\n";
+        //    //monitor.PrintMonitoringData();
+        //    std::cout << "\n";
 
-            g_iFpsCheck += 1000;
+        //    g_iFpsCheck += 1000;
 
-            UINT32 netLoop = InterlockedExchange(&g_iNetworkLoop, 0);
-            UINT32 fps = InterlockedExchange(&g_iFPS, 0);
+        //    UINT32 netLoop = InterlockedExchange(&g_iNetworkLoop, 0);
+        //    UINT32 fps = InterlockedExchange(&g_iFPS, 0);
 
-            std::cout << "FPS & Network Loop Num : " << fps << "\n";
-            std::cout << "Main Loop : " << netLoop << "\n";
-            std::cout << "SyncCount : " << g_iSyncCount << "\n";
+        //    std::cout << "FPS & Network Loop Num : " << fps << "\n";
+        //    std::cout << "Main Loop : " << netLoop << "\n";
+        //    std::cout << "SyncCount : " << g_iSyncCount << "\n";
 
-            std::wcout << L"======================================================" << std::endl;
+        //    std::wcout << L"======================================================" << std::endl;
 
-            std::cout << "Session Count" << "\n\n";
-            std::cout << "Connect : " << g_SessionHashMap.size() << "\n";
-            std::cout << "Accept : " << netIOManager.acceptSessionCnt << "\n";
-            std::cout << "Disconnect : " << netIOManager.disconnectSessionCnt << "\n";
+        //    std::cout << "Session Count" << "\n\n";
+        //    std::cout << "Connect : " << g_SessionHashMap.size() << "\n";
+        //    std::cout << "Accept : " << netIOManager.acceptSessionCnt << "\n";
+        //    std::cout << "Disconnect : " << netIOManager.disconnectSessionCnt << "\n";
         }
 
         // 1초간 Sleep

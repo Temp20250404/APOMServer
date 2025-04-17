@@ -63,7 +63,7 @@ BTNode* CreateBossBT(AIContext& context)
     // = 보스의 위치는 context.posX, posY, posZ에서 가져옴  
     // = 이후 여러 단계에서 보스의 위치(bossPos)를 패킷 전송 인자로 사용함  
     // ==========================================================================  
-    Position bossPos = { context.posX, context.posY, context.posZ };
+    Position bossPos = context.currentPos;
     // ==========================================================================  
 
     // ==========================================================================  
@@ -86,20 +86,21 @@ BTNode* CreateBossBT(AIContext& context)
     // 액션 노드: 사망 애니메이션 실행 및 패킷 전송  
     dieBranch.push_back(
         new ActionNode([&context, bossPos]() -> NodeStatus {
+
+            if (context.eCurState != game::BOSS_STATE_DIE)
+            {
+                SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
+                    context.currentHP, context.maxHP,
+                    context.targetPos, context.currentPos, game::BOSS_STATE_DIE, context.moveSpeed);
+
+                context.eCurState = game::BOSS_STATE_DIE;
+            }
+
             float initTime = context.dieAnimTime;   // 애니메이션 시작 시간(초)
 
             // phaseTimer가 초기화되지 않았다면 초기화
             if (context.phaseTimer <= 0)
                 context.phaseTimer = initTime;
-
-            // 애니메이션이 갓 시작하는 경우, 즉 phaseTimer가 초기값과 같을 때
-            if (context.phaseTimer == initTime)
-            {
-                // 사망 패킷 전송: 보스의 사망 상태를 클라이언트에 알림
-                SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
-                    context.currentHP, context.maxHP,
-                    bossPos, bossPos, game::BOSS_STATE_DIE, 0);
-            }
 
             // 애니메이션 실행 중이면 phaseTimer 값을 감소시키고 RUNNING 상태 반환
             if (context.phaseTimer > 0)
@@ -110,10 +111,7 @@ BTNode* CreateBossBT(AIContext& context)
 
             // 애니메이션 실행이 완료된 경우, 보스의 사망 상태로 전환
             context.bDeath = true;
-            // 최종 상태를 클라이언트에 전송 (추가 전송하지 않아도 되지만 상태 동기화를 위해 다시 한번 전송)
-            SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
-                context.currentHP, context.maxHP,
-                bossPos, bossPos, game::BOSS_STATE_DIE, 0);
+
             return NodeStatus::SUCCESS;
             })
     );
@@ -139,16 +137,19 @@ BTNode* CreateBossBT(AIContext& context)
 
     skill3Branch.push_back(
         new ActionNode([&context, bossPos]() -> NodeStatus {
-            float initTime = context.skill3AnimTime;
-            if (context.phaseTimer <= 0)
-                context.phaseTimer = initTime;
 
-            if (context.phaseTimer == initTime)
+            if (context.eCurState != game::BOSS_STATE_SKILL3)
             {
                 SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
                     context.currentHP, context.maxHP,
-                    bossPos, bossPos, game::BOSS_STATE_SKILL3, 0);
+                    context.targetPos, context.currentPos, game::BOSS_STATE_SKILL3, context.moveSpeed);
+
+                context.eCurState = game::BOSS_STATE_SKILL3;
             }
+
+            float initTime = context.skill3AnimTime;
+            if (context.phaseTimer <= 0)
+                context.phaseTimer = initTime;
 
             if (context.phaseTimer > 0)
             {
@@ -182,16 +183,19 @@ BTNode* CreateBossBT(AIContext& context)
 
     skill2Branch.push_back(
         new ActionNode([&context, bossPos]() -> NodeStatus {
-            float initTime = context.skill2AnimTime;
-            if (context.phaseTimer <= 0)
-                context.phaseTimer = initTime;
 
-            if (context.phaseTimer == initTime)
+            if (context.eCurState != game::BOSS_STATE_SKILL2)
             {
                 SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
                     context.currentHP, context.maxHP,
-                    bossPos, bossPos, game::BOSS_STATE_SKILL2, 0);
+                    context.targetPos, context.currentPos, game::BOSS_STATE_SKILL2, context.moveSpeed);
+
+                context.eCurState = game::BOSS_STATE_SKILL2;
             }
+
+            float initTime = context.skill2AnimTime;
+            if (context.phaseTimer <= 0)
+                context.phaseTimer = initTime;
 
             if (context.phaseTimer > 0)
             {
@@ -225,16 +229,19 @@ BTNode* CreateBossBT(AIContext& context)
 
     skill1Branch.push_back(
         new ActionNode([&context, bossPos]() -> NodeStatus {
-            float initTime = context.skill1AnimTime;
-            if (context.phaseTimer <= 0)
-                context.phaseTimer = initTime;
 
-            if (context.phaseTimer == initTime)
+            if (context.eCurState != game::BOSS_STATE_SKILL1)
             {
                 SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
                     context.currentHP, context.maxHP,
-                    bossPos, bossPos, game::BOSS_STATE_SKILL1, 0);
+                    context.targetPos, context.currentPos, game::BOSS_STATE_SKILL1, context.moveSpeed);
+
+                context.eCurState = game::BOSS_STATE_SKILL1;
             }
+
+            float initTime = context.skill1AnimTime;
+            if (context.phaseTimer <= 0)
+                context.phaseTimer = initTime;
 
             if (context.phaseTimer > 0)
             {
@@ -260,41 +267,45 @@ BTNode* CreateBossBT(AIContext& context)
 
     attackBranch.push_back(
         new ConditionNode([&context]() -> bool {
+
+            if (context.hasTargetPlayer)
+            {
+                std::cout << "PlayerDistance : " << context.playerDistance << "\n";
+            }
+
+            // 타겟 플레이어가 존재하고, 해당 플레이어와의 거리가 공격 범위내에 존재할 경우 
             return context.hasTargetPlayer && (context.playerDistance <= context.attackRange);
             })
     );
 
     attackBranch.push_back(
         new ActionNode([&context, bossPos]() -> NodeStatus {
-            // 타겟 플레이어 위치를 계산. 타겟이 없으면 보스 위치를 기본값으로 사용
-            Position targetPos = bossPos;
-            if (context.pTargetPlayer)
-            {
-                float tx, ty, tz;
-                context.pTargetPlayer->getPosition(tx, ty, tz);
-                targetPos = { tx, ty, tz };
-            }
-
-            float initTime = context.attackAnimTime;
-            if (context.phaseTimer <= 0)
-                context.phaseTimer = initTime;
-
-            if (context.phaseTimer == initTime)
-            {
-                SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
-                    context.currentHP, context.maxHP,
-                    targetPos, bossPos, game::BOSS_STATE_ATTACK, 0);
-            }
 
             if (context.phaseTimer > 0)
             {
                 context.phaseTimer -= context.deltaTime;
+                std::cout << "공격 애니메이션 실행중. 남은 지속 시간 : " << context.phaseTimer << "\n";
                 return NodeStatus::RUNNING;
             }
 
-            SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
-                context.currentHP, context.maxHP,
-                targetPos, bossPos, game::BOSS_STATE_ATTACK, 0);
+            if (context.eCurState != game::BOSS_STATE_ATTACK)
+            {
+                SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
+                    context.currentHP, context.maxHP,
+                    context.targetPos, context.currentPos, game::BOSS_STATE_ATTACK, context.moveSpeed);
+
+                context.eCurState = game::BOSS_STATE_ATTACK;
+
+                context.phaseTimer = context.attackAnimTime;
+                std::cout << "공격 실행 " << context.phaseTimer << "초 만큼 공격 애니메이션 실행 진행\n";
+            }
+            else
+            {
+                context.phaseTimer = context.attackAnimTime;
+                std::cout << "재공격 " << context.phaseTimer << "초 만큼 공격 애니메이션 실행 진행\n";
+            }
+
+
             return NodeStatus::SUCCESS;
             })
     );
@@ -312,42 +323,64 @@ BTNode* CreateBossBT(AIContext& context)
 
     chaseBranch.push_back(
         new ConditionNode([&context]() -> bool {
-            return context.hasTargetPlayer && (context.playerDistance > context.attackRange);
+            // 타겟 플레이어가 존재하고, 해당 플레이어와의 거리가 감지 범위내에 존재할 경우 
+            return context.hasTargetPlayer && (context.playerDistance <= context.detectionRange);
             })
     );
 
     chaseBranch.push_back(
         new ActionNode([&context, bossPos]() -> NodeStatus {
-            Position targetPos = bossPos;
-            if (context.pTargetPlayer)
+
+            if (context.eCurState != game::BOSS_STATE_CHASE)
             {
-                float tx, ty, tz;
-                context.pTargetPlayer->getPosition(tx, ty, tz);
-                targetPos = { tx, ty, tz };
-            }
+                std::cout << "타겟 플레이어 감지됨, Chase 모드 작동\n";
 
-            // 보스가 타겟을 향해 추적하면서, 플레이어와의 거리를 감소시킴
-            context.playerDistance -= context.moveSpeed;
-
-            float initSpeed = context.moveSpeed;
-            // 추적 애니메이션의 시작 시점에만 패킷 전송
-            if (context.phaseTimer <= 0)
-                context.phaseTimer = context.attackAnimTime;  // 임시로 attackAnimTime 사용
-
-            if (context.phaseTimer == context.attackAnimTime)
-            {
                 SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
                     context.currentHP, context.maxHP,
-                    targetPos, bossPos, game::BOSS_STATE_CHASE, initSpeed);
+                    context.targetPos, context.currentPos, game::BOSS_STATE_CHASE, context.moveSpeed);
+
+                context.eCurState = game::BOSS_STATE_CHASE;
+            }
+            else
+            {
+                std::cout << "Chase 중... 새로운 위치를 갱신해서 쫒아가는 중\n";
+
+                SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
+                    context.currentHP, context.maxHP,
+                    context.targetPos, context.currentPos, game::BOSS_STATE_CHASE, context.moveSpeed);
             }
 
-            if (context.playerDistance <= context.attackRange)
-                return NodeStatus::SUCCESS;
+            // --- 이동 로직 추가 부분 ---
+            // 1) 목표 벡터 계산
+            Position targetPos = context.targetPos;
+            float dx = targetPos.posX - context.currentPos.posX;
+            float dy = targetPos.posY - context.currentPos.posY;
+            float dz = targetPos.posZ - context.currentPos.posZ;
 
-            if (context.phaseTimer > 0)
+            // 2) 거리 계산
+            float distance = context.playerDistance; //std::sqrt(dx * dx + dy * dy + dz * dz);
+
+            // 3) 공격 범위에 들어오면 완료
+            if (distance <= context.attackRange)
             {
-                context.phaseTimer -= context.deltaTime;
-                return NodeStatus::RUNNING;
+                std::cout << "Chase 완료. 공격 범위 내로 플레이어 들어옴\n";
+                return NodeStatus::SUCCESS;
+            }
+
+            // 4) 이동
+            float moveDistance = context.moveSpeed;
+            if (moveDistance >= distance)
+            {
+                // 목표에 바로 도착
+                context.currentPos = targetPos;
+            }
+            else
+            {
+                // 방향 정규화 후 이동
+                float inv = 1.0f / distance;
+                context.currentPos.posX += dx * inv * moveDistance;
+                context.currentPos.posY += dy * inv * moveDistance;
+                context.currentPos.posZ += dz * inv * moveDistance;
             }
 
             return NodeStatus::RUNNING;
@@ -359,7 +392,7 @@ BTNode* CreateBossBT(AIContext& context)
 
     // ==========================================================================  
     // [WALK Branch 시작] : 이동 브랜치  
-    // = 조건: 타겟 플레이어가 없고, idleTime이 0 이하일 경우  
+    // = 조건: 타겟 플레이어가 없고, idleTime이 0 이하일 경우
     // = 액션: 새로운 목표 위치로 이동했다고 가정하고, idleTime을 idleResetTime으로 재설정하며 패킷 전송 (bossState: BOSS_STATE_WALK)  
     // ==========================================================================  
     std::vector<BTNode*> walkBranch;
@@ -372,11 +405,64 @@ BTNode* CreateBossBT(AIContext& context)
 
     walkBranch.push_back(
         new ActionNode([&context, bossPos]() -> NodeStatus {
-            context.idleTime = context.idleResetTime;
-            SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
-                context.currentHP, context.maxHP,
-                bossPos, bossPos, game::BOSS_STATE_WALK, 0);
-            return NodeStatus::SUCCESS;
+
+            // 타겟 플레이어가 존재한다면
+            if (context.hasTargetPlayer)
+            {
+                std::cout << "WALK 중간에 타겟 플레이어 발견\n";
+                return NodeStatus::FAILURE;
+            }
+
+            if (context.eCurState != game::BOSS_STATE_WALK)
+            {
+                SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
+                    context.currentHP, context.maxHP,
+                    context.targetPos, context.currentPos, game::BOSS_STATE_WALK, context.moveSpeed);
+
+                context.eCurState = game::BOSS_STATE_WALK;
+            }
+
+            // 현재 위치와 목표 위치 사이의 방향 벡터 계산
+            float dx = context.targetPos.posX - context.currentPos.posX;
+            float dy = context.targetPos.posY - context.currentPos.posY;
+            float dz = context.targetPos.posZ - context.currentPos.posZ;
+
+            // 거리 계산 (Euclidean Distance)
+            float distance = std::sqrt(dx * dx + dy * dy + dz * dz);
+
+            // 이미 도착했거나, 매우 가까운 경우 이동하지 않음
+            if (distance < 0.001f) {
+                // 도착 처리
+                // 목표 위치에 도착했으니 잠시 idle 상태로 전환하기 위해 context.idleTime을 context.idleResetTime로 설정
+                context.idleTime = context.idleResetTime;
+
+                std::cout << "목표 위치 도착\n";
+
+                return NodeStatus::SUCCESS;
+            }
+
+            // 방향 벡터 정규화
+            float dirX = dx / distance;
+            float dirY = dy / distance;
+            float dirZ = dz / distance;
+
+            // 프레임 주기를 고려한 이동 거리
+            float moveDistance = context.moveSpeed;  // 현재 25프레임에 1회 실행하는 중
+
+            // 만약 목표까지의 거리가 moveDistance보다 작다면, 목표 지점에 도달
+            if (moveDistance >= distance) {
+                context.currentPos = context.targetPos;
+            }
+            else {
+                // 방향 * 이동 거리 만큼 이동
+                context.currentPos.posX += dirX * moveDistance;
+                context.currentPos.posY += dirY * moveDistance;
+                context.currentPos.posZ += dirZ * moveDistance;
+            }
+
+            std::cout << "현재 위치 : " << context.currentPos.posX << ", " << context.currentPos.posY << ", " << context.currentPos.posZ << "\n";
+
+            return NodeStatus::RUNNING;
             })
     );
 
@@ -392,15 +478,31 @@ BTNode* CreateBossBT(AIContext& context)
         if (context.idleTime > 0)
         {
             // Idle 애니메이션이 시작될 때만 패킷 전송 (idleTime이 idleResetTime과 같을 때)
-            if (context.idleTime == context.idleResetTime)
+            if (context.eCurState != game::BOSS_STATE_IDLE)
             {
                 SC_BOSS_PHASE_FOR_AROUND(nullptr, context.ptargetRoom, context.ID,
                     context.currentHP, context.maxHP,
-                    bossPos, bossPos, game::BOSS_STATE_IDLE, 0);
+                    context.targetPos, context.currentPos, game::BOSS_STATE_IDLE, context.moveSpeed);
+
+                context.eCurState = game::BOSS_STATE_IDLE;
             }
+
             context.idleTime -= context.deltaTime;
+
             return NodeStatus::RUNNING;
         }
+        // 시간이 다 지났으므로 랜덤한 새로운 위치를 목표로 움직이도록 한다.
+        else
+        {
+            float randomMoveX = RandomRange(-1.f, 1.f) * 4;
+            float randomMoveZ = RandomRange(-1.f, 1.f) * 4;
+
+            context.targetPos.posX += randomMoveX;
+            context.targetPos.posZ += randomMoveZ;
+
+            std::cout << "새로운 목표 위치 갱신\n";
+        }
+
         return NodeStatus::SUCCESS;
         });
     // ==========================================================================  

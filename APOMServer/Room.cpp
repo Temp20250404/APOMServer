@@ -11,24 +11,24 @@ CRoom::CRoom(int id) : m_roomId(id) {
 
 void CRoom::Init(void)
 {
-    std::vector<std::tuple<float, float, float>> spawnPoints = {
-        {2.0f, 0.0f, 2.0f}, {5.0f, 0.0f, 5.0f}, {8.0f, 0.0f, 1.0f}
-    };
+    //std::vector<std::tuple<float, float, float>> spawnPoints = {
+    //    {2.0f, 0.0f, 2.0f}, {5.0f, 0.0f, 5.0f}, {8.0f, 0.0f, 1.0f}
+    //};
 
-    try
-    {
-        m_pItemSpawner = new ItemSpawner;
-    }
-    catch (const std::exception& e)
-    {
-        std::cout << "예외 발생: " << e.what() << std::endl;
-    }
-    catch (...)
-    {
-        std::cout << "알 수 없는 예외 발생" << std::endl;
-    }
+    //try
+    //{
+    //    m_pItemSpawner = new ItemSpawner;
+    //}
+    //catch (const std::exception& e)
+    //{
+    //    std::cout << "예외 발생: " << e.what() << std::endl;
+    //}
+    //catch (...)
+    //{
+    //    std::cout << "알 수 없는 예외 발생" << std::endl;
+    //}
 
-    m_pItemSpawner->Init(spawnPoints);
+    //m_pItemSpawner->Init(spawnPoints);
 
     m_activePlayers.clear();
     m_waitingPlayers.clear();
@@ -60,7 +60,7 @@ void CRoom::Update(float deltaTime) {
     //    p->UpdateDamageHistory(now);
     //}
 
-    m_pItemSpawner->Update(deltaTime);
+    //m_pItemSpawner->Update(deltaTime);
 }
 
 bool CRoom::IsFull() const {
@@ -68,24 +68,26 @@ bool CRoom::IsFull() const {
 }
 
 bool CRoom::OnItemPickupRequest(int playerId, int itemId) {
-    // 잘못된 플레이어가 올 경우
-    CPlayer* player = FindPlayerById(playerId);
-    if (!player) return false;  // 이건 기능적으로 완전 잘못된 것이기에 이쪽에서 return 되면 서버를 멈추는게 맞다.
+    //// 잘못된 플레이어가 올 경우
+    //CPlayer* player = FindPlayerById(playerId);
+    //if (!player) return false;  // 이건 기능적으로 완전 잘못된 것이기에 이쪽에서 return 되면 서버를 멈추는게 맞다.
 
-    // 아이템이 없을 경우
-    Item* item = m_pItemSpawner->GetItemById(itemId);
-    if (!item) {
-        // 반환받는쪽에서 플레이어에게 아이템 획득 실패 패킷 전송
-        return false;
-    }
-    else
-    {
-        // 아이템 지우고
-        m_pItemSpawner->RemoveItemById(itemId);
+    //// 아이템이 없을 경우
+    //Item* item = m_pItemSpawner->GetItemById(itemId);
+    //if (!item) {
+    //    // 반환받는쪽에서 플레이어에게 아이템 획득 실패 패킷 전송
+    //    return false;
+    //}
+    //else
+    //{
+    //    // 아이템 지우고
+    //    m_pItemSpawner->RemoveItemById(itemId);
 
-        // 반환받는쪽에서 플레이어에게 아이템 획득 성공 패킷 전송
-        return true;
-    }
+    //    // 반환받는쪽에서 플레이어에게 아이템 획득 성공 패킷 전송
+    //    return true;
+    //}
+
+    return true;
 }
 
 void CRoom::MoveToActive(int playerId) {

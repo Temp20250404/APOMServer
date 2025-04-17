@@ -31,7 +31,7 @@ public:
 public:
     void GetDamaged(UINT damage);
 
-private:
+public:
     int m_id;
     AIContext m_context;
     BTNode* m_behaviorTree;

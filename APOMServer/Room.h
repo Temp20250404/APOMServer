@@ -44,5 +44,5 @@ private:
     static constexpr int MAX_PLAYERS = 10;
     int m_roomId = -1;
 
-    ItemSpawner* m_pItemSpawner;
+    //ItemSpawner* m_pItemSpawner;
 };
