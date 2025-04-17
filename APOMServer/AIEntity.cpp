@@ -3,12 +3,13 @@
 #include "RoomManager.h"
 #include "Player.h"
 
-UINT32 AIEntity::g_id = 0;
+UINT32 AIEntity::g_id = 1;
 
 AIEntity::AIEntity(const AIContext& aiContext, BTBuilder builder)
 {
     m_id = g_id++;
     m_context = aiContext;
+    m_context.ID = m_id;
     // 전달받은 builder 함수를 사용하여 행동 트리 생성
     m_behaviorTree = builder(m_context);
 }
