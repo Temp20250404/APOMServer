@@ -216,8 +216,8 @@ bool CS_FIND_PW_REQUEST(CSession* pSession, std::string id, std::string email)
 
     for (const auto& [login, _] : loginManager.GetUserMap()) {
         if (login.id == id && login.email == email) {
-            // 찾았을 경우
-            SC_FIND_PW_RESPONSE_FOR_SINGLE(pSession, true, login.id);
+            // 찾았을 경우, 패스워드를 전송
+            SC_FIND_PW_RESPONSE_FOR_SINGLE(pSession, true, login.pw);
             return true;
         }
     }
