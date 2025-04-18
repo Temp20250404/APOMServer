@@ -78,27 +78,27 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
 
     case game::PacketID::CS_RequestCharacterInfo:
     {
-        bool bRequest;
+        std::string id;
 
         game::CS_REQUEST_CHARACTER_INFO pkt;
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
-        bRequest = pkt.brequest();
+        id = pkt.id();
 
-        return CS_REQUEST_CHARACTER_INFO(pSession, bRequest);
+        return CS_REQUEST_CHARACTER_INFO(pSession, id);
     }
     break;
 
     case game::PacketID::CS_RequestItemInfo:
     {
-        bool bRequest;
+        std::string id;
 
         game::CS_REQUEST_ITEM_INFO pkt;
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
-        bRequest = pkt.brequest();
+        id = pkt.id();
 
-        return CS_REQUEST_ITEM_INFO(pSession, bRequest);
+        return CS_REQUEST_ITEM_INFO(pSession, id);
     }
     break;
 
@@ -119,56 +119,16 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     }
     break;
 
-    case game::PacketID::CS_TestPacket1:
-    {
-        std::vector<UINT32> tempData;
-
-        game::CS_TEST_PACKET1 pkt;
-        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
-
-        auto* __list_tempData = pkt.mutable_tempdata();
-        tempData.reserve(__list_tempData->size());
-        for (const auto& v : *__list_tempData) tempData.push_back(v);
-
-
-        return CS_TEST_PACKET1(pSession, tempData);
-    }
-    break;
-
-    case game::PacketID::CS_TestPacket2:
-    {
-        std::vector<PlayerInfo> tempData;
-
-        game::CS_TEST_PACKET2 pkt;
-        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
-
-        auto* __list_tempData = pkt.mutable_tempdata();
-        tempData.reserve(__list_tempData->size());
-        for (const auto& v : *__list_tempData)
-        {
-            PlayerInfo tmp;
-            tmp.playerNickname = v.playernickname();
-            tmp.playerMaxHp = v.playermaxhp();
-            tmp.playerMaxMp = v.playermaxmp();
-            tmp.playerJobIcon = v.playerjobicon();
-            tempData.push_back(tmp);
-        }
-
-
-        return CS_TEST_PACKET2(pSession, tempData);
-    }
-    break;
-
     case game::PacketID::CS_RegisterRequest:
     {
-        std::string userName;
+        bool bRequest;
 
         game::CS_REGISTER_REQUEST pkt;
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
-        userName = pkt.username();
+        bRequest = pkt.brequest();
 
-        return CS_REGISTER_REQUEST(pSession, userName);
+        return CS_REGISTER_REQUEST(pSession, bRequest);
     }
     break;
 
@@ -246,6 +206,46 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         bCheck = pkt.bcheck();
 
         return CS_CHECK_TIMEOUT(pSession, bCheck);
+    }
+    break;
+
+    case game::PacketID::CS_TestPacket1:
+    {
+        std::vector<UINT32> tempData;
+
+        game::CS_TEST_PACKET1 pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        auto* __list_tempData = pkt.mutable_tempdata();
+        tempData.reserve(__list_tempData->size());
+        for (const auto& v : *__list_tempData) tempData.push_back(v);
+
+
+        return CS_TEST_PACKET1(pSession, tempData);
+    }
+    break;
+
+    case game::PacketID::CS_TestPacket2:
+    {
+        std::vector<PlayerInfo> tempData;
+
+        game::CS_TEST_PACKET2 pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        auto* __list_tempData = pkt.mutable_tempdata();
+        tempData.reserve(__list_tempData->size());
+        for (const auto& v : *__list_tempData)
+        {
+            PlayerInfo tmp;
+            tmp.playerNickname = v.playernickname();
+            tmp.playerMaxHp = v.playermaxhp();
+            tmp.playerMaxMp = v.playermaxmp();
+            tmp.playerJobIcon = v.playerjobicon();
+            tempData.push_back(tmp);
+        }
+
+
+        return CS_TEST_PACKET2(pSession, tempData);
     }
     break;
 
@@ -343,12 +343,12 @@ bool CS_LOGIN_REQUEST(CSession* pSession, std::string id, std::string password)
     return true;
 }
 
-bool CS_REQUEST_CHARACTER_INFO(CSession* pSession, bool bRequest)
+bool CS_REQUEST_CHARACTER_INFO(CSession* pSession, std::string id)
 {
     return false;
 }
 
-bool CS_REQUEST_ITEM_INFO(CSession* pSession, bool bRequest)
+bool CS_REQUEST_ITEM_INFO(CSession* pSession, std::string id)
 {
     return false;
 }
@@ -462,13 +462,10 @@ bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float cameraYa
     return true;
 }
 
-bool CS_REGISTER_REQUEST(CSession* pSession, std::string userName)
+bool CS_REGISTER_REQUEST(CSession* pSession, bool bRequest)
 {
     // 1. 연결된 플레이어 객체 추출
     CPlayer* pPlayer = static_cast<CPlayer*>(pSession->pObj);
-
-    // 플레이어 이름 적용
-    pPlayer->SetName(userName);
 
     // 2. 빈 던전 찾기 - 일단 던전이라는 가정하에, 한 던전에는 최대 10명이 들어갈 수 있도록 한다.
     CRoom* room = CRoomManager::GetInstance().FindAvailableDungeon();

@@ -192,7 +192,6 @@ int g_iSyncCount = 0;
         sig = ", ".join(args)
         lines.append(f"bool {msg}(CSession* pSession{', ' + sig if sig else ''})")
         lines.append("{")
-        lines.append("    // TODO: Implement handler")
         lines.append("    return false;")
         lines.append("}")
         lines.append("")  # 빈 줄

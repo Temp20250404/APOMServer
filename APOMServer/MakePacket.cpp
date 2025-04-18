@@ -464,103 +464,6 @@ void SC_SIGNUP_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool succes
 }
 
 
-void SC_TEST_PACKET_FOR_All(CSession* pSession, std::vector<PlayerInfo>& tempData)
-{
-    game::SC_TEST_PACKET pkt;
-
-    auto* list = pkt.mutable_tempdata();
-    list->Reserve(static_cast<int>(tempData.size()));
-
-    // 메시지 구조체: 각 요소 필드별 setter 호출
-    for (const auto& elem : tempData) {
-        auto* msg = pkt.add_tempdata();
-        msg->set_playernickname(elem.playerNickname);
-        msg->set_playermaxhp(elem.playerMaxHp);
-        msg->set_playermaxmp(elem.playerMaxMp);
-        msg->set_playerjobicon(elem.playerJobIcon);
-    }
-
-    int pktSize = pkt.ByteSizeLong();
-    PACKET_HEADER header;
-    header.byCode = dfNETWORK_PACKET_CODE;
-    header.bySize = pktSize;
-    header.byType = game::PacketID::SC_TestPacket;
-
-    CPacket* Packet = packetPool.Alloc();
-    char buffer[512];
-    pkt.SerializeToArray(buffer, pktSize);
-    Packet->PutData(buffer, pktSize);
-    BroadcastData(pSession, Packet, Packet->GetDataSize());
-
-    Packet->Clear();
-    packetPool.Free(Packet);
-}
-
-void SC_TEST_PACKET_FOR_SINGLE(CSession* pSession, std::vector<PlayerInfo>& tempData)
-{
-    game::SC_TEST_PACKET pkt;
-
-    auto* list = pkt.mutable_tempdata();
-    list->Reserve(static_cast<int>(tempData.size()));
-
-    // 메시지 구조체: 각 요소 필드별 setter 호출
-    for (const auto& elem : tempData) {
-        auto* msg = pkt.add_tempdata();
-        msg->set_playernickname(elem.playerNickname);
-        msg->set_playermaxhp(elem.playerMaxHp);
-        msg->set_playermaxmp(elem.playerMaxMp);
-        msg->set_playerjobicon(elem.playerJobIcon);
-    }
-
-    int pktSize = pkt.ByteSizeLong();
-    PACKET_HEADER header;
-    header.byCode = dfNETWORK_PACKET_CODE;
-    header.bySize = pktSize;
-    header.byType = game::PacketID::SC_TestPacket;
-
-    CPacket* Packet = packetPool.Alloc();
-    char buffer[512];
-    pkt.SerializeToArray(buffer, pktSize);
-    Packet->PutData(buffer, pktSize);
-    UnicastPacket(pSession, &header, Packet);
-
-    Packet->Clear();
-    packetPool.Free(Packet);
-}
-
-void SC_TEST_PACKET_FOR_AROUND(CSession* pSession, CRoom* pRoom, std::vector<PlayerInfo>& tempData)
-{
-    game::SC_TEST_PACKET pkt;
-
-    auto* list = pkt.mutable_tempdata();
-    list->Reserve(static_cast<int>(tempData.size()));
-
-    // 메시지 구조체: 각 요소 필드별 setter 호출
-    for (const auto& elem : tempData) {
-        auto* msg = pkt.add_tempdata();
-        msg->set_playernickname(elem.playerNickname);
-        msg->set_playermaxhp(elem.playerMaxHp);
-        msg->set_playermaxmp(elem.playerMaxMp);
-        msg->set_playerjobicon(elem.playerJobIcon);
-    }
-
-    int pktSize = pkt.ByteSizeLong();
-    PACKET_HEADER header;
-    header.byCode = dfNETWORK_PACKET_CODE;
-    header.bySize = pktSize;
-    header.byType = game::PacketID::SC_TestPacket;
-
-    CPacket* Packet = packetPool.Alloc();
-    char buffer[512];
-    pkt.SerializeToArray(buffer, pktSize);
-    Packet->PutData(buffer, pktSize);
-    for(auto& pl: pRoom->m_activePlayers){ if(pl->m_pSession != pSession) UnicastPacket(pl->m_pSession, &header, Packet); }
-
-    Packet->Clear();
-    packetPool.Free(Packet);
-}
-
-
 void SC_CREATE_MONSTER_FOR_All(CSession* pSession, UINT32 aiID, UINT32 monsterTypeID, Position monsterPos)
 {
     game::SC_CREATE_MONSTER pkt;
@@ -1441,6 +1344,103 @@ void SC_BOSS_PHASE_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 bossID, U
     header.byCode = dfNETWORK_PACKET_CODE;
     header.bySize = pktSize;
     header.byType = game::PacketID::SC_BossPhase;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    for(auto& pl: pRoom->m_activePlayers){ if(pl->m_pSession != pSession) UnicastPacket(pl->m_pSession, &header, Packet); }
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+
+void SC_TEST_PACKET_FOR_All(CSession* pSession, std::vector<PlayerInfo>& tempData)
+{
+    game::SC_TEST_PACKET pkt;
+
+    auto* list = pkt.mutable_tempdata();
+    list->Reserve(static_cast<int>(tempData.size()));
+
+    // 메시지 구조체: 각 요소 필드별 setter 호출
+    for (const auto& elem : tempData) {
+        auto* msg = pkt.add_tempdata();
+        msg->set_playernickname(elem.playerNickname);
+        msg->set_playermaxhp(elem.playerMaxHp);
+        msg->set_playermaxmp(elem.playerMaxMp);
+        msg->set_playerjobicon(elem.playerJobIcon);
+    }
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_TestPacket;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    BroadcastData(pSession, Packet, Packet->GetDataSize());
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_TEST_PACKET_FOR_SINGLE(CSession* pSession, std::vector<PlayerInfo>& tempData)
+{
+    game::SC_TEST_PACKET pkt;
+
+    auto* list = pkt.mutable_tempdata();
+    list->Reserve(static_cast<int>(tempData.size()));
+
+    // 메시지 구조체: 각 요소 필드별 setter 호출
+    for (const auto& elem : tempData) {
+        auto* msg = pkt.add_tempdata();
+        msg->set_playernickname(elem.playerNickname);
+        msg->set_playermaxhp(elem.playerMaxHp);
+        msg->set_playermaxmp(elem.playerMaxMp);
+        msg->set_playerjobicon(elem.playerJobIcon);
+    }
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_TestPacket;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    UnicastPacket(pSession, &header, Packet);
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_TEST_PACKET_FOR_AROUND(CSession* pSession, CRoom* pRoom, std::vector<PlayerInfo>& tempData)
+{
+    game::SC_TEST_PACKET pkt;
+
+    auto* list = pkt.mutable_tempdata();
+    list->Reserve(static_cast<int>(tempData.size()));
+
+    // 메시지 구조체: 각 요소 필드별 setter 호출
+    for (const auto& elem : tempData) {
+        auto* msg = pkt.add_tempdata();
+        msg->set_playernickname(elem.playerNickname);
+        msg->set_playermaxhp(elem.playerMaxHp);
+        msg->set_playermaxmp(elem.playerMaxMp);
+        msg->set_playerjobicon(elem.playerJobIcon);
+    }
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_TestPacket;
 
     CPacket* Packet = packetPool.Alloc();
     char buffer[512];

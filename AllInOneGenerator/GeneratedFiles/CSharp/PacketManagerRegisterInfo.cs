@@ -21,9 +21,6 @@ public class PacketManagerRegisterInfo
         _onRecv.Add((ushort)Game.PacketID.ScSignupResponse, MakePacket<SC_SIGNUP_RESPONSE>);
         _handler.Add((ushort)Game.PacketID.ScSignupResponse, PacketHandler.SC_SignupResponse);
 
-        _onRecv.Add((ushort)Game.PacketID.ScTestPacket, MakePacket<SC_TEST_PACKET>);
-        _handler.Add((ushort)Game.PacketID.ScTestPacket, PacketHandler.SC_TestPacket);
-
         _onRecv.Add((ushort)Game.PacketID.ScCreateMonster, MakePacket<SC_CREATE_MONSTER>);
         _handler.Add((ushort)Game.PacketID.ScCreateMonster, PacketHandler.SC_CreateMonster);
 
@@ -53,5 +50,8 @@ public class PacketManagerRegisterInfo
 
         _onRecv.Add((ushort)Game.PacketID.ScBossPhase, MakePacket<SC_BOSS_PHASE>);
         _handler.Add((ushort)Game.PacketID.ScBossPhase, PacketHandler.SC_BossPhase);
+
+        _onRecv.Add((ushort)Game.PacketID.ScTestPacket, MakePacket<SC_TEST_PACKET>);
+        _handler.Add((ushort)Game.PacketID.ScTestPacket, PacketHandler.SC_TestPacket);
     }
 }

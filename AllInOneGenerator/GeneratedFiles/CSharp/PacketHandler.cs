@@ -55,14 +55,6 @@ class PacketHandler
         // TODO: SC_SignupResponse 패킷 처리 로직을 여기에 구현
     }
 
-    // SC_TEST_PACKET 패킷을 처리하는 함수
-    public static void SC_TestPacket(PacketSession session, IMessage packet)
-    {
-        SC_TEST_PACKET testPacketPacket = packet as SC_TEST_PACKET;
-
-        // TODO: SC_TestPacket 패킷 처리 로직을 여기에 구현
-    }
-
     // SC_CREATE_MONSTER 패킷을 처리하는 함수
     public static void SC_CreateMonster(PacketSession session, IMessage packet)
     {
@@ -141,5 +133,13 @@ class PacketHandler
         SC_BOSS_PHASE bossPhasePacket = packet as SC_BOSS_PHASE;
 
         // TODO: SC_BossPhase 패킷 처리 로직을 여기에 구현
+    }
+
+    // SC_TEST_PACKET 패킷을 처리하는 함수
+    public static void SC_TestPacket(PacketSession session, IMessage packet)
+    {
+        SC_TEST_PACKET testPacketPacket = packet as SC_TEST_PACKET;
+
+        // TODO: SC_TestPacket 패킷 처리 로직을 여기에 구현
     }
 }

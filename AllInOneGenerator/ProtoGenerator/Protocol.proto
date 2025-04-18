@@ -74,21 +74,15 @@ message CS_LOGIN_REQUEST {
     string password = 2;
 }
 message CS_REQUEST_CHARACTER_INFO {
-    bool bRequest = 1; // true를 삽입 후 전송할 것
+    string id = 1; // 로그인에 사용한 id를 전송, 서버에서 이를 기반으로 플레이어 정보 파싱
 }
 message CS_REQUEST_ITEM_INFO {
-    bool bRequest = 1; // true를 삽입 후 전송할 것
+    string id = 1; // 로그인에 사용한 id를 전송, 서버에서 이를 기반으로 아이템 정보 파싱
 }
 message CS_SIGNUP_REQUEST {
     string id = 1;
     string email = 2; // 회원가입시 사용하는  이메일. naver, gmail 등으로 인증용 기능 만들 예정
     string password = 3;
-}
-message CS_TEST_PACKET1 {
-    repeated uint32 tempData = 1;
-}
-message CS_TEST_PACKET2 {
-    repeated PlayerInfo tempData = 1;
 }
 message SC_FIND_ID_RESPONSE {
     bool success = 1;
@@ -112,11 +106,8 @@ message SC_SIGNUP_RESPONSE {
     bool success = 1; // 성공 여부
     uint32 errorCode = 2; // 에러코드 1: 이미 존재하는 ID, 2: 이미 존재하는 이메일
 }
-message SC_TEST_PACKET {
-    repeated PlayerInfo tempData = 1;
-}
 message CS_REGISTER_REQUEST {
-    string userName = 1;
+    bool bRequest = 1;
 }
 message SC_CREATE_MONSTER {
     uint32 aiID = 1; // AI 고유 ID
@@ -192,4 +183,13 @@ message SC_BOSS_PHASE {
 }
 message CS_CHECK_TIMEOUT {
     bool bCheck = 1; // L7에서 timeout 체크용. 일정 주기마다 한번씩 서버에 전송
+}
+message CS_TEST_PACKET1 {
+    repeated uint32 tempData = 1;
+}
+message CS_TEST_PACKET2 {
+    repeated PlayerInfo tempData = 1;
+}
+message SC_TEST_PACKET {
+    repeated PlayerInfo tempData = 1;
 }
