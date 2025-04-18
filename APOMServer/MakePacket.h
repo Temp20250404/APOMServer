@@ -6,25 +6,34 @@
 class CSession;
 class CRoom;
 
+
 void SC_FIND_ID_RESPONSE_FOR_All(CSession* pSession, bool success, std::string id);
 void SC_FIND_ID_RESPONSE_FOR_SINGLE(CSession* pSession, bool success, std::string id);
 void SC_FIND_ID_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool success, std::string id);
 
-void SC_FIND_PW_RESPONSE_FOR_All(CSession* pSession, bool success, std::string id);
-void SC_FIND_PW_RESPONSE_FOR_SINGLE(CSession* pSession, bool success, std::string id);
-void SC_FIND_PW_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool success, std::string id);
+void SC_FIND_PW_RESPONSE_FOR_All(CSession* pSession, bool success, std::string pw);
+void SC_FIND_PW_RESPONSE_FOR_SINGLE(CSession* pSession, bool success, std::string pw);
+void SC_FIND_PW_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool success, std::string pw);
 
 void SC_LOGIN_RESPONSE_FOR_All(CSession* pSession, bool success, UINT32 errorCode);
 void SC_LOGIN_RESPONSE_FOR_SINGLE(CSession* pSession, bool success, UINT32 errorCode);
 void SC_LOGIN_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool success, UINT32 errorCode);
 
+void SC_REQUEST_ITEM_INFO_FOR_All(CSession* pSession, std::vector<UINT32>& itemInfo);
+void SC_REQUEST_ITEM_INFO_FOR_SINGLE(CSession* pSession, std::vector<UINT32>& itemInfo);
+void SC_REQUEST_ITEM_INFO_FOR_AROUND(CSession* pSession, CRoom* pRoom, std::vector<UINT32>& itemInfo);
+
+void SC_RESPONSE_CHARACTER_INFO_FOR_All(CSession* pSession, PlayerInfo playerInfo);
+void SC_RESPONSE_CHARACTER_INFO_FOR_SINGLE(CSession* pSession, PlayerInfo playerInfo);
+void SC_RESPONSE_CHARACTER_INFO_FOR_AROUND(CSession* pSession, CRoom* pRoom, PlayerInfo playerInfo);
+
 void SC_SIGNUP_RESPONSE_FOR_All(CSession* pSession, bool success, UINT32 errorCode);
 void SC_SIGNUP_RESPONSE_FOR_SINGLE(CSession* pSession, bool success, UINT32 errorCode);
 void SC_SIGNUP_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool success, UINT32 errorCode);
 
-void SC_TRANSFER_CHARACTER_INFO_FOR_All(CSession* pSession, PlayerInfo playerInfo);
-void SC_TRANSFER_CHARACTER_INFO_FOR_SINGLE(CSession* pSession, PlayerInfo playerInfo);
-void SC_TRANSFER_CHARACTER_INFO_FOR_AROUND(CSession* pSession, CRoom* pRoom, PlayerInfo playerInfo);
+void SC_TEST_PACKET_FOR_All(CSession* pSession, std::vector<PlayerInfo>& tempData);
+void SC_TEST_PACKET_FOR_SINGLE(CSession* pSession, std::vector<PlayerInfo>& tempData);
+void SC_TEST_PACKET_FOR_AROUND(CSession* pSession, CRoom* pRoom, std::vector<PlayerInfo>& tempData);
 
 void SC_CREATE_MONSTER_FOR_All(CSession* pSession, UINT32 aiID, UINT32 monsterTypeID, Position monsterPos);
 void SC_CREATE_MONSTER_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 monsterTypeID, Position monsterPos);

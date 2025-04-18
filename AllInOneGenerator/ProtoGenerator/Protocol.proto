@@ -13,24 +13,30 @@ enum PacketID {
     CS_PlayerAttack = 6;
     CS_PositionSync = 7;
     CS_RegisterRequest = 8;
-    CS_SignupRequest = 9;
+    CS_RequestCharacterInfo = 9;
+    CS_RequestItemInfo = 10;
+    CS_SignupRequest = 11;
+    CS_TestPacket1 = 12;
+    CS_TestPacket2 = 13;
 
 // Server → Client
-    SC_BossPhase = 10;
-    SC_Chat = 11;
-    SC_CreateMonster = 12;
-    SC_FindIdResponse = 13;
-    SC_FindPwResponse = 14;
-    SC_Keyinfo = 15;
-    SC_LoginResponse = 16;
-    SC_PlayerAttack = 17;
-    SC_PlayerDamaged = 18;
-    SC_PlayerDie = 19;
-    SC_PositionSync = 20;
-    SC_RemoveCharacter = 21;
-    SC_SignupResponse = 22;
-    SC_SpawnCharacter = 23;
-    SC_TransferCharacterInfo = 24;
+    SC_BossPhase = 14;
+    SC_Chat = 15;
+    SC_CreateMonster = 16;
+    SC_FindIdResponse = 17;
+    SC_FindPwResponse = 18;
+    SC_Keyinfo = 19;
+    SC_LoginResponse = 20;
+    SC_PlayerAttack = 21;
+    SC_PlayerDamaged = 22;
+    SC_PlayerDie = 23;
+    SC_PositionSync = 24;
+    SC_RemoveCharacter = 25;
+    SC_RequestItemInfo = 26;
+    SC_ResponseCharacterInfo = 27;
+    SC_SignupResponse = 28;
+    SC_SpawnCharacter = 29;
+    SC_TestPacket = 30;
 }
 
 enum BOSS_STATE {
@@ -60,17 +66,29 @@ message CS_FIND_ID_REQUEST {
     string email = 1;
 }
 message CS_FIND_PW_REQUEST {
-    string pw = 1;
+    string id = 1;
     string email = 2;
 }
 message CS_LOGIN_REQUEST {
     string id = 1;
     string password = 2;
 }
+message CS_REQUEST_CHARACTER_INFO {
+    bool bRequest = 1; // true를 삽입 후 전송할 것
+}
+message CS_REQUEST_ITEM_INFO {
+    bool bRequest = 1; // true를 삽입 후 전송할 것
+}
 message CS_SIGNUP_REQUEST {
     string id = 1;
     string email = 2; // 회원가입시 사용하는  이메일. naver, gmail 등으로 인증용 기능 만들 예정
     string password = 3;
+}
+message CS_TEST_PACKET1 {
+    repeated uint32 tempData = 1;
+}
+message CS_TEST_PACKET2 {
+    repeated PlayerInfo tempData = 1;
 }
 message SC_FIND_ID_RESPONSE {
     bool success = 1;
@@ -78,18 +96,24 @@ message SC_FIND_ID_RESPONSE {
 }
 message SC_FIND_PW_RESPONSE {
     bool success = 1;
-    string id = 2;
+    string pw = 2;
 }
 message SC_LOGIN_RESPONSE {
     bool success = 1;
     uint32 errorCode = 2; // 에러코드 1: ID 존재하지 않음, 2: 비밀번호 불일치
 }
+message SC_REQUEST_ITEM_INFO {
+    repeated uint32 itemInfo = 1; // 플레이어가 소지하고 있던 아이템 정보
+}
+message SC_RESPONSE_CHARACTER_INFO {
+    PlayerInfo playerInfo = 1; // 플레이어 정보
+}
 message SC_SIGNUP_RESPONSE {
     bool success = 1; // 성공 여부
     uint32 errorCode = 2; // 에러코드 1: 이미 존재하는 ID, 2: 이미 존재하는 이메일
 }
-message SC_TRANSFER_CHARACTER_INFO {
-    PlayerInfo playerInfo = 1; // 플레이어 정보
+message SC_TEST_PACKET {
+    repeated PlayerInfo tempData = 1;
 }
 message CS_REGISTER_REQUEST {
     string userName = 1;

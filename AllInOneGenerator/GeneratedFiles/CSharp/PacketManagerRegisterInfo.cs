@@ -12,11 +12,17 @@ public class PacketManagerRegisterInfo
         _onRecv.Add((ushort)Game.PacketID.ScLoginResponse, MakePacket<SC_LOGIN_RESPONSE>);
         _handler.Add((ushort)Game.PacketID.ScLoginResponse, PacketHandler.SC_LoginResponse);
 
+        _onRecv.Add((ushort)Game.PacketID.ScRequestItemInfo, MakePacket<SC_REQUEST_ITEM_INFO>);
+        _handler.Add((ushort)Game.PacketID.ScRequestItemInfo, PacketHandler.SC_RequestItemInfo);
+
+        _onRecv.Add((ushort)Game.PacketID.ScResponseCharacterInfo, MakePacket<SC_RESPONSE_CHARACTER_INFO>);
+        _handler.Add((ushort)Game.PacketID.ScResponseCharacterInfo, PacketHandler.SC_ResponseCharacterInfo);
+
         _onRecv.Add((ushort)Game.PacketID.ScSignupResponse, MakePacket<SC_SIGNUP_RESPONSE>);
         _handler.Add((ushort)Game.PacketID.ScSignupResponse, PacketHandler.SC_SignupResponse);
 
-        _onRecv.Add((ushort)Game.PacketID.ScTransferCharacterInfo, MakePacket<SC_TRANSFER_CHARACTER_INFO>);
-        _handler.Add((ushort)Game.PacketID.ScTransferCharacterInfo, PacketHandler.SC_TransferCharacterInfo);
+        _onRecv.Add((ushort)Game.PacketID.ScTestPacket, MakePacket<SC_TEST_PACKET>);
+        _handler.Add((ushort)Game.PacketID.ScTestPacket, PacketHandler.SC_TestPacket);
 
         _onRecv.Add((ushort)Game.PacketID.ScCreateMonster, MakePacket<SC_CREATE_MONSTER>);
         _handler.Add((ushort)Game.PacketID.ScCreateMonster, PacketHandler.SC_CreateMonster);

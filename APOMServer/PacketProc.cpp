@@ -45,20 +45,22 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         return CS_FIND_ID_REQUEST(pSession, email);
     }
     break;
+
     case game::PacketID::CS_FindPwRequest:
     {
-        std::string pw;
+        std::string id;
         std::string email;
 
         game::CS_FIND_PW_REQUEST pkt;
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
-        pw = pkt.pw();
+        id = pkt.id();
         email = pkt.email();
 
-        return CS_FIND_PW_REQUEST(pSession, pw, email);
+        return CS_FIND_PW_REQUEST(pSession, id, email);
     }
     break;
+
     case game::PacketID::CS_LoginRequest:
     {
         std::string id;
@@ -73,6 +75,33 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         return CS_LOGIN_REQUEST(pSession, id, password);
     }
     break;
+
+    case game::PacketID::CS_RequestCharacterInfo:
+    {
+        bool bRequest;
+
+        game::CS_REQUEST_CHARACTER_INFO pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        bRequest = pkt.brequest();
+
+        return CS_REQUEST_CHARACTER_INFO(pSession, bRequest);
+    }
+    break;
+
+    case game::PacketID::CS_RequestItemInfo:
+    {
+        bool bRequest;
+
+        game::CS_REQUEST_ITEM_INFO pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        bRequest = pkt.brequest();
+
+        return CS_REQUEST_ITEM_INFO(pSession, bRequest);
+    }
+    break;
+
     case game::PacketID::CS_SignupRequest:
     {
         std::string id;
@@ -89,6 +118,47 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         return CS_SIGNUP_REQUEST(pSession, id, email, password);
     }
     break;
+
+    case game::PacketID::CS_TestPacket1:
+    {
+        std::vector<UINT32> tempData;
+
+        game::CS_TEST_PACKET1 pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        auto* __list_tempData = pkt.mutable_tempdata();
+        tempData.reserve(__list_tempData->size());
+        for (const auto& v : *__list_tempData) tempData.push_back(v);
+
+
+        return CS_TEST_PACKET1(pSession, tempData);
+    }
+    break;
+
+    case game::PacketID::CS_TestPacket2:
+    {
+        std::vector<PlayerInfo> tempData;
+
+        game::CS_TEST_PACKET2 pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        auto* __list_tempData = pkt.mutable_tempdata();
+        tempData.reserve(__list_tempData->size());
+        for (const auto& v : *__list_tempData)
+        {
+            PlayerInfo tmp;
+            tmp.playerNickname = v.playernickname();
+            tmp.playerMaxHp = v.playermaxhp();
+            tmp.playerMaxMp = v.playermaxmp();
+            tmp.playerJobIcon = v.playerjobicon();
+            tempData.push_back(tmp);
+        }
+
+
+        return CS_TEST_PACKET2(pSession, tempData);
+    }
+    break;
+
     case game::PacketID::CS_RegisterRequest:
     {
         std::string userName;
@@ -101,6 +171,7 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         return CS_REGISTER_REQUEST(pSession, userName);
     }
     break;
+
     case game::PacketID::CS_Chat:
     {
         UINT32 targetID;
@@ -117,6 +188,7 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         return CS_CHAT(pSession, targetID, message, channel);
     }
     break;
+
     case game::PacketID::CS_Keyinfo:
     {
         UINT32 keyInfo;
@@ -131,6 +203,7 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         return CS_KEYINFO(pSession, keyInfo, cameraYaw);
     }
     break;
+
     case game::PacketID::CS_PlayerAttack:
     {
         UINT32 aiID;
@@ -145,6 +218,7 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         return CS_PLAYER_ATTACK(pSession, aiID, attackType);
     }
     break;
+
     case game::PacketID::CS_PositionSync:
     {
         float posX;
@@ -161,6 +235,7 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         return CS_POSITION_SYNC(pSession, posX, posY, cameraYaw);
     }
     break;
+
     case game::PacketID::CS_CheckTimeout:
     {
         bool bCheck;
@@ -173,6 +248,7 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         return CS_CHECK_TIMEOUT(pSession, bCheck);
     }
     break;
+
     default:
         break;
     }
@@ -267,6 +343,16 @@ bool CS_LOGIN_REQUEST(CSession* pSession, std::string id, std::string password)
     return true;
 }
 
+bool CS_REQUEST_CHARACTER_INFO(CSession* pSession, bool bRequest)
+{
+    return false;
+}
+
+bool CS_REQUEST_ITEM_INFO(CSession* pSession, bool bRequest)
+{
+    return false;
+}
+
 bool CS_SIGNUP_REQUEST(CSession* pSession, std::string id, std::string email, std::string password)
 {
     // 회원가입 시도
@@ -292,6 +378,16 @@ bool CS_SIGNUP_REQUEST(CSession* pSession, std::string id, std::string email, st
 
     SC_SIGNUP_RESPONSE_FOR_SINGLE(pSession, false, 3);   // 에러 코드 3 : 알 수 없는 이유로 검사를 했음에도 불구하고 이미 존재하는 이메일 or ID. 데이터 오염이 의심됨.
     return true;
+}
+
+bool CS_TEST_PACKET1(CSession* pSession, const std::vector<UINT32>& tempData)
+{
+    return false;
+}
+
+bool CS_TEST_PACKET2(CSession* pSession, const std::vector<PlayerInfo>& tempData)
+{
+    return false;
 }
 
 bool CS_CHAT(CSession* pSession, UINT32 targetID, std::string message, UINT32 channel)

@@ -11,5 +11,18 @@
             "playerMaxMp": 100,
             "playerNickname": "default"
         }
+    },
+    {
+        "login": {
+            "email": "1234",
+            "id": "123",
+            "pw": "12345"
+        },
+        "player": {
+            "playerJobIcon": 0,
+            "playerMaxHp": 100,
+            "playerMaxMp": 100,
+            "playerNickname": "default"
+        }
     }
 ]

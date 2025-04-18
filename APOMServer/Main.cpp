@@ -177,7 +177,7 @@ int main()
     // 로그인 정보 불러오기
     //=====================================================================================================================================
     CLoginManager& loginManager = CLoginManager::GetInstance();
-    if(!loginManager.LoadFromFile("logins.json"))
+    if(!loginManager.LoadFromFile("users.json"))
     {
         std::cout << "파일을 불러오지 못했습니다.\n";
         std::system("pause");
@@ -303,7 +303,7 @@ int main()
     // 종료시 현재 서버에 있는 정보 안전하게 DB등에 저장
 
     // 로그인 데이터 저장
-    loginManager.SaveToFile("logins.json");
+    loginManager.SaveToFile("users.json");
 
     // 윈도우 소켓 매니저 정리
     winSockManager.Cleanup();
