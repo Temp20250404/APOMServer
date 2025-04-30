@@ -13,9 +13,6 @@ public:
 	~CSession();
 
 public:
-    void RegisterObject(CObject** ppObj);
-
-public:
     // 삭제 여부를 판별하는 변수
     bool isAlive;
 

@@ -48,6 +48,9 @@ public class PacketManagerRegisterInfo
         _onRecv.Add((ushort)Game.PacketID.ScPositionSync, MakePacket<SC_POSITION_SYNC>);
         _handler.Add((ushort)Game.PacketID.ScPositionSync, PacketHandler.SC_PositionSync);
 
+        _onRecv.Add((ushort)Game.PacketID.ScBossAttack, MakePacket<SC_BOSS_ATTACK>);
+        _handler.Add((ushort)Game.PacketID.ScBossAttack, PacketHandler.SC_BossAttack);
+
         _onRecv.Add((ushort)Game.PacketID.ScBossPhase, MakePacket<SC_BOSS_PHASE>);
         _handler.Add((ushort)Game.PacketID.ScBossPhase, PacketHandler.SC_BossPhase);
 

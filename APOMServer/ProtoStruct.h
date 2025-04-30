@@ -2,9 +2,8 @@
 
 struct PlayerInfo {
     std::string playerNickname;
-    UINT32 playerMaxHp;
-    UINT32 playerMaxMp;
-    UINT32 playerJobIcon;
+    UINT32 playerJob;
+    UINT32 level;
 };
 
 struct Position {

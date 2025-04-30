@@ -24,9 +24,8 @@ namespace game {
 PROTOBUF_CONSTEXPR PlayerInfo::PlayerInfo(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.playernickname_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.playermaxhp_)*/0u
-  , /*decltype(_impl_.playermaxmp_)*/0u
-  , /*decltype(_impl_.playerjobicon_)*/0u
+  , /*decltype(_impl_.playerjob_)*/0u
+  , /*decltype(_impl_.level_)*/0u
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct PlayerInfoDefaultTypeInternal {
   PROTOBUF_CONSTEXPR PlayerInfoDefaultTypeInternal()
@@ -234,7 +233,8 @@ PROTOBUF_CONSTEXPR SC_CREATE_MONSTER::SC_CREATE_MONSTER(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.monsterpos_)*/nullptr
   , /*decltype(_impl_.aiid_)*/0u
-  , /*decltype(_impl_.monstertypeid_)*/0u
+  , /*decltype(_impl_.monstertype_)*/0u
+  , /*decltype(_impl_.maxhp_)*/0u
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct SC_CREATE_MONSTERDefaultTypeInternal {
   PROTOBUF_CONSTEXPR SC_CREATE_MONSTERDefaultTypeInternal()
@@ -321,7 +321,7 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORIT
 PROTOBUF_CONSTEXPR CS_PLAYER_ATTACK::CS_PLAYER_ATTACK(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.aiid_)*/0u
-  , /*decltype(_impl_.attacktype_)*/0u
+  , /*decltype(_impl_.attackdamage_)*/0u
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct CS_PLAYER_ATTACKDefaultTypeInternal {
   PROTOBUF_CONSTEXPR CS_PLAYER_ATTACKDefaultTypeInternal()
@@ -365,10 +365,8 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORIT
 PROTOBUF_CONSTEXPR SC_PLAYER_ATTACK::SC_PLAYER_ATTACK(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.playerid_)*/0u
-  , /*decltype(_impl_.attacktype_)*/0u
   , /*decltype(_impl_.aiid_)*/0u
   , /*decltype(_impl_.damage_)*/0u
-  , /*decltype(_impl_.targetmaxhp_)*/0u
   , /*decltype(_impl_.targetcurhp_)*/0u
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct SC_PLAYER_ATTACKDefaultTypeInternal {
@@ -423,6 +421,34 @@ struct SC_POSITION_SYNCDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SC_POSITION_SYNCDefaultTypeInternal _SC_POSITION_SYNC_default_instance_;
+PROTOBUF_CONSTEXPR CS_BOSS_ATTACK::CS_BOSS_ATTACK(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.damage_)*/0u
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct CS_BOSS_ATTACKDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR CS_BOSS_ATTACKDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~CS_BOSS_ATTACKDefaultTypeInternal() {}
+  union {
+    CS_BOSS_ATTACK _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CS_BOSS_ATTACKDefaultTypeInternal _CS_BOSS_ATTACK_default_instance_;
+PROTOBUF_CONSTEXPR SC_BOSS_ATTACK::SC_BOSS_ATTACK(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.targetplayerid_)*/0u
+  , /*decltype(_impl_.damage_)*/0u
+  , /*decltype(_impl_.curhp_)*/0u
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct SC_BOSS_ATTACKDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SC_BOSS_ATTACKDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SC_BOSS_ATTACKDefaultTypeInternal() {}
+  union {
+    SC_BOSS_ATTACK _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SC_BOSS_ATTACKDefaultTypeInternal _SC_BOSS_ATTACK_default_instance_;
 PROTOBUF_CONSTEXPR SC_BOSS_PHASE::SC_BOSS_PHASE(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.targetmovementpos_)*/nullptr
@@ -496,7 +522,7 @@ struct SC_TEST_PACKETDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SC_TEST_PACKETDefaultTypeInternal _SC_TEST_PACKET_default_instance_;
 }  // namespace game
-static ::_pb::Metadata file_level_metadata_Protocol_2eproto[33];
+static ::_pb::Metadata file_level_metadata_Protocol_2eproto[35];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_Protocol_2eproto[2];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Protocol_2eproto = nullptr;
 
@@ -508,9 +534,8 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::game::PlayerInfo, _impl_.playernickname_),
-  PROTOBUF_FIELD_OFFSET(::game::PlayerInfo, _impl_.playermaxhp_),
-  PROTOBUF_FIELD_OFFSET(::game::PlayerInfo, _impl_.playermaxmp_),
-  PROTOBUF_FIELD_OFFSET(::game::PlayerInfo, _impl_.playerjobicon_),
+  PROTOBUF_FIELD_OFFSET(::game::PlayerInfo, _impl_.playerjob_),
+  PROTOBUF_FIELD_OFFSET(::game::PlayerInfo, _impl_.level_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::game::Position, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -626,8 +651,9 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::game::SC_CREATE_MONSTER, _impl_.aiid_),
-  PROTOBUF_FIELD_OFFSET(::game::SC_CREATE_MONSTER, _impl_.monstertypeid_),
+  PROTOBUF_FIELD_OFFSET(::game::SC_CREATE_MONSTER, _impl_.monstertype_),
   PROTOBUF_FIELD_OFFSET(::game::SC_CREATE_MONSTER, _impl_.monsterpos_),
+  PROTOBUF_FIELD_OFFSET(::game::SC_CREATE_MONSTER, _impl_.maxhp_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::game::SC_REMOVE_CHARACTER, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -678,7 +704,7 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::game::CS_PLAYER_ATTACK, _impl_.aiid_),
-  PROTOBUF_FIELD_OFFSET(::game::CS_PLAYER_ATTACK, _impl_.attacktype_),
+  PROTOBUF_FIELD_OFFSET(::game::CS_PLAYER_ATTACK, _impl_.attackdamage_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::game::CS_POSITION_SYNC, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -704,10 +730,8 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::game::SC_PLAYER_ATTACK, _impl_.playerid_),
-  PROTOBUF_FIELD_OFFSET(::game::SC_PLAYER_ATTACK, _impl_.attacktype_),
   PROTOBUF_FIELD_OFFSET(::game::SC_PLAYER_ATTACK, _impl_.aiid_),
   PROTOBUF_FIELD_OFFSET(::game::SC_PLAYER_ATTACK, _impl_.damage_),
-  PROTOBUF_FIELD_OFFSET(::game::SC_PLAYER_ATTACK, _impl_.targetmaxhp_),
   PROTOBUF_FIELD_OFFSET(::game::SC_PLAYER_ATTACK, _impl_.targetcurhp_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::game::SC_PLAYER_DAMAGED, _internal_metadata_),
@@ -734,6 +758,22 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   PROTOBUF_FIELD_OFFSET(::game::SC_POSITION_SYNC, _impl_.posx_),
   PROTOBUF_FIELD_OFFSET(::game::SC_POSITION_SYNC, _impl_.posy_),
   PROTOBUF_FIELD_OFFSET(::game::SC_POSITION_SYNC, _impl_.camerayaw_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::game::CS_BOSS_ATTACK, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::game::CS_BOSS_ATTACK, _impl_.damage_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::game::SC_BOSS_ATTACK, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::game::SC_BOSS_ATTACK, _impl_.targetplayerid_),
+  PROTOBUF_FIELD_OFFSET(::game::SC_BOSS_ATTACK, _impl_.damage_),
+  PROTOBUF_FIELD_OFFSET(::game::SC_BOSS_ATTACK, _impl_.curhp_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::game::SC_BOSS_PHASE, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -778,21 +818,21 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::game::PlayerInfo)},
-  { 10, -1, -1, sizeof(::game::Position)},
-  { 19, -1, -1, sizeof(::game::CS_FIND_ID_REQUEST)},
-  { 26, -1, -1, sizeof(::game::CS_FIND_PW_REQUEST)},
-  { 34, -1, -1, sizeof(::game::CS_LOGIN_REQUEST)},
-  { 42, -1, -1, sizeof(::game::CS_REQUEST_CHARACTER_INFO)},
-  { 49, -1, -1, sizeof(::game::CS_REQUEST_ITEM_INFO)},
-  { 56, -1, -1, sizeof(::game::CS_SIGNUP_REQUEST)},
-  { 65, -1, -1, sizeof(::game::SC_FIND_ID_RESPONSE)},
-  { 73, -1, -1, sizeof(::game::SC_FIND_PW_RESPONSE)},
-  { 81, -1, -1, sizeof(::game::SC_LOGIN_RESPONSE)},
-  { 89, -1, -1, sizeof(::game::SC_REQUEST_ITEM_INFO)},
-  { 96, -1, -1, sizeof(::game::SC_RESPONSE_CHARACTER_INFO)},
-  { 103, -1, -1, sizeof(::game::SC_SIGNUP_RESPONSE)},
-  { 111, -1, -1, sizeof(::game::CS_REGISTER_REQUEST)},
-  { 118, -1, -1, sizeof(::game::SC_CREATE_MONSTER)},
+  { 9, -1, -1, sizeof(::game::Position)},
+  { 18, -1, -1, sizeof(::game::CS_FIND_ID_REQUEST)},
+  { 25, -1, -1, sizeof(::game::CS_FIND_PW_REQUEST)},
+  { 33, -1, -1, sizeof(::game::CS_LOGIN_REQUEST)},
+  { 41, -1, -1, sizeof(::game::CS_REQUEST_CHARACTER_INFO)},
+  { 48, -1, -1, sizeof(::game::CS_REQUEST_ITEM_INFO)},
+  { 55, -1, -1, sizeof(::game::CS_SIGNUP_REQUEST)},
+  { 64, -1, -1, sizeof(::game::SC_FIND_ID_RESPONSE)},
+  { 72, -1, -1, sizeof(::game::SC_FIND_PW_RESPONSE)},
+  { 80, -1, -1, sizeof(::game::SC_LOGIN_RESPONSE)},
+  { 88, -1, -1, sizeof(::game::SC_REQUEST_ITEM_INFO)},
+  { 95, -1, -1, sizeof(::game::SC_RESPONSE_CHARACTER_INFO)},
+  { 102, -1, -1, sizeof(::game::SC_SIGNUP_RESPONSE)},
+  { 110, -1, -1, sizeof(::game::CS_REGISTER_REQUEST)},
+  { 117, -1, -1, sizeof(::game::SC_CREATE_MONSTER)},
   { 127, -1, -1, sizeof(::game::SC_REMOVE_CHARACTER)},
   { 134, -1, -1, sizeof(::game::SC_SPAWN_CHARACTER)},
   { 144, -1, -1, sizeof(::game::CS_CHAT)},
@@ -802,14 +842,16 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 178, -1, -1, sizeof(::game::CS_POSITION_SYNC)},
   { 187, -1, -1, sizeof(::game::SC_KEYINFO)},
   { 196, -1, -1, sizeof(::game::SC_PLAYER_ATTACK)},
-  { 208, -1, -1, sizeof(::game::SC_PLAYER_DAMAGED)},
-  { 216, -1, -1, sizeof(::game::SC_PLAYER_DIE)},
-  { 223, -1, -1, sizeof(::game::SC_POSITION_SYNC)},
-  { 233, -1, -1, sizeof(::game::SC_BOSS_PHASE)},
-  { 246, -1, -1, sizeof(::game::CS_CHECK_TIMEOUT)},
-  { 253, -1, -1, sizeof(::game::CS_TEST_PACKET1)},
-  { 260, -1, -1, sizeof(::game::CS_TEST_PACKET2)},
-  { 267, -1, -1, sizeof(::game::SC_TEST_PACKET)},
+  { 206, -1, -1, sizeof(::game::SC_PLAYER_DAMAGED)},
+  { 214, -1, -1, sizeof(::game::SC_PLAYER_DIE)},
+  { 221, -1, -1, sizeof(::game::SC_POSITION_SYNC)},
+  { 231, -1, -1, sizeof(::game::CS_BOSS_ATTACK)},
+  { 238, -1, -1, sizeof(::game::SC_BOSS_ATTACK)},
+  { 247, -1, -1, sizeof(::game::SC_BOSS_PHASE)},
+  { 260, -1, -1, sizeof(::game::CS_CHECK_TIMEOUT)},
+  { 267, -1, -1, sizeof(::game::CS_TEST_PACKET1)},
+  { 274, -1, -1, sizeof(::game::CS_TEST_PACKET2)},
+  { 281, -1, -1, sizeof(::game::SC_TEST_PACKET)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -841,6 +883,8 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::game::_SC_PLAYER_DAMAGED_default_instance_._instance,
   &::game::_SC_PLAYER_DIE_default_instance_._instance,
   &::game::_SC_POSITION_SYNC_default_instance_._instance,
+  &::game::_CS_BOSS_ATTACK_default_instance_._instance,
+  &::game::_SC_BOSS_ATTACK_default_instance_._instance,
   &::game::_SC_BOSS_PHASE_default_instance_._instance,
   &::game::_CS_CHECK_TIMEOUT_default_instance_._instance,
   &::game::_CS_TEST_PACKET1_default_instance_._instance,
@@ -849,88 +893,90 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_Protocol_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\016Protocol.proto\022\004game\"e\n\nPlayerInfo\022\026\n\016"
-  "playerNickname\030\001 \001(\t\022\023\n\013playerMaxHp\030\002 \001("
-  "\r\022\023\n\013playerMaxMp\030\003 \001(\r\022\025\n\rplayerJobIcon\030"
-  "\004 \001(\r\"4\n\010Position\022\014\n\004posX\030\001 \001(\002\022\014\n\004posY\030"
-  "\002 \001(\002\022\014\n\004posZ\030\003 \001(\002\"#\n\022CS_FIND_ID_REQUES"
-  "T\022\r\n\005email\030\001 \001(\t\"/\n\022CS_FIND_PW_REQUEST\022\n"
-  "\n\002id\030\001 \001(\t\022\r\n\005email\030\002 \001(\t\"0\n\020CS_LOGIN_RE"
-  "QUEST\022\n\n\002id\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"\'\n\031C"
-  "S_REQUEST_CHARACTER_INFO\022\n\n\002id\030\001 \001(\t\"\"\n\024"
-  "CS_REQUEST_ITEM_INFO\022\n\n\002id\030\001 \001(\t\"@\n\021CS_S"
-  "IGNUP_REQUEST\022\n\n\002id\030\001 \001(\t\022\r\n\005email\030\002 \001(\t"
-  "\022\020\n\010password\030\003 \001(\t\"2\n\023SC_FIND_ID_RESPONS"
-  "E\022\017\n\007success\030\001 \001(\010\022\n\n\002id\030\002 \001(\t\"2\n\023SC_FIN"
-  "D_PW_RESPONSE\022\017\n\007success\030\001 \001(\010\022\n\n\002pw\030\002 \001"
-  "(\t\"7\n\021SC_LOGIN_RESPONSE\022\017\n\007success\030\001 \001(\010"
-  "\022\021\n\terrorCode\030\002 \001(\r\"(\n\024SC_REQUEST_ITEM_I"
-  "NFO\022\020\n\010itemInfo\030\001 \003(\r\"B\n\032SC_RESPONSE_CHA"
-  "RACTER_INFO\022$\n\nplayerInfo\030\001 \001(\0132\020.game.P"
-  "layerInfo\"8\n\022SC_SIGNUP_RESPONSE\022\017\n\007succe"
-  "ss\030\001 \001(\010\022\021\n\terrorCode\030\002 \001(\r\"\'\n\023CS_REGIST"
-  "ER_REQUEST\022\020\n\010bRequest\030\001 \001(\010\"\\\n\021SC_CREAT"
-  "E_MONSTER\022\014\n\004aiID\030\001 \001(\r\022\025\n\rmonsterTypeID"
-  "\030\002 \001(\r\022\"\n\nmonsterPos\030\003 \001(\0132\016.game.Positi"
-  "on\"\'\n\023SC_REMOVE_CHARACTER\022\020\n\010playerID\030\001 "
-  "\001(\r\"\202\001\n\022SC_SPAWN_CHARACTER\022\020\n\010playerID\030\001"
-  " \001(\r\022!\n\tplayerPos\030\002 \001(\0132\016.game.Position\022"
-  "\021\n\tcameraYaw\030\003 \001(\002\022$\n\nplayerInfo\030\004 \001(\0132\020"
-  ".game.PlayerInfo\"=\n\007CS_CHAT\022\020\n\010targetID\030"
-  "\001 \001(\r\022\017\n\007message\030\002 \001(\t\022\017\n\007channel\030\003 \001(\r\""
-  "=\n\007SC_CHAT\022\020\n\010playerID\030\001 \001(\r\022\017\n\007message\030"
-  "\002 \001(\t\022\017\n\007channel\030\003 \001(\r\"0\n\nCS_KEYINFO\022\017\n\007"
-  "keyInfo\030\001 \001(\r\022\021\n\tcameraYaw\030\002 \001(\002\"4\n\020CS_P"
-  "LAYER_ATTACK\022\014\n\004aiID\030\001 \001(\r\022\022\n\nattackType"
-  "\030\002 \001(\r\"A\n\020CS_POSITION_SYNC\022\014\n\004posX\030\001 \001(\002"
-  "\022\014\n\004posY\030\002 \001(\002\022\021\n\tcameraYaw\030\003 \001(\002\"B\n\nSC_"
-  "KEYINFO\022\020\n\010playerID\030\001 \001(\r\022\017\n\007keyInfo\030\002 \001"
-  "(\r\022\021\n\tcameraYaw\030\003 \001(\002\"\200\001\n\020SC_PLAYER_ATTA"
-  "CK\022\020\n\010playerID\030\001 \001(\r\022\022\n\nattackType\030\002 \001(\r"
-  "\022\014\n\004aiID\030\003 \001(\r\022\016\n\006damage\030\004 \001(\r\022\023\n\013target"
-  "MaxHP\030\005 \001(\r\022\023\n\013targetCurHP\030\006 \001(\r\"5\n\021SC_P"
-  "LAYER_DAMAGED\022\020\n\010playerID\030\001 \001(\r\022\016\n\006damag"
-  "e\030\002 \001(\r\"!\n\rSC_PLAYER_DIE\022\020\n\010playerID\030\001 \001"
-  "(\r\"S\n\020SC_POSITION_SYNC\022\020\n\010playerID\030\001 \001(\r"
-  "\022\014\n\004posX\030\002 \001(\002\022\014\n\004posY\030\003 \001(\002\022\021\n\tcameraYa"
-  "w\030\004 \001(\002\"\304\001\n\rSC_BOSS_PHASE\022\016\n\006bossID\030\001 \001("
-  "\r\022\021\n\tcurrentHp\030\002 \001(\r\022\r\n\005maxHp\030\003 \001(\r\022)\n\021t"
-  "argetMovementPos\030\004 \001(\0132\016.game.Position\022\037"
-  "\n\007bossPos\030\005 \001(\0132\016.game.Position\022#\n\tbossS"
-  "tate\030\006 \001(\0162\020.game.BOSS_STATE\022\020\n\010curSpeed"
-  "\030\007 \001(\002\"\"\n\020CS_CHECK_TIMEOUT\022\016\n\006bCheck\030\001 \001"
-  "(\010\"#\n\017CS_TEST_PACKET1\022\020\n\010tempData\030\001 \003(\r\""
-  "5\n\017CS_TEST_PACKET2\022\"\n\010tempData\030\001 \003(\0132\020.g"
-  "ame.PlayerInfo\"4\n\016SC_TEST_PACKET\022\"\n\010temp"
-  "Data\030\001 \003(\0132\020.game.PlayerInfo*\234\005\n\010PacketI"
-  "D\022\013\n\007CS_Chat\020\000\022\023\n\017CS_CheckTimeout\020\001\022\024\n\020C"
-  "S_FindIdRequest\020\002\022\024\n\020CS_FindPwRequest\020\003\022"
-  "\016\n\nCS_Keyinfo\020\004\022\023\n\017CS_LoginRequest\020\005\022\023\n\017"
-  "CS_PlayerAttack\020\006\022\023\n\017CS_PositionSync\020\007\022\026"
-  "\n\022CS_RegisterRequest\020\010\022\033\n\027CS_RequestChar"
-  "acterInfo\020\t\022\026\n\022CS_RequestItemInfo\020\n\022\024\n\020C"
-  "S_SignupRequest\020\013\022\022\n\016CS_TestPacket1\020\014\022\022\n"
-  "\016CS_TestPacket2\020\r\022\020\n\014SC_BossPhase\020\016\022\013\n\007S"
-  "C_Chat\020\017\022\024\n\020SC_CreateMonster\020\020\022\025\n\021SC_Fin"
-  "dIdResponse\020\021\022\025\n\021SC_FindPwResponse\020\022\022\016\n\n"
-  "SC_Keyinfo\020\023\022\024\n\020SC_LoginResponse\020\024\022\023\n\017SC"
-  "_PlayerAttack\020\025\022\024\n\020SC_PlayerDamaged\020\026\022\020\n"
-  "\014SC_PlayerDie\020\027\022\023\n\017SC_PositionSync\020\030\022\026\n\022"
-  "SC_RemoveCharacter\020\031\022\026\n\022SC_RequestItemIn"
-  "fo\020\032\022\034\n\030SC_ResponseCharacterInfo\020\033\022\025\n\021SC"
-  "_SignupResponse\020\034\022\025\n\021SC_SpawnCharacter\020\035"
-  "\022\021\n\rSC_TestPacket\020\036*\274\001\n\nBOSS_STATE\022\025\n\021BO"
-  "SS_STATE_ATTACK\020\000\022\024\n\020BOSS_STATE_CHASE\020\001\022"
-  "\022\n\016BOSS_STATE_DIE\020\002\022\023\n\017BOSS_STATE_IDLE\020\003"
-  "\022\025\n\021BOSS_STATE_SKILL1\020\004\022\025\n\021BOSS_STATE_SK"
-  "ILL2\020\005\022\025\n\021BOSS_STATE_SKILL3\020\006\022\023\n\017BOSS_ST"
-  "ATE_WALK\020\007b\006proto3"
+  "\n\016Protocol.proto\022\004game\"F\n\nPlayerInfo\022\026\n\016"
+  "playerNickname\030\001 \001(\t\022\021\n\tplayerJob\030\002 \001(\r\022"
+  "\r\n\005level\030\003 \001(\r\"4\n\010Position\022\014\n\004posX\030\001 \001(\002"
+  "\022\014\n\004posY\030\002 \001(\002\022\014\n\004posZ\030\003 \001(\002\"#\n\022CS_FIND_"
+  "ID_REQUEST\022\r\n\005email\030\001 \001(\t\"/\n\022CS_FIND_PW_"
+  "REQUEST\022\n\n\002id\030\001 \001(\t\022\r\n\005email\030\002 \001(\t\"0\n\020CS"
+  "_LOGIN_REQUEST\022\n\n\002id\030\001 \001(\t\022\020\n\010password\030\002"
+  " \001(\t\"\'\n\031CS_REQUEST_CHARACTER_INFO\022\n\n\002id\030"
+  "\001 \001(\t\"\"\n\024CS_REQUEST_ITEM_INFO\022\n\n\002id\030\001 \001("
+  "\t\"@\n\021CS_SIGNUP_REQUEST\022\n\n\002id\030\001 \001(\t\022\r\n\005em"
+  "ail\030\002 \001(\t\022\020\n\010password\030\003 \001(\t\"2\n\023SC_FIND_I"
+  "D_RESPONSE\022\017\n\007success\030\001 \001(\010\022\n\n\002id\030\002 \001(\t\""
+  "2\n\023SC_FIND_PW_RESPONSE\022\017\n\007success\030\001 \001(\010\022"
+  "\n\n\002pw\030\002 \001(\t\"7\n\021SC_LOGIN_RESPONSE\022\017\n\007succ"
+  "ess\030\001 \001(\010\022\021\n\terrorCode\030\002 \001(\r\"(\n\024SC_REQUE"
+  "ST_ITEM_INFO\022\020\n\010itemInfo\030\001 \003(\r\"B\n\032SC_RES"
+  "PONSE_CHARACTER_INFO\022$\n\nplayerInfo\030\001 \001(\013"
+  "2\020.game.PlayerInfo\"8\n\022SC_SIGNUP_RESPONSE"
+  "\022\017\n\007success\030\001 \001(\010\022\021\n\terrorCode\030\002 \001(\r\"\'\n\023"
+  "CS_REGISTER_REQUEST\022\020\n\010bRequest\030\001 \001(\010\"i\n"
+  "\021SC_CREATE_MONSTER\022\014\n\004aiID\030\001 \001(\r\022\023\n\013mons"
+  "terType\030\002 \001(\r\022\"\n\nmonsterPos\030\003 \001(\0132\016.game"
+  ".Position\022\r\n\005MaxHP\030\004 \001(\r\"\'\n\023SC_REMOVE_CH"
+  "ARACTER\022\020\n\010playerID\030\001 \001(\r\"\202\001\n\022SC_SPAWN_C"
+  "HARACTER\022\020\n\010playerID\030\001 \001(\r\022!\n\tplayerPos\030"
+  "\002 \001(\0132\016.game.Position\022\021\n\tcameraYaw\030\003 \001(\002"
+  "\022$\n\nplayerInfo\030\004 \001(\0132\020.game.PlayerInfo\"="
+  "\n\007CS_CHAT\022\020\n\010targetID\030\001 \001(\r\022\017\n\007message\030\002"
+  " \001(\t\022\017\n\007channel\030\003 \001(\r\"=\n\007SC_CHAT\022\020\n\010play"
+  "erID\030\001 \001(\r\022\017\n\007message\030\002 \001(\t\022\017\n\007channel\030\003"
+  " \001(\r\"0\n\nCS_KEYINFO\022\017\n\007keyInfo\030\001 \001(\r\022\021\n\tc"
+  "ameraYaw\030\002 \001(\002\"6\n\020CS_PLAYER_ATTACK\022\014\n\004ai"
+  "ID\030\001 \001(\r\022\024\n\014attackDamage\030\002 \001(\r\"A\n\020CS_POS"
+  "ITION_SYNC\022\014\n\004posX\030\001 \001(\002\022\014\n\004posY\030\002 \001(\002\022\021"
+  "\n\tcameraYaw\030\003 \001(\002\"B\n\nSC_KEYINFO\022\020\n\010playe"
+  "rID\030\001 \001(\r\022\017\n\007keyInfo\030\002 \001(\r\022\021\n\tcameraYaw\030"
+  "\003 \001(\002\"W\n\020SC_PLAYER_ATTACK\022\020\n\010playerID\030\001 "
+  "\001(\r\022\014\n\004aiID\030\002 \001(\r\022\016\n\006damage\030\003 \001(\r\022\023\n\013tar"
+  "getCurHP\030\004 \001(\r\"5\n\021SC_PLAYER_DAMAGED\022\020\n\010p"
+  "layerID\030\001 \001(\r\022\016\n\006damage\030\002 \001(\r\"!\n\rSC_PLAY"
+  "ER_DIE\022\020\n\010playerID\030\001 \001(\r\"S\n\020SC_POSITION_"
+  "SYNC\022\020\n\010playerID\030\001 \001(\r\022\014\n\004posX\030\002 \001(\002\022\014\n\004"
+  "posY\030\003 \001(\002\022\021\n\tcameraYaw\030\004 \001(\002\" \n\016CS_BOSS"
+  "_ATTACK\022\016\n\006damage\030\001 \001(\r\"G\n\016SC_BOSS_ATTAC"
+  "K\022\026\n\016targetPlayerID\030\001 \001(\r\022\016\n\006damage\030\002 \001("
+  "\r\022\r\n\005CurHP\030\003 \001(\r\"\304\001\n\rSC_BOSS_PHASE\022\016\n\006bo"
+  "ssID\030\001 \001(\r\022\021\n\tcurrentHp\030\002 \001(\r\022\r\n\005maxHp\030\003"
+  " \001(\r\022)\n\021targetMovementPos\030\004 \001(\0132\016.game.P"
+  "osition\022\037\n\007bossPos\030\005 \001(\0132\016.game.Position"
+  "\022#\n\tbossState\030\006 \001(\0162\020.game.BOSS_STATE\022\020\n"
+  "\010curSpeed\030\007 \001(\002\"\"\n\020CS_CHECK_TIMEOUT\022\016\n\006b"
+  "Check\030\001 \001(\010\"#\n\017CS_TEST_PACKET1\022\020\n\010tempDa"
+  "ta\030\001 \003(\r\"5\n\017CS_TEST_PACKET2\022\"\n\010tempData\030"
+  "\001 \003(\0132\020.game.PlayerInfo\"4\n\016SC_TEST_PACKE"
+  "T\022\"\n\010tempData\030\001 \003(\0132\020.game.PlayerInfo*\302\005"
+  "\n\010PacketID\022\021\n\rCS_BossAttack\020\000\022\013\n\007CS_Chat"
+  "\020\001\022\023\n\017CS_CheckTimeout\020\002\022\024\n\020CS_FindIdRequ"
+  "est\020\003\022\024\n\020CS_FindPwRequest\020\004\022\016\n\nCS_Keyinf"
+  "o\020\005\022\023\n\017CS_LoginRequest\020\006\022\023\n\017CS_PlayerAtt"
+  "ack\020\007\022\023\n\017CS_PositionSync\020\010\022\026\n\022CS_Registe"
+  "rRequest\020\t\022\033\n\027CS_RequestCharacterInfo\020\n\022"
+  "\026\n\022CS_RequestItemInfo\020\013\022\024\n\020CS_SignupRequ"
+  "est\020\014\022\022\n\016CS_TestPacket1\020\r\022\022\n\016CS_TestPack"
+  "et2\020\016\022\021\n\rSC_BossAttack\020\017\022\020\n\014SC_BossPhase"
+  "\020\020\022\013\n\007SC_Chat\020\021\022\024\n\020SC_CreateMonster\020\022\022\025\n"
+  "\021SC_FindIdResponse\020\023\022\025\n\021SC_FindPwRespons"
+  "e\020\024\022\016\n\nSC_Keyinfo\020\025\022\024\n\020SC_LoginResponse\020"
+  "\026\022\023\n\017SC_PlayerAttack\020\027\022\024\n\020SC_PlayerDamag"
+  "ed\020\030\022\020\n\014SC_PlayerDie\020\031\022\023\n\017SC_PositionSyn"
+  "c\020\032\022\026\n\022SC_RemoveCharacter\020\033\022\026\n\022SC_Reques"
+  "tItemInfo\020\034\022\034\n\030SC_ResponseCharacterInfo\020"
+  "\035\022\025\n\021SC_SignupResponse\020\036\022\025\n\021SC_SpawnChar"
+  "acter\020\037\022\021\n\rSC_TestPacket\020 *\274\001\n\nBOSS_STAT"
+  "E\022\025\n\021BOSS_STATE_ATTACK\020\000\022\024\n\020BOSS_STATE_C"
+  "HASE\020\001\022\022\n\016BOSS_STATE_DIE\020\002\022\023\n\017BOSS_STATE"
+  "_IDLE\020\003\022\025\n\021BOSS_STATE_SKILL1\020\004\022\025\n\021BOSS_S"
+  "TATE_SKILL2\020\005\022\025\n\021BOSS_STATE_SKILL3\020\006\022\023\n\017"
+  "BOSS_STATE_WALK\020\007b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Protocol_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Protocol_2eproto = {
-    false, false, 3018, descriptor_table_protodef_Protocol_2eproto,
+    false, false, 3105, descriptor_table_protodef_Protocol_2eproto,
     "Protocol.proto",
-    &descriptor_table_Protocol_2eproto_once, nullptr, 0, 33,
+    &descriptor_table_Protocol_2eproto_once, nullptr, 0, 35,
     schemas, file_default_instances, TableStruct_Protocol_2eproto::offsets,
     file_level_metadata_Protocol_2eproto, file_level_enum_descriptors_Protocol_2eproto,
     file_level_service_descriptors_Protocol_2eproto,
@@ -979,6 +1025,8 @@ bool PacketID_IsValid(int value) {
     case 28:
     case 29:
     case 30:
+    case 31:
+    case 32:
       return true;
     default:
       return false;
@@ -1023,9 +1071,8 @@ PlayerInfo::PlayerInfo(const PlayerInfo& from)
   PlayerInfo* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.playernickname_){}
-    , decltype(_impl_.playermaxhp_){}
-    , decltype(_impl_.playermaxmp_){}
-    , decltype(_impl_.playerjobicon_){}
+    , decltype(_impl_.playerjob_){}
+    , decltype(_impl_.level_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -1037,9 +1084,9 @@ PlayerInfo::PlayerInfo(const PlayerInfo& from)
     _this->_impl_.playernickname_.Set(from._internal_playernickname(), 
       _this->GetArenaForAllocation());
   }
-  ::memcpy(&_impl_.playermaxhp_, &from._impl_.playermaxhp_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.playerjobicon_) -
-    reinterpret_cast<char*>(&_impl_.playermaxhp_)) + sizeof(_impl_.playerjobicon_));
+  ::memcpy(&_impl_.playerjob_, &from._impl_.playerjob_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.level_) -
+    reinterpret_cast<char*>(&_impl_.playerjob_)) + sizeof(_impl_.level_));
   // @@protoc_insertion_point(copy_constructor:game.PlayerInfo)
 }
 
@@ -1049,9 +1096,8 @@ inline void PlayerInfo::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.playernickname_){}
-    , decltype(_impl_.playermaxhp_){0u}
-    , decltype(_impl_.playermaxmp_){0u}
-    , decltype(_impl_.playerjobicon_){0u}
+    , decltype(_impl_.playerjob_){0u}
+    , decltype(_impl_.level_){0u}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.playernickname_.InitDefault();
@@ -1085,9 +1131,9 @@ void PlayerInfo::Clear() {
   (void) cached_has_bits;
 
   _impl_.playernickname_.ClearToEmpty();
-  ::memset(&_impl_.playermaxhp_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.playerjobicon_) -
-      reinterpret_cast<char*>(&_impl_.playermaxhp_)) + sizeof(_impl_.playerjobicon_));
+  ::memset(&_impl_.playerjob_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.level_) -
+      reinterpret_cast<char*>(&_impl_.playerjob_)) + sizeof(_impl_.level_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1107,26 +1153,18 @@ const char* PlayerInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ct
         } else
           goto handle_unusual;
         continue;
-      // uint32 playerMaxHp = 2;
+      // uint32 playerJob = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.playermaxhp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          _impl_.playerjob_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // uint32 playerMaxMp = 3;
+      // uint32 level = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-          _impl_.playermaxmp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // uint32 playerJobIcon = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
-          _impl_.playerjobicon_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          _impl_.level_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -1170,22 +1208,16 @@ uint8_t* PlayerInfo::_InternalSerialize(
         1, this->_internal_playernickname(), target);
   }
 
-  // uint32 playerMaxHp = 2;
-  if (this->_internal_playermaxhp() != 0) {
+  // uint32 playerJob = 2;
+  if (this->_internal_playerjob() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_playermaxhp(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_playerjob(), target);
   }
 
-  // uint32 playerMaxMp = 3;
-  if (this->_internal_playermaxmp() != 0) {
+  // uint32 level = 3;
+  if (this->_internal_level() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(3, this->_internal_playermaxmp(), target);
-  }
-
-  // uint32 playerJobIcon = 4;
-  if (this->_internal_playerjobicon() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(4, this->_internal_playerjobicon(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(3, this->_internal_level(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1211,19 +1243,14 @@ size_t PlayerInfo::ByteSizeLong() const {
         this->_internal_playernickname());
   }
 
-  // uint32 playerMaxHp = 2;
-  if (this->_internal_playermaxhp() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_playermaxhp());
+  // uint32 playerJob = 2;
+  if (this->_internal_playerjob() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_playerjob());
   }
 
-  // uint32 playerMaxMp = 3;
-  if (this->_internal_playermaxmp() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_playermaxmp());
-  }
-
-  // uint32 playerJobIcon = 4;
-  if (this->_internal_playerjobicon() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_playerjobicon());
+  // uint32 level = 3;
+  if (this->_internal_level() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_level());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -1247,14 +1274,11 @@ void PlayerInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PRO
   if (!from._internal_playernickname().empty()) {
     _this->_internal_set_playernickname(from._internal_playernickname());
   }
-  if (from._internal_playermaxhp() != 0) {
-    _this->_internal_set_playermaxhp(from._internal_playermaxhp());
+  if (from._internal_playerjob() != 0) {
+    _this->_internal_set_playerjob(from._internal_playerjob());
   }
-  if (from._internal_playermaxmp() != 0) {
-    _this->_internal_set_playermaxmp(from._internal_playermaxmp());
-  }
-  if (from._internal_playerjobicon() != 0) {
-    _this->_internal_set_playerjobicon(from._internal_playerjobicon());
+  if (from._internal_level() != 0) {
+    _this->_internal_set_level(from._internal_level());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1280,11 +1304,11 @@ void PlayerInfo::InternalSwap(PlayerInfo* other) {
       &other->_impl_.playernickname_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(PlayerInfo, _impl_.playerjobicon_)
-      + sizeof(PlayerInfo::_impl_.playerjobicon_)
-      - PROTOBUF_FIELD_OFFSET(PlayerInfo, _impl_.playermaxhp_)>(
-          reinterpret_cast<char*>(&_impl_.playermaxhp_),
-          reinterpret_cast<char*>(&other->_impl_.playermaxhp_));
+      PROTOBUF_FIELD_OFFSET(PlayerInfo, _impl_.level_)
+      + sizeof(PlayerInfo::_impl_.level_)
+      - PROTOBUF_FIELD_OFFSET(PlayerInfo, _impl_.playerjob_)>(
+          reinterpret_cast<char*>(&_impl_.playerjob_),
+          reinterpret_cast<char*>(&other->_impl_.playerjob_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata PlayerInfo::GetMetadata() const {
@@ -4451,7 +4475,8 @@ SC_CREATE_MONSTER::SC_CREATE_MONSTER(const SC_CREATE_MONSTER& from)
   new (&_impl_) Impl_{
       decltype(_impl_.monsterpos_){nullptr}
     , decltype(_impl_.aiid_){}
-    , decltype(_impl_.monstertypeid_){}
+    , decltype(_impl_.monstertype_){}
+    , decltype(_impl_.maxhp_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -4459,8 +4484,8 @@ SC_CREATE_MONSTER::SC_CREATE_MONSTER(const SC_CREATE_MONSTER& from)
     _this->_impl_.monsterpos_ = new ::game::Position(*from._impl_.monsterpos_);
   }
   ::memcpy(&_impl_.aiid_, &from._impl_.aiid_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.monstertypeid_) -
-    reinterpret_cast<char*>(&_impl_.aiid_)) + sizeof(_impl_.monstertypeid_));
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.maxhp_) -
+    reinterpret_cast<char*>(&_impl_.aiid_)) + sizeof(_impl_.maxhp_));
   // @@protoc_insertion_point(copy_constructor:game.SC_CREATE_MONSTER)
 }
 
@@ -4471,7 +4496,8 @@ inline void SC_CREATE_MONSTER::SharedCtor(
   new (&_impl_) Impl_{
       decltype(_impl_.monsterpos_){nullptr}
     , decltype(_impl_.aiid_){0u}
-    , decltype(_impl_.monstertypeid_){0u}
+    , decltype(_impl_.monstertype_){0u}
+    , decltype(_impl_.maxhp_){0u}
     , /*decltype(_impl_._cached_size_)*/{}
   };
 }
@@ -4505,8 +4531,8 @@ void SC_CREATE_MONSTER::Clear() {
   }
   _impl_.monsterpos_ = nullptr;
   ::memset(&_impl_.aiid_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.monstertypeid_) -
-      reinterpret_cast<char*>(&_impl_.aiid_)) + sizeof(_impl_.monstertypeid_));
+      reinterpret_cast<char*>(&_impl_.maxhp_) -
+      reinterpret_cast<char*>(&_impl_.aiid_)) + sizeof(_impl_.maxhp_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -4524,10 +4550,10 @@ const char* SC_CREATE_MONSTER::_InternalParse(const char* ptr, ::_pbi::ParseCont
         } else
           goto handle_unusual;
         continue;
-      // uint32 monsterTypeID = 2;
+      // uint32 monsterType = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.monstertypeid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          _impl_.monstertype_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -4536,6 +4562,14 @@ const char* SC_CREATE_MONSTER::_InternalParse(const char* ptr, ::_pbi::ParseCont
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr = ctx->ParseMessage(_internal_mutable_monsterpos(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint32 MaxHP = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
+          _impl_.maxhp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -4575,10 +4609,10 @@ uint8_t* SC_CREATE_MONSTER::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_aiid(), target);
   }
 
-  // uint32 monsterTypeID = 2;
-  if (this->_internal_monstertypeid() != 0) {
+  // uint32 monsterType = 2;
+  if (this->_internal_monstertype() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_monstertypeid(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_monstertype(), target);
   }
 
   // .game.Position monsterPos = 3;
@@ -4586,6 +4620,12 @@ uint8_t* SC_CREATE_MONSTER::_InternalSerialize(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(3, _Internal::monsterpos(this),
         _Internal::monsterpos(this).GetCachedSize(), target, stream);
+  }
+
+  // uint32 MaxHP = 4;
+  if (this->_internal_maxhp() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(4, this->_internal_maxhp(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -4616,9 +4656,14 @@ size_t SC_CREATE_MONSTER::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_aiid());
   }
 
-  // uint32 monsterTypeID = 2;
-  if (this->_internal_monstertypeid() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_monstertypeid());
+  // uint32 monsterType = 2;
+  if (this->_internal_monstertype() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_monstertype());
+  }
+
+  // uint32 MaxHP = 4;
+  if (this->_internal_maxhp() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_maxhp());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -4646,8 +4691,11 @@ void SC_CREATE_MONSTER::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, cons
   if (from._internal_aiid() != 0) {
     _this->_internal_set_aiid(from._internal_aiid());
   }
-  if (from._internal_monstertypeid() != 0) {
-    _this->_internal_set_monstertypeid(from._internal_monstertypeid());
+  if (from._internal_monstertype() != 0) {
+    _this->_internal_set_monstertype(from._internal_monstertype());
+  }
+  if (from._internal_maxhp() != 0) {
+    _this->_internal_set_maxhp(from._internal_maxhp());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -4667,8 +4715,8 @@ void SC_CREATE_MONSTER::InternalSwap(SC_CREATE_MONSTER* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(SC_CREATE_MONSTER, _impl_.monstertypeid_)
-      + sizeof(SC_CREATE_MONSTER::_impl_.monstertypeid_)
+      PROTOBUF_FIELD_OFFSET(SC_CREATE_MONSTER, _impl_.maxhp_)
+      + sizeof(SC_CREATE_MONSTER::_impl_.maxhp_)
       - PROTOBUF_FIELD_OFFSET(SC_CREATE_MONSTER, _impl_.monsterpos_)>(
           reinterpret_cast<char*>(&_impl_.monsterpos_),
           reinterpret_cast<char*>(&other->_impl_.monsterpos_));
@@ -5929,13 +5977,13 @@ CS_PLAYER_ATTACK::CS_PLAYER_ATTACK(const CS_PLAYER_ATTACK& from)
   CS_PLAYER_ATTACK* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.aiid_){}
-    , decltype(_impl_.attacktype_){}
+    , decltype(_impl_.attackdamage_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::memcpy(&_impl_.aiid_, &from._impl_.aiid_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.attacktype_) -
-    reinterpret_cast<char*>(&_impl_.aiid_)) + sizeof(_impl_.attacktype_));
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.attackdamage_) -
+    reinterpret_cast<char*>(&_impl_.aiid_)) + sizeof(_impl_.attackdamage_));
   // @@protoc_insertion_point(copy_constructor:game.CS_PLAYER_ATTACK)
 }
 
@@ -5945,7 +5993,7 @@ inline void CS_PLAYER_ATTACK::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.aiid_){0u}
-    , decltype(_impl_.attacktype_){0u}
+    , decltype(_impl_.attackdamage_){0u}
     , /*decltype(_impl_._cached_size_)*/{}
   };
 }
@@ -5974,8 +6022,8 @@ void CS_PLAYER_ATTACK::Clear() {
   (void) cached_has_bits;
 
   ::memset(&_impl_.aiid_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.attacktype_) -
-      reinterpret_cast<char*>(&_impl_.aiid_)) + sizeof(_impl_.attacktype_));
+      reinterpret_cast<char*>(&_impl_.attackdamage_) -
+      reinterpret_cast<char*>(&_impl_.aiid_)) + sizeof(_impl_.attackdamage_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -5993,10 +6041,10 @@ const char* CS_PLAYER_ATTACK::_InternalParse(const char* ptr, ::_pbi::ParseConte
         } else
           goto handle_unusual;
         continue;
-      // uint32 attackType = 2;
+      // uint32 attackDamage = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.attacktype_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          _impl_.attackdamage_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -6036,10 +6084,10 @@ uint8_t* CS_PLAYER_ATTACK::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_aiid(), target);
   }
 
-  // uint32 attackType = 2;
-  if (this->_internal_attacktype() != 0) {
+  // uint32 attackDamage = 2;
+  if (this->_internal_attackdamage() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_attacktype(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_attackdamage(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -6063,9 +6111,9 @@ size_t CS_PLAYER_ATTACK::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_aiid());
   }
 
-  // uint32 attackType = 2;
-  if (this->_internal_attacktype() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_attacktype());
+  // uint32 attackDamage = 2;
+  if (this->_internal_attackdamage() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_attackdamage());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -6089,8 +6137,8 @@ void CS_PLAYER_ATTACK::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   if (from._internal_aiid() != 0) {
     _this->_internal_set_aiid(from._internal_aiid());
   }
-  if (from._internal_attacktype() != 0) {
-    _this->_internal_set_attacktype(from._internal_attacktype());
+  if (from._internal_attackdamage() != 0) {
+    _this->_internal_set_attackdamage(from._internal_attackdamage());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -6110,8 +6158,8 @@ void CS_PLAYER_ATTACK::InternalSwap(CS_PLAYER_ATTACK* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(CS_PLAYER_ATTACK, _impl_.attacktype_)
-      + sizeof(CS_PLAYER_ATTACK::_impl_.attacktype_)
+      PROTOBUF_FIELD_OFFSET(CS_PLAYER_ATTACK, _impl_.attackdamage_)
+      + sizeof(CS_PLAYER_ATTACK::_impl_.attackdamage_)
       - PROTOBUF_FIELD_OFFSET(CS_PLAYER_ATTACK, _impl_.aiid_)>(
           reinterpret_cast<char*>(&_impl_.aiid_),
           reinterpret_cast<char*>(&other->_impl_.aiid_));
@@ -6658,10 +6706,8 @@ SC_PLAYER_ATTACK::SC_PLAYER_ATTACK(const SC_PLAYER_ATTACK& from)
   SC_PLAYER_ATTACK* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.playerid_){}
-    , decltype(_impl_.attacktype_){}
     , decltype(_impl_.aiid_){}
     , decltype(_impl_.damage_){}
-    , decltype(_impl_.targetmaxhp_){}
     , decltype(_impl_.targetcurhp_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
@@ -6678,10 +6724,8 @@ inline void SC_PLAYER_ATTACK::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.playerid_){0u}
-    , decltype(_impl_.attacktype_){0u}
     , decltype(_impl_.aiid_){0u}
     , decltype(_impl_.damage_){0u}
-    , decltype(_impl_.targetmaxhp_){0u}
     , decltype(_impl_.targetcurhp_){0u}
     , /*decltype(_impl_._cached_size_)*/{}
   };
@@ -6730,41 +6774,25 @@ const char* SC_PLAYER_ATTACK::_InternalParse(const char* ptr, ::_pbi::ParseConte
         } else
           goto handle_unusual;
         continue;
-      // uint32 attackType = 2;
+      // uint32 aiID = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.attacktype_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // uint32 aiID = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
           _impl_.aiid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // uint32 damage = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
+      // uint32 damage = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
           _impl_.damage_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // uint32 targetMaxHP = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.targetmaxhp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // uint32 targetCurHP = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
+      // uint32 targetCurHP = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
           _impl_.targetcurhp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
@@ -6805,34 +6833,22 @@ uint8_t* SC_PLAYER_ATTACK::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_playerid(), target);
   }
 
-  // uint32 attackType = 2;
-  if (this->_internal_attacktype() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_attacktype(), target);
-  }
-
-  // uint32 aiID = 3;
+  // uint32 aiID = 2;
   if (this->_internal_aiid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(3, this->_internal_aiid(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_aiid(), target);
   }
 
-  // uint32 damage = 4;
+  // uint32 damage = 3;
   if (this->_internal_damage() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(4, this->_internal_damage(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(3, this->_internal_damage(), target);
   }
 
-  // uint32 targetMaxHP = 5;
-  if (this->_internal_targetmaxhp() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(5, this->_internal_targetmaxhp(), target);
-  }
-
-  // uint32 targetCurHP = 6;
+  // uint32 targetCurHP = 4;
   if (this->_internal_targetcurhp() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(6, this->_internal_targetcurhp(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(4, this->_internal_targetcurhp(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -6856,27 +6872,17 @@ size_t SC_PLAYER_ATTACK::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_playerid());
   }
 
-  // uint32 attackType = 2;
-  if (this->_internal_attacktype() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_attacktype());
-  }
-
-  // uint32 aiID = 3;
+  // uint32 aiID = 2;
   if (this->_internal_aiid() != 0) {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_aiid());
   }
 
-  // uint32 damage = 4;
+  // uint32 damage = 3;
   if (this->_internal_damage() != 0) {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_damage());
   }
 
-  // uint32 targetMaxHP = 5;
-  if (this->_internal_targetmaxhp() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_targetmaxhp());
-  }
-
-  // uint32 targetCurHP = 6;
+  // uint32 targetCurHP = 4;
   if (this->_internal_targetcurhp() != 0) {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_targetcurhp());
   }
@@ -6902,17 +6908,11 @@ void SC_PLAYER_ATTACK::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   if (from._internal_playerid() != 0) {
     _this->_internal_set_playerid(from._internal_playerid());
   }
-  if (from._internal_attacktype() != 0) {
-    _this->_internal_set_attacktype(from._internal_attacktype());
-  }
   if (from._internal_aiid() != 0) {
     _this->_internal_set_aiid(from._internal_aiid());
   }
   if (from._internal_damage() != 0) {
     _this->_internal_set_damage(from._internal_damage());
-  }
-  if (from._internal_targetmaxhp() != 0) {
-    _this->_internal_set_targetmaxhp(from._internal_targetmaxhp());
   }
   if (from._internal_targetcurhp() != 0) {
     _this->_internal_set_targetcurhp(from._internal_targetcurhp());
@@ -7634,6 +7634,419 @@ void SC_POSITION_SYNC::InternalSwap(SC_POSITION_SYNC* other) {
 
 // ===================================================================
 
+class CS_BOSS_ATTACK::_Internal {
+ public:
+};
+
+CS_BOSS_ATTACK::CS_BOSS_ATTACK(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:game.CS_BOSS_ATTACK)
+}
+CS_BOSS_ATTACK::CS_BOSS_ATTACK(const CS_BOSS_ATTACK& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  CS_BOSS_ATTACK* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.damage_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_impl_.damage_ = from._impl_.damage_;
+  // @@protoc_insertion_point(copy_constructor:game.CS_BOSS_ATTACK)
+}
+
+inline void CS_BOSS_ATTACK::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.damage_){0u}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+CS_BOSS_ATTACK::~CS_BOSS_ATTACK() {
+  // @@protoc_insertion_point(destructor:game.CS_BOSS_ATTACK)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void CS_BOSS_ATTACK::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
+
+void CS_BOSS_ATTACK::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void CS_BOSS_ATTACK::Clear() {
+// @@protoc_insertion_point(message_clear_start:game.CS_BOSS_ATTACK)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.damage_ = 0u;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* CS_BOSS_ATTACK::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // uint32 damage = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.damage_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* CS_BOSS_ATTACK::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:game.CS_BOSS_ATTACK)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint32 damage = 1;
+  if (this->_internal_damage() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_damage(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:game.CS_BOSS_ATTACK)
+  return target;
+}
+
+size_t CS_BOSS_ATTACK::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:game.CS_BOSS_ATTACK)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // uint32 damage = 1;
+  if (this->_internal_damage() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_damage());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData CS_BOSS_ATTACK::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    CS_BOSS_ATTACK::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*CS_BOSS_ATTACK::GetClassData() const { return &_class_data_; }
+
+
+void CS_BOSS_ATTACK::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<CS_BOSS_ATTACK*>(&to_msg);
+  auto& from = static_cast<const CS_BOSS_ATTACK&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:game.CS_BOSS_ATTACK)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_damage() != 0) {
+    _this->_internal_set_damage(from._internal_damage());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void CS_BOSS_ATTACK::CopyFrom(const CS_BOSS_ATTACK& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:game.CS_BOSS_ATTACK)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CS_BOSS_ATTACK::IsInitialized() const {
+  return true;
+}
+
+void CS_BOSS_ATTACK::InternalSwap(CS_BOSS_ATTACK* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.damage_, other->_impl_.damage_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata CS_BOSS_ATTACK::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
+      file_level_metadata_Protocol_2eproto[28]);
+}
+
+// ===================================================================
+
+class SC_BOSS_ATTACK::_Internal {
+ public:
+};
+
+SC_BOSS_ATTACK::SC_BOSS_ATTACK(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:game.SC_BOSS_ATTACK)
+}
+SC_BOSS_ATTACK::SC_BOSS_ATTACK(const SC_BOSS_ATTACK& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  SC_BOSS_ATTACK* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.targetplayerid_){}
+    , decltype(_impl_.damage_){}
+    , decltype(_impl_.curhp_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::memcpy(&_impl_.targetplayerid_, &from._impl_.targetplayerid_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.curhp_) -
+    reinterpret_cast<char*>(&_impl_.targetplayerid_)) + sizeof(_impl_.curhp_));
+  // @@protoc_insertion_point(copy_constructor:game.SC_BOSS_ATTACK)
+}
+
+inline void SC_BOSS_ATTACK::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.targetplayerid_){0u}
+    , decltype(_impl_.damage_){0u}
+    , decltype(_impl_.curhp_){0u}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+SC_BOSS_ATTACK::~SC_BOSS_ATTACK() {
+  // @@protoc_insertion_point(destructor:game.SC_BOSS_ATTACK)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void SC_BOSS_ATTACK::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
+
+void SC_BOSS_ATTACK::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void SC_BOSS_ATTACK::Clear() {
+// @@protoc_insertion_point(message_clear_start:game.SC_BOSS_ATTACK)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.targetplayerid_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.curhp_) -
+      reinterpret_cast<char*>(&_impl_.targetplayerid_)) + sizeof(_impl_.curhp_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* SC_BOSS_ATTACK::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // uint32 targetPlayerID = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.targetplayerid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint32 damage = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.damage_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint32 CurHP = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          _impl_.curhp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* SC_BOSS_ATTACK::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:game.SC_BOSS_ATTACK)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint32 targetPlayerID = 1;
+  if (this->_internal_targetplayerid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_targetplayerid(), target);
+  }
+
+  // uint32 damage = 2;
+  if (this->_internal_damage() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_damage(), target);
+  }
+
+  // uint32 CurHP = 3;
+  if (this->_internal_curhp() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(3, this->_internal_curhp(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:game.SC_BOSS_ATTACK)
+  return target;
+}
+
+size_t SC_BOSS_ATTACK::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:game.SC_BOSS_ATTACK)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // uint32 targetPlayerID = 1;
+  if (this->_internal_targetplayerid() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_targetplayerid());
+  }
+
+  // uint32 damage = 2;
+  if (this->_internal_damage() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_damage());
+  }
+
+  // uint32 CurHP = 3;
+  if (this->_internal_curhp() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_curhp());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData SC_BOSS_ATTACK::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    SC_BOSS_ATTACK::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*SC_BOSS_ATTACK::GetClassData() const { return &_class_data_; }
+
+
+void SC_BOSS_ATTACK::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<SC_BOSS_ATTACK*>(&to_msg);
+  auto& from = static_cast<const SC_BOSS_ATTACK&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:game.SC_BOSS_ATTACK)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_targetplayerid() != 0) {
+    _this->_internal_set_targetplayerid(from._internal_targetplayerid());
+  }
+  if (from._internal_damage() != 0) {
+    _this->_internal_set_damage(from._internal_damage());
+  }
+  if (from._internal_curhp() != 0) {
+    _this->_internal_set_curhp(from._internal_curhp());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void SC_BOSS_ATTACK::CopyFrom(const SC_BOSS_ATTACK& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:game.SC_BOSS_ATTACK)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SC_BOSS_ATTACK::IsInitialized() const {
+  return true;
+}
+
+void SC_BOSS_ATTACK::InternalSwap(SC_BOSS_ATTACK* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(SC_BOSS_ATTACK, _impl_.curhp_)
+      + sizeof(SC_BOSS_ATTACK::_impl_.curhp_)
+      - PROTOBUF_FIELD_OFFSET(SC_BOSS_ATTACK, _impl_.targetplayerid_)>(
+          reinterpret_cast<char*>(&_impl_.targetplayerid_),
+          reinterpret_cast<char*>(&other->_impl_.targetplayerid_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata SC_BOSS_ATTACK::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
+      file_level_metadata_Protocol_2eproto[29]);
+}
+
+// ===================================================================
+
 class SC_BOSS_PHASE::_Internal {
  public:
   static const ::game::Position& targetmovementpos(const SC_BOSS_PHASE* msg);
@@ -8009,7 +8422,7 @@ void SC_BOSS_PHASE::InternalSwap(SC_BOSS_PHASE* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata SC_BOSS_PHASE::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[28]);
+      file_level_metadata_Protocol_2eproto[30]);
 }
 
 // ===================================================================
@@ -8187,7 +8600,7 @@ void CS_CHECK_TIMEOUT::InternalSwap(CS_CHECK_TIMEOUT* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata CS_CHECK_TIMEOUT::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[29]);
+      file_level_metadata_Protocol_2eproto[31]);
 }
 
 // ===================================================================
@@ -8380,7 +8793,7 @@ void CS_TEST_PACKET1::InternalSwap(CS_TEST_PACKET1* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata CS_TEST_PACKET1::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[30]);
+      file_level_metadata_Protocol_2eproto[32]);
 }
 
 // ===================================================================
@@ -8565,7 +8978,7 @@ void CS_TEST_PACKET2::InternalSwap(CS_TEST_PACKET2* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata CS_TEST_PACKET2::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[31]);
+      file_level_metadata_Protocol_2eproto[33]);
 }
 
 // ===================================================================
@@ -8750,7 +9163,7 @@ void SC_TEST_PACKET::InternalSwap(SC_TEST_PACKET* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata SC_TEST_PACKET::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[32]);
+      file_level_metadata_Protocol_2eproto[34]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -8867,6 +9280,14 @@ Arena::CreateMaybeMessage< ::game::SC_PLAYER_DIE >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::game::SC_POSITION_SYNC*
 Arena::CreateMaybeMessage< ::game::SC_POSITION_SYNC >(Arena* arena) {
   return Arena::CreateMessageInternal< ::game::SC_POSITION_SYNC >(arena);
+}
+template<> PROTOBUF_NOINLINE ::game::CS_BOSS_ATTACK*
+Arena::CreateMaybeMessage< ::game::CS_BOSS_ATTACK >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::game::CS_BOSS_ATTACK >(arena);
+}
+template<> PROTOBUF_NOINLINE ::game::SC_BOSS_ATTACK*
+Arena::CreateMaybeMessage< ::game::SC_BOSS_ATTACK >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::game::SC_BOSS_ATTACK >(arena);
 }
 template<> PROTOBUF_NOINLINE ::game::SC_BOSS_PHASE*
 Arena::CreateMaybeMessage< ::game::SC_BOSS_PHASE >(Arena* arena) {

@@ -31,9 +31,9 @@ void SC_SIGNUP_RESPONSE_FOR_All(CSession* pSession, bool success, UINT32 errorCo
 void SC_SIGNUP_RESPONSE_FOR_SINGLE(CSession* pSession, bool success, UINT32 errorCode);
 void SC_SIGNUP_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool success, UINT32 errorCode);
 
-void SC_CREATE_MONSTER_FOR_All(CSession* pSession, UINT32 aiID, UINT32 monsterTypeID, Position monsterPos);
-void SC_CREATE_MONSTER_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 monsterTypeID, Position monsterPos);
-void SC_CREATE_MONSTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, UINT32 monsterTypeID, Position monsterPos);
+void SC_CREATE_MONSTER_FOR_All(CSession* pSession, UINT32 aiID, UINT32 monsterType, Position monsterPos, UINT32 MaxHP);
+void SC_CREATE_MONSTER_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 monsterType, Position monsterPos, UINT32 MaxHP);
+void SC_CREATE_MONSTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, UINT32 monsterType, Position monsterPos, UINT32 MaxHP);
 
 void SC_REMOVE_CHARACTER_FOR_All(CSession* pSession, UINT32 playerID);
 void SC_REMOVE_CHARACTER_FOR_SINGLE(CSession* pSession, UINT32 playerID);
@@ -51,9 +51,9 @@ void SC_KEYINFO_FOR_All(CSession* pSession, UINT32 playerID, UINT32 keyInfo, flo
 void SC_KEYINFO_FOR_SINGLE(CSession* pSession, UINT32 playerID, UINT32 keyInfo, float cameraYaw);
 void SC_KEYINFO_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, UINT32 keyInfo, float cameraYaw);
 
-void SC_PLAYER_ATTACK_FOR_All(CSession* pSession, UINT32 playerID, UINT32 attackType, UINT32 aiID, UINT32 damage, UINT32 targetMaxHP, UINT32 targetCurHP);
-void SC_PLAYER_ATTACK_FOR_SINGLE(CSession* pSession, UINT32 playerID, UINT32 attackType, UINT32 aiID, UINT32 damage, UINT32 targetMaxHP, UINT32 targetCurHP);
-void SC_PLAYER_ATTACK_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, UINT32 attackType, UINT32 aiID, UINT32 damage, UINT32 targetMaxHP, UINT32 targetCurHP);
+void SC_PLAYER_ATTACK_FOR_All(CSession* pSession, UINT32 playerID, UINT32 aiID, UINT32 damage, UINT32 targetCurHP);
+void SC_PLAYER_ATTACK_FOR_SINGLE(CSession* pSession, UINT32 playerID, UINT32 aiID, UINT32 damage, UINT32 targetCurHP);
+void SC_PLAYER_ATTACK_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, UINT32 aiID, UINT32 damage, UINT32 targetCurHP);
 
 void SC_PLAYER_DAMAGED_FOR_All(CSession* pSession, UINT32 playerID, UINT32 damage);
 void SC_PLAYER_DAMAGED_FOR_SINGLE(CSession* pSession, UINT32 playerID, UINT32 damage);
@@ -66,6 +66,10 @@ void SC_PLAYER_DIE_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID)
 void SC_POSITION_SYNC_FOR_All(CSession* pSession, UINT32 playerID, float posX, float posY, float cameraYaw);
 void SC_POSITION_SYNC_FOR_SINGLE(CSession* pSession, UINT32 playerID, float posX, float posY, float cameraYaw);
 void SC_POSITION_SYNC_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, float posX, float posY, float cameraYaw);
+
+void SC_BOSS_ATTACK_FOR_All(CSession* pSession, UINT32 targetPlayerID, UINT32 damage, UINT32 CurHP);
+void SC_BOSS_ATTACK_FOR_SINGLE(CSession* pSession, UINT32 targetPlayerID, UINT32 damage, UINT32 CurHP);
+void SC_BOSS_ATTACK_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 targetPlayerID, UINT32 damage, UINT32 CurHP);
 
 void SC_BOSS_PHASE_FOR_All(CSession* pSession, UINT32 bossID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, game::BOSS_STATE bossState, float curSpeed);
 void SC_BOSS_PHASE_FOR_SINGLE(CSession* pSession, UINT32 bossID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, game::BOSS_STATE bossState, float curSpeed);

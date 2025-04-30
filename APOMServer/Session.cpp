@@ -17,8 +17,3 @@ CSession::CSession()
 CSession::~CSession()
 {
 }
-
-void CSession::RegisterObject(CObject** ppObj)
-{
-    pObj = *ppObj;
-}

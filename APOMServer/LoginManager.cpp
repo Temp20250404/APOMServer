@@ -20,18 +20,16 @@ void from_json(const json& j, LoginInfo& info) {
 void to_json(json& j, const PlayerInfo& info) {
     j = json{
         {"playerNickname", info.playerNickname},
-        {"playerMaxHp", info.playerMaxHp},
-        {"playerMaxMp", info.playerMaxMp},
-        {"playerJobIcon", info.playerJobIcon}
+        {"level", info.level},
+        {"playerJob", info.playerJob}
     };
 }
 
 // JSON을 PlayerInfo로 변환
 void from_json(const json& j, PlayerInfo& info) {
     j.at("playerNickname").get_to(info.playerNickname);
-    j.at("playerMaxHp").get_to(info.playerMaxHp);
-    j.at("playerMaxMp").get_to(info.playerMaxMp);
-    j.at("playerJobIcon").get_to(info.playerJobIcon);
+    j.at("level").get_to(info.level);
+    j.at("playerJob").get_to(info.playerJob);
 }
 
 

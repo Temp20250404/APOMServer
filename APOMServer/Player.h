@@ -64,6 +64,9 @@ public:
     UINT8 GetMaxMp(void) { return m_maxMp; }
     void SetCurMp(UINT8 curMp) { m_curMp = curMp; }
 
+    UINT8 GetLevel(void) { return level; }
+    void SetLevel(UINT8 curlevel) { level = curlevel; }
+
 public:
     const std::string& GetName(void) { return m_playerName; }
     void SetName(const std::string& name) { m_playerName = name; }
@@ -88,4 +91,6 @@ private:
     std::string m_playerName;
 
     UINT32 playerJobID;     // 임시로 정의한 플레이어 직업 정보
+
+    UINT8 level;    // level 정보
 };

@@ -167,15 +167,15 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     case game::PacketID::CS_PlayerAttack:
     {
         UINT32 aiID;
-        UINT32 attackType;
+        UINT32 attackDamage;
 
         game::CS_PLAYER_ATTACK pkt;
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
         aiID = pkt.aiid();
-        attackType = pkt.attacktype();
+        attackDamage = pkt.attackdamage();
 
-        return CS_PLAYER_ATTACK(pSession, aiID, attackType);
+        return CS_PLAYER_ATTACK(pSession, aiID, attackDamage);
     }
     break;
 
@@ -193,6 +193,19 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         cameraYaw = pkt.camerayaw();
 
         return CS_POSITION_SYNC(pSession, posX, posY, cameraYaw);
+    }
+    break;
+
+    case game::PacketID::CS_BossAttack:
+    {
+        UINT32 damage;
+
+        game::CS_BOSS_ATTACK pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        damage = pkt.damage();
+
+        return CS_BOSS_ATTACK(pSession, damage);
     }
     break;
 
@@ -238,9 +251,8 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         {
             PlayerInfo tmp;
             tmp.playerNickname = v.playernickname();
-            tmp.playerMaxHp = v.playermaxhp();
-            tmp.playerMaxMp = v.playermaxmp();
-            tmp.playerJobIcon = v.playerjobicon();
+            tmp.playerJob = v.playerjob();
+            tmp.level = v.level();
             tempData.push_back(tmp);
         }
 
@@ -345,11 +357,22 @@ bool CS_LOGIN_REQUEST(CSession* pSession, std::string id, std::string password)
 
 bool CS_REQUEST_CHARACTER_INFO(CSession* pSession, std::string id)
 {
+    // id를 기반으로 플레이어 정보 추출
+    for (const auto& [login, _] : loginManager.GetUserMap()) {
+        if (login.id == id) {
+            SC_RESPONSE_CHARACTER_INFO_FOR_SINGLE(pSession, _);
+            return true;
+        }
+    }
+
+    // 로그인에 성공했을테니 당연히 존재할 것이라 생각하지만 혹시 버그일 수 있으니 없을 경우 연결 종료 처리
     return false;
 }
 
 bool CS_REQUEST_ITEM_INFO(CSession* pSession, std::string id)
 {
+    // id를 기반으로 아이템 정보 추출. 지금은 없음.
+
     return false;
 }
 
@@ -368,7 +391,7 @@ bool CS_SIGNUP_REQUEST(CSession* pSession, std::string id, std::string email, st
     }
 
     LoginInfo login{ id, email, password };
-    PlayerInfo player{ "default", 100, 100, 0 }; // 초기값
+    PlayerInfo player{ "default", 2, 1 }; // 초기값
 
     if (loginManager.AddUser(login, player)) {
         loginManager.SaveToFile("users.json");  // 데이터 저장
@@ -425,7 +448,7 @@ bool CS_KEYINFO(CSession* pSession, UINT32 keyInfo, float cameraYaw)
     return true;
 }
 
-bool CS_PLAYER_ATTACK(CSession* pSession, UINT32 aiID, UINT32 attackType)
+bool CS_PLAYER_ATTACK(CSession* pSession, UINT32 aiID, UINT32 attackDamage)
 {
     // AI 매니저에서 AI를 찾아서 체력을 감소하고, 해당 체력을 반환해줌
 
@@ -438,9 +461,9 @@ bool CS_PLAYER_ATTACK(CSession* pSession, UINT32 aiID, UINT32 attackType)
     AIEntity* pEntity = aiManager.FindEntityByID(aiID);
     if (pEntity)
     {
-        pEntity->GetDamaged(5); // 일단 임의로 5 데미지를 부여함
+        pEntity->GetDamaged(attackDamage);
         const AIContext& context = pEntity->GetContext();
-        SC_PLAYER_ATTACK_FOR_AROUND(nullptr, pRoom, pPlayer->m_ID, attackType, aiID, 5, context.maxHP, context.currentHP); // 임의로 부여한 5 데미지
+        SC_PLAYER_ATTACK_FOR_AROUND(nullptr, pRoom, pPlayer->m_ID, aiID, attackDamage, context.currentHP);
     }
 
     return true;
@@ -460,6 +483,11 @@ bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float cameraYa
     pPlayer->SetPosition(posX, 0, posY);
 
     return true;
+}
+
+bool CS_BOSS_ATTACK(CSession* pSession, UINT32 damage)
+{
+    return false;
 }
 
 bool CS_REGISTER_REQUEST(CSession* pSession, bool bRequest)
@@ -486,11 +514,12 @@ bool CS_REGISTER_REQUEST(CSession* pSession, bool bRequest)
 
     // 4. 접속 성공
 
+    // 나중엔 json 파일에서 데이터를 읽어와서 적용. 지금은 임의로 한다.
+    
     // 새로 접속한 플레이어에게 스스로 생성하라고 알림
     PlayerInfo playerInfo;
-    playerInfo.playerJobIcon = 0;
-    playerInfo.playerMaxHp = pPlayer->GetMaxHp();
-    playerInfo.playerMaxMp = pPlayer->GetMaxMp();
+    playerInfo.playerJob = 2;   // 2번은 아쳐, 우선은 이렇게 설정하고 나중에 바꾼다.
+    playerInfo.level = 1;       // pPlayer->GetLevel();
     playerInfo.playerNickname = pPlayer->GetName();
 
     Position playerPos = { 0, 0, 0 };
@@ -538,7 +567,7 @@ bool CS_REGISTER_REQUEST(CSession* pSession, bool bRequest)
         {
             const AIContext& ctx = entity->GetContext();
 
-            SC_CREATE_MONSTER_FOR_SINGLE(pSession, ctx.ID, 1, ctx.currentPos);
+            SC_CREATE_MONSTER_FOR_SINGLE(pSession, ctx.ID, 1, ctx.currentPos, 100);
         }
     }
 

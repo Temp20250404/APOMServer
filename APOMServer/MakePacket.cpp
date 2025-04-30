@@ -313,9 +313,8 @@ void SC_RESPONSE_CHARACTER_INFO_FOR_All(CSession* pSession, PlayerInfo playerInf
     {  // 구조체 단일 필드 시작
         game::PlayerInfo* sub = pkt.mutable_playerinfo();
         sub->set_playernickname(playerInfo.playerNickname);
-        sub->set_playermaxhp(playerInfo.playerMaxHp);
-        sub->set_playermaxmp(playerInfo.playerMaxMp);
-        sub->set_playerjobicon(playerInfo.playerJobIcon);
+        sub->set_playerjob(playerInfo.playerJob);
+        sub->set_level(playerInfo.level);
     }  // 구조체 단일 필드 끝
 
     int pktSize = pkt.ByteSizeLong();
@@ -341,9 +340,8 @@ void SC_RESPONSE_CHARACTER_INFO_FOR_SINGLE(CSession* pSession, PlayerInfo player
     {  // 구조체 단일 필드 시작
         game::PlayerInfo* sub = pkt.mutable_playerinfo();
         sub->set_playernickname(playerInfo.playerNickname);
-        sub->set_playermaxhp(playerInfo.playerMaxHp);
-        sub->set_playermaxmp(playerInfo.playerMaxMp);
-        sub->set_playerjobicon(playerInfo.playerJobIcon);
+        sub->set_playerjob(playerInfo.playerJob);
+        sub->set_level(playerInfo.level);
     }  // 구조체 단일 필드 끝
 
     int pktSize = pkt.ByteSizeLong();
@@ -369,9 +367,8 @@ void SC_RESPONSE_CHARACTER_INFO_FOR_AROUND(CSession* pSession, CRoom* pRoom, Pla
     {  // 구조체 단일 필드 시작
         game::PlayerInfo* sub = pkt.mutable_playerinfo();
         sub->set_playernickname(playerInfo.playerNickname);
-        sub->set_playermaxhp(playerInfo.playerMaxHp);
-        sub->set_playermaxmp(playerInfo.playerMaxMp);
-        sub->set_playerjobicon(playerInfo.playerJobIcon);
+        sub->set_playerjob(playerInfo.playerJob);
+        sub->set_level(playerInfo.level);
     }  // 구조체 단일 필드 끝
 
     int pktSize = pkt.ByteSizeLong();
@@ -464,13 +461,13 @@ void SC_SIGNUP_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool succes
 }
 
 
-void SC_CREATE_MONSTER_FOR_All(CSession* pSession, UINT32 aiID, UINT32 monsterTypeID, Position monsterPos)
+void SC_CREATE_MONSTER_FOR_All(CSession* pSession, UINT32 aiID, UINT32 monsterType, Position monsterPos, UINT32 MaxHP)
 {
     game::SC_CREATE_MONSTER pkt;
 
     pkt.set_aiid(aiID);
 
-    pkt.set_monstertypeid(monsterTypeID);
+    pkt.set_monstertype(monsterType);
 
     {  // 구조체 단일 필드 시작
         game::Position* sub = pkt.mutable_monsterpos();
@@ -478,6 +475,8 @@ void SC_CREATE_MONSTER_FOR_All(CSession* pSession, UINT32 aiID, UINT32 monsterTy
         sub->set_posy(monsterPos.posY);
         sub->set_posz(monsterPos.posZ);
     }  // 구조체 단일 필드 끝
+
+    pkt.set_maxhp(MaxHP);
 
     int pktSize = pkt.ByteSizeLong();
     PACKET_HEADER header;
@@ -495,13 +494,13 @@ void SC_CREATE_MONSTER_FOR_All(CSession* pSession, UINT32 aiID, UINT32 monsterTy
     packetPool.Free(Packet);
 }
 
-void SC_CREATE_MONSTER_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 monsterTypeID, Position monsterPos)
+void SC_CREATE_MONSTER_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 monsterType, Position monsterPos, UINT32 MaxHP)
 {
     game::SC_CREATE_MONSTER pkt;
 
     pkt.set_aiid(aiID);
 
-    pkt.set_monstertypeid(monsterTypeID);
+    pkt.set_monstertype(monsterType);
 
     {  // 구조체 단일 필드 시작
         game::Position* sub = pkt.mutable_monsterpos();
@@ -509,6 +508,8 @@ void SC_CREATE_MONSTER_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 monste
         sub->set_posy(monsterPos.posY);
         sub->set_posz(monsterPos.posZ);
     }  // 구조체 단일 필드 끝
+
+    pkt.set_maxhp(MaxHP);
 
     int pktSize = pkt.ByteSizeLong();
     PACKET_HEADER header;
@@ -526,13 +527,13 @@ void SC_CREATE_MONSTER_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 monste
     packetPool.Free(Packet);
 }
 
-void SC_CREATE_MONSTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, UINT32 monsterTypeID, Position monsterPos)
+void SC_CREATE_MONSTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, UINT32 monsterType, Position monsterPos, UINT32 MaxHP)
 {
     game::SC_CREATE_MONSTER pkt;
 
     pkt.set_aiid(aiID);
 
-    pkt.set_monstertypeid(monsterTypeID);
+    pkt.set_monstertype(monsterType);
 
     {  // 구조체 단일 필드 시작
         game::Position* sub = pkt.mutable_monsterpos();
@@ -540,6 +541,8 @@ void SC_CREATE_MONSTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID,
         sub->set_posy(monsterPos.posY);
         sub->set_posz(monsterPos.posZ);
     }  // 구조체 단일 필드 끝
+
+    pkt.set_maxhp(MaxHP);
 
     int pktSize = pkt.ByteSizeLong();
     PACKET_HEADER header;
@@ -643,9 +646,8 @@ void SC_SPAWN_CHARACTER_FOR_All(CSession* pSession, UINT32 playerID, Position pl
     {  // 구조체 단일 필드 시작
         game::PlayerInfo* sub = pkt.mutable_playerinfo();
         sub->set_playernickname(playerInfo.playerNickname);
-        sub->set_playermaxhp(playerInfo.playerMaxHp);
-        sub->set_playermaxmp(playerInfo.playerMaxMp);
-        sub->set_playerjobicon(playerInfo.playerJobIcon);
+        sub->set_playerjob(playerInfo.playerJob);
+        sub->set_level(playerInfo.level);
     }  // 구조체 단일 필드 끝
 
     int pktSize = pkt.ByteSizeLong();
@@ -682,9 +684,8 @@ void SC_SPAWN_CHARACTER_FOR_SINGLE(CSession* pSession, UINT32 playerID, Position
     {  // 구조체 단일 필드 시작
         game::PlayerInfo* sub = pkt.mutable_playerinfo();
         sub->set_playernickname(playerInfo.playerNickname);
-        sub->set_playermaxhp(playerInfo.playerMaxHp);
-        sub->set_playermaxmp(playerInfo.playerMaxMp);
-        sub->set_playerjobicon(playerInfo.playerJobIcon);
+        sub->set_playerjob(playerInfo.playerJob);
+        sub->set_level(playerInfo.level);
     }  // 구조체 단일 필드 끝
 
     int pktSize = pkt.ByteSizeLong();
@@ -721,9 +722,8 @@ void SC_SPAWN_CHARACTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 play
     {  // 구조체 단일 필드 시작
         game::PlayerInfo* sub = pkt.mutable_playerinfo();
         sub->set_playernickname(playerInfo.playerNickname);
-        sub->set_playermaxhp(playerInfo.playerMaxHp);
-        sub->set_playermaxmp(playerInfo.playerMaxMp);
-        sub->set_playerjobicon(playerInfo.playerJobIcon);
+        sub->set_playerjob(playerInfo.playerJob);
+        sub->set_level(playerInfo.level);
     }  // 구조체 단일 필드 끝
 
     int pktSize = pkt.ByteSizeLong();
@@ -901,19 +901,15 @@ void SC_KEYINFO_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, UI
 }
 
 
-void SC_PLAYER_ATTACK_FOR_All(CSession* pSession, UINT32 playerID, UINT32 attackType, UINT32 aiID, UINT32 damage, UINT32 targetMaxHP, UINT32 targetCurHP)
+void SC_PLAYER_ATTACK_FOR_All(CSession* pSession, UINT32 playerID, UINT32 aiID, UINT32 damage, UINT32 targetCurHP)
 {
     game::SC_PLAYER_ATTACK pkt;
 
     pkt.set_playerid(playerID);
 
-    pkt.set_attacktype(attackType);
-
     pkt.set_aiid(aiID);
 
     pkt.set_damage(damage);
-
-    pkt.set_targetmaxhp(targetMaxHP);
 
     pkt.set_targetcurhp(targetCurHP);
 
@@ -933,19 +929,15 @@ void SC_PLAYER_ATTACK_FOR_All(CSession* pSession, UINT32 playerID, UINT32 attack
     packetPool.Free(Packet);
 }
 
-void SC_PLAYER_ATTACK_FOR_SINGLE(CSession* pSession, UINT32 playerID, UINT32 attackType, UINT32 aiID, UINT32 damage, UINT32 targetMaxHP, UINT32 targetCurHP)
+void SC_PLAYER_ATTACK_FOR_SINGLE(CSession* pSession, UINT32 playerID, UINT32 aiID, UINT32 damage, UINT32 targetCurHP)
 {
     game::SC_PLAYER_ATTACK pkt;
 
     pkt.set_playerid(playerID);
 
-    pkt.set_attacktype(attackType);
-
     pkt.set_aiid(aiID);
 
     pkt.set_damage(damage);
-
-    pkt.set_targetmaxhp(targetMaxHP);
 
     pkt.set_targetcurhp(targetCurHP);
 
@@ -965,19 +957,15 @@ void SC_PLAYER_ATTACK_FOR_SINGLE(CSession* pSession, UINT32 playerID, UINT32 att
     packetPool.Free(Packet);
 }
 
-void SC_PLAYER_ATTACK_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, UINT32 attackType, UINT32 aiID, UINT32 damage, UINT32 targetMaxHP, UINT32 targetCurHP)
+void SC_PLAYER_ATTACK_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, UINT32 aiID, UINT32 damage, UINT32 targetCurHP)
 {
     game::SC_PLAYER_ATTACK pkt;
 
     pkt.set_playerid(playerID);
 
-    pkt.set_attacktype(attackType);
-
     pkt.set_aiid(aiID);
 
     pkt.set_damage(damage);
-
-    pkt.set_targetmaxhp(targetMaxHP);
 
     pkt.set_targetcurhp(targetCurHP);
 
@@ -1223,6 +1211,85 @@ void SC_POSITION_SYNC_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 player
 }
 
 
+void SC_BOSS_ATTACK_FOR_All(CSession* pSession, UINT32 targetPlayerID, UINT32 damage, UINT32 CurHP)
+{
+    game::SC_BOSS_ATTACK pkt;
+
+    pkt.set_targetplayerid(targetPlayerID);
+
+    pkt.set_damage(damage);
+
+    pkt.set_curhp(CurHP);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_BossAttack;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    BroadcastData(pSession, Packet, Packet->GetDataSize());
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_BOSS_ATTACK_FOR_SINGLE(CSession* pSession, UINT32 targetPlayerID, UINT32 damage, UINT32 CurHP)
+{
+    game::SC_BOSS_ATTACK pkt;
+
+    pkt.set_targetplayerid(targetPlayerID);
+
+    pkt.set_damage(damage);
+
+    pkt.set_curhp(CurHP);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_BossAttack;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    UnicastPacket(pSession, &header, Packet);
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_BOSS_ATTACK_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 targetPlayerID, UINT32 damage, UINT32 CurHP)
+{
+    game::SC_BOSS_ATTACK pkt;
+
+    pkt.set_targetplayerid(targetPlayerID);
+
+    pkt.set_damage(damage);
+
+    pkt.set_curhp(CurHP);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_BossAttack;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    for(auto& pl: pRoom->m_activePlayers){ if(pl->m_pSession != pSession) UnicastPacket(pl->m_pSession, &header, Packet); }
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+
 void SC_BOSS_PHASE_FOR_All(CSession* pSession, UINT32 bossID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, game::BOSS_STATE bossState, float curSpeed)
 {
     game::SC_BOSS_PHASE pkt;
@@ -1367,9 +1434,8 @@ void SC_TEST_PACKET_FOR_All(CSession* pSession, std::vector<PlayerInfo>& tempDat
     for (const auto& elem : tempData) {
         auto* msg = pkt.add_tempdata();
         msg->set_playernickname(elem.playerNickname);
-        msg->set_playermaxhp(elem.playerMaxHp);
-        msg->set_playermaxmp(elem.playerMaxMp);
-        msg->set_playerjobicon(elem.playerJobIcon);
+        msg->set_playerjob(elem.playerJob);
+        msg->set_level(elem.level);
     }
 
     int pktSize = pkt.ByteSizeLong();
@@ -1399,9 +1465,8 @@ void SC_TEST_PACKET_FOR_SINGLE(CSession* pSession, std::vector<PlayerInfo>& temp
     for (const auto& elem : tempData) {
         auto* msg = pkt.add_tempdata();
         msg->set_playernickname(elem.playerNickname);
-        msg->set_playermaxhp(elem.playerMaxHp);
-        msg->set_playermaxmp(elem.playerMaxMp);
-        msg->set_playerjobicon(elem.playerJobIcon);
+        msg->set_playerjob(elem.playerJob);
+        msg->set_level(elem.level);
     }
 
     int pktSize = pkt.ByteSizeLong();
@@ -1431,9 +1496,8 @@ void SC_TEST_PACKET_FOR_AROUND(CSession* pSession, CRoom* pRoom, std::vector<Pla
     for (const auto& elem : tempData) {
         auto* msg = pkt.add_tempdata();
         msg->set_playernickname(elem.playerNickname);
-        msg->set_playermaxhp(elem.playerMaxHp);
-        msg->set_playermaxmp(elem.playerMaxMp);
-        msg->set_playerjobicon(elem.playerJobIcon);
+        msg->set_playerjob(elem.playerJob);
+        msg->set_level(elem.level);
     }
 
     int pktSize = pkt.ByteSizeLong();

@@ -127,6 +127,14 @@ class PacketHandler
         // TODO: SC_PositionSync 패킷 처리 로직을 여기에 구현
     }
 
+    // SC_BOSS_ATTACK 패킷을 처리하는 함수
+    public static void SC_BossAttack(PacketSession session, IMessage packet)
+    {
+        SC_BOSS_ATTACK bossAttackPacket = packet as SC_BOSS_ATTACK;
+
+        // TODO: SC_BossAttack 패킷 처리 로직을 여기에 구현
+    }
+
     // SC_BOSS_PHASE 패킷을 처리하는 함수
     public static void SC_BossPhase(PacketSession session, IMessage packet)
     {
