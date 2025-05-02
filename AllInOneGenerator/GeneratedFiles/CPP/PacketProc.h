@@ -21,9 +21,12 @@ bool CS_SIGNUP_REQUEST(CSession* pSession, std::string id, std::string email, st
 bool CS_REGISTER_REQUEST(CSession* pSession, bool bRequest);
 bool CS_CHAT(CSession* pSession, UINT32 targetID, std::string message, UINT32 channel);
 bool CS_KEYINFO(CSession* pSession, UINT32 keyInfo, float cameraYaw);
+bool CS_MONSTER_ATTACK(CSession* pSession, UINT32 playerID, UINT32 damage);
+bool CS_MONSTER_DIE(CSession* pSession, UINT32 aiID);
 bool CS_PLAYER_ATTACK(CSession* pSession, UINT32 aiID, UINT32 attackDamage);
+bool CS_PLAYER_DIE(CSession* pSession, UINT32 playerID);
 bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float cameraYaw);
-bool CS_BOSS_ATTACK(CSession* pSession, UINT32 damage);
+bool CS_BOSS_PHASE(CSession* pSession, UINT32 bossID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed);
 bool CS_CHECK_TIMEOUT(CSession* pSession, bool bCheck);
 bool CS_TEST_PACKET1(CSession* pSession, const std::vector<UINT32>& tempData);
 bool CS_TEST_PACKET2(CSession* pSession, const std::vector<PlayerInfo>& tempData);

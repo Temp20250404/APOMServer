@@ -187,60 +187,60 @@ int main()
     // AI 정보 추가, 내용이 많아질 예정이니 나중에 다른곳에서 하도록 수정 예정
     //=====================================================================================================================================
 
-    BTBuilder builder = CreateBossBT;
+    //BTBuilder builder = CreateBossBT;
 
-    // AIContext (보스)
-    AIContext boss{};
+    //// AIContext (보스)
+    //AIContext boss{};
 
-    boss.currentHP = 100.0f;
-    boss.maxHP = 100.0f;
-    boss.bDeath = false;
+    //boss.currentHP = 100.0f;
+    //boss.maxHP = 100.0f;
+    //boss.bDeath = false;
 
-    boss.usedSkill1 = false;
-    boss.usedSkill2 = false;
-    boss.usedSkill3 = false;
+    //boss.usedSkill1 = false;
+    //boss.usedSkill2 = false;
+    //boss.usedSkill3 = false;
 
-    boss.attackAnimTime = 1.f;  // 공격 애니메이션
-    boss.dieAnimTime = 2.f;     // 사망 애니메이션
-    boss.skill1AnimTime = 1.0f;  // 스킬1 애니메이션
-    boss.skill2AnimTime = 1.5f;  // 스킬2 애니메이션
-    boss.skill3AnimTime = 2.0f;  // 스킬3 애니메이션
-    boss.phaseTimer = 0;
+    //boss.attackAnimTime = 1.f;  // 공격 애니메이션
+    //boss.dieAnimTime = 2.f;     // 사망 애니메이션
+    //boss.skill1AnimTime = 1.0f;  // 스킬1 애니메이션
+    //boss.skill2AnimTime = 1.5f;  // 스킬2 애니메이션
+    //boss.skill3AnimTime = 2.0f;  // 스킬3 애니메이션
+    //boss.phaseTimer = 0;
 
-    boss.hasTargetPlayer = false;
-    boss.playerDistance = 0;
+    //boss.hasTargetPlayer = false;
+    //boss.playerDistance = 0;
 
-    boss.idleTime = 0;
+    //boss.idleTime = 0;
 
-    // 상수 값들
-    boss.attackRange = 3.0f;
-    boss.moveSpeed = 0.4f;          // 1회동안 0.6만큼 이동. 현재 25프레임에 1회씩 작동하니 1초에 0.6만큼 움직임
-    boss.idleResetTime = 3.0f;
-    boss.deltaTime = 1.f;           // 현재 ai가 25프레임에 1번씩 작동하고, 서버는 1초에 25프레임 움직인다. 그러므로 1 대입
-    boss.detectionRange = 15.0f;     // 플레이어 감지 범위
+    //// 상수 값들
+    //boss.attackRange = 3.0f;
+    //boss.moveSpeed = 0.4f;          // 1회동안 0.6만큼 이동. 현재 25프레임에 1회씩 작동하니 1초에 0.6만큼 움직임
+    //boss.idleResetTime = 3.0f;
+    //boss.deltaTime = 1.f;           // 현재 ai가 25프레임에 1번씩 작동하고, 서버는 1초에 25프레임 움직인다. 그러므로 1 대입
+    //boss.detectionRange = 15.0f;     // 플레이어 감지 범위
 
-    // 보스의 현재 위치
-    boss.currentPos.posX = 0.f; boss.currentPos.posY = 0.f; boss.currentPos.posZ = 0.f;
+    //// 보스의 현재 위치
+    //boss.currentPos.posX = 0.f; boss.currentPos.posY = 0.f; boss.currentPos.posZ = 0.f;
 
-    AIEntity* pAIEntity;
-    for (int i = 0; i < 1; ++i)
-    {
-        // context에 방 정보 삽입
-        CRoom* pRoom = roomManager.GetRoomById(i);
-        boss.ptargetRoom = pRoom;
+    //AIEntity* pAIEntity;
+    //for (int i = 0; i < 1; ++i)
+    //{
+    //    // context에 방 정보 삽입
+    //    CRoom* pRoom = roomManager.GetRoomById(i);
+    //    boss.ptargetRoom = pRoom;
 
-        // AIEntity 인스턴스 생성
-        pAIEntity = new AIEntity(boss, builder);
+    //    // AIEntity 인스턴스 생성
+    //    pAIEntity = new AIEntity(boss, builder);
 
-        // 고유 ID 추가
-        boss.ID = pAIEntity->GetID();
+    //    // 고유 ID 추가
+    //    boss.ID = pAIEntity->GetID();
 
-        // AI 매니저에 AI 객체 등록
-        aiManager.AddEntity(pAIEntity);
+    //    // AI 매니저에 AI 객체 등록
+    //    aiManager.AddEntity(pAIEntity);
 
-        // 방에 AI 객체 정보 등록
-        pRoom->AddEntity(pAIEntity);
-    }
+    //    // 방에 AI 객체 정보 등록
+    //    pRoom->AddEntity(pAIEntity);
+    //}
 
 
 

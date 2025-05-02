@@ -164,6 +164,34 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     }
     break;
 
+    case game::PacketID::CS_MonsterAttack:
+    {
+        UINT32 playerID;
+        UINT32 damage;
+
+        game::CS_MONSTER_ATTACK pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        playerID = pkt.playerid();
+        damage = pkt.damage();
+
+        return CS_MONSTER_ATTACK(pSession, playerID, damage);
+    }
+    break;
+
+    case game::PacketID::CS_MonsterDie:
+    {
+        UINT32 aiID;
+
+        game::CS_MONSTER_DIE pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        aiID = pkt.aiid();
+
+        return CS_MONSTER_DIE(pSession, aiID);
+    }
+    break;
+
     case game::PacketID::CS_PlayerAttack:
     {
         UINT32 aiID;
@@ -176,6 +204,19 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         attackDamage = pkt.attackdamage();
 
         return CS_PLAYER_ATTACK(pSession, aiID, attackDamage);
+    }
+    break;
+
+    case game::PacketID::CS_PlayerDie:
+    {
+        UINT32 playerID;
+
+        game::CS_PLAYER_DIE pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        playerID = pkt.playerid();
+
+        return CS_PLAYER_DIE(pSession, playerID);
     }
     break;
 
@@ -196,16 +237,28 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     }
     break;
 
-    case game::PacketID::CS_BossAttack:
+    case game::PacketID::CS_BossPhase:
     {
-        UINT32 damage;
+        UINT32 bossID;
+        UINT32 currentHp;
+        UINT32 maxHp;
+        Position targetMovementPos;
+        Position bossPos;
+        UINT32 bossState;
+        float curSpeed;
 
-        game::CS_BOSS_ATTACK pkt;
+        game::CS_BOSS_PHASE pkt;
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
-        damage = pkt.damage();
+        bossID = pkt.bossid();
+        currentHp = pkt.currenthp();
+        maxHp = pkt.maxhp();
+        targetMovementPos = pkt.targetmovementpos();
+        bossPos = pkt.bosspos();
+        bossState = pkt.bossstate();
+        curSpeed = pkt.curspeed();
 
-        return CS_BOSS_ATTACK(pSession, damage);
+        return CS_BOSS_PHASE(pSession, bossID, currentHp, maxHp, targetMovementPos, bossPos, bossState, curSpeed);
     }
     break;
 
@@ -448,6 +501,51 @@ bool CS_KEYINFO(CSession* pSession, UINT32 keyInfo, float cameraYaw)
     return true;
 }
 
+bool CS_MONSTER_ATTACK(CSession* pSession, UINT32 playerID, UINT32 damage)
+{ 
+    // 플레이어가 데미지를 입음
+
+    // 1. 연결된 플레이어 추출
+    CPlayer* pPlayer = static_cast<CPlayer*>(pSession->pObj);
+
+    // 2. 방 정보 검색
+    CRoom* pRoom = roomManager.GetRoomById(pPlayer->GetRoomId());
+
+    SC_PLAYER_DAMAGED_FOR_AROUND(nullptr, pRoom, playerID, damage);
+
+    return true;
+}
+
+bool CS_MONSTER_DIE(CSession* pSession, UINT32 aiID)
+{
+    // 몬스터가 죽음
+    
+    // 1. 연결된 플레이어 추출
+    CPlayer* pPlayer = static_cast<CPlayer*>(pSession->pObj);
+
+    // 2. 방 정보 검색
+    CRoom* pRoom = roomManager.GetRoomById(pPlayer->GetRoomId());
+
+    SC_MONSTER_DIE_FOR_AROUND(nullptr, pRoom, aiID);
+
+    return true;
+}
+
+bool CS_PLAYER_DIE(CSession* pSession, UINT32 playerID)
+{ 
+    // 플레이어가 죽음
+
+    // 1. 연결된 플레이어 추출
+    CPlayer* pPlayer = static_cast<CPlayer*>(pSession->pObj);
+
+    // 2. 방 정보 검색
+    CRoom* pRoom = roomManager.GetRoomById(pPlayer->GetRoomId());
+
+    SC_PLAYER_DIE_FOR_AROUND(nullptr, pRoom, playerID);
+
+    return true;
+}
+
 bool CS_PLAYER_ATTACK(CSession* pSession, UINT32 aiID, UINT32 attackDamage)
 {
     // AI 매니저에서 AI를 찾아서 체력을 감소하고, 해당 체력을 반환해줌
@@ -458,13 +556,7 @@ bool CS_PLAYER_ATTACK(CSession* pSession, UINT32 aiID, UINT32 attackDamage)
     // 2. 방 정보 검색
     CRoom* pRoom = roomManager.GetRoomById(pPlayer->GetRoomId());
 
-    AIEntity* pEntity = aiManager.FindEntityByID(aiID);
-    if (pEntity)
-    {
-        pEntity->GetDamaged(attackDamage);
-        const AIContext& context = pEntity->GetContext();
-        SC_PLAYER_ATTACK_FOR_AROUND(nullptr, pRoom, pPlayer->m_ID, aiID, attackDamage, context.currentHP);
-    }
+    SC_MONSTER_DAMAGED_FOR_AROUND(nullptr, pRoom, aiID, attackDamage);
 
     return true;
 }
@@ -485,9 +577,17 @@ bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float cameraYa
     return true;
 }
 
-bool CS_BOSS_ATTACK(CSession* pSession, UINT32 damage)
+bool CS_BOSS_PHASE(CSession* pSession, UINT32 bossID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
 {
-    return false;
+    // 1. 연결된 플레이어 추출
+    CPlayer* pPlayer = static_cast<CPlayer*>(pSession->pObj);
+
+    // 2. 방 정보 검색
+    CRoom* pRoom = roomManager.GetRoomById(pPlayer->GetRoomId());
+
+    SC_BOSS_PHASE_FOR_AROUND(pSession, pRoom, bossID, currentHp, maxHp, targetMovementPos, bossPos, bossState, curSpeed);
+
+    return true;
 }
 
 bool CS_REGISTER_REQUEST(CSession* pSession, bool bRequest)

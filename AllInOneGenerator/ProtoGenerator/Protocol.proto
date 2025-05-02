@@ -4,53 +4,48 @@ package game;
 
 enum PacketID {
 // Client → Server
-    CS_BossAttack = 0;
+    CS_BossPhase = 0;
     CS_Chat = 1;
     CS_CheckTimeout = 2;
     CS_FindIdRequest = 3;
     CS_FindPwRequest = 4;
     CS_Keyinfo = 5;
     CS_LoginRequest = 6;
-    CS_PlayerAttack = 7;
-    CS_PositionSync = 8;
-    CS_RegisterRequest = 9;
-    CS_RequestCharacterInfo = 10;
-    CS_RequestItemInfo = 11;
-    CS_SignupRequest = 12;
-    CS_TestPacket1 = 13;
-    CS_TestPacket2 = 14;
+    CS_MonsterAttack = 7;
+    CS_MonsterDie = 8;
+    CS_PlayerAttack = 9;
+    CS_PlayerDie = 10;
+    CS_PositionSync = 11;
+    CS_RegisterRequest = 12;
+    CS_RequestCharacterInfo = 13;
+    CS_RequestItemInfo = 14;
+    CS_SignupRequest = 15;
+    CS_TestPacket1 = 16;
+    CS_TestPacket2 = 17;
 
 // Server → Client
-    SC_BossAttack = 15;
-    SC_BossPhase = 16;
-    SC_Chat = 17;
-    SC_CreateMonster = 18;
-    SC_FindIdResponse = 19;
-    SC_FindPwResponse = 20;
-    SC_Keyinfo = 21;
-    SC_LoginResponse = 22;
-    SC_PlayerAttack = 23;
-    SC_PlayerDamaged = 24;
-    SC_PlayerDie = 25;
-    SC_PositionSync = 26;
-    SC_RemoveCharacter = 27;
-    SC_RequestItemInfo = 28;
-    SC_ResponseCharacterInfo = 29;
-    SC_SignupResponse = 30;
-    SC_SpawnCharacter = 31;
-    SC_TestPacket = 32;
+    SC_BossPhase = 18;
+    SC_Chat = 19;
+    SC_CreateMonster = 20;
+    SC_FindIdResponse = 21;
+    SC_FindPwResponse = 22;
+    SC_Keyinfo = 23;
+    SC_LoginResponse = 24;
+    SC_MonsterDamaged = 25;
+    SC_MonsterDie = 26;
+    SC_PlayerDamaged = 27;
+    SC_PlayerDie = 28;
+    SC_PositionSync = 29;
+    SC_RemoveCharacter = 30;
+    SC_RequestItemInfo = 31;
+    SC_ResponseCharacterInfo = 32;
+    SC_SignupResponse = 33;
+    SC_SpawnCharacter = 34;
+    SC_StartAiCalculate = 35;
+    SC_StopAiCalculate = 36;
+    SC_TestPacket = 37;
 }
 
-enum BOSS_STATE {
-    BOSS_STATE_ATTACK = 0; // 공격
-    BOSS_STATE_CHASE = 1; // 추적
-    BOSS_STATE_DIE = 2; // 죽음
-    BOSS_STATE_IDLE = 3; // 대기
-    BOSS_STATE_SKILL1 = 4; // 스킬
-    BOSS_STATE_SKILL2 = 5; // 스킬1
-    BOSS_STATE_SKILL3 = 6; // 스킬2
-    BOSS_STATE_WALK = 7; // 걷기
-}
 
 message PlayerInfo {
     string playerNickname = 1; // 이름
@@ -125,6 +120,12 @@ message SC_SPAWN_CHARACTER {
     float cameraYaw = 3; // 초기 카메라 y축 회전값. 이건 사용하지 않을 수 있으니 놔두기만 함
     PlayerInfo playerInfo = 4; // 플레이어 정보
 }
+message SC_START_AI_CALCULATE {
+    bool bStart = 1; // AI 계산 및 패킷 전송 시작
+}
+message SC_STOP_AI_CALCULATE {
+    bool bStop = 1; // AI 계산 및 패킷 전송 중단
+}
 message CS_CHAT {
     uint32 targetID = 1; // 타겟이 되는 플레이어의 id
     string message = 2; // 채팅 메시지
@@ -139,9 +140,19 @@ message CS_KEYINFO {
     uint32 keyInfo = 1; // 키보드 입력시 관련 움직임 정보 전송
     float cameraYaw = 2; // 카메라 회전값
 }
+message CS_MONSTER_ATTACK {
+    uint32 playerID = 1; // 타겟 플레이어 고유 ID
+    uint32 damage  = 2; // 타겟 플레이어가 입은 데미지
+}
+message CS_MONSTER_DIE {
+    uint32 aiID = 1; // AI 고유 ID
+}
 message CS_PLAYER_ATTACK {
     uint32 aiID = 1; // AI 고유 ID
     uint32 attackDamage = 2; // 공격 데미지
+}
+message CS_PLAYER_DIE {
+    uint32 playerID = 1; // 플레이어 고유 ID
 }
 message CS_POSITION_SYNC {
     float posX = 1; // 위치 정보 동기화
@@ -153,11 +164,12 @@ message SC_KEYINFO {
     uint32 keyInfo = 2; // 키보드 입력시 관련 움직임 정보 전송
     float cameraYaw = 3; // 카메라 회전값
 }
-message SC_PLAYER_ATTACK {
-    uint32 playerID = 1; // 플레이어 고유 ID
-    uint32 aiID = 2; // AI 고유 ID
-    uint32 damage  = 3; // 플레이어가 가한 데미지
-    uint32 targetCurHP = 4; // 타겟 AI의 남은 HP
+message SC_MONSTER_DAMAGED {
+    uint32 aiID = 1; // AI 고유 ID
+    uint32 damage  = 2; // 플레이어가 가한 데미지
+}
+message SC_MONSTER_DIE {
+    uint32 aiID = 1; // AI 고유 ID
 }
 message SC_PLAYER_DAMAGED {
     uint32 playerID = 1; // 플레이어 고유 ID
@@ -172,13 +184,14 @@ message SC_POSITION_SYNC {
     float posY = 3;
     float cameraYaw = 4; // 카메라 회전값
 }
-message CS_BOSS_ATTACK {
-    uint32 damage  = 1; // 플레이어가 입은 데미지
-}
-message SC_BOSS_ATTACK {
-    uint32 targetPlayerID = 1; // 타겟 플레이어의 ID
-    uint32 damage  = 2; // 플레이어가 입은 데미지
-    uint32 CurHP = 3; // 플레이어의 남은 HP
+message CS_BOSS_PHASE {
+    uint32 bossID = 1; // 보스의 고유 ID
+    uint32 currentHp = 2; // 보스의 현재 체력
+    uint32 maxHp = 3; // 보스의 최대 체력
+    Position targetMovementPos = 4; // 보스가 이동해야 하는 목표 위치
+    Position bossPos = 5; // 현재 보스의 위치
+    uint32 bossState = 6; // 보스의 현재 상태
+    float curSpeed = 7; // 현재 이동속도
 }
 message SC_BOSS_PHASE {
     uint32 bossID = 1; // 보스의 고유 ID
@@ -186,7 +199,7 @@ message SC_BOSS_PHASE {
     uint32 maxHp = 3; // 보스의 최대 체력
     Position targetMovementPos = 4; // 보스가 이동해야 하는 목표 위치
     Position bossPos = 5; // 현재 보스의 위치
-    BOSS_STATE bossState = 6; // 보스의 현재 상태
+    uint32 bossState = 6; // 보스의 현재 상태
     float curSpeed = 7; // 현재 이동속도
 }
 message CS_CHECK_TIMEOUT {

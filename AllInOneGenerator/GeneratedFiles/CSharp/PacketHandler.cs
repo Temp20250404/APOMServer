@@ -79,6 +79,22 @@ class PacketHandler
         // TODO: SC_SpawnCharacter 패킷 처리 로직을 여기에 구현
     }
 
+    // SC_START_AI_CALCULATE 패킷을 처리하는 함수
+    public static void SC_StartAiCalculate(PacketSession session, IMessage packet)
+    {
+        SC_START_AI_CALCULATE startAiCalculatePacket = packet as SC_START_AI_CALCULATE;
+
+        // TODO: SC_StartAiCalculate 패킷 처리 로직을 여기에 구현
+    }
+
+    // SC_STOP_AI_CALCULATE 패킷을 처리하는 함수
+    public static void SC_StopAiCalculate(PacketSession session, IMessage packet)
+    {
+        SC_STOP_AI_CALCULATE stopAiCalculatePacket = packet as SC_STOP_AI_CALCULATE;
+
+        // TODO: SC_StopAiCalculate 패킷 처리 로직을 여기에 구현
+    }
+
     // SC_CHAT 패킷을 처리하는 함수
     public static void SC_Chat(PacketSession session, IMessage packet)
     {
@@ -95,12 +111,20 @@ class PacketHandler
         // TODO: SC_Keyinfo 패킷 처리 로직을 여기에 구현
     }
 
-    // SC_PLAYER_ATTACK 패킷을 처리하는 함수
-    public static void SC_PlayerAttack(PacketSession session, IMessage packet)
+    // SC_MONSTER_DAMAGED 패킷을 처리하는 함수
+    public static void SC_MonsterDamaged(PacketSession session, IMessage packet)
     {
-        SC_PLAYER_ATTACK playerAttackPacket = packet as SC_PLAYER_ATTACK;
+        SC_MONSTER_DAMAGED monsterDamagedPacket = packet as SC_MONSTER_DAMAGED;
 
-        // TODO: SC_PlayerAttack 패킷 처리 로직을 여기에 구현
+        // TODO: SC_MonsterDamaged 패킷 처리 로직을 여기에 구현
+    }
+
+    // SC_MONSTER_DIE 패킷을 처리하는 함수
+    public static void SC_MonsterDie(PacketSession session, IMessage packet)
+    {
+        SC_MONSTER_DIE monsterDiePacket = packet as SC_MONSTER_DIE;
+
+        // TODO: SC_MonsterDie 패킷 처리 로직을 여기에 구현
     }
 
     // SC_PLAYER_DAMAGED 패킷을 처리하는 함수
@@ -125,14 +149,6 @@ class PacketHandler
         SC_POSITION_SYNC positionSyncPacket = packet as SC_POSITION_SYNC;
 
         // TODO: SC_PositionSync 패킷 처리 로직을 여기에 구현
-    }
-
-    // SC_BOSS_ATTACK 패킷을 처리하는 함수
-    public static void SC_BossAttack(PacketSession session, IMessage packet)
-    {
-        SC_BOSS_ATTACK bossAttackPacket = packet as SC_BOSS_ATTACK;
-
-        // TODO: SC_BossAttack 패킷 처리 로직을 여기에 구현
     }
 
     // SC_BOSS_PHASE 패킷을 처리하는 함수

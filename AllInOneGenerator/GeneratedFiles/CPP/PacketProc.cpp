@@ -158,6 +158,34 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     }
     break;
 
+    case game::PacketID::CS_MonsterAttack:
+    {
+        UINT32 playerID;
+        UINT32 damage;
+
+        game::CS_MONSTER_ATTACK pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        playerID = pkt.playerid();
+        damage = pkt.damage();
+
+        return CS_MONSTER_ATTACK(pSession, playerID, damage);
+    }
+    break;
+
+    case game::PacketID::CS_MonsterDie:
+    {
+        UINT32 aiID;
+
+        game::CS_MONSTER_DIE pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        aiID = pkt.aiid();
+
+        return CS_MONSTER_DIE(pSession, aiID);
+    }
+    break;
+
     case game::PacketID::CS_PlayerAttack:
     {
         UINT32 aiID;
@@ -170,6 +198,19 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         attackDamage = pkt.attackdamage();
 
         return CS_PLAYER_ATTACK(pSession, aiID, attackDamage);
+    }
+    break;
+
+    case game::PacketID::CS_PlayerDie:
+    {
+        UINT32 playerID;
+
+        game::CS_PLAYER_DIE pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        playerID = pkt.playerid();
+
+        return CS_PLAYER_DIE(pSession, playerID);
     }
     break;
 
@@ -190,16 +231,28 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     }
     break;
 
-    case game::PacketID::CS_BossAttack:
+    case game::PacketID::CS_BossPhase:
     {
-        UINT32 damage;
+        UINT32 bossID;
+        UINT32 currentHp;
+        UINT32 maxHp;
+        Position targetMovementPos;
+        Position bossPos;
+        UINT32 bossState;
+        float curSpeed;
 
-        game::CS_BOSS_ATTACK pkt;
+        game::CS_BOSS_PHASE pkt;
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
-        damage = pkt.damage();
+        bossID = pkt.bossid();
+        currentHp = pkt.currenthp();
+        maxHp = pkt.maxhp();
+        targetMovementPos = pkt.targetmovementpos();
+        bossPos = pkt.bosspos();
+        bossState = pkt.bossstate();
+        curSpeed = pkt.curspeed();
 
-        return CS_BOSS_ATTACK(pSession, damage);
+        return CS_BOSS_PHASE(pSession, bossID, currentHp, maxHp, targetMovementPos, bossPos, bossState, curSpeed);
     }
     break;
 
@@ -311,7 +364,22 @@ bool CS_KEYINFO(CSession* pSession, UINT32 keyInfo, float cameraYaw)
     return false;
 }
 
+bool CS_MONSTER_ATTACK(CSession* pSession, UINT32 playerID, UINT32 damage)
+{
+    return false;
+}
+
+bool CS_MONSTER_DIE(CSession* pSession, UINT32 aiID)
+{
+    return false;
+}
+
 bool CS_PLAYER_ATTACK(CSession* pSession, UINT32 aiID, UINT32 attackDamage)
+{
+    return false;
+}
+
+bool CS_PLAYER_DIE(CSession* pSession, UINT32 playerID)
 {
     return false;
 }
@@ -321,7 +389,7 @@ bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float cameraYa
     return false;
 }
 
-bool CS_BOSS_ATTACK(CSession* pSession, UINT32 damage)
+bool CS_BOSS_PHASE(CSession* pSession, UINT32 bossID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
 {
     return false;
 }

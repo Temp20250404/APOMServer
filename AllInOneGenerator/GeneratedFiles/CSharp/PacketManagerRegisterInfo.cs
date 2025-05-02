@@ -30,14 +30,23 @@ public class PacketManagerRegisterInfo
         _onRecv.Add((ushort)Game.PacketID.ScSpawnCharacter, MakePacket<SC_SPAWN_CHARACTER>);
         _handler.Add((ushort)Game.PacketID.ScSpawnCharacter, PacketHandler.SC_SpawnCharacter);
 
+        _onRecv.Add((ushort)Game.PacketID.ScStartAiCalculate, MakePacket<SC_START_AI_CALCULATE>);
+        _handler.Add((ushort)Game.PacketID.ScStartAiCalculate, PacketHandler.SC_StartAiCalculate);
+
+        _onRecv.Add((ushort)Game.PacketID.ScStopAiCalculate, MakePacket<SC_STOP_AI_CALCULATE>);
+        _handler.Add((ushort)Game.PacketID.ScStopAiCalculate, PacketHandler.SC_StopAiCalculate);
+
         _onRecv.Add((ushort)Game.PacketID.ScChat, MakePacket<SC_CHAT>);
         _handler.Add((ushort)Game.PacketID.ScChat, PacketHandler.SC_Chat);
 
         _onRecv.Add((ushort)Game.PacketID.ScKeyinfo, MakePacket<SC_KEYINFO>);
         _handler.Add((ushort)Game.PacketID.ScKeyinfo, PacketHandler.SC_Keyinfo);
 
-        _onRecv.Add((ushort)Game.PacketID.ScPlayerAttack, MakePacket<SC_PLAYER_ATTACK>);
-        _handler.Add((ushort)Game.PacketID.ScPlayerAttack, PacketHandler.SC_PlayerAttack);
+        _onRecv.Add((ushort)Game.PacketID.ScMonsterDamaged, MakePacket<SC_MONSTER_DAMAGED>);
+        _handler.Add((ushort)Game.PacketID.ScMonsterDamaged, PacketHandler.SC_MonsterDamaged);
+
+        _onRecv.Add((ushort)Game.PacketID.ScMonsterDie, MakePacket<SC_MONSTER_DIE>);
+        _handler.Add((ushort)Game.PacketID.ScMonsterDie, PacketHandler.SC_MonsterDie);
 
         _onRecv.Add((ushort)Game.PacketID.ScPlayerDamaged, MakePacket<SC_PLAYER_DAMAGED>);
         _handler.Add((ushort)Game.PacketID.ScPlayerDamaged, PacketHandler.SC_PlayerDamaged);
@@ -47,9 +56,6 @@ public class PacketManagerRegisterInfo
 
         _onRecv.Add((ushort)Game.PacketID.ScPositionSync, MakePacket<SC_POSITION_SYNC>);
         _handler.Add((ushort)Game.PacketID.ScPositionSync, PacketHandler.SC_PositionSync);
-
-        _onRecv.Add((ushort)Game.PacketID.ScBossAttack, MakePacket<SC_BOSS_ATTACK>);
-        _handler.Add((ushort)Game.PacketID.ScBossAttack, PacketHandler.SC_BossAttack);
 
         _onRecv.Add((ushort)Game.PacketID.ScBossPhase, MakePacket<SC_BOSS_PHASE>);
         _handler.Add((ushort)Game.PacketID.ScBossPhase, PacketHandler.SC_BossPhase);

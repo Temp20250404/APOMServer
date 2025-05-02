@@ -53,7 +53,4 @@ struct AIContext {
     // 위치 정보
     Position currentPos{ 0.f, 0.f, 0.f };   // 현재 AI(보스)의 위치 (월드 좌표)
     Position targetPos{ 0.f, 0.f, 0.f };    // 보스의 이동 목표 위치
-
-    // 상태 정보
-    game::BOSS_STATE eCurState = game::BOSS_STATE::BOSS_STATE_IDLE;
 };
