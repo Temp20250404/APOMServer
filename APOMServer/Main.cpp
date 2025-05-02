@@ -401,26 +401,26 @@ unsigned int WINAPI MonitorThread(void* pArg)
         UINT32 globalTime = InterlockedCompareExchange(&g_iTime, 0, 0);
         if (globalTime - g_iFpsCheck >= 1000)
         {
-        //    std::wcout << L"======================================================" << std::endl;
+            std::wcout << L"======================================================" << std::endl;
 
-        //    //monitor.PrintMonitoringData();
-        //    std::cout << "\n";
+            //monitor.PrintMonitoringData();
+            std::cout << "\n";
 
-        //    g_iFpsCheck += 1000;
+            g_iFpsCheck += 1000;
 
-        //    UINT32 netLoop = InterlockedExchange(&g_iNetworkLoop, 0);
-        //    UINT32 fps = InterlockedExchange(&g_iFPS, 0);
+            UINT32 netLoop = InterlockedExchange(&g_iNetworkLoop, 0);
+            UINT32 fps = InterlockedExchange(&g_iFPS, 0);
 
-        //    std::cout << "FPS & Network Loop Num : " << fps << "\n";
-        //    std::cout << "Main Loop : " << netLoop << "\n";
-        //    std::cout << "SyncCount : " << g_iSyncCount << "\n";
+            std::cout << "FPS & Network Loop Num : " << fps << "\n";
+            std::cout << "Main Loop : " << netLoop << "\n";
+            std::cout << "SyncCount : " << g_iSyncCount << "\n";
 
-        //    std::wcout << L"======================================================" << std::endl;
+            std::wcout << L"======================================================" << std::endl;
 
-        //    std::cout << "Session Count" << "\n\n";
-        //    std::cout << "Connect : " << g_SessionHashMap.size() << "\n";
-        //    std::cout << "Accept : " << netIOManager.acceptSessionCnt << "\n";
-        //    std::cout << "Disconnect : " << netIOManager.disconnectSessionCnt << "\n";
+            std::cout << "Session Count" << "\n\n";
+            std::cout << "Connect : " << g_SessionHashMap.size() << "\n";
+            std::cout << "Accept : " << netIOManager.acceptSessionCnt << "\n";
+            std::cout << "Disconnect : " << netIOManager.disconnectSessionCnt << "\n";
         }
 
         // 1ÃÊ°£ Sleep

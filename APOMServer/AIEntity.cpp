@@ -15,22 +15,29 @@ AIEntity::AIEntity(const AIContext& aiContext, BTBuilder builder)
     //m_context.ptargetRoom = aiContext.ptargetRoom;
 
     // 전달받은 builder 함수를 사용하여 행동 트리 생성
-    m_behaviorTree = builder(m_context);
+    if (m_behaviorTree != nullptr)
+        m_behaviorTree = builder(m_context);
+
+    m_behaviorTree = nullptr;
 }
 
 AIEntity::~AIEntity()
 {
-    delete m_behaviorTree;
+    if (m_behaviorTree)
+        delete m_behaviorTree;
 }
 
 void AIEntity::Update()
 {
-    // 가장 가까운 플레이어를 타겟으로 설정. 나중에 어그로 게이지 같은 기능이 추가되면 여기만 건들이면 끝
-    UpdateTarget();
+    if (m_behaviorTree)
+    {
+        // 가장 가까운 플레이어를 타겟으로 설정. 나중에 어그로 게이지 같은 기능이 추가되면 여기만 건들이면 끝
+        UpdateTarget();
 
-    NodeStatus status = m_behaviorTree->Tick();
-    if (status != NodeStatus::RUNNING)
-        m_behaviorTree->Initialize();
+        NodeStatus status = m_behaviorTree->Tick();
+        if (status != NodeStatus::RUNNING)
+            m_behaviorTree->Initialize();
+    }
 }
 
 void AIEntity::UpdateTarget()
