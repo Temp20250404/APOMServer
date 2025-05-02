@@ -666,8 +666,8 @@ bool CS_REGISTER_REQUEST(CSession* pSession, bool bRequest)
         if (entity)
         {
             const AIContext& ctx = entity->GetContext();
-
-            SC_CREATE_MONSTER_FOR_SINGLE(pSession, ctx.ID, 1, ctx.currentPos, 100);
+            Position pos{ 53.67, 1.21, -33.59 };
+            SC_CREATE_MONSTER_FOR_SINGLE(pSession, ctx.ID, 1, pos, 100);
         }
     }
 
