@@ -113,6 +113,64 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     }
     break;
 
+    case game::PacketID::CS_AcceptParty:
+    {
+        UINT32 FromPlayerID;
+        UINT32 ToPlayerID;
+
+        game::CS_ACCEPT_PARTY pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        FromPlayerID = pkt.fromplayerid();
+        ToPlayerID = pkt.toplayerid();
+
+        return CS_ACCEPT_PARTY(pSession, FromPlayerID, ToPlayerID);
+    }
+    break;
+
+    case game::PacketID::CS_CancelEnteringDungeon:
+    {
+        bool bCancel;
+
+        game::CS_CANCEL_ENTERING_DUNGEON pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        bCancel = pkt.bcancel();
+
+        return CS_CANCEL_ENTERING_DUNGEON(pSession, bCancel);
+    }
+    break;
+
+    case game::PacketID::CS_CreateMonster:
+    {
+        UINT32 monsterType;
+        Position monsterPos;
+
+        game::CS_CREATE_MONSTER pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        monsterType = pkt.monstertype();
+        monsterPos = pkt.monsterpos();
+
+        return CS_CREATE_MONSTER(pSession, monsterType, monsterPos);
+    }
+    break;
+
+    case game::PacketID::CS_MakeParty:
+    {
+        UINT32 FromPlayerID;
+        UINT32 ToPlayerID;
+
+        game::CS_MAKE_PARTY pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        FromPlayerID = pkt.fromplayerid();
+        ToPlayerID = pkt.toplayerid();
+
+        return CS_MAKE_PARTY(pSession, FromPlayerID, ToPlayerID);
+    }
+    break;
+
     case game::PacketID::CS_RegisterRequest:
     {
         bool bRequest;
@@ -123,6 +181,77 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         bRequest = pkt.brequest();
 
         return CS_REGISTER_REQUEST(pSession, bRequest);
+    }
+    break;
+
+    case game::PacketID::CS_RequestEnterDungeon:
+    {
+        bool bEnter;
+
+        game::CS_REQUEST_ENTER_DUNGEON pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        bEnter = pkt.benter();
+
+        return CS_REQUEST_ENTER_DUNGEON(pSession, bEnter);
+    }
+    break;
+
+    case game::PacketID::CS_ResponseEnterDungeonEnd:
+    {
+        bool bEnterEnd;
+
+        game::CS_RESPONSE_ENTER_DUNGEON_END pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        bEnterEnd = pkt.benterend();
+
+        return CS_RESPONSE_ENTER_DUNGEON_END(pSession, bEnterEnd);
+    }
+    break;
+
+    case game::PacketID::CS_SpawnCharacter:
+    {
+        UINT32 playerID;
+        Position playerPos;
+        float cameraYaw;
+        PlayerInfo playerInfo;
+
+        game::CS_SPAWN_CHARACTER pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        playerID = pkt.playerid();
+        playerPos = pkt.playerpos();
+        cameraYaw = pkt.camerayaw();
+        playerInfo = pkt.playerinfo();
+
+        return CS_SPAWN_CHARACTER(pSession, playerID, playerPos, cameraYaw, playerInfo);
+    }
+    break;
+
+    case game::PacketID::CS_StartAiCalculate:
+    {
+        bool bStart;
+
+        game::CS_START_AI_CALCULATE pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        bStart = pkt.bstart();
+
+        return CS_START_AI_CALCULATE(pSession, bStart);
+    }
+    break;
+
+    case game::PacketID::CS_StopAiCalculate:
+    {
+        bool bStop;
+
+        game::CS_STOP_AI_CALCULATE pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        bStop = pkt.bstop();
+
+        return CS_STOP_AI_CALCULATE(pSession, bStop);
     }
     break;
 
@@ -231,9 +360,9 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     }
     break;
 
-    case game::PacketID::CS_BossPhase:
+    case game::PacketID::CS_MonsterAi:
     {
-        UINT32 bossID;
+        UINT32 aiID;
         UINT32 currentHp;
         UINT32 maxHp;
         Position targetMovementPos;
@@ -241,10 +370,10 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         UINT32 bossState;
         float curSpeed;
 
-        game::CS_BOSS_PHASE pkt;
+        game::CS_MONSTER_AI pkt;
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
-        bossID = pkt.bossid();
+        aiID = pkt.aiid();
         currentHp = pkt.currenthp();
         maxHp = pkt.maxhp();
         targetMovementPos = pkt.targetmovementpos();
@@ -252,7 +381,22 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         bossState = pkt.bossstate();
         curSpeed = pkt.curspeed();
 
-        return CS_BOSS_PHASE(pSession, bossID, currentHp, maxHp, targetMovementPos, bossPos, bossState, curSpeed);
+        return CS_MONSTER_AI(pSession, aiID, currentHp, maxHp, targetMovementPos, bossPos, bossState, curSpeed);
+    }
+    break;
+
+    case game::PacketID::CS_MonsterRotate:
+    {
+        UINT32 aiID;
+        float rotateY;
+
+        game::CS_MONSTER_ROTATE pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        aiID = pkt.aiid();
+        rotateY = pkt.rotatey();
+
+        return CS_MONSTER_ROTATE(pSession, aiID, rotateY);
     }
     break;
 
@@ -349,7 +493,52 @@ bool CS_SIGNUP_REQUEST(CSession* pSession, std::string id, std::string email, st
     return false;
 }
 
+bool CS_ACCEPT_PARTY(CSession* pSession, UINT32 FromPlayerID, UINT32 ToPlayerID)
+{
+    return false;
+}
+
+bool CS_CANCEL_ENTERING_DUNGEON(CSession* pSession, bool bCancel)
+{
+    return false;
+}
+
+bool CS_CREATE_MONSTER(CSession* pSession, UINT32 monsterType, Position monsterPos)
+{
+    return false;
+}
+
+bool CS_MAKE_PARTY(CSession* pSession, UINT32 FromPlayerID, UINT32 ToPlayerID)
+{
+    return false;
+}
+
 bool CS_REGISTER_REQUEST(CSession* pSession, bool bRequest)
+{
+    return false;
+}
+
+bool CS_REQUEST_ENTER_DUNGEON(CSession* pSession, bool bEnter)
+{
+    return false;
+}
+
+bool CS_RESPONSE_ENTER_DUNGEON_END(CSession* pSession, bool bEnterEnd)
+{
+    return false;
+}
+
+bool CS_SPAWN_CHARACTER(CSession* pSession, UINT32 playerID, Position playerPos, float cameraYaw, PlayerInfo playerInfo)
+{
+    return false;
+}
+
+bool CS_START_AI_CALCULATE(CSession* pSession, bool bStart)
+{
+    return false;
+}
+
+bool CS_STOP_AI_CALCULATE(CSession* pSession, bool bStop)
 {
     return false;
 }
@@ -389,7 +578,12 @@ bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float cameraYa
     return false;
 }
 
-bool CS_BOSS_PHASE(CSession* pSession, UINT32 bossID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
+bool CS_MONSTER_AI(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
+{
+    return false;
+}
+
+bool CS_MONSTER_ROTATE(CSession* pSession, UINT32 aiID, float rotateY)
 {
     return false;
 }

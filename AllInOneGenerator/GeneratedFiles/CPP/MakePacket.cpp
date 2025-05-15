@@ -461,7 +461,174 @@ void SC_SIGNUP_RESPONSE_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool succes
 }
 
 
-void SC_CREATE_MONSTER_FOR_All(CSession* pSession, UINT32 aiID, UINT32 monsterType, Position monsterPos, UINT32 MaxHP)
+void SC_ACCEPT_PARTY_FOR_All(CSession* pSession, UINT32 FromPlayerID, UINT32 ToPlayerID, PlayerInfo playerInfo)
+{
+    game::SC_ACCEPT_PARTY pkt;
+
+    pkt.set_fromplayerid(FromPlayerID);
+
+    pkt.set_toplayerid(ToPlayerID);
+
+    {  // 구조체 단일 필드 시작
+        game::PlayerInfo* sub = pkt.mutable_playerinfo();
+        sub->set_playernickname(playerInfo.playerNickname);
+        sub->set_playerjob(playerInfo.playerJob);
+        sub->set_level(playerInfo.level);
+    }  // 구조체 단일 필드 끝
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_AcceptParty;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    BroadcastData(pSession, Packet, Packet->GetDataSize());
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_ACCEPT_PARTY_FOR_SINGLE(CSession* pSession, UINT32 FromPlayerID, UINT32 ToPlayerID, PlayerInfo playerInfo)
+{
+    game::SC_ACCEPT_PARTY pkt;
+
+    pkt.set_fromplayerid(FromPlayerID);
+
+    pkt.set_toplayerid(ToPlayerID);
+
+    {  // 구조체 단일 필드 시작
+        game::PlayerInfo* sub = pkt.mutable_playerinfo();
+        sub->set_playernickname(playerInfo.playerNickname);
+        sub->set_playerjob(playerInfo.playerJob);
+        sub->set_level(playerInfo.level);
+    }  // 구조체 단일 필드 끝
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_AcceptParty;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    UnicastPacket(pSession, &header, Packet);
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_ACCEPT_PARTY_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 FromPlayerID, UINT32 ToPlayerID, PlayerInfo playerInfo)
+{
+    game::SC_ACCEPT_PARTY pkt;
+
+    pkt.set_fromplayerid(FromPlayerID);
+
+    pkt.set_toplayerid(ToPlayerID);
+
+    {  // 구조체 단일 필드 시작
+        game::PlayerInfo* sub = pkt.mutable_playerinfo();
+        sub->set_playernickname(playerInfo.playerNickname);
+        sub->set_playerjob(playerInfo.playerJob);
+        sub->set_level(playerInfo.level);
+    }  // 구조체 단일 필드 끝
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_AcceptParty;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    for(auto& pl: pRoom->m_activePlayers){ if(pl->m_pSession != pSession) UnicastPacket(pl->m_pSession, &header, Packet); }
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+
+void SC_CANCEL_ENTERING_DUNGEON_FOR_All(CSession* pSession, bool bCancel, UINT32 playerID)
+{
+    game::SC_CANCEL_ENTERING_DUNGEON pkt;
+
+    pkt.set_bcancel(bCancel);
+
+    pkt.set_playerid(playerID);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_CancelEnteringDungeon;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    BroadcastData(pSession, Packet, Packet->GetDataSize());
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_CANCEL_ENTERING_DUNGEON_FOR_SINGLE(CSession* pSession, bool bCancel, UINT32 playerID)
+{
+    game::SC_CANCEL_ENTERING_DUNGEON pkt;
+
+    pkt.set_bcancel(bCancel);
+
+    pkt.set_playerid(playerID);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_CancelEnteringDungeon;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    UnicastPacket(pSession, &header, Packet);
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_CANCEL_ENTERING_DUNGEON_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool bCancel, UINT32 playerID)
+{
+    game::SC_CANCEL_ENTERING_DUNGEON pkt;
+
+    pkt.set_bcancel(bCancel);
+
+    pkt.set_playerid(playerID);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_CancelEnteringDungeon;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    for(auto& pl: pRoom->m_activePlayers){ if(pl->m_pSession != pSession) UnicastPacket(pl->m_pSession, &header, Packet); }
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+
+void SC_CREATE_MONSTER_FOR_All(CSession* pSession, UINT32 aiID, UINT32 monsterType, Position monsterPos)
 {
     game::SC_CREATE_MONSTER pkt;
 
@@ -475,8 +642,6 @@ void SC_CREATE_MONSTER_FOR_All(CSession* pSession, UINT32 aiID, UINT32 monsterTy
         sub->set_posy(monsterPos.posY);
         sub->set_posz(monsterPos.posZ);
     }  // 구조체 단일 필드 끝
-
-    pkt.set_maxhp(MaxHP);
 
     int pktSize = pkt.ByteSizeLong();
     PACKET_HEADER header;
@@ -494,7 +659,7 @@ void SC_CREATE_MONSTER_FOR_All(CSession* pSession, UINT32 aiID, UINT32 monsterTy
     packetPool.Free(Packet);
 }
 
-void SC_CREATE_MONSTER_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 monsterType, Position monsterPos, UINT32 MaxHP)
+void SC_CREATE_MONSTER_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 monsterType, Position monsterPos)
 {
     game::SC_CREATE_MONSTER pkt;
 
@@ -508,8 +673,6 @@ void SC_CREATE_MONSTER_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 monste
         sub->set_posy(monsterPos.posY);
         sub->set_posz(monsterPos.posZ);
     }  // 구조체 단일 필드 끝
-
-    pkt.set_maxhp(MaxHP);
 
     int pktSize = pkt.ByteSizeLong();
     PACKET_HEADER header;
@@ -527,7 +690,7 @@ void SC_CREATE_MONSTER_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 monste
     packetPool.Free(Packet);
 }
 
-void SC_CREATE_MONSTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, UINT32 monsterType, Position monsterPos, UINT32 MaxHP)
+void SC_CREATE_MONSTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, UINT32 monsterType, Position monsterPos)
 {
     game::SC_CREATE_MONSTER pkt;
 
@@ -542,13 +705,151 @@ void SC_CREATE_MONSTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID,
         sub->set_posz(monsterPos.posZ);
     }  // 구조체 단일 필드 끝
 
-    pkt.set_maxhp(MaxHP);
-
     int pktSize = pkt.ByteSizeLong();
     PACKET_HEADER header;
     header.byCode = dfNETWORK_PACKET_CODE;
     header.bySize = pktSize;
     header.byType = game::PacketID::SC_CreateMonster;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    for(auto& pl: pRoom->m_activePlayers){ if(pl->m_pSession != pSession) UnicastPacket(pl->m_pSession, &header, Packet); }
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+
+void SC_MAKE_PARTY_FOR_All(CSession* pSession, UINT32 FromPlayerID, UINT32 ToPlayerID)
+{
+    game::SC_MAKE_PARTY pkt;
+
+    pkt.set_fromplayerid(FromPlayerID);
+
+    pkt.set_toplayerid(ToPlayerID);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_MakeParty;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    BroadcastData(pSession, Packet, Packet->GetDataSize());
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_MAKE_PARTY_FOR_SINGLE(CSession* pSession, UINT32 FromPlayerID, UINT32 ToPlayerID)
+{
+    game::SC_MAKE_PARTY pkt;
+
+    pkt.set_fromplayerid(FromPlayerID);
+
+    pkt.set_toplayerid(ToPlayerID);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_MakeParty;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    UnicastPacket(pSession, &header, Packet);
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_MAKE_PARTY_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 FromPlayerID, UINT32 ToPlayerID)
+{
+    game::SC_MAKE_PARTY pkt;
+
+    pkt.set_fromplayerid(FromPlayerID);
+
+    pkt.set_toplayerid(ToPlayerID);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_MakeParty;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    for(auto& pl: pRoom->m_activePlayers){ if(pl->m_pSession != pSession) UnicastPacket(pl->m_pSession, &header, Packet); }
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+
+void SC_PREPARE_ENTERING_DUNGEON_FOR_All(CSession* pSession, bool bEnter)
+{
+    game::SC_PREPARE_ENTERING_DUNGEON pkt;
+
+    pkt.set_benter(bEnter);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_PrepareEnteringDungeon;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    BroadcastData(pSession, Packet, Packet->GetDataSize());
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_PREPARE_ENTERING_DUNGEON_FOR_SINGLE(CSession* pSession, bool bEnter)
+{
+    game::SC_PREPARE_ENTERING_DUNGEON pkt;
+
+    pkt.set_benter(bEnter);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_PrepareEnteringDungeon;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    UnicastPacket(pSession, &header, Packet);
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_PREPARE_ENTERING_DUNGEON_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool bEnter)
+{
+    game::SC_PREPARE_ENTERING_DUNGEON pkt;
+
+    pkt.set_benter(bEnter);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_PrepareEnteringDungeon;
 
     CPacket* Packet = packetPool.Alloc();
     char buffer[512];
@@ -616,6 +917,140 @@ void SC_REMOVE_CHARACTER_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 pla
     header.byCode = dfNETWORK_PACKET_CODE;
     header.bySize = pktSize;
     header.byType = game::PacketID::SC_RemoveCharacter;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    for(auto& pl: pRoom->m_activePlayers){ if(pl->m_pSession != pSession) UnicastPacket(pl->m_pSession, &header, Packet); }
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+
+void SC_RESPONSE_ENTER_DUNGEON_BEGIN_FOR_All(CSession* pSession, bool bEnterBegin)
+{
+    game::SC_RESPONSE_ENTER_DUNGEON_BEGIN pkt;
+
+    pkt.set_benterbegin(bEnterBegin);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_ResponseEnterDungeonBegin;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    BroadcastData(pSession, Packet, Packet->GetDataSize());
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_RESPONSE_ENTER_DUNGEON_BEGIN_FOR_SINGLE(CSession* pSession, bool bEnterBegin)
+{
+    game::SC_RESPONSE_ENTER_DUNGEON_BEGIN pkt;
+
+    pkt.set_benterbegin(bEnterBegin);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_ResponseEnterDungeonBegin;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    UnicastPacket(pSession, &header, Packet);
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_RESPONSE_ENTER_DUNGEON_BEGIN_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool bEnterBegin)
+{
+    game::SC_RESPONSE_ENTER_DUNGEON_BEGIN pkt;
+
+    pkt.set_benterbegin(bEnterBegin);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_ResponseEnterDungeonBegin;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    for(auto& pl: pRoom->m_activePlayers){ if(pl->m_pSession != pSession) UnicastPacket(pl->m_pSession, &header, Packet); }
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+
+void SC_RESPONSE_ENTER_DUNGEON_END_FOR_All(CSession* pSession, bool bEnterEnd)
+{
+    game::SC_RESPONSE_ENTER_DUNGEON_END pkt;
+
+    pkt.set_benterend(bEnterEnd);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_ResponseEnterDungeonEnd;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    BroadcastData(pSession, Packet, Packet->GetDataSize());
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_RESPONSE_ENTER_DUNGEON_END_FOR_SINGLE(CSession* pSession, bool bEnterEnd)
+{
+    game::SC_RESPONSE_ENTER_DUNGEON_END pkt;
+
+    pkt.set_benterend(bEnterEnd);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_ResponseEnterDungeonEnd;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    UnicastPacket(pSession, &header, Packet);
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_RESPONSE_ENTER_DUNGEON_END_FOR_AROUND(CSession* pSession, CRoom* pRoom, bool bEnterEnd)
+{
+    game::SC_RESPONSE_ENTER_DUNGEON_END pkt;
+
+    pkt.set_benterend(bEnterEnd);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_ResponseEnterDungeonEnd;
 
     CPacket* Packet = packetPool.Alloc();
     char buffer[512];
@@ -1400,11 +1835,11 @@ void SC_POSITION_SYNC_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 player
 }
 
 
-void SC_BOSS_PHASE_FOR_All(CSession* pSession, UINT32 bossID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
+void SC_MONSTER_AI_FOR_All(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
 {
-    game::SC_BOSS_PHASE pkt;
+    game::SC_MONSTER_AI pkt;
 
-    pkt.set_bossid(bossID);
+    pkt.set_aiid(aiID);
 
     pkt.set_currenthp(currentHp);
 
@@ -1432,7 +1867,7 @@ void SC_BOSS_PHASE_FOR_All(CSession* pSession, UINT32 bossID, UINT32 currentHp, 
     PACKET_HEADER header;
     header.byCode = dfNETWORK_PACKET_CODE;
     header.bySize = pktSize;
-    header.byType = game::PacketID::SC_BossPhase;
+    header.byType = game::PacketID::SC_MonsterAi;
 
     CPacket* Packet = packetPool.Alloc();
     char buffer[512];
@@ -1444,11 +1879,11 @@ void SC_BOSS_PHASE_FOR_All(CSession* pSession, UINT32 bossID, UINT32 currentHp, 
     packetPool.Free(Packet);
 }
 
-void SC_BOSS_PHASE_FOR_SINGLE(CSession* pSession, UINT32 bossID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
+void SC_MONSTER_AI_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
 {
-    game::SC_BOSS_PHASE pkt;
+    game::SC_MONSTER_AI pkt;
 
-    pkt.set_bossid(bossID);
+    pkt.set_aiid(aiID);
 
     pkt.set_currenthp(currentHp);
 
@@ -1476,7 +1911,7 @@ void SC_BOSS_PHASE_FOR_SINGLE(CSession* pSession, UINT32 bossID, UINT32 currentH
     PACKET_HEADER header;
     header.byCode = dfNETWORK_PACKET_CODE;
     header.bySize = pktSize;
-    header.byType = game::PacketID::SC_BossPhase;
+    header.byType = game::PacketID::SC_MonsterAi;
 
     CPacket* Packet = packetPool.Alloc();
     char buffer[512];
@@ -1488,11 +1923,11 @@ void SC_BOSS_PHASE_FOR_SINGLE(CSession* pSession, UINT32 bossID, UINT32 currentH
     packetPool.Free(Packet);
 }
 
-void SC_BOSS_PHASE_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 bossID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
+void SC_MONSTER_AI_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
 {
-    game::SC_BOSS_PHASE pkt;
+    game::SC_MONSTER_AI pkt;
 
-    pkt.set_bossid(bossID);
+    pkt.set_aiid(aiID);
 
     pkt.set_currenthp(currentHp);
 
@@ -1520,7 +1955,80 @@ void SC_BOSS_PHASE_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 bossID, U
     PACKET_HEADER header;
     header.byCode = dfNETWORK_PACKET_CODE;
     header.bySize = pktSize;
-    header.byType = game::PacketID::SC_BossPhase;
+    header.byType = game::PacketID::SC_MonsterAi;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    for(auto& pl: pRoom->m_activePlayers){ if(pl->m_pSession != pSession) UnicastPacket(pl->m_pSession, &header, Packet); }
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+
+void SC_MONSTER_ROTATE_FOR_All(CSession* pSession, UINT32 aiID, float rotateY)
+{
+    game::SC_MONSTER_ROTATE pkt;
+
+    pkt.set_aiid(aiID);
+
+    pkt.set_rotatey(rotateY);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_MonsterRotate;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    BroadcastData(pSession, Packet, Packet->GetDataSize());
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_MONSTER_ROTATE_FOR_SINGLE(CSession* pSession, UINT32 aiID, float rotateY)
+{
+    game::SC_MONSTER_ROTATE pkt;
+
+    pkt.set_aiid(aiID);
+
+    pkt.set_rotatey(rotateY);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_MonsterRotate;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    UnicastPacket(pSession, &header, Packet);
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_MONSTER_ROTATE_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, float rotateY)
+{
+    game::SC_MONSTER_ROTATE pkt;
+
+    pkt.set_aiid(aiID);
+
+    pkt.set_rotatey(rotateY);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_MonsterRotate;
 
     CPacket* Packet = packetPool.Alloc();
     char buffer[512];

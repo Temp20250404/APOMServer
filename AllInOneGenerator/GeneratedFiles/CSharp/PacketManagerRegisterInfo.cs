@@ -21,11 +21,29 @@ public class PacketManagerRegisterInfo
         _onRecv.Add((ushort)Game.PacketID.ScSignupResponse, MakePacket<SC_SIGNUP_RESPONSE>);
         _handler.Add((ushort)Game.PacketID.ScSignupResponse, PacketHandler.SC_SignupResponse);
 
+        _onRecv.Add((ushort)Game.PacketID.ScAcceptParty, MakePacket<SC_ACCEPT_PARTY>);
+        _handler.Add((ushort)Game.PacketID.ScAcceptParty, PacketHandler.SC_AcceptParty);
+
+        _onRecv.Add((ushort)Game.PacketID.ScCancelEnteringDungeon, MakePacket<SC_CANCEL_ENTERING_DUNGEON>);
+        _handler.Add((ushort)Game.PacketID.ScCancelEnteringDungeon, PacketHandler.SC_CancelEnteringDungeon);
+
         _onRecv.Add((ushort)Game.PacketID.ScCreateMonster, MakePacket<SC_CREATE_MONSTER>);
         _handler.Add((ushort)Game.PacketID.ScCreateMonster, PacketHandler.SC_CreateMonster);
 
+        _onRecv.Add((ushort)Game.PacketID.ScMakeParty, MakePacket<SC_MAKE_PARTY>);
+        _handler.Add((ushort)Game.PacketID.ScMakeParty, PacketHandler.SC_MakeParty);
+
+        _onRecv.Add((ushort)Game.PacketID.ScPrepareEnteringDungeon, MakePacket<SC_PREPARE_ENTERING_DUNGEON>);
+        _handler.Add((ushort)Game.PacketID.ScPrepareEnteringDungeon, PacketHandler.SC_PrepareEnteringDungeon);
+
         _onRecv.Add((ushort)Game.PacketID.ScRemoveCharacter, MakePacket<SC_REMOVE_CHARACTER>);
         _handler.Add((ushort)Game.PacketID.ScRemoveCharacter, PacketHandler.SC_RemoveCharacter);
+
+        _onRecv.Add((ushort)Game.PacketID.ScResponseEnterDungeonBegin, MakePacket<SC_RESPONSE_ENTER_DUNGEON_BEGIN>);
+        _handler.Add((ushort)Game.PacketID.ScResponseEnterDungeonBegin, PacketHandler.SC_ResponseEnterDungeonBegin);
+
+        _onRecv.Add((ushort)Game.PacketID.ScResponseEnterDungeonEnd, MakePacket<SC_RESPONSE_ENTER_DUNGEON_END>);
+        _handler.Add((ushort)Game.PacketID.ScResponseEnterDungeonEnd, PacketHandler.SC_ResponseEnterDungeonEnd);
 
         _onRecv.Add((ushort)Game.PacketID.ScSpawnCharacter, MakePacket<SC_SPAWN_CHARACTER>);
         _handler.Add((ushort)Game.PacketID.ScSpawnCharacter, PacketHandler.SC_SpawnCharacter);
@@ -57,8 +75,11 @@ public class PacketManagerRegisterInfo
         _onRecv.Add((ushort)Game.PacketID.ScPositionSync, MakePacket<SC_POSITION_SYNC>);
         _handler.Add((ushort)Game.PacketID.ScPositionSync, PacketHandler.SC_PositionSync);
 
-        _onRecv.Add((ushort)Game.PacketID.ScBossPhase, MakePacket<SC_BOSS_PHASE>);
-        _handler.Add((ushort)Game.PacketID.ScBossPhase, PacketHandler.SC_BossPhase);
+        _onRecv.Add((ushort)Game.PacketID.ScMonsterAi, MakePacket<SC_MONSTER_AI>);
+        _handler.Add((ushort)Game.PacketID.ScMonsterAi, PacketHandler.SC_MonsterAi);
+
+        _onRecv.Add((ushort)Game.PacketID.ScMonsterRotate, MakePacket<SC_MONSTER_ROTATE>);
+        _handler.Add((ushort)Game.PacketID.ScMonsterRotate, PacketHandler.SC_MonsterRotate);
 
         _onRecv.Add((ushort)Game.PacketID.ScTestPacket, MakePacket<SC_TEST_PACKET>);
         _handler.Add((ushort)Game.PacketID.ScTestPacket, PacketHandler.SC_TestPacket);

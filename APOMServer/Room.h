@@ -40,9 +40,10 @@ public:
 
     std::vector<AIEntity*> m_pEntities;
 
+public:
+    UINT32 authorityPlayerID = 0;
+
 private:
     static constexpr int MAX_PLAYERS = 10;
     int m_roomId = -1;
-
-    //ItemSpawner* m_pItemSpawner;
 };

@@ -32,5 +32,4 @@ CObject* CreateAcceptObject(void)
 void LoginAcceptObject(CObject* pObj)
 {
     CNetIOManager::GetInstance().acceptSessionCnt++;
-
 }

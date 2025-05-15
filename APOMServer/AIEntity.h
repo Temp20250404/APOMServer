@@ -17,24 +17,18 @@ public:
     void Update();
 
     bool IsAlive() const {
-        return (m_context.currentHP > 0);
+        return m_context.bDeath;
     }
 
     int GetID() const { return m_id; }
-
-    void UpdateTarget();
 
     const AIContext& GetContext(void) const {
         return m_context;
     }
 
 public:
-    void GetDamaged(UINT damage);
-
-public:
     int m_id;
     AIContext m_context;
-    BTNode* m_behaviorTree;
 
     static UINT32 g_id;
 };

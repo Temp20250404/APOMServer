@@ -119,6 +119,64 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     }
     break;
 
+    case game::PacketID::CS_AcceptParty:
+    {
+        UINT32 FromPlayerID;
+        UINT32 ToPlayerID;
+
+        game::CS_ACCEPT_PARTY pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        FromPlayerID = pkt.fromplayerid();
+        ToPlayerID = pkt.toplayerid();
+
+        return CS_ACCEPT_PARTY(pSession, FromPlayerID, ToPlayerID);
+    }
+    break;
+
+    case game::PacketID::CS_CancelEnteringDungeon:
+    {
+        bool bCancel;
+
+        game::CS_CANCEL_ENTERING_DUNGEON pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        bCancel = pkt.bcancel();
+
+        return CS_CANCEL_ENTERING_DUNGEON(pSession, bCancel);
+    }
+    break;
+
+    case game::PacketID::CS_CreateMonster:
+    {
+        UINT32 monsterType;
+        Position monsterPos;
+
+        game::CS_CREATE_MONSTER pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        monsterType = pkt.monstertype();
+        monsterPos = pkt.monsterpos();
+
+        return CS_CREATE_MONSTER(pSession, monsterType, monsterPos);
+    }
+    break;
+
+    case game::PacketID::CS_MakeParty:
+    {
+        UINT32 FromPlayerID;
+        UINT32 ToPlayerID;
+
+        game::CS_MAKE_PARTY pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        FromPlayerID = pkt.fromplayerid();
+        ToPlayerID = pkt.toplayerid();
+
+        return CS_MAKE_PARTY(pSession, FromPlayerID, ToPlayerID);
+    }
+    break;
+
     case game::PacketID::CS_RegisterRequest:
     {
         bool bRequest;
@@ -129,6 +187,77 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         bRequest = pkt.brequest();
 
         return CS_REGISTER_REQUEST(pSession, bRequest);
+    }
+    break;
+
+    case game::PacketID::CS_RequestEnterDungeon:
+    {
+        bool bEnter;
+
+        game::CS_REQUEST_ENTER_DUNGEON pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        bEnter = pkt.benter();
+
+        return CS_REQUEST_ENTER_DUNGEON(pSession, bEnter);
+    }
+    break;
+
+    case game::PacketID::CS_ResponseEnterDungeonEnd:
+    {
+        bool bEnterEnd;
+
+        game::CS_RESPONSE_ENTER_DUNGEON_END pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        bEnterEnd = pkt.benterend();
+
+        return CS_RESPONSE_ENTER_DUNGEON_END(pSession, bEnterEnd);
+    }
+    break;
+
+    case game::PacketID::CS_SpawnCharacter:
+    {
+        UINT32 playerID;
+        Position playerPos;
+        float cameraYaw;
+        PlayerInfo playerInfo;
+
+        game::CS_SPAWN_CHARACTER pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        playerID = pkt.playerid();
+        playerPos = pkt.playerpos();
+        cameraYaw = pkt.camerayaw();
+        playerInfo = pkt.playerinfo();
+
+        return CS_SPAWN_CHARACTER(pSession, playerID, playerPos, cameraYaw, playerInfo);
+    }
+    break;
+
+    case game::PacketID::CS_StartAiCalculate:
+    {
+        bool bStart;
+
+        game::CS_START_AI_CALCULATE pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        bStart = pkt.bstart();
+
+        return CS_START_AI_CALCULATE(pSession, bStart);
+    }
+    break;
+
+    case game::PacketID::CS_StopAiCalculate:
+    {
+        bool bStop;
+
+        game::CS_STOP_AI_CALCULATE pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        bStop = pkt.bstop();
+
+        return CS_STOP_AI_CALCULATE(pSession, bStop);
     }
     break;
 
@@ -237,9 +366,9 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     }
     break;
 
-    case game::PacketID::CS_BossPhase:
+    case game::PacketID::CS_MonsterAi:
     {
-        UINT32 bossID;
+        UINT32 aiID;
         UINT32 currentHp;
         UINT32 maxHp;
         Position targetMovementPos;
@@ -247,10 +376,10 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         UINT32 bossState;
         float curSpeed;
 
-        game::CS_BOSS_PHASE pkt;
+        game::CS_MONSTER_AI pkt;
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
-        bossID = pkt.bossid();
+        aiID = pkt.aiid();
         currentHp = pkt.currenthp();
         maxHp = pkt.maxhp();
         targetMovementPos = pkt.targetmovementpos();
@@ -258,7 +387,22 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         bossState = pkt.bossstate();
         curSpeed = pkt.curspeed();
 
-        return CS_BOSS_PHASE(pSession, bossID, currentHp, maxHp, targetMovementPos, bossPos, bossState, curSpeed);
+        return CS_MONSTER_AI(pSession, aiID, currentHp, maxHp, targetMovementPos, bossPos, bossState, curSpeed);
+    }
+    break;
+
+    case game::PacketID::CS_MonsterRotate:
+    {
+        UINT32 aiID;
+        float rotateY;
+
+        game::CS_MONSTER_ROTATE pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        aiID = pkt.aiid();
+        rotateY = pkt.rotatey();
+
+        return CS_MONSTER_ROTATE(pSession, aiID, rotateY);
     }
     break;
 
@@ -335,6 +479,18 @@ void DisconnectSessionProc(CSession* pSession)
 
         // 방에 있는 모든 플레이어에게 해당 플레이어가 제거되었다고 알림
         SC_REMOVE_CHARACTER_FOR_AROUND(pSession, pRoom, pPlayer->m_ID);
+
+        // 해당 방의 패킷 생성 권한을 가진 플레이어라면
+        if (pPlayer->m_ID == pRoom->authorityPlayerID)
+        {
+            // 새로운 플레이어에게 권한 생성을 넘김
+            if (!pRoom->GetActivePlayers().empty())
+            {
+                CPlayer* pPlayer = pRoom->GetActivePlayers().front();
+                SC_START_AI_CALCULATE_FOR_SINGLE(pPlayer->m_pSession, true);
+                pRoom->authorityPlayerID = pPlayer->m_ID;
+            }
+        }
     }
 
     // 플레이어 반환
@@ -454,6 +610,57 @@ bool CS_SIGNUP_REQUEST(CSession* pSession, std::string id, std::string email, st
 
     SC_SIGNUP_RESPONSE_FOR_SINGLE(pSession, false, 3);   // 에러 코드 3 : 알 수 없는 이유로 검사를 했음에도 불구하고 이미 존재하는 이메일 or ID. 데이터 오염이 의심됨.
     return true;
+}
+
+bool CS_ACCEPT_PARTY(CSession* pSession, UINT32 FromPlayerID, UINT32 ToPlayerID)
+{
+    return false;
+}
+
+bool CS_CANCEL_ENTERING_DUNGEON(CSession* pSession, bool bCancel)
+{
+    return false;
+}
+
+bool CS_CREATE_MONSTER(CSession* pSession, UINT32 monsterType, Position monsterPos)
+{
+    static UINT32 aiID = 1;
+
+    // 나간 플레이어의 정보를 Room에서 나가도록 함
+    CPlayer* pPlayer = (CPlayer*)pSession->pObj;
+
+    CRoom* pRoom = roomManager.GetRoomById(pPlayer->GetRoomId());
+
+    if (pRoom)
+    {
+        //// AIContext (보스)
+        //AIContext aiContext{};
+        //AIEntity* pAIEntity;
+
+        //for (int i = 0; i < 1; ++i)
+        //{
+        //    // context에 방 정보 삽입
+        //    aiContext.ptargetRoom = pRoom;
+
+        //    // AIEntity 인스턴스 생성
+        //    pAIEntity = new AIEntity(aiContext, nullptr);
+
+        //    // AI 매니저에 AI 객체 등록
+        //    aiManager.AddEntity(pAIEntity);
+
+        //    // 방에 AI 객체 정보 등록
+        //    pRoom->AddEntity(pAIEntity);
+        //}
+
+        SC_CREATE_MONSTER_FOR_AROUND(nullptr, pRoom, /*aiContext.ID*/ aiID++, monsterType, monsterPos);
+    }
+
+    return true;
+}
+
+bool CS_MAKE_PARTY(CSession* pSession, UINT32 FromPlayerID, UINT32 ToPlayerID)
+{
+    return false;
 }
 
 bool CS_TEST_PACKET1(CSession* pSession, const std::vector<UINT32>& tempData)
@@ -577,7 +784,7 @@ bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float cameraYa
     return true;
 }
 
-bool CS_BOSS_PHASE(CSession* pSession, UINT32 bossID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
+bool CS_MONSTER_AI(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
 {
     // 1. 연결된 플레이어 추출
     CPlayer* pPlayer = static_cast<CPlayer*>(pSession->pObj);
@@ -585,7 +792,20 @@ bool CS_BOSS_PHASE(CSession* pSession, UINT32 bossID, UINT32 currentHp, UINT32 m
     // 2. 방 정보 검색
     CRoom* pRoom = roomManager.GetRoomById(pPlayer->GetRoomId());
 
-    SC_BOSS_PHASE_FOR_AROUND(pSession, pRoom, bossID, currentHp, maxHp, targetMovementPos, bossPos, bossState, curSpeed);
+    SC_MONSTER_AI_FOR_AROUND(pSession, pRoom, aiID, currentHp, maxHp, targetMovementPos, bossPos, bossState, curSpeed);
+
+    return true;
+}
+
+bool CS_MONSTER_ROTATE(CSession* pSession, UINT32 aiID, float rotateY)
+{
+    // 1. 연결된 플레이어 추출
+    CPlayer* pPlayer = static_cast<CPlayer*>(pSession->pObj);
+
+    // 2. 방 정보 검색
+    CRoom* pRoom = roomManager.GetRoomById(pPlayer->GetRoomId());
+
+    SC_MONSTER_ROTATE_FOR_AROUND(nullptr, pRoom, aiID, rotateY);
 
     return true;
 }
@@ -610,6 +830,13 @@ bool CS_REGISTER_REQUEST(CSession* pSession, bool bRequest)
     {
         // 룸에 추가 실패 처리
         return false;
+    }
+
+    // 방에 생성 권한을 가진 플레이어가 있는지 유무 살피기
+    if (room->authorityPlayerID == 0)
+    {
+        SC_START_AI_CALCULATE_FOR_SINGLE(pSession, true);
+        room->authorityPlayerID = pPlayer->m_ID;    // m_ID는 1번부터 시작함
     }
 
     // 4. 접속 성공
@@ -659,7 +886,6 @@ bool CS_REGISTER_REQUEST(CSession* pSession, bool bRequest)
     // active로 이동
     room->MoveToActive(pPlayer->m_ID);
 
-    
     // 방에 있는 ai를 모두 생성하는 패킷 전송
     for (const auto& entity : room->GetEntities())
     {
@@ -667,9 +893,34 @@ bool CS_REGISTER_REQUEST(CSession* pSession, bool bRequest)
         {
             const AIContext& ctx = entity->GetContext();
             Position pos{ 53.67, 1.21, -33.59 };
-            SC_CREATE_MONSTER_FOR_SINGLE(pSession, ctx.ID, 1, pos, 100);
+            SC_CREATE_MONSTER_FOR_SINGLE(pSession, ctx.ID, 1, pos);
         }
     }
 
     return true;
+}
+
+bool CS_REQUEST_ENTER_DUNGEON(CSession* pSession, bool bEnter)
+{
+    return false;
+}
+
+bool CS_RESPONSE_ENTER_DUNGEON_END(CSession* pSession, bool bEnterEnd)
+{
+    return false;
+}
+
+bool CS_SPAWN_CHARACTER(CSession* pSession, UINT32 playerID, Position playerPos, float cameraYaw, PlayerInfo playerInfo)
+{
+    return false;
+}
+
+bool CS_START_AI_CALCULATE(CSession* pSession, bool bStart)
+{
+    return false;
+}
+
+bool CS_STOP_AI_CALCULATE(CSession* pSession, bool bStop)
+{
+    return false;
 }

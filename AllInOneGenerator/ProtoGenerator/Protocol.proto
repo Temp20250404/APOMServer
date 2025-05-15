@@ -4,46 +4,63 @@ package game;
 
 enum PacketID {
 // Client → Server
-    CS_BossPhase = 0;
-    CS_Chat = 1;
-    CS_CheckTimeout = 2;
-    CS_FindIdRequest = 3;
-    CS_FindPwRequest = 4;
-    CS_Keyinfo = 5;
-    CS_LoginRequest = 6;
-    CS_MonsterAttack = 7;
-    CS_MonsterDie = 8;
-    CS_PlayerAttack = 9;
-    CS_PlayerDie = 10;
-    CS_PositionSync = 11;
-    CS_RegisterRequest = 12;
-    CS_RequestCharacterInfo = 13;
-    CS_RequestItemInfo = 14;
-    CS_SignupRequest = 15;
-    CS_TestPacket1 = 16;
-    CS_TestPacket2 = 17;
+    CS_AcceptParty = 0;
+    CS_CancelEnteringDungeon = 1;
+    CS_Chat = 2;
+    CS_CheckTimeout = 3;
+    CS_CreateMonster = 4;
+    CS_FindIdRequest = 5;
+    CS_FindPwRequest = 6;
+    CS_Keyinfo = 7;
+    CS_LoginRequest = 8;
+    CS_MakeParty = 9;
+    CS_MonsterAi = 10;
+    CS_MonsterAttack = 11;
+    CS_MonsterDie = 12;
+    CS_MonsterRotate = 13;
+    CS_PlayerAttack = 14;
+    CS_PlayerDie = 15;
+    CS_PositionSync = 16;
+    CS_RegisterRequest = 17;
+    CS_RequestCharacterInfo = 18;
+    CS_RequestEnterDungeon = 19;
+    CS_RequestItemInfo = 20;
+    CS_ResponseEnterDungeonEnd = 21;
+    CS_SignupRequest = 22;
+    CS_SpawnCharacter = 23;
+    CS_StartAiCalculate = 24;
+    CS_StopAiCalculate = 25;
+    CS_TestPacket1 = 26;
+    CS_TestPacket2 = 27;
 
 // Server → Client
-    SC_BossPhase = 18;
-    SC_Chat = 19;
-    SC_CreateMonster = 20;
-    SC_FindIdResponse = 21;
-    SC_FindPwResponse = 22;
-    SC_Keyinfo = 23;
-    SC_LoginResponse = 24;
-    SC_MonsterDamaged = 25;
-    SC_MonsterDie = 26;
-    SC_PlayerDamaged = 27;
-    SC_PlayerDie = 28;
-    SC_PositionSync = 29;
-    SC_RemoveCharacter = 30;
-    SC_RequestItemInfo = 31;
-    SC_ResponseCharacterInfo = 32;
-    SC_SignupResponse = 33;
-    SC_SpawnCharacter = 34;
-    SC_StartAiCalculate = 35;
-    SC_StopAiCalculate = 36;
-    SC_TestPacket = 37;
+    SC_AcceptParty = 28;
+    SC_CancelEnteringDungeon = 29;
+    SC_Chat = 30;
+    SC_CreateMonster = 31;
+    SC_FindIdResponse = 32;
+    SC_FindPwResponse = 33;
+    SC_Keyinfo = 34;
+    SC_LoginResponse = 35;
+    SC_MakeParty = 36;
+    SC_MonsterAi = 37;
+    SC_MonsterDamaged = 38;
+    SC_MonsterDie = 39;
+    SC_MonsterRotate = 40;
+    SC_PlayerDamaged = 41;
+    SC_PlayerDie = 42;
+    SC_PositionSync = 43;
+    SC_PrepareEnteringDungeon = 44;
+    SC_RemoveCharacter = 45;
+    SC_RequestItemInfo = 46;
+    SC_ResponseCharacterInfo = 47;
+    SC_ResponseEnterDungeonBegin = 48;
+    SC_ResponseEnterDungeonEnd = 49;
+    SC_SignupResponse = 50;
+    SC_SpawnCharacter = 51;
+    SC_StartAiCalculate = 52;
+    SC_StopAiCalculate = 53;
+    SC_TestPacket = 54;
 }
 
 
@@ -102,17 +119,71 @@ message SC_SIGNUP_RESPONSE {
     bool success = 1; // 성공 여부
     uint32 errorCode = 2; // 에러코드 1: 이미 존재하는 ID, 2: 이미 존재하는 이메일
 }
+message CS_ACCEPT_PARTY {
+    uint32 FromPlayerID = 1; // 파티를 요청하는 플레이어 ID
+    uint32 ToPlayerID = 2; // 파티 요청 대상 플레이어 ID
+}
+message CS_CANCEL_ENTERING_DUNGEON {
+    bool bCancel = 1;
+}
+message CS_CREATE_MONSTER {
+    uint32 monsterType = 1; // 생성될 몬스터 타입
+    Position monsterPos = 2; // 몬스터의 초기 위치
+}
+message CS_MAKE_PARTY {
+    uint32 FromPlayerID = 1; // 파티를 요청하는 플레이어 ID
+    uint32 ToPlayerID = 2; // 파티 요청 대상 플레이어 ID
+}
 message CS_REGISTER_REQUEST {
     bool bRequest = 1;
+}
+message CS_REQUEST_ENTER_DUNGEON {
+    bool bEnter = 1;
+}
+message CS_RESPONSE_ENTER_DUNGEON_END {
+    bool bEnterEnd = 1;
+}
+message CS_SPAWN_CHARACTER {
+    uint32 playerID = 1; // 플레이어의 id
+    Position playerPos = 2; // 플레이어의 초기 위치. 나중에 가면 마지막에 로그아웃했던 위치로 변경 예정
+    float cameraYaw = 3; // 초기 카메라 y축 회전값. 이건 사용하지 않을 수 있으니 놔두기만 함
+    PlayerInfo playerInfo = 4; // 플레이어 정보
+}
+message CS_START_AI_CALCULATE {
+    bool bStart = 1; // AI 계산 및 패킷 전송 시작을 서버에 알림
+}
+message CS_STOP_AI_CALCULATE {
+    bool bStop = 1; // AI 계산 및 패킷 전송 중단을 서버에 알림
+}
+message SC_ACCEPT_PARTY {
+    uint32 FromPlayerID = 1; // 파티를 요청하는 플레이어 ID
+    uint32 ToPlayerID = 2; // 파티 요청 대상 플레이어 ID
+    PlayerInfo playerInfo = 3; // 플레이어 정보
+}
+message SC_CANCEL_ENTERING_DUNGEON {
+    bool bCancel = 1;
+    uint32 playerID = 2; // 취소를 누른 플레이어의 id
 }
 message SC_CREATE_MONSTER {
     uint32 aiID = 1; // AI 고유 ID
     uint32 monsterType = 2; // 생성될 몬스터 타입
     Position monsterPos = 3; // 몬스터의 초기 위치
-    uint32 MaxHP = 4; // 몬스터의 최대 HP
+}
+message SC_MAKE_PARTY {
+    uint32 FromPlayerID = 1; // 파티를 요청하는 플레이어 ID
+    uint32 ToPlayerID = 2; // 파티 요청 대상 플레이어 ID
+}
+message SC_PREPARE_ENTERING_DUNGEON {
+    bool bEnter = 1;
 }
 message SC_REMOVE_CHARACTER {
     uint32 playerID = 1; // 플레이어의 id
+}
+message SC_RESPONSE_ENTER_DUNGEON_BEGIN {
+    bool bEnterBegin = 1;
+}
+message SC_RESPONSE_ENTER_DUNGEON_END {
+    bool bEnterEnd = 1;
 }
 message SC_SPAWN_CHARACTER {
     uint32 playerID = 1; // 플레이어의 id
@@ -184,8 +255,8 @@ message SC_POSITION_SYNC {
     float posY = 3;
     float cameraYaw = 4; // 카메라 회전값
 }
-message CS_BOSS_PHASE {
-    uint32 bossID = 1; // 보스의 고유 ID
+message CS_MONSTER_AI {
+    uint32 aiID = 1; // 보스의 고유 ID
     uint32 currentHp = 2; // 보스의 현재 체력
     uint32 maxHp = 3; // 보스의 최대 체력
     Position targetMovementPos = 4; // 보스가 이동해야 하는 목표 위치
@@ -193,14 +264,22 @@ message CS_BOSS_PHASE {
     uint32 bossState = 6; // 보스의 현재 상태
     float curSpeed = 7; // 현재 이동속도
 }
-message SC_BOSS_PHASE {
-    uint32 bossID = 1; // 보스의 고유 ID
+message CS_MONSTER_ROTATE {
+    uint32 aiID = 1; // 보스의 고유 ID
+    float rotateY = 2; // 목표 회전값
+}
+message SC_MONSTER_AI {
+    uint32 aiID = 1; // 보스의 고유 ID
     uint32 currentHp = 2; // 보스의 현재 체력
     uint32 maxHp = 3; // 보스의 최대 체력
     Position targetMovementPos = 4; // 보스가 이동해야 하는 목표 위치
     Position bossPos = 5; // 현재 보스의 위치
     uint32 bossState = 6; // 보스의 현재 상태
     float curSpeed = 7; // 현재 이동속도
+}
+message SC_MONSTER_ROTATE {
+    uint32 aiID = 1; // 보스의 고유 ID
+    float rotateY = 2; // 목표 회전값
 }
 message CS_CHECK_TIMEOUT {
     bool bCheck = 1; // L7에서 timeout 체크용. 일정 주기마다 한번씩 서버에 전송
