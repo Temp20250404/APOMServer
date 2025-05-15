@@ -369,8 +369,6 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     case game::PacketID::CS_MonsterAi:
     {
         UINT32 aiID;
-        UINT32 currentHp;
-        UINT32 maxHp;
         Position targetMovementPos;
         Position bossPos;
         UINT32 bossState;
@@ -380,14 +378,29 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
         aiID = pkt.aiid();
-        currentHp = pkt.currenthp();
-        maxHp = pkt.maxhp();
         targetMovementPos = pkt.targetmovementpos();
         bossPos = pkt.bosspos();
         bossState = pkt.bossstate();
         curSpeed = pkt.curspeed();
 
-        return CS_MONSTER_AI(pSession, aiID, currentHp, maxHp, targetMovementPos, bossPos, bossState, curSpeed);
+        return CS_MONSTER_AI(pSession, aiID, targetMovementPos, bossPos, bossState, curSpeed);
+    }
+    break;
+
+    case game::PacketID::CS_MonsterCondition:
+    {
+        UINT32 aiID;
+        UINT32 currentHp;
+        UINT32 maxHp;
+
+        game::CS_MONSTER_CONDITION pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        aiID = pkt.aiid();
+        currentHp = pkt.currenthp();
+        maxHp = pkt.maxhp();
+
+        return CS_MONSTER_CONDITION(pSession, aiID, currentHp, maxHp);
     }
     break;
 
@@ -784,7 +797,7 @@ bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float cameraYa
     return true;
 }
 
-bool CS_MONSTER_AI(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
+bool CS_MONSTER_AI(CSession* pSession, UINT32 aiID, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
 {
     // 1. 연결된 플레이어 추출
     CPlayer* pPlayer = static_cast<CPlayer*>(pSession->pObj);
@@ -792,7 +805,20 @@ bool CS_MONSTER_AI(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 max
     // 2. 방 정보 검색
     CRoom* pRoom = roomManager.GetRoomById(pPlayer->GetRoomId());
 
-    SC_MONSTER_AI_FOR_AROUND(pSession, pRoom, aiID, currentHp, maxHp, targetMovementPos, bossPos, bossState, curSpeed);
+    SC_MONSTER_AI_FOR_AROUND(nullptr, pRoom, aiID, targetMovementPos, bossPos, bossState, curSpeed);
+
+    return true;
+}
+
+bool CS_MONSTER_CONDITION(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp)
+{
+    // 1. 연결된 플레이어 추출
+    CPlayer* pPlayer = static_cast<CPlayer*>(pSession->pObj);
+
+    // 2. 방 정보 검색
+    CRoom* pRoom = roomManager.GetRoomById(pPlayer->GetRoomId());
+
+    SC_MONSTER_CONDITION_FOR_AROUND(nullptr, pRoom, aiID, currentHp, maxHp);
 
     return true;
 }

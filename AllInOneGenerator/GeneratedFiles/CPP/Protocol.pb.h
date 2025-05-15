@@ -82,6 +82,9 @@ extern CS_MONSTER_AIDefaultTypeInternal _CS_MONSTER_AI_default_instance_;
 class CS_MONSTER_ATTACK;
 struct CS_MONSTER_ATTACKDefaultTypeInternal;
 extern CS_MONSTER_ATTACKDefaultTypeInternal _CS_MONSTER_ATTACK_default_instance_;
+class CS_MONSTER_CONDITION;
+struct CS_MONSTER_CONDITIONDefaultTypeInternal;
+extern CS_MONSTER_CONDITIONDefaultTypeInternal _CS_MONSTER_CONDITION_default_instance_;
 class CS_MONSTER_DIE;
 struct CS_MONSTER_DIEDefaultTypeInternal;
 extern CS_MONSTER_DIEDefaultTypeInternal _CS_MONSTER_DIE_default_instance_;
@@ -166,6 +169,9 @@ extern SC_MAKE_PARTYDefaultTypeInternal _SC_MAKE_PARTY_default_instance_;
 class SC_MONSTER_AI;
 struct SC_MONSTER_AIDefaultTypeInternal;
 extern SC_MONSTER_AIDefaultTypeInternal _SC_MONSTER_AI_default_instance_;
+class SC_MONSTER_CONDITION;
+struct SC_MONSTER_CONDITIONDefaultTypeInternal;
+extern SC_MONSTER_CONDITIONDefaultTypeInternal _SC_MONSTER_CONDITION_default_instance_;
 class SC_MONSTER_DAMAGED;
 struct SC_MONSTER_DAMAGEDDefaultTypeInternal;
 extern SC_MONSTER_DAMAGEDDefaultTypeInternal _SC_MONSTER_DAMAGED_default_instance_;
@@ -231,6 +237,7 @@ template<> ::game::CS_LOGIN_REQUEST* Arena::CreateMaybeMessage<::game::CS_LOGIN_
 template<> ::game::CS_MAKE_PARTY* Arena::CreateMaybeMessage<::game::CS_MAKE_PARTY>(Arena*);
 template<> ::game::CS_MONSTER_AI* Arena::CreateMaybeMessage<::game::CS_MONSTER_AI>(Arena*);
 template<> ::game::CS_MONSTER_ATTACK* Arena::CreateMaybeMessage<::game::CS_MONSTER_ATTACK>(Arena*);
+template<> ::game::CS_MONSTER_CONDITION* Arena::CreateMaybeMessage<::game::CS_MONSTER_CONDITION>(Arena*);
 template<> ::game::CS_MONSTER_DIE* Arena::CreateMaybeMessage<::game::CS_MONSTER_DIE>(Arena*);
 template<> ::game::CS_MONSTER_ROTATE* Arena::CreateMaybeMessage<::game::CS_MONSTER_ROTATE>(Arena*);
 template<> ::game::CS_PLAYER_ATTACK* Arena::CreateMaybeMessage<::game::CS_PLAYER_ATTACK>(Arena*);
@@ -259,6 +266,7 @@ template<> ::game::SC_KEYINFO* Arena::CreateMaybeMessage<::game::SC_KEYINFO>(Are
 template<> ::game::SC_LOGIN_RESPONSE* Arena::CreateMaybeMessage<::game::SC_LOGIN_RESPONSE>(Arena*);
 template<> ::game::SC_MAKE_PARTY* Arena::CreateMaybeMessage<::game::SC_MAKE_PARTY>(Arena*);
 template<> ::game::SC_MONSTER_AI* Arena::CreateMaybeMessage<::game::SC_MONSTER_AI>(Arena*);
+template<> ::game::SC_MONSTER_CONDITION* Arena::CreateMaybeMessage<::game::SC_MONSTER_CONDITION>(Arena*);
 template<> ::game::SC_MONSTER_DAMAGED* Arena::CreateMaybeMessage<::game::SC_MONSTER_DAMAGED>(Arena*);
 template<> ::game::SC_MONSTER_DIE* Arena::CreateMaybeMessage<::game::SC_MONSTER_DIE>(Arena*);
 template<> ::game::SC_MONSTER_ROTATE* Arena::CreateMaybeMessage<::game::SC_MONSTER_ROTATE>(Arena*);
@@ -292,49 +300,51 @@ enum PacketID : int {
   CS_MakeParty = 9,
   CS_MonsterAi = 10,
   CS_MonsterAttack = 11,
-  CS_MonsterDie = 12,
-  CS_MonsterRotate = 13,
-  CS_PlayerAttack = 14,
-  CS_PlayerDie = 15,
-  CS_PositionSync = 16,
-  CS_RegisterRequest = 17,
-  CS_RequestCharacterInfo = 18,
-  CS_RequestEnterDungeon = 19,
-  CS_RequestItemInfo = 20,
-  CS_ResponseEnterDungeonEnd = 21,
-  CS_SignupRequest = 22,
-  CS_SpawnCharacter = 23,
-  CS_StartAiCalculate = 24,
-  CS_StopAiCalculate = 25,
-  CS_TestPacket1 = 26,
-  CS_TestPacket2 = 27,
-  SC_AcceptParty = 28,
-  SC_CancelEnteringDungeon = 29,
-  SC_Chat = 30,
-  SC_CreateMonster = 31,
-  SC_FindIdResponse = 32,
-  SC_FindPwResponse = 33,
-  SC_Keyinfo = 34,
-  SC_LoginResponse = 35,
-  SC_MakeParty = 36,
-  SC_MonsterAi = 37,
-  SC_MonsterDamaged = 38,
-  SC_MonsterDie = 39,
-  SC_MonsterRotate = 40,
-  SC_PlayerDamaged = 41,
-  SC_PlayerDie = 42,
-  SC_PositionSync = 43,
-  SC_PrepareEnteringDungeon = 44,
-  SC_RemoveCharacter = 45,
-  SC_RequestItemInfo = 46,
-  SC_ResponseCharacterInfo = 47,
-  SC_ResponseEnterDungeonBegin = 48,
-  SC_ResponseEnterDungeonEnd = 49,
-  SC_SignupResponse = 50,
-  SC_SpawnCharacter = 51,
-  SC_StartAiCalculate = 52,
-  SC_StopAiCalculate = 53,
-  SC_TestPacket = 54,
+  CS_MonsterCondition = 12,
+  CS_MonsterDie = 13,
+  CS_MonsterRotate = 14,
+  CS_PlayerAttack = 15,
+  CS_PlayerDie = 16,
+  CS_PositionSync = 17,
+  CS_RegisterRequest = 18,
+  CS_RequestCharacterInfo = 19,
+  CS_RequestEnterDungeon = 20,
+  CS_RequestItemInfo = 21,
+  CS_ResponseEnterDungeonEnd = 22,
+  CS_SignupRequest = 23,
+  CS_SpawnCharacter = 24,
+  CS_StartAiCalculate = 25,
+  CS_StopAiCalculate = 26,
+  CS_TestPacket1 = 27,
+  CS_TestPacket2 = 28,
+  SC_AcceptParty = 29,
+  SC_CancelEnteringDungeon = 30,
+  SC_Chat = 31,
+  SC_CreateMonster = 32,
+  SC_FindIdResponse = 33,
+  SC_FindPwResponse = 34,
+  SC_Keyinfo = 35,
+  SC_LoginResponse = 36,
+  SC_MakeParty = 37,
+  SC_MonsterAi = 38,
+  SC_MonsterCondition = 39,
+  SC_MonsterDamaged = 40,
+  SC_MonsterDie = 41,
+  SC_MonsterRotate = 42,
+  SC_PlayerDamaged = 43,
+  SC_PlayerDie = 44,
+  SC_PositionSync = 45,
+  SC_PrepareEnteringDungeon = 46,
+  SC_RemoveCharacter = 47,
+  SC_RequestItemInfo = 48,
+  SC_ResponseCharacterInfo = 49,
+  SC_ResponseEnterDungeonBegin = 50,
+  SC_ResponseEnterDungeonEnd = 51,
+  SC_SignupResponse = 52,
+  SC_SpawnCharacter = 53,
+  SC_StartAiCalculate = 54,
+  SC_StopAiCalculate = 55,
+  SC_TestPacket = 56,
   PacketID_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
   PacketID_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
 };
@@ -8366,15 +8376,13 @@ class CS_MONSTER_AI final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kTargetMovementPosFieldNumber = 4,
-    kBossPosFieldNumber = 5,
+    kTargetMovementPosFieldNumber = 2,
+    kBossPosFieldNumber = 3,
     kAiIDFieldNumber = 1,
-    kCurrentHpFieldNumber = 2,
-    kMaxHpFieldNumber = 3,
-    kBossStateFieldNumber = 6,
-    kCurSpeedFieldNumber = 7,
+    kBossStateFieldNumber = 4,
+    kCurSpeedFieldNumber = 5,
   };
-  // .game.Position targetMovementPos = 4;
+  // .game.Position targetMovementPos = 2;
   bool has_targetmovementpos() const;
   private:
   bool _internal_has_targetmovementpos() const;
@@ -8392,7 +8400,7 @@ class CS_MONSTER_AI final :
       ::game::Position* targetmovementpos);
   ::game::Position* unsafe_arena_release_targetmovementpos();
 
-  // .game.Position bossPos = 5;
+  // .game.Position bossPos = 3;
   bool has_bosspos() const;
   private:
   bool _internal_has_bosspos() const;
@@ -8410,6 +8418,178 @@ class CS_MONSTER_AI final :
       ::game::Position* bosspos);
   ::game::Position* unsafe_arena_release_bosspos();
 
+  // uint32 aiID = 1;
+  void clear_aiid();
+  uint32_t aiid() const;
+  void set_aiid(uint32_t value);
+  private:
+  uint32_t _internal_aiid() const;
+  void _internal_set_aiid(uint32_t value);
+  public:
+
+  // uint32 bossState = 4;
+  void clear_bossstate();
+  uint32_t bossstate() const;
+  void set_bossstate(uint32_t value);
+  private:
+  uint32_t _internal_bossstate() const;
+  void _internal_set_bossstate(uint32_t value);
+  public:
+
+  // float curSpeed = 5;
+  void clear_curspeed();
+  float curspeed() const;
+  void set_curspeed(float value);
+  private:
+  float _internal_curspeed() const;
+  void _internal_set_curspeed(float value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:game.CS_MONSTER_AI)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::game::Position* targetmovementpos_;
+    ::game::Position* bosspos_;
+    uint32_t aiid_;
+    uint32_t bossstate_;
+    float curspeed_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Protocol_2eproto;
+};
+// -------------------------------------------------------------------
+
+class CS_MONSTER_CONDITION final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:game.CS_MONSTER_CONDITION) */ {
+ public:
+  inline CS_MONSTER_CONDITION() : CS_MONSTER_CONDITION(nullptr) {}
+  ~CS_MONSTER_CONDITION() override;
+  explicit PROTOBUF_CONSTEXPR CS_MONSTER_CONDITION(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  CS_MONSTER_CONDITION(const CS_MONSTER_CONDITION& from);
+  CS_MONSTER_CONDITION(CS_MONSTER_CONDITION&& from) noexcept
+    : CS_MONSTER_CONDITION() {
+    *this = ::std::move(from);
+  }
+
+  inline CS_MONSTER_CONDITION& operator=(const CS_MONSTER_CONDITION& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline CS_MONSTER_CONDITION& operator=(CS_MONSTER_CONDITION&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const CS_MONSTER_CONDITION& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const CS_MONSTER_CONDITION* internal_default_instance() {
+    return reinterpret_cast<const CS_MONSTER_CONDITION*>(
+               &_CS_MONSTER_CONDITION_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    50;
+
+  friend void swap(CS_MONSTER_CONDITION& a, CS_MONSTER_CONDITION& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(CS_MONSTER_CONDITION* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(CS_MONSTER_CONDITION* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  CS_MONSTER_CONDITION* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<CS_MONSTER_CONDITION>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const CS_MONSTER_CONDITION& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const CS_MONSTER_CONDITION& from) {
+    CS_MONSTER_CONDITION::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(CS_MONSTER_CONDITION* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "game.CS_MONSTER_CONDITION";
+  }
+  protected:
+  explicit CS_MONSTER_CONDITION(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kAiIDFieldNumber = 1,
+    kCurrentHpFieldNumber = 2,
+    kMaxHpFieldNumber = 3,
+  };
   // uint32 aiID = 1;
   void clear_aiid();
   uint32_t aiid() const;
@@ -8437,25 +8617,7 @@ class CS_MONSTER_AI final :
   void _internal_set_maxhp(uint32_t value);
   public:
 
-  // uint32 bossState = 6;
-  void clear_bossstate();
-  uint32_t bossstate() const;
-  void set_bossstate(uint32_t value);
-  private:
-  uint32_t _internal_bossstate() const;
-  void _internal_set_bossstate(uint32_t value);
-  public:
-
-  // float curSpeed = 7;
-  void clear_curspeed();
-  float curspeed() const;
-  void set_curspeed(float value);
-  private:
-  float _internal_curspeed() const;
-  void _internal_set_curspeed(float value);
-  public:
-
-  // @@protoc_insertion_point(class_scope:game.CS_MONSTER_AI)
+  // @@protoc_insertion_point(class_scope:game.CS_MONSTER_CONDITION)
  private:
   class _Internal;
 
@@ -8463,13 +8625,9 @@ class CS_MONSTER_AI final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::game::Position* targetmovementpos_;
-    ::game::Position* bosspos_;
     uint32_t aiid_;
     uint32_t currenthp_;
     uint32_t maxhp_;
-    uint32_t bossstate_;
-    float curspeed_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -8525,7 +8683,7 @@ class CS_MONSTER_ROTATE final :
                &_CS_MONSTER_ROTATE_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    50;
+    51;
 
   friend void swap(CS_MONSTER_ROTATE& a, CS_MONSTER_ROTATE& b) {
     a.Swap(&b);
@@ -8684,7 +8842,7 @@ class SC_MONSTER_AI final :
                &_SC_MONSTER_AI_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    51;
+    52;
 
   friend void swap(SC_MONSTER_AI& a, SC_MONSTER_AI& b) {
     a.Swap(&b);
@@ -8757,15 +8915,13 @@ class SC_MONSTER_AI final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kTargetMovementPosFieldNumber = 4,
-    kBossPosFieldNumber = 5,
+    kTargetMovementPosFieldNumber = 2,
+    kBossPosFieldNumber = 3,
     kAiIDFieldNumber = 1,
-    kCurrentHpFieldNumber = 2,
-    kMaxHpFieldNumber = 3,
-    kBossStateFieldNumber = 6,
-    kCurSpeedFieldNumber = 7,
+    kBossStateFieldNumber = 4,
+    kCurSpeedFieldNumber = 5,
   };
-  // .game.Position targetMovementPos = 4;
+  // .game.Position targetMovementPos = 2;
   bool has_targetmovementpos() const;
   private:
   bool _internal_has_targetmovementpos() const;
@@ -8783,7 +8939,7 @@ class SC_MONSTER_AI final :
       ::game::Position* targetmovementpos);
   ::game::Position* unsafe_arena_release_targetmovementpos();
 
-  // .game.Position bossPos = 5;
+  // .game.Position bossPos = 3;
   bool has_bosspos() const;
   private:
   bool _internal_has_bosspos() const;
@@ -8801,6 +8957,178 @@ class SC_MONSTER_AI final :
       ::game::Position* bosspos);
   ::game::Position* unsafe_arena_release_bosspos();
 
+  // uint32 aiID = 1;
+  void clear_aiid();
+  uint32_t aiid() const;
+  void set_aiid(uint32_t value);
+  private:
+  uint32_t _internal_aiid() const;
+  void _internal_set_aiid(uint32_t value);
+  public:
+
+  // uint32 bossState = 4;
+  void clear_bossstate();
+  uint32_t bossstate() const;
+  void set_bossstate(uint32_t value);
+  private:
+  uint32_t _internal_bossstate() const;
+  void _internal_set_bossstate(uint32_t value);
+  public:
+
+  // float curSpeed = 5;
+  void clear_curspeed();
+  float curspeed() const;
+  void set_curspeed(float value);
+  private:
+  float _internal_curspeed() const;
+  void _internal_set_curspeed(float value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:game.SC_MONSTER_AI)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::game::Position* targetmovementpos_;
+    ::game::Position* bosspos_;
+    uint32_t aiid_;
+    uint32_t bossstate_;
+    float curspeed_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Protocol_2eproto;
+};
+// -------------------------------------------------------------------
+
+class SC_MONSTER_CONDITION final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:game.SC_MONSTER_CONDITION) */ {
+ public:
+  inline SC_MONSTER_CONDITION() : SC_MONSTER_CONDITION(nullptr) {}
+  ~SC_MONSTER_CONDITION() override;
+  explicit PROTOBUF_CONSTEXPR SC_MONSTER_CONDITION(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  SC_MONSTER_CONDITION(const SC_MONSTER_CONDITION& from);
+  SC_MONSTER_CONDITION(SC_MONSTER_CONDITION&& from) noexcept
+    : SC_MONSTER_CONDITION() {
+    *this = ::std::move(from);
+  }
+
+  inline SC_MONSTER_CONDITION& operator=(const SC_MONSTER_CONDITION& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SC_MONSTER_CONDITION& operator=(SC_MONSTER_CONDITION&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const SC_MONSTER_CONDITION& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const SC_MONSTER_CONDITION* internal_default_instance() {
+    return reinterpret_cast<const SC_MONSTER_CONDITION*>(
+               &_SC_MONSTER_CONDITION_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    53;
+
+  friend void swap(SC_MONSTER_CONDITION& a, SC_MONSTER_CONDITION& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(SC_MONSTER_CONDITION* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(SC_MONSTER_CONDITION* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  SC_MONSTER_CONDITION* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<SC_MONSTER_CONDITION>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const SC_MONSTER_CONDITION& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const SC_MONSTER_CONDITION& from) {
+    SC_MONSTER_CONDITION::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(SC_MONSTER_CONDITION* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "game.SC_MONSTER_CONDITION";
+  }
+  protected:
+  explicit SC_MONSTER_CONDITION(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kAiIDFieldNumber = 1,
+    kCurrentHpFieldNumber = 2,
+    kMaxHpFieldNumber = 3,
+  };
   // uint32 aiID = 1;
   void clear_aiid();
   uint32_t aiid() const;
@@ -8828,25 +9156,7 @@ class SC_MONSTER_AI final :
   void _internal_set_maxhp(uint32_t value);
   public:
 
-  // uint32 bossState = 6;
-  void clear_bossstate();
-  uint32_t bossstate() const;
-  void set_bossstate(uint32_t value);
-  private:
-  uint32_t _internal_bossstate() const;
-  void _internal_set_bossstate(uint32_t value);
-  public:
-
-  // float curSpeed = 7;
-  void clear_curspeed();
-  float curspeed() const;
-  void set_curspeed(float value);
-  private:
-  float _internal_curspeed() const;
-  void _internal_set_curspeed(float value);
-  public:
-
-  // @@protoc_insertion_point(class_scope:game.SC_MONSTER_AI)
+  // @@protoc_insertion_point(class_scope:game.SC_MONSTER_CONDITION)
  private:
   class _Internal;
 
@@ -8854,13 +9164,9 @@ class SC_MONSTER_AI final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::game::Position* targetmovementpos_;
-    ::game::Position* bosspos_;
     uint32_t aiid_;
     uint32_t currenthp_;
     uint32_t maxhp_;
-    uint32_t bossstate_;
-    float curspeed_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -8916,7 +9222,7 @@ class SC_MONSTER_ROTATE final :
                &_SC_MONSTER_ROTATE_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    52;
+    54;
 
   friend void swap(SC_MONSTER_ROTATE& a, SC_MONSTER_ROTATE& b) {
     a.Swap(&b);
@@ -9075,7 +9381,7 @@ class CS_CHECK_TIMEOUT final :
                &_CS_CHECK_TIMEOUT_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    53;
+    55;
 
   friend void swap(CS_CHECK_TIMEOUT& a, CS_CHECK_TIMEOUT& b) {
     a.Swap(&b);
@@ -9223,7 +9529,7 @@ class CS_TEST_PACKET1 final :
                &_CS_TEST_PACKET1_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    54;
+    56;
 
   friend void swap(CS_TEST_PACKET1& a, CS_TEST_PACKET1& b) {
     a.Swap(&b);
@@ -9385,7 +9691,7 @@ class CS_TEST_PACKET2 final :
                &_CS_TEST_PACKET2_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    55;
+    57;
 
   friend void swap(CS_TEST_PACKET2& a, CS_TEST_PACKET2& b) {
     a.Swap(&b);
@@ -9542,7 +9848,7 @@ class SC_TEST_PACKET final :
                &_SC_TEST_PACKET_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    56;
+    58;
 
   friend void swap(SC_TEST_PACKET& a, SC_TEST_PACKET& b) {
     a.Swap(&b);
@@ -12753,47 +13059,7 @@ inline void CS_MONSTER_AI::set_aiid(uint32_t value) {
   // @@protoc_insertion_point(field_set:game.CS_MONSTER_AI.aiID)
 }
 
-// uint32 currentHp = 2;
-inline void CS_MONSTER_AI::clear_currenthp() {
-  _impl_.currenthp_ = 0u;
-}
-inline uint32_t CS_MONSTER_AI::_internal_currenthp() const {
-  return _impl_.currenthp_;
-}
-inline uint32_t CS_MONSTER_AI::currenthp() const {
-  // @@protoc_insertion_point(field_get:game.CS_MONSTER_AI.currentHp)
-  return _internal_currenthp();
-}
-inline void CS_MONSTER_AI::_internal_set_currenthp(uint32_t value) {
-  
-  _impl_.currenthp_ = value;
-}
-inline void CS_MONSTER_AI::set_currenthp(uint32_t value) {
-  _internal_set_currenthp(value);
-  // @@protoc_insertion_point(field_set:game.CS_MONSTER_AI.currentHp)
-}
-
-// uint32 maxHp = 3;
-inline void CS_MONSTER_AI::clear_maxhp() {
-  _impl_.maxhp_ = 0u;
-}
-inline uint32_t CS_MONSTER_AI::_internal_maxhp() const {
-  return _impl_.maxhp_;
-}
-inline uint32_t CS_MONSTER_AI::maxhp() const {
-  // @@protoc_insertion_point(field_get:game.CS_MONSTER_AI.maxHp)
-  return _internal_maxhp();
-}
-inline void CS_MONSTER_AI::_internal_set_maxhp(uint32_t value) {
-  
-  _impl_.maxhp_ = value;
-}
-inline void CS_MONSTER_AI::set_maxhp(uint32_t value) {
-  _internal_set_maxhp(value);
-  // @@protoc_insertion_point(field_set:game.CS_MONSTER_AI.maxHp)
-}
-
-// .game.Position targetMovementPos = 4;
+// .game.Position targetMovementPos = 2;
 inline bool CS_MONSTER_AI::_internal_has_targetmovementpos() const {
   return this != internal_default_instance() && _impl_.targetmovementpos_ != nullptr;
 }
@@ -12883,7 +13149,7 @@ inline void CS_MONSTER_AI::set_allocated_targetmovementpos(::game::Position* tar
   // @@protoc_insertion_point(field_set_allocated:game.CS_MONSTER_AI.targetMovementPos)
 }
 
-// .game.Position bossPos = 5;
+// .game.Position bossPos = 3;
 inline bool CS_MONSTER_AI::_internal_has_bosspos() const {
   return this != internal_default_instance() && _impl_.bosspos_ != nullptr;
 }
@@ -12973,7 +13239,7 @@ inline void CS_MONSTER_AI::set_allocated_bosspos(::game::Position* bosspos) {
   // @@protoc_insertion_point(field_set_allocated:game.CS_MONSTER_AI.bossPos)
 }
 
-// uint32 bossState = 6;
+// uint32 bossState = 4;
 inline void CS_MONSTER_AI::clear_bossstate() {
   _impl_.bossstate_ = 0u;
 }
@@ -12993,7 +13259,7 @@ inline void CS_MONSTER_AI::set_bossstate(uint32_t value) {
   // @@protoc_insertion_point(field_set:game.CS_MONSTER_AI.bossState)
 }
 
-// float curSpeed = 7;
+// float curSpeed = 5;
 inline void CS_MONSTER_AI::clear_curspeed() {
   _impl_.curspeed_ = 0;
 }
@@ -13011,6 +13277,70 @@ inline void CS_MONSTER_AI::_internal_set_curspeed(float value) {
 inline void CS_MONSTER_AI::set_curspeed(float value) {
   _internal_set_curspeed(value);
   // @@protoc_insertion_point(field_set:game.CS_MONSTER_AI.curSpeed)
+}
+
+// -------------------------------------------------------------------
+
+// CS_MONSTER_CONDITION
+
+// uint32 aiID = 1;
+inline void CS_MONSTER_CONDITION::clear_aiid() {
+  _impl_.aiid_ = 0u;
+}
+inline uint32_t CS_MONSTER_CONDITION::_internal_aiid() const {
+  return _impl_.aiid_;
+}
+inline uint32_t CS_MONSTER_CONDITION::aiid() const {
+  // @@protoc_insertion_point(field_get:game.CS_MONSTER_CONDITION.aiID)
+  return _internal_aiid();
+}
+inline void CS_MONSTER_CONDITION::_internal_set_aiid(uint32_t value) {
+  
+  _impl_.aiid_ = value;
+}
+inline void CS_MONSTER_CONDITION::set_aiid(uint32_t value) {
+  _internal_set_aiid(value);
+  // @@protoc_insertion_point(field_set:game.CS_MONSTER_CONDITION.aiID)
+}
+
+// uint32 currentHp = 2;
+inline void CS_MONSTER_CONDITION::clear_currenthp() {
+  _impl_.currenthp_ = 0u;
+}
+inline uint32_t CS_MONSTER_CONDITION::_internal_currenthp() const {
+  return _impl_.currenthp_;
+}
+inline uint32_t CS_MONSTER_CONDITION::currenthp() const {
+  // @@protoc_insertion_point(field_get:game.CS_MONSTER_CONDITION.currentHp)
+  return _internal_currenthp();
+}
+inline void CS_MONSTER_CONDITION::_internal_set_currenthp(uint32_t value) {
+  
+  _impl_.currenthp_ = value;
+}
+inline void CS_MONSTER_CONDITION::set_currenthp(uint32_t value) {
+  _internal_set_currenthp(value);
+  // @@protoc_insertion_point(field_set:game.CS_MONSTER_CONDITION.currentHp)
+}
+
+// uint32 maxHp = 3;
+inline void CS_MONSTER_CONDITION::clear_maxhp() {
+  _impl_.maxhp_ = 0u;
+}
+inline uint32_t CS_MONSTER_CONDITION::_internal_maxhp() const {
+  return _impl_.maxhp_;
+}
+inline uint32_t CS_MONSTER_CONDITION::maxhp() const {
+  // @@protoc_insertion_point(field_get:game.CS_MONSTER_CONDITION.maxHp)
+  return _internal_maxhp();
+}
+inline void CS_MONSTER_CONDITION::_internal_set_maxhp(uint32_t value) {
+  
+  _impl_.maxhp_ = value;
+}
+inline void CS_MONSTER_CONDITION::set_maxhp(uint32_t value) {
+  _internal_set_maxhp(value);
+  // @@protoc_insertion_point(field_set:game.CS_MONSTER_CONDITION.maxHp)
 }
 
 // -------------------------------------------------------------------
@@ -13081,47 +13411,7 @@ inline void SC_MONSTER_AI::set_aiid(uint32_t value) {
   // @@protoc_insertion_point(field_set:game.SC_MONSTER_AI.aiID)
 }
 
-// uint32 currentHp = 2;
-inline void SC_MONSTER_AI::clear_currenthp() {
-  _impl_.currenthp_ = 0u;
-}
-inline uint32_t SC_MONSTER_AI::_internal_currenthp() const {
-  return _impl_.currenthp_;
-}
-inline uint32_t SC_MONSTER_AI::currenthp() const {
-  // @@protoc_insertion_point(field_get:game.SC_MONSTER_AI.currentHp)
-  return _internal_currenthp();
-}
-inline void SC_MONSTER_AI::_internal_set_currenthp(uint32_t value) {
-  
-  _impl_.currenthp_ = value;
-}
-inline void SC_MONSTER_AI::set_currenthp(uint32_t value) {
-  _internal_set_currenthp(value);
-  // @@protoc_insertion_point(field_set:game.SC_MONSTER_AI.currentHp)
-}
-
-// uint32 maxHp = 3;
-inline void SC_MONSTER_AI::clear_maxhp() {
-  _impl_.maxhp_ = 0u;
-}
-inline uint32_t SC_MONSTER_AI::_internal_maxhp() const {
-  return _impl_.maxhp_;
-}
-inline uint32_t SC_MONSTER_AI::maxhp() const {
-  // @@protoc_insertion_point(field_get:game.SC_MONSTER_AI.maxHp)
-  return _internal_maxhp();
-}
-inline void SC_MONSTER_AI::_internal_set_maxhp(uint32_t value) {
-  
-  _impl_.maxhp_ = value;
-}
-inline void SC_MONSTER_AI::set_maxhp(uint32_t value) {
-  _internal_set_maxhp(value);
-  // @@protoc_insertion_point(field_set:game.SC_MONSTER_AI.maxHp)
-}
-
-// .game.Position targetMovementPos = 4;
+// .game.Position targetMovementPos = 2;
 inline bool SC_MONSTER_AI::_internal_has_targetmovementpos() const {
   return this != internal_default_instance() && _impl_.targetmovementpos_ != nullptr;
 }
@@ -13211,7 +13501,7 @@ inline void SC_MONSTER_AI::set_allocated_targetmovementpos(::game::Position* tar
   // @@protoc_insertion_point(field_set_allocated:game.SC_MONSTER_AI.targetMovementPos)
 }
 
-// .game.Position bossPos = 5;
+// .game.Position bossPos = 3;
 inline bool SC_MONSTER_AI::_internal_has_bosspos() const {
   return this != internal_default_instance() && _impl_.bosspos_ != nullptr;
 }
@@ -13301,7 +13591,7 @@ inline void SC_MONSTER_AI::set_allocated_bosspos(::game::Position* bosspos) {
   // @@protoc_insertion_point(field_set_allocated:game.SC_MONSTER_AI.bossPos)
 }
 
-// uint32 bossState = 6;
+// uint32 bossState = 4;
 inline void SC_MONSTER_AI::clear_bossstate() {
   _impl_.bossstate_ = 0u;
 }
@@ -13321,7 +13611,7 @@ inline void SC_MONSTER_AI::set_bossstate(uint32_t value) {
   // @@protoc_insertion_point(field_set:game.SC_MONSTER_AI.bossState)
 }
 
-// float curSpeed = 7;
+// float curSpeed = 5;
 inline void SC_MONSTER_AI::clear_curspeed() {
   _impl_.curspeed_ = 0;
 }
@@ -13339,6 +13629,70 @@ inline void SC_MONSTER_AI::_internal_set_curspeed(float value) {
 inline void SC_MONSTER_AI::set_curspeed(float value) {
   _internal_set_curspeed(value);
   // @@protoc_insertion_point(field_set:game.SC_MONSTER_AI.curSpeed)
+}
+
+// -------------------------------------------------------------------
+
+// SC_MONSTER_CONDITION
+
+// uint32 aiID = 1;
+inline void SC_MONSTER_CONDITION::clear_aiid() {
+  _impl_.aiid_ = 0u;
+}
+inline uint32_t SC_MONSTER_CONDITION::_internal_aiid() const {
+  return _impl_.aiid_;
+}
+inline uint32_t SC_MONSTER_CONDITION::aiid() const {
+  // @@protoc_insertion_point(field_get:game.SC_MONSTER_CONDITION.aiID)
+  return _internal_aiid();
+}
+inline void SC_MONSTER_CONDITION::_internal_set_aiid(uint32_t value) {
+  
+  _impl_.aiid_ = value;
+}
+inline void SC_MONSTER_CONDITION::set_aiid(uint32_t value) {
+  _internal_set_aiid(value);
+  // @@protoc_insertion_point(field_set:game.SC_MONSTER_CONDITION.aiID)
+}
+
+// uint32 currentHp = 2;
+inline void SC_MONSTER_CONDITION::clear_currenthp() {
+  _impl_.currenthp_ = 0u;
+}
+inline uint32_t SC_MONSTER_CONDITION::_internal_currenthp() const {
+  return _impl_.currenthp_;
+}
+inline uint32_t SC_MONSTER_CONDITION::currenthp() const {
+  // @@protoc_insertion_point(field_get:game.SC_MONSTER_CONDITION.currentHp)
+  return _internal_currenthp();
+}
+inline void SC_MONSTER_CONDITION::_internal_set_currenthp(uint32_t value) {
+  
+  _impl_.currenthp_ = value;
+}
+inline void SC_MONSTER_CONDITION::set_currenthp(uint32_t value) {
+  _internal_set_currenthp(value);
+  // @@protoc_insertion_point(field_set:game.SC_MONSTER_CONDITION.currentHp)
+}
+
+// uint32 maxHp = 3;
+inline void SC_MONSTER_CONDITION::clear_maxhp() {
+  _impl_.maxhp_ = 0u;
+}
+inline uint32_t SC_MONSTER_CONDITION::_internal_maxhp() const {
+  return _impl_.maxhp_;
+}
+inline uint32_t SC_MONSTER_CONDITION::maxhp() const {
+  // @@protoc_insertion_point(field_get:game.SC_MONSTER_CONDITION.maxHp)
+  return _internal_maxhp();
+}
+inline void SC_MONSTER_CONDITION::_internal_set_maxhp(uint32_t value) {
+  
+  _impl_.maxhp_ = value;
+}
+inline void SC_MONSTER_CONDITION::set_maxhp(uint32_t value) {
+  _internal_set_maxhp(value);
+  // @@protoc_insertion_point(field_set:game.SC_MONSTER_CONDITION.maxHp)
 }
 
 // -------------------------------------------------------------------
@@ -13551,6 +13905,10 @@ SC_TEST_PACKET::tempdata() const {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

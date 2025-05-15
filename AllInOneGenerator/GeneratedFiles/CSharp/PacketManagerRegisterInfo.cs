@@ -78,6 +78,9 @@ public class PacketManagerRegisterInfo
         _onRecv.Add((ushort)Game.PacketID.ScMonsterAi, MakePacket<SC_MONSTER_AI>);
         _handler.Add((ushort)Game.PacketID.ScMonsterAi, PacketHandler.SC_MonsterAi);
 
+        _onRecv.Add((ushort)Game.PacketID.ScMonsterCondition, MakePacket<SC_MONSTER_CONDITION>);
+        _handler.Add((ushort)Game.PacketID.ScMonsterCondition, PacketHandler.SC_MonsterCondition);
+
         _onRecv.Add((ushort)Game.PacketID.ScMonsterRotate, MakePacket<SC_MONSTER_ROTATE>);
         _handler.Add((ushort)Game.PacketID.ScMonsterRotate, PacketHandler.SC_MonsterRotate);
 

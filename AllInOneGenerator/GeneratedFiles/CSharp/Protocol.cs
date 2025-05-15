@@ -86,49 +86,52 @@ namespace Game {
             "UExBWUVSX0RBTUFHRUQSEAoIcGxheWVySUQYASABKA0SDgoGZGFtYWdlGAIg",
             "ASgNIiEKDVNDX1BMQVlFUl9ESUUSEAoIcGxheWVySUQYASABKA0iUwoQU0Nf",
             "UE9TSVRJT05fU1lOQxIQCghwbGF5ZXJJRBgBIAEoDRIMCgRwb3NYGAIgASgC",
-            "EgwKBHBvc1kYAyABKAISEQoJY2FtZXJhWWF3GAQgASgCIrABCg1DU19NT05T",
-            "VEVSX0FJEgwKBGFpSUQYASABKA0SEQoJY3VycmVudEhwGAIgASgNEg0KBW1h",
-            "eEhwGAMgASgNEikKEXRhcmdldE1vdmVtZW50UG9zGAQgASgLMg4uZ2FtZS5Q",
-            "b3NpdGlvbhIfCgdib3NzUG9zGAUgASgLMg4uZ2FtZS5Qb3NpdGlvbhIRCgli",
-            "b3NzU3RhdGUYBiABKA0SEAoIY3VyU3BlZWQYByABKAIiMgoRQ1NfTU9OU1RF",
-            "Ul9ST1RBVEUSDAoEYWlJRBgBIAEoDRIPCgdyb3RhdGVZGAIgASgCIrABCg1T",
-            "Q19NT05TVEVSX0FJEgwKBGFpSUQYASABKA0SEQoJY3VycmVudEhwGAIgASgN",
-            "Eg0KBW1heEhwGAMgASgNEikKEXRhcmdldE1vdmVtZW50UG9zGAQgASgLMg4u",
-            "Z2FtZS5Qb3NpdGlvbhIfCgdib3NzUG9zGAUgASgLMg4uZ2FtZS5Qb3NpdGlv",
-            "bhIRCglib3NzU3RhdGUYBiABKA0SEAoIY3VyU3BlZWQYByABKAIiMgoRU0Nf",
-            "TU9OU1RFUl9ST1RBVEUSDAoEYWlJRBgBIAEoDRIPCgdyb3RhdGVZGAIgASgC",
-            "IiIKEENTX0NIRUNLX1RJTUVPVVQSDgoGYkNoZWNrGAEgASgIIiMKD0NTX1RF",
-            "U1RfUEFDS0VUMRIQCgh0ZW1wRGF0YRgBIAMoDSI1Cg9DU19URVNUX1BBQ0tF",
-            "VDISIgoIdGVtcERhdGEYASADKAsyEC5nYW1lLlBsYXllckluZm8iNAoOU0Nf",
-            "VEVTVF9QQUNLRVQSIgoIdGVtcERhdGEYASADKAsyEC5nYW1lLlBsYXllcklu",
-            "Zm8q3gkKCFBhY2tldElEEhIKDkNTX0FjY2VwdFBhcnR5EAASHAoYQ1NfQ2Fu",
-            "Y2VsRW50ZXJpbmdEdW5nZW9uEAESCwoHQ1NfQ2hhdBACEhMKD0NTX0NoZWNr",
-            "VGltZW91dBADEhQKEENTX0NyZWF0ZU1vbnN0ZXIQBBIUChBDU19GaW5kSWRS",
-            "ZXF1ZXN0EAUSFAoQQ1NfRmluZFB3UmVxdWVzdBAGEg4KCkNTX0tleWluZm8Q",
-            "BxITCg9DU19Mb2dpblJlcXVlc3QQCBIQCgxDU19NYWtlUGFydHkQCRIQCgxD",
-            "U19Nb25zdGVyQWkQChIUChBDU19Nb25zdGVyQXR0YWNrEAsSEQoNQ1NfTW9u",
-            "c3RlckRpZRAMEhQKEENTX01vbnN0ZXJSb3RhdGUQDRITCg9DU19QbGF5ZXJB",
-            "dHRhY2sQDhIQCgxDU19QbGF5ZXJEaWUQDxITCg9DU19Qb3NpdGlvblN5bmMQ",
-            "EBIWChJDU19SZWdpc3RlclJlcXVlc3QQERIbChdDU19SZXF1ZXN0Q2hhcmFj",
-            "dGVySW5mbxASEhoKFkNTX1JlcXVlc3RFbnRlckR1bmdlb24QExIWChJDU19S",
-            "ZXF1ZXN0SXRlbUluZm8QFBIeChpDU19SZXNwb25zZUVudGVyRHVuZ2VvbkVu",
-            "ZBAVEhQKEENTX1NpZ251cFJlcXVlc3QQFhIVChFDU19TcGF3bkNoYXJhY3Rl",
-            "chAXEhcKE0NTX1N0YXJ0QWlDYWxjdWxhdGUQGBIWChJDU19TdG9wQWlDYWxj",
-            "dWxhdGUQGRISCg5DU19UZXN0UGFja2V0MRAaEhIKDkNTX1Rlc3RQYWNrZXQy",
-            "EBsSEgoOU0NfQWNjZXB0UGFydHkQHBIcChhTQ19DYW5jZWxFbnRlcmluZ0R1",
-            "bmdlb24QHRILCgdTQ19DaGF0EB4SFAoQU0NfQ3JlYXRlTW9uc3RlchAfEhUK",
-            "EVNDX0ZpbmRJZFJlc3BvbnNlECASFQoRU0NfRmluZFB3UmVzcG9uc2UQIRIO",
-            "CgpTQ19LZXlpbmZvECISFAoQU0NfTG9naW5SZXNwb25zZRAjEhAKDFNDX01h",
-            "a2VQYXJ0eRAkEhAKDFNDX01vbnN0ZXJBaRAlEhUKEVNDX01vbnN0ZXJEYW1h",
-            "Z2VkECYSEQoNU0NfTW9uc3RlckRpZRAnEhQKEFNDX01vbnN0ZXJSb3RhdGUQ",
-            "KBIUChBTQ19QbGF5ZXJEYW1hZ2VkECkSEAoMU0NfUGxheWVyRGllECoSEwoP",
-            "U0NfUG9zaXRpb25TeW5jECsSHQoZU0NfUHJlcGFyZUVudGVyaW5nRHVuZ2Vv",
-            "bhAsEhYKElNDX1JlbW92ZUNoYXJhY3RlchAtEhYKElNDX1JlcXVlc3RJdGVt",
-            "SW5mbxAuEhwKGFNDX1Jlc3BvbnNlQ2hhcmFjdGVySW5mbxAvEiAKHFNDX1Jl",
-            "c3BvbnNlRW50ZXJEdW5nZW9uQmVnaW4QMBIeChpTQ19SZXNwb25zZUVudGVy",
-            "RHVuZ2VvbkVuZBAxEhUKEVNDX1NpZ251cFJlc3BvbnNlEDISFQoRU0NfU3Bh",
-            "d25DaGFyYWN0ZXIQMxIXChNTQ19TdGFydEFpQ2FsY3VsYXRlEDQSFgoSU0Nf",
-            "U3RvcEFpQ2FsY3VsYXRlEDUSEQoNU0NfVGVzdFBhY2tldBA2YgZwcm90bzM="));
+            "EgwKBHBvc1kYAyABKAISEQoJY2FtZXJhWWF3GAQgASgCIo4BCg1DU19NT05T",
+            "VEVSX0FJEgwKBGFpSUQYASABKA0SKQoRdGFyZ2V0TW92ZW1lbnRQb3MYAiAB",
+            "KAsyDi5nYW1lLlBvc2l0aW9uEh8KB2Jvc3NQb3MYAyABKAsyDi5nYW1lLlBv",
+            "c2l0aW9uEhEKCWJvc3NTdGF0ZRgEIAEoDRIQCghjdXJTcGVlZBgFIAEoAiJG",
+            "ChRDU19NT05TVEVSX0NPTkRJVElPThIMCgRhaUlEGAEgASgNEhEKCWN1cnJl",
+            "bnRIcBgCIAEoDRINCgVtYXhIcBgDIAEoDSIyChFDU19NT05TVEVSX1JPVEFU",
+            "RRIMCgRhaUlEGAEgASgNEg8KB3JvdGF0ZVkYAiABKAIijgEKDVNDX01PTlNU",
+            "RVJfQUkSDAoEYWlJRBgBIAEoDRIpChF0YXJnZXRNb3ZlbWVudFBvcxgCIAEo",
+            "CzIOLmdhbWUuUG9zaXRpb24SHwoHYm9zc1BvcxgDIAEoCzIOLmdhbWUuUG9z",
+            "aXRpb24SEQoJYm9zc1N0YXRlGAQgASgNEhAKCGN1clNwZWVkGAUgASgCIkYK",
+            "FFNDX01PTlNURVJfQ09ORElUSU9OEgwKBGFpSUQYASABKA0SEQoJY3VycmVu",
+            "dEhwGAIgASgNEg0KBW1heEhwGAMgASgNIjIKEVNDX01PTlNURVJfUk9UQVRF",
+            "EgwKBGFpSUQYASABKA0SDwoHcm90YXRlWRgCIAEoAiIiChBDU19DSEVDS19U",
+            "SU1FT1VUEg4KBmJDaGVjaxgBIAEoCCIjCg9DU19URVNUX1BBQ0tFVDESEAoI",
+            "dGVtcERhdGEYASADKA0iNQoPQ1NfVEVTVF9QQUNLRVQyEiIKCHRlbXBEYXRh",
+            "GAEgAygLMhAuZ2FtZS5QbGF5ZXJJbmZvIjQKDlNDX1RFU1RfUEFDS0VUEiIK",
+            "CHRlbXBEYXRhGAEgAygLMhAuZ2FtZS5QbGF5ZXJJbmZvKpAKCghQYWNrZXRJ",
+            "RBISCg5DU19BY2NlcHRQYXJ0eRAAEhwKGENTX0NhbmNlbEVudGVyaW5nRHVu",
+            "Z2VvbhABEgsKB0NTX0NoYXQQAhITCg9DU19DaGVja1RpbWVvdXQQAxIUChBD",
+            "U19DcmVhdGVNb25zdGVyEAQSFAoQQ1NfRmluZElkUmVxdWVzdBAFEhQKEENT",
+            "X0ZpbmRQd1JlcXVlc3QQBhIOCgpDU19LZXlpbmZvEAcSEwoPQ1NfTG9naW5S",
+            "ZXF1ZXN0EAgSEAoMQ1NfTWFrZVBhcnR5EAkSEAoMQ1NfTW9uc3RlckFpEAoS",
+            "FAoQQ1NfTW9uc3RlckF0dGFjaxALEhcKE0NTX01vbnN0ZXJDb25kaXRpb24Q",
+            "DBIRCg1DU19Nb25zdGVyRGllEA0SFAoQQ1NfTW9uc3RlclJvdGF0ZRAOEhMK",
+            "D0NTX1BsYXllckF0dGFjaxAPEhAKDENTX1BsYXllckRpZRAQEhMKD0NTX1Bv",
+            "c2l0aW9uU3luYxAREhYKEkNTX1JlZ2lzdGVyUmVxdWVzdBASEhsKF0NTX1Jl",
+            "cXVlc3RDaGFyYWN0ZXJJbmZvEBMSGgoWQ1NfUmVxdWVzdEVudGVyRHVuZ2Vv",
+            "bhAUEhYKEkNTX1JlcXVlc3RJdGVtSW5mbxAVEh4KGkNTX1Jlc3BvbnNlRW50",
+            "ZXJEdW5nZW9uRW5kEBYSFAoQQ1NfU2lnbnVwUmVxdWVzdBAXEhUKEUNTX1Nw",
+            "YXduQ2hhcmFjdGVyEBgSFwoTQ1NfU3RhcnRBaUNhbGN1bGF0ZRAZEhYKEkNT",
+            "X1N0b3BBaUNhbGN1bGF0ZRAaEhIKDkNTX1Rlc3RQYWNrZXQxEBsSEgoOQ1Nf",
+            "VGVzdFBhY2tldDIQHBISCg5TQ19BY2NlcHRQYXJ0eRAdEhwKGFNDX0NhbmNl",
+            "bEVudGVyaW5nRHVuZ2VvbhAeEgsKB1NDX0NoYXQQHxIUChBTQ19DcmVhdGVN",
+            "b25zdGVyECASFQoRU0NfRmluZElkUmVzcG9uc2UQIRIVChFTQ19GaW5kUHdS",
+            "ZXNwb25zZRAiEg4KClNDX0tleWluZm8QIxIUChBTQ19Mb2dpblJlc3BvbnNl",
+            "ECQSEAoMU0NfTWFrZVBhcnR5ECUSEAoMU0NfTW9uc3RlckFpECYSFwoTU0Nf",
+            "TW9uc3RlckNvbmRpdGlvbhAnEhUKEVNDX01vbnN0ZXJEYW1hZ2VkECgSEQoN",
+            "U0NfTW9uc3RlckRpZRApEhQKEFNDX01vbnN0ZXJSb3RhdGUQKhIUChBTQ19Q",
+            "bGF5ZXJEYW1hZ2VkECsSEAoMU0NfUGxheWVyRGllECwSEwoPU0NfUG9zaXRp",
+            "b25TeW5jEC0SHQoZU0NfUHJlcGFyZUVudGVyaW5nRHVuZ2VvbhAuEhYKElND",
+            "X1JlbW92ZUNoYXJhY3RlchAvEhYKElNDX1JlcXVlc3RJdGVtSW5mbxAwEhwK",
+            "GFNDX1Jlc3BvbnNlQ2hhcmFjdGVySW5mbxAxEiAKHFNDX1Jlc3BvbnNlRW50",
+            "ZXJEdW5nZW9uQmVnaW4QMhIeChpTQ19SZXNwb25zZUVudGVyRHVuZ2VvbkVu",
+            "ZBAzEhUKEVNDX1NpZ251cFJlc3BvbnNlEDQSFQoRU0NfU3Bhd25DaGFyYWN0",
+            "ZXIQNRIXChNTQ19TdGFydEFpQ2FsY3VsYXRlEDYSFgoSU0NfU3RvcEFpQ2Fs",
+            "Y3VsYXRlEDcSEQoNU0NfVGVzdFBhY2tldBA4YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Game.PacketID), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -181,9 +184,11 @@ namespace Game {
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_PLAYER_DAMAGED), global::Game.SC_PLAYER_DAMAGED.Parser, new[]{ "PlayerID", "Damage" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_PLAYER_DIE), global::Game.SC_PLAYER_DIE.Parser, new[]{ "PlayerID" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_POSITION_SYNC), global::Game.SC_POSITION_SYNC.Parser, new[]{ "PlayerID", "PosX", "PosY", "CameraYaw" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_MONSTER_AI), global::Game.CS_MONSTER_AI.Parser, new[]{ "AiID", "CurrentHp", "MaxHp", "TargetMovementPos", "BossPos", "BossState", "CurSpeed" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_MONSTER_AI), global::Game.CS_MONSTER_AI.Parser, new[]{ "AiID", "TargetMovementPos", "BossPos", "BossState", "CurSpeed" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_MONSTER_CONDITION), global::Game.CS_MONSTER_CONDITION.Parser, new[]{ "AiID", "CurrentHp", "MaxHp" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_MONSTER_ROTATE), global::Game.CS_MONSTER_ROTATE.Parser, new[]{ "AiID", "RotateY" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_MONSTER_AI), global::Game.SC_MONSTER_AI.Parser, new[]{ "AiID", "CurrentHp", "MaxHp", "TargetMovementPos", "BossPos", "BossState", "CurSpeed" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_MONSTER_AI), global::Game.SC_MONSTER_AI.Parser, new[]{ "AiID", "TargetMovementPos", "BossPos", "BossState", "CurSpeed" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_MONSTER_CONDITION), global::Game.SC_MONSTER_CONDITION.Parser, new[]{ "AiID", "CurrentHp", "MaxHp" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_MONSTER_ROTATE), global::Game.SC_MONSTER_ROTATE.Parser, new[]{ "AiID", "RotateY" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_CHECK_TIMEOUT), global::Game.CS_CHECK_TIMEOUT.Parser, new[]{ "BCheck" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_TEST_PACKET1), global::Game.CS_TEST_PACKET1.Parser, new[]{ "TempData" }, null, null, null, null),
@@ -211,52 +216,54 @@ namespace Game {
     [pbr::OriginalName("CS_MakeParty")] CsMakeParty = 9,
     [pbr::OriginalName("CS_MonsterAi")] CsMonsterAi = 10,
     [pbr::OriginalName("CS_MonsterAttack")] CsMonsterAttack = 11,
-    [pbr::OriginalName("CS_MonsterDie")] CsMonsterDie = 12,
-    [pbr::OriginalName("CS_MonsterRotate")] CsMonsterRotate = 13,
-    [pbr::OriginalName("CS_PlayerAttack")] CsPlayerAttack = 14,
-    [pbr::OriginalName("CS_PlayerDie")] CsPlayerDie = 15,
-    [pbr::OriginalName("CS_PositionSync")] CsPositionSync = 16,
-    [pbr::OriginalName("CS_RegisterRequest")] CsRegisterRequest = 17,
-    [pbr::OriginalName("CS_RequestCharacterInfo")] CsRequestCharacterInfo = 18,
-    [pbr::OriginalName("CS_RequestEnterDungeon")] CsRequestEnterDungeon = 19,
-    [pbr::OriginalName("CS_RequestItemInfo")] CsRequestItemInfo = 20,
-    [pbr::OriginalName("CS_ResponseEnterDungeonEnd")] CsResponseEnterDungeonEnd = 21,
-    [pbr::OriginalName("CS_SignupRequest")] CsSignupRequest = 22,
-    [pbr::OriginalName("CS_SpawnCharacter")] CsSpawnCharacter = 23,
-    [pbr::OriginalName("CS_StartAiCalculate")] CsStartAiCalculate = 24,
-    [pbr::OriginalName("CS_StopAiCalculate")] CsStopAiCalculate = 25,
-    [pbr::OriginalName("CS_TestPacket1")] CsTestPacket1 = 26,
-    [pbr::OriginalName("CS_TestPacket2")] CsTestPacket2 = 27,
+    [pbr::OriginalName("CS_MonsterCondition")] CsMonsterCondition = 12,
+    [pbr::OriginalName("CS_MonsterDie")] CsMonsterDie = 13,
+    [pbr::OriginalName("CS_MonsterRotate")] CsMonsterRotate = 14,
+    [pbr::OriginalName("CS_PlayerAttack")] CsPlayerAttack = 15,
+    [pbr::OriginalName("CS_PlayerDie")] CsPlayerDie = 16,
+    [pbr::OriginalName("CS_PositionSync")] CsPositionSync = 17,
+    [pbr::OriginalName("CS_RegisterRequest")] CsRegisterRequest = 18,
+    [pbr::OriginalName("CS_RequestCharacterInfo")] CsRequestCharacterInfo = 19,
+    [pbr::OriginalName("CS_RequestEnterDungeon")] CsRequestEnterDungeon = 20,
+    [pbr::OriginalName("CS_RequestItemInfo")] CsRequestItemInfo = 21,
+    [pbr::OriginalName("CS_ResponseEnterDungeonEnd")] CsResponseEnterDungeonEnd = 22,
+    [pbr::OriginalName("CS_SignupRequest")] CsSignupRequest = 23,
+    [pbr::OriginalName("CS_SpawnCharacter")] CsSpawnCharacter = 24,
+    [pbr::OriginalName("CS_StartAiCalculate")] CsStartAiCalculate = 25,
+    [pbr::OriginalName("CS_StopAiCalculate")] CsStopAiCalculate = 26,
+    [pbr::OriginalName("CS_TestPacket1")] CsTestPacket1 = 27,
+    [pbr::OriginalName("CS_TestPacket2")] CsTestPacket2 = 28,
     /// <summary>
     /// Server → Client
     /// </summary>
-    [pbr::OriginalName("SC_AcceptParty")] ScAcceptParty = 28,
-    [pbr::OriginalName("SC_CancelEnteringDungeon")] ScCancelEnteringDungeon = 29,
-    [pbr::OriginalName("SC_Chat")] ScChat = 30,
-    [pbr::OriginalName("SC_CreateMonster")] ScCreateMonster = 31,
-    [pbr::OriginalName("SC_FindIdResponse")] ScFindIdResponse = 32,
-    [pbr::OriginalName("SC_FindPwResponse")] ScFindPwResponse = 33,
-    [pbr::OriginalName("SC_Keyinfo")] ScKeyinfo = 34,
-    [pbr::OriginalName("SC_LoginResponse")] ScLoginResponse = 35,
-    [pbr::OriginalName("SC_MakeParty")] ScMakeParty = 36,
-    [pbr::OriginalName("SC_MonsterAi")] ScMonsterAi = 37,
-    [pbr::OriginalName("SC_MonsterDamaged")] ScMonsterDamaged = 38,
-    [pbr::OriginalName("SC_MonsterDie")] ScMonsterDie = 39,
-    [pbr::OriginalName("SC_MonsterRotate")] ScMonsterRotate = 40,
-    [pbr::OriginalName("SC_PlayerDamaged")] ScPlayerDamaged = 41,
-    [pbr::OriginalName("SC_PlayerDie")] ScPlayerDie = 42,
-    [pbr::OriginalName("SC_PositionSync")] ScPositionSync = 43,
-    [pbr::OriginalName("SC_PrepareEnteringDungeon")] ScPrepareEnteringDungeon = 44,
-    [pbr::OriginalName("SC_RemoveCharacter")] ScRemoveCharacter = 45,
-    [pbr::OriginalName("SC_RequestItemInfo")] ScRequestItemInfo = 46,
-    [pbr::OriginalName("SC_ResponseCharacterInfo")] ScResponseCharacterInfo = 47,
-    [pbr::OriginalName("SC_ResponseEnterDungeonBegin")] ScResponseEnterDungeonBegin = 48,
-    [pbr::OriginalName("SC_ResponseEnterDungeonEnd")] ScResponseEnterDungeonEnd = 49,
-    [pbr::OriginalName("SC_SignupResponse")] ScSignupResponse = 50,
-    [pbr::OriginalName("SC_SpawnCharacter")] ScSpawnCharacter = 51,
-    [pbr::OriginalName("SC_StartAiCalculate")] ScStartAiCalculate = 52,
-    [pbr::OriginalName("SC_StopAiCalculate")] ScStopAiCalculate = 53,
-    [pbr::OriginalName("SC_TestPacket")] ScTestPacket = 54,
+    [pbr::OriginalName("SC_AcceptParty")] ScAcceptParty = 29,
+    [pbr::OriginalName("SC_CancelEnteringDungeon")] ScCancelEnteringDungeon = 30,
+    [pbr::OriginalName("SC_Chat")] ScChat = 31,
+    [pbr::OriginalName("SC_CreateMonster")] ScCreateMonster = 32,
+    [pbr::OriginalName("SC_FindIdResponse")] ScFindIdResponse = 33,
+    [pbr::OriginalName("SC_FindPwResponse")] ScFindPwResponse = 34,
+    [pbr::OriginalName("SC_Keyinfo")] ScKeyinfo = 35,
+    [pbr::OriginalName("SC_LoginResponse")] ScLoginResponse = 36,
+    [pbr::OriginalName("SC_MakeParty")] ScMakeParty = 37,
+    [pbr::OriginalName("SC_MonsterAi")] ScMonsterAi = 38,
+    [pbr::OriginalName("SC_MonsterCondition")] ScMonsterCondition = 39,
+    [pbr::OriginalName("SC_MonsterDamaged")] ScMonsterDamaged = 40,
+    [pbr::OriginalName("SC_MonsterDie")] ScMonsterDie = 41,
+    [pbr::OriginalName("SC_MonsterRotate")] ScMonsterRotate = 42,
+    [pbr::OriginalName("SC_PlayerDamaged")] ScPlayerDamaged = 43,
+    [pbr::OriginalName("SC_PlayerDie")] ScPlayerDie = 44,
+    [pbr::OriginalName("SC_PositionSync")] ScPositionSync = 45,
+    [pbr::OriginalName("SC_PrepareEnteringDungeon")] ScPrepareEnteringDungeon = 46,
+    [pbr::OriginalName("SC_RemoveCharacter")] ScRemoveCharacter = 47,
+    [pbr::OriginalName("SC_RequestItemInfo")] ScRequestItemInfo = 48,
+    [pbr::OriginalName("SC_ResponseCharacterInfo")] ScResponseCharacterInfo = 49,
+    [pbr::OriginalName("SC_ResponseEnterDungeonBegin")] ScResponseEnterDungeonBegin = 50,
+    [pbr::OriginalName("SC_ResponseEnterDungeonEnd")] ScResponseEnterDungeonEnd = 51,
+    [pbr::OriginalName("SC_SignupResponse")] ScSignupResponse = 52,
+    [pbr::OriginalName("SC_SpawnCharacter")] ScSpawnCharacter = 53,
+    [pbr::OriginalName("SC_StartAiCalculate")] ScStartAiCalculate = 54,
+    [pbr::OriginalName("SC_StopAiCalculate")] ScStopAiCalculate = 55,
+    [pbr::OriginalName("SC_TestPacket")] ScTestPacket = 56,
   }
 
   #endregion
@@ -11416,8 +11423,6 @@ namespace Game {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public CS_MONSTER_AI(CS_MONSTER_AI other) : this() {
       aiID_ = other.aiID_;
-      currentHp_ = other.currentHp_;
-      maxHp_ = other.maxHp_;
       targetMovementPos_ = other.targetMovementPos_ != null ? other.targetMovementPos_.Clone() : null;
       bossPos_ = other.bossPos_ != null ? other.bossPos_.Clone() : null;
       bossState_ = other.bossState_;
@@ -11446,38 +11451,8 @@ namespace Game {
       }
     }
 
-    /// <summary>Field number for the "currentHp" field.</summary>
-    public const int CurrentHpFieldNumber = 2;
-    private uint currentHp_;
-    /// <summary>
-    /// 보스의 현재 체력
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint CurrentHp {
-      get { return currentHp_; }
-      set {
-        currentHp_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "maxHp" field.</summary>
-    public const int MaxHpFieldNumber = 3;
-    private uint maxHp_;
-    /// <summary>
-    /// 보스의 최대 체력
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint MaxHp {
-      get { return maxHp_; }
-      set {
-        maxHp_ = value;
-      }
-    }
-
     /// <summary>Field number for the "targetMovementPos" field.</summary>
-    public const int TargetMovementPosFieldNumber = 4;
+    public const int TargetMovementPosFieldNumber = 2;
     private global::Game.Position targetMovementPos_;
     /// <summary>
     /// 보스가 이동해야 하는 목표 위치
@@ -11492,7 +11467,7 @@ namespace Game {
     }
 
     /// <summary>Field number for the "bossPos" field.</summary>
-    public const int BossPosFieldNumber = 5;
+    public const int BossPosFieldNumber = 3;
     private global::Game.Position bossPos_;
     /// <summary>
     /// 현재 보스의 위치
@@ -11507,7 +11482,7 @@ namespace Game {
     }
 
     /// <summary>Field number for the "bossState" field.</summary>
-    public const int BossStateFieldNumber = 6;
+    public const int BossStateFieldNumber = 4;
     private uint bossState_;
     /// <summary>
     /// 보스의 현재 상태
@@ -11522,7 +11497,7 @@ namespace Game {
     }
 
     /// <summary>Field number for the "curSpeed" field.</summary>
-    public const int CurSpeedFieldNumber = 7;
+    public const int CurSpeedFieldNumber = 5;
     private float curSpeed_;
     /// <summary>
     /// 현재 이동속도
@@ -11552,8 +11527,6 @@ namespace Game {
         return true;
       }
       if (AiID != other.AiID) return false;
-      if (CurrentHp != other.CurrentHp) return false;
-      if (MaxHp != other.MaxHp) return false;
       if (!object.Equals(TargetMovementPos, other.TargetMovementPos)) return false;
       if (!object.Equals(BossPos, other.BossPos)) return false;
       if (BossState != other.BossState) return false;
@@ -11566,8 +11539,6 @@ namespace Game {
     public override int GetHashCode() {
       int hash = 1;
       if (AiID != 0) hash ^= AiID.GetHashCode();
-      if (CurrentHp != 0) hash ^= CurrentHp.GetHashCode();
-      if (MaxHp != 0) hash ^= MaxHp.GetHashCode();
       if (targetMovementPos_ != null) hash ^= TargetMovementPos.GetHashCode();
       if (bossPos_ != null) hash ^= BossPos.GetHashCode();
       if (BossState != 0) hash ^= BossState.GetHashCode();
@@ -11594,28 +11565,20 @@ namespace Game {
         output.WriteRawTag(8);
         output.WriteUInt32(AiID);
       }
-      if (CurrentHp != 0) {
-        output.WriteRawTag(16);
-        output.WriteUInt32(CurrentHp);
-      }
-      if (MaxHp != 0) {
-        output.WriteRawTag(24);
-        output.WriteUInt32(MaxHp);
-      }
       if (targetMovementPos_ != null) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(18);
         output.WriteMessage(TargetMovementPos);
       }
       if (bossPos_ != null) {
-        output.WriteRawTag(42);
+        output.WriteRawTag(26);
         output.WriteMessage(BossPos);
       }
       if (BossState != 0) {
-        output.WriteRawTag(48);
+        output.WriteRawTag(32);
         output.WriteUInt32(BossState);
       }
       if (CurSpeed != 0F) {
-        output.WriteRawTag(61);
+        output.WriteRawTag(45);
         output.WriteFloat(CurSpeed);
       }
       if (_unknownFields != null) {
@@ -11632,28 +11595,20 @@ namespace Game {
         output.WriteRawTag(8);
         output.WriteUInt32(AiID);
       }
-      if (CurrentHp != 0) {
-        output.WriteRawTag(16);
-        output.WriteUInt32(CurrentHp);
-      }
-      if (MaxHp != 0) {
-        output.WriteRawTag(24);
-        output.WriteUInt32(MaxHp);
-      }
       if (targetMovementPos_ != null) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(18);
         output.WriteMessage(TargetMovementPos);
       }
       if (bossPos_ != null) {
-        output.WriteRawTag(42);
+        output.WriteRawTag(26);
         output.WriteMessage(BossPos);
       }
       if (BossState != 0) {
-        output.WriteRawTag(48);
+        output.WriteRawTag(32);
         output.WriteUInt32(BossState);
       }
       if (CurSpeed != 0F) {
-        output.WriteRawTag(61);
+        output.WriteRawTag(45);
         output.WriteFloat(CurSpeed);
       }
       if (_unknownFields != null) {
@@ -11668,12 +11623,6 @@ namespace Game {
       int size = 0;
       if (AiID != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(AiID);
-      }
-      if (CurrentHp != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurrentHp);
-      }
-      if (MaxHp != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(MaxHp);
       }
       if (targetMovementPos_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(TargetMovementPos);
@@ -11701,12 +11650,6 @@ namespace Game {
       }
       if (other.AiID != 0) {
         AiID = other.AiID;
-      }
-      if (other.CurrentHp != 0) {
-        CurrentHp = other.CurrentHp;
-      }
-      if (other.MaxHp != 0) {
-        MaxHp = other.MaxHp;
       }
       if (other.targetMovementPos_ != null) {
         if (targetMovementPos_ == null) {
@@ -11745,34 +11688,312 @@ namespace Game {
             AiID = input.ReadUInt32();
             break;
           }
-          case 16: {
-            CurrentHp = input.ReadUInt32();
-            break;
-          }
-          case 24: {
-            MaxHp = input.ReadUInt32();
-            break;
-          }
-          case 34: {
+          case 18: {
             if (targetMovementPos_ == null) {
               TargetMovementPos = new global::Game.Position();
             }
             input.ReadMessage(TargetMovementPos);
             break;
           }
-          case 42: {
+          case 26: {
             if (bossPos_ == null) {
               BossPos = new global::Game.Position();
             }
             input.ReadMessage(BossPos);
             break;
           }
-          case 48: {
+          case 32: {
             BossState = input.ReadUInt32();
             break;
           }
-          case 61: {
+          case 45: {
             CurSpeed = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            AiID = input.ReadUInt32();
+            break;
+          }
+          case 18: {
+            if (targetMovementPos_ == null) {
+              TargetMovementPos = new global::Game.Position();
+            }
+            input.ReadMessage(TargetMovementPos);
+            break;
+          }
+          case 26: {
+            if (bossPos_ == null) {
+              BossPos = new global::Game.Position();
+            }
+            input.ReadMessage(BossPos);
+            break;
+          }
+          case 32: {
+            BossState = input.ReadUInt32();
+            break;
+          }
+          case 45: {
+            CurSpeed = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class CS_MONSTER_CONDITION : pb::IMessage<CS_MONSTER_CONDITION>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<CS_MONSTER_CONDITION> _parser = new pb::MessageParser<CS_MONSTER_CONDITION>(() => new CS_MONSTER_CONDITION());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<CS_MONSTER_CONDITION> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[50]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public CS_MONSTER_CONDITION() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public CS_MONSTER_CONDITION(CS_MONSTER_CONDITION other) : this() {
+      aiID_ = other.aiID_;
+      currentHp_ = other.currentHp_;
+      maxHp_ = other.maxHp_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public CS_MONSTER_CONDITION Clone() {
+      return new CS_MONSTER_CONDITION(this);
+    }
+
+    /// <summary>Field number for the "aiID" field.</summary>
+    public const int AiIDFieldNumber = 1;
+    private uint aiID_;
+    /// <summary>
+    /// 몬스터의 고유 ID
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint AiID {
+      get { return aiID_; }
+      set {
+        aiID_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "currentHp" field.</summary>
+    public const int CurrentHpFieldNumber = 2;
+    private uint currentHp_;
+    /// <summary>
+    /// 몬스터의 현재 체력
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint CurrentHp {
+      get { return currentHp_; }
+      set {
+        currentHp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "maxHp" field.</summary>
+    public const int MaxHpFieldNumber = 3;
+    private uint maxHp_;
+    /// <summary>
+    /// 몬스터의 최대 체력
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint MaxHp {
+      get { return maxHp_; }
+      set {
+        maxHp_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as CS_MONSTER_CONDITION);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(CS_MONSTER_CONDITION other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (AiID != other.AiID) return false;
+      if (CurrentHp != other.CurrentHp) return false;
+      if (MaxHp != other.MaxHp) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (AiID != 0) hash ^= AiID.GetHashCode();
+      if (CurrentHp != 0) hash ^= CurrentHp.GetHashCode();
+      if (MaxHp != 0) hash ^= MaxHp.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (AiID != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(AiID);
+      }
+      if (CurrentHp != 0) {
+        output.WriteRawTag(16);
+        output.WriteUInt32(CurrentHp);
+      }
+      if (MaxHp != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(MaxHp);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (AiID != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(AiID);
+      }
+      if (CurrentHp != 0) {
+        output.WriteRawTag(16);
+        output.WriteUInt32(CurrentHp);
+      }
+      if (MaxHp != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(MaxHp);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (AiID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(AiID);
+      }
+      if (CurrentHp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurrentHp);
+      }
+      if (MaxHp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(MaxHp);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(CS_MONSTER_CONDITION other) {
+      if (other == null) {
+        return;
+      }
+      if (other.AiID != 0) {
+        AiID = other.AiID;
+      }
+      if (other.CurrentHp != 0) {
+        CurrentHp = other.CurrentHp;
+      }
+      if (other.MaxHp != 0) {
+        MaxHp = other.MaxHp;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            AiID = input.ReadUInt32();
+            break;
+          }
+          case 16: {
+            CurrentHp = input.ReadUInt32();
+            break;
+          }
+          case 24: {
+            MaxHp = input.ReadUInt32();
             break;
           }
         }
@@ -11802,28 +12023,6 @@ namespace Game {
             MaxHp = input.ReadUInt32();
             break;
           }
-          case 34: {
-            if (targetMovementPos_ == null) {
-              TargetMovementPos = new global::Game.Position();
-            }
-            input.ReadMessage(TargetMovementPos);
-            break;
-          }
-          case 42: {
-            if (bossPos_ == null) {
-              BossPos = new global::Game.Position();
-            }
-            input.ReadMessage(BossPos);
-            break;
-          }
-          case 48: {
-            BossState = input.ReadUInt32();
-            break;
-          }
-          case 61: {
-            CurSpeed = input.ReadFloat();
-            break;
-          }
         }
       }
     }
@@ -11845,7 +12044,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[50]; }
+      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[51]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -12077,7 +12276,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[51]; }
+      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[52]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -12098,8 +12297,6 @@ namespace Game {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SC_MONSTER_AI(SC_MONSTER_AI other) : this() {
       aiID_ = other.aiID_;
-      currentHp_ = other.currentHp_;
-      maxHp_ = other.maxHp_;
       targetMovementPos_ = other.targetMovementPos_ != null ? other.targetMovementPos_.Clone() : null;
       bossPos_ = other.bossPos_ != null ? other.bossPos_.Clone() : null;
       bossState_ = other.bossState_;
@@ -12128,38 +12325,8 @@ namespace Game {
       }
     }
 
-    /// <summary>Field number for the "currentHp" field.</summary>
-    public const int CurrentHpFieldNumber = 2;
-    private uint currentHp_;
-    /// <summary>
-    /// 보스의 현재 체력
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint CurrentHp {
-      get { return currentHp_; }
-      set {
-        currentHp_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "maxHp" field.</summary>
-    public const int MaxHpFieldNumber = 3;
-    private uint maxHp_;
-    /// <summary>
-    /// 보스의 최대 체력
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint MaxHp {
-      get { return maxHp_; }
-      set {
-        maxHp_ = value;
-      }
-    }
-
     /// <summary>Field number for the "targetMovementPos" field.</summary>
-    public const int TargetMovementPosFieldNumber = 4;
+    public const int TargetMovementPosFieldNumber = 2;
     private global::Game.Position targetMovementPos_;
     /// <summary>
     /// 보스가 이동해야 하는 목표 위치
@@ -12174,7 +12341,7 @@ namespace Game {
     }
 
     /// <summary>Field number for the "bossPos" field.</summary>
-    public const int BossPosFieldNumber = 5;
+    public const int BossPosFieldNumber = 3;
     private global::Game.Position bossPos_;
     /// <summary>
     /// 현재 보스의 위치
@@ -12189,7 +12356,7 @@ namespace Game {
     }
 
     /// <summary>Field number for the "bossState" field.</summary>
-    public const int BossStateFieldNumber = 6;
+    public const int BossStateFieldNumber = 4;
     private uint bossState_;
     /// <summary>
     /// 보스의 현재 상태
@@ -12204,7 +12371,7 @@ namespace Game {
     }
 
     /// <summary>Field number for the "curSpeed" field.</summary>
-    public const int CurSpeedFieldNumber = 7;
+    public const int CurSpeedFieldNumber = 5;
     private float curSpeed_;
     /// <summary>
     /// 현재 이동속도
@@ -12234,8 +12401,6 @@ namespace Game {
         return true;
       }
       if (AiID != other.AiID) return false;
-      if (CurrentHp != other.CurrentHp) return false;
-      if (MaxHp != other.MaxHp) return false;
       if (!object.Equals(TargetMovementPos, other.TargetMovementPos)) return false;
       if (!object.Equals(BossPos, other.BossPos)) return false;
       if (BossState != other.BossState) return false;
@@ -12248,8 +12413,6 @@ namespace Game {
     public override int GetHashCode() {
       int hash = 1;
       if (AiID != 0) hash ^= AiID.GetHashCode();
-      if (CurrentHp != 0) hash ^= CurrentHp.GetHashCode();
-      if (MaxHp != 0) hash ^= MaxHp.GetHashCode();
       if (targetMovementPos_ != null) hash ^= TargetMovementPos.GetHashCode();
       if (bossPos_ != null) hash ^= BossPos.GetHashCode();
       if (BossState != 0) hash ^= BossState.GetHashCode();
@@ -12276,28 +12439,20 @@ namespace Game {
         output.WriteRawTag(8);
         output.WriteUInt32(AiID);
       }
-      if (CurrentHp != 0) {
-        output.WriteRawTag(16);
-        output.WriteUInt32(CurrentHp);
-      }
-      if (MaxHp != 0) {
-        output.WriteRawTag(24);
-        output.WriteUInt32(MaxHp);
-      }
       if (targetMovementPos_ != null) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(18);
         output.WriteMessage(TargetMovementPos);
       }
       if (bossPos_ != null) {
-        output.WriteRawTag(42);
+        output.WriteRawTag(26);
         output.WriteMessage(BossPos);
       }
       if (BossState != 0) {
-        output.WriteRawTag(48);
+        output.WriteRawTag(32);
         output.WriteUInt32(BossState);
       }
       if (CurSpeed != 0F) {
-        output.WriteRawTag(61);
+        output.WriteRawTag(45);
         output.WriteFloat(CurSpeed);
       }
       if (_unknownFields != null) {
@@ -12314,28 +12469,20 @@ namespace Game {
         output.WriteRawTag(8);
         output.WriteUInt32(AiID);
       }
-      if (CurrentHp != 0) {
-        output.WriteRawTag(16);
-        output.WriteUInt32(CurrentHp);
-      }
-      if (MaxHp != 0) {
-        output.WriteRawTag(24);
-        output.WriteUInt32(MaxHp);
-      }
       if (targetMovementPos_ != null) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(18);
         output.WriteMessage(TargetMovementPos);
       }
       if (bossPos_ != null) {
-        output.WriteRawTag(42);
+        output.WriteRawTag(26);
         output.WriteMessage(BossPos);
       }
       if (BossState != 0) {
-        output.WriteRawTag(48);
+        output.WriteRawTag(32);
         output.WriteUInt32(BossState);
       }
       if (CurSpeed != 0F) {
-        output.WriteRawTag(61);
+        output.WriteRawTag(45);
         output.WriteFloat(CurSpeed);
       }
       if (_unknownFields != null) {
@@ -12350,12 +12497,6 @@ namespace Game {
       int size = 0;
       if (AiID != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(AiID);
-      }
-      if (CurrentHp != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurrentHp);
-      }
-      if (MaxHp != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(MaxHp);
       }
       if (targetMovementPos_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(TargetMovementPos);
@@ -12383,12 +12524,6 @@ namespace Game {
       }
       if (other.AiID != 0) {
         AiID = other.AiID;
-      }
-      if (other.CurrentHp != 0) {
-        CurrentHp = other.CurrentHp;
-      }
-      if (other.MaxHp != 0) {
-        MaxHp = other.MaxHp;
       }
       if (other.targetMovementPos_ != null) {
         if (targetMovementPos_ == null) {
@@ -12427,34 +12562,312 @@ namespace Game {
             AiID = input.ReadUInt32();
             break;
           }
-          case 16: {
-            CurrentHp = input.ReadUInt32();
-            break;
-          }
-          case 24: {
-            MaxHp = input.ReadUInt32();
-            break;
-          }
-          case 34: {
+          case 18: {
             if (targetMovementPos_ == null) {
               TargetMovementPos = new global::Game.Position();
             }
             input.ReadMessage(TargetMovementPos);
             break;
           }
-          case 42: {
+          case 26: {
             if (bossPos_ == null) {
               BossPos = new global::Game.Position();
             }
             input.ReadMessage(BossPos);
             break;
           }
-          case 48: {
+          case 32: {
             BossState = input.ReadUInt32();
             break;
           }
-          case 61: {
+          case 45: {
             CurSpeed = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            AiID = input.ReadUInt32();
+            break;
+          }
+          case 18: {
+            if (targetMovementPos_ == null) {
+              TargetMovementPos = new global::Game.Position();
+            }
+            input.ReadMessage(TargetMovementPos);
+            break;
+          }
+          case 26: {
+            if (bossPos_ == null) {
+              BossPos = new global::Game.Position();
+            }
+            input.ReadMessage(BossPos);
+            break;
+          }
+          case 32: {
+            BossState = input.ReadUInt32();
+            break;
+          }
+          case 45: {
+            CurSpeed = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class SC_MONSTER_CONDITION : pb::IMessage<SC_MONSTER_CONDITION>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<SC_MONSTER_CONDITION> _parser = new pb::MessageParser<SC_MONSTER_CONDITION>(() => new SC_MONSTER_CONDITION());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<SC_MONSTER_CONDITION> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[53]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SC_MONSTER_CONDITION() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SC_MONSTER_CONDITION(SC_MONSTER_CONDITION other) : this() {
+      aiID_ = other.aiID_;
+      currentHp_ = other.currentHp_;
+      maxHp_ = other.maxHp_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SC_MONSTER_CONDITION Clone() {
+      return new SC_MONSTER_CONDITION(this);
+    }
+
+    /// <summary>Field number for the "aiID" field.</summary>
+    public const int AiIDFieldNumber = 1;
+    private uint aiID_;
+    /// <summary>
+    /// 몬스터의 고유 ID
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint AiID {
+      get { return aiID_; }
+      set {
+        aiID_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "currentHp" field.</summary>
+    public const int CurrentHpFieldNumber = 2;
+    private uint currentHp_;
+    /// <summary>
+    /// 몬스터의 현재 체력
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint CurrentHp {
+      get { return currentHp_; }
+      set {
+        currentHp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "maxHp" field.</summary>
+    public const int MaxHpFieldNumber = 3;
+    private uint maxHp_;
+    /// <summary>
+    /// 몬스터의 최대 체력
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint MaxHp {
+      get { return maxHp_; }
+      set {
+        maxHp_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as SC_MONSTER_CONDITION);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(SC_MONSTER_CONDITION other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (AiID != other.AiID) return false;
+      if (CurrentHp != other.CurrentHp) return false;
+      if (MaxHp != other.MaxHp) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (AiID != 0) hash ^= AiID.GetHashCode();
+      if (CurrentHp != 0) hash ^= CurrentHp.GetHashCode();
+      if (MaxHp != 0) hash ^= MaxHp.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (AiID != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(AiID);
+      }
+      if (CurrentHp != 0) {
+        output.WriteRawTag(16);
+        output.WriteUInt32(CurrentHp);
+      }
+      if (MaxHp != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(MaxHp);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (AiID != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(AiID);
+      }
+      if (CurrentHp != 0) {
+        output.WriteRawTag(16);
+        output.WriteUInt32(CurrentHp);
+      }
+      if (MaxHp != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(MaxHp);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (AiID != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(AiID);
+      }
+      if (CurrentHp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(CurrentHp);
+      }
+      if (MaxHp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(MaxHp);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(SC_MONSTER_CONDITION other) {
+      if (other == null) {
+        return;
+      }
+      if (other.AiID != 0) {
+        AiID = other.AiID;
+      }
+      if (other.CurrentHp != 0) {
+        CurrentHp = other.CurrentHp;
+      }
+      if (other.MaxHp != 0) {
+        MaxHp = other.MaxHp;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            AiID = input.ReadUInt32();
+            break;
+          }
+          case 16: {
+            CurrentHp = input.ReadUInt32();
+            break;
+          }
+          case 24: {
+            MaxHp = input.ReadUInt32();
             break;
           }
         }
@@ -12484,28 +12897,6 @@ namespace Game {
             MaxHp = input.ReadUInt32();
             break;
           }
-          case 34: {
-            if (targetMovementPos_ == null) {
-              TargetMovementPos = new global::Game.Position();
-            }
-            input.ReadMessage(TargetMovementPos);
-            break;
-          }
-          case 42: {
-            if (bossPos_ == null) {
-              BossPos = new global::Game.Position();
-            }
-            input.ReadMessage(BossPos);
-            break;
-          }
-          case 48: {
-            BossState = input.ReadUInt32();
-            break;
-          }
-          case 61: {
-            CurSpeed = input.ReadFloat();
-            break;
-          }
         }
       }
     }
@@ -12527,7 +12918,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[52]; }
+      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[54]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -12759,7 +13150,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[53]; }
+      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[55]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -12951,7 +13342,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[54]; }
+      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[56]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -13131,7 +13522,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[55]; }
+      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[57]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -13309,7 +13700,7 @@ namespace Game {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[56]; }
+      get { return global::Game.ProtocolReflection.Descriptor.MessageTypes[58]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

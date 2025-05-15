@@ -103,9 +103,13 @@ void SC_POSITION_SYNC_FOR_All(CSession* pSession, UINT32 playerID, float posX, f
 void SC_POSITION_SYNC_FOR_SINGLE(CSession* pSession, UINT32 playerID, float posX, float posY, float cameraYaw);
 void SC_POSITION_SYNC_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, float posX, float posY, float cameraYaw);
 
-void SC_MONSTER_AI_FOR_All(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed);
-void SC_MONSTER_AI_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed);
-void SC_MONSTER_AI_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed);
+void SC_MONSTER_AI_FOR_All(CSession* pSession, UINT32 aiID, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed);
+void SC_MONSTER_AI_FOR_SINGLE(CSession* pSession, UINT32 aiID, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed);
+void SC_MONSTER_AI_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed);
+
+void SC_MONSTER_CONDITION_FOR_All(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp);
+void SC_MONSTER_CONDITION_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp);
+void SC_MONSTER_CONDITION_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, UINT32 currentHp, UINT32 maxHp);
 
 void SC_MONSTER_ROTATE_FOR_All(CSession* pSession, UINT32 aiID, float rotateY);
 void SC_MONSTER_ROTATE_FOR_SINGLE(CSession* pSession, UINT32 aiID, float rotateY);

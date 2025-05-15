@@ -363,8 +363,6 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     case game::PacketID::CS_MonsterAi:
     {
         UINT32 aiID;
-        UINT32 currentHp;
-        UINT32 maxHp;
         Position targetMovementPos;
         Position bossPos;
         UINT32 bossState;
@@ -374,14 +372,29 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
         pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
 
         aiID = pkt.aiid();
-        currentHp = pkt.currenthp();
-        maxHp = pkt.maxhp();
         targetMovementPos = pkt.targetmovementpos();
         bossPos = pkt.bosspos();
         bossState = pkt.bossstate();
         curSpeed = pkt.curspeed();
 
-        return CS_MONSTER_AI(pSession, aiID, currentHp, maxHp, targetMovementPos, bossPos, bossState, curSpeed);
+        return CS_MONSTER_AI(pSession, aiID, targetMovementPos, bossPos, bossState, curSpeed);
+    }
+    break;
+
+    case game::PacketID::CS_MonsterCondition:
+    {
+        UINT32 aiID;
+        UINT32 currentHp;
+        UINT32 maxHp;
+
+        game::CS_MONSTER_CONDITION pkt;
+        pkt.ParseFromArray(pPacket->GetBufferPtr(), pPacket->GetDataSize());
+
+        aiID = pkt.aiid();
+        currentHp = pkt.currenthp();
+        maxHp = pkt.maxhp();
+
+        return CS_MONSTER_CONDITION(pSession, aiID, currentHp, maxHp);
     }
     break;
 
@@ -578,7 +591,12 @@ bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float cameraYa
     return false;
 }
 
-bool CS_MONSTER_AI(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
+bool CS_MONSTER_AI(CSession* pSession, UINT32 aiID, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
+{
+    return false;
+}
+
+bool CS_MONSTER_CONDITION(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp)
 {
     return false;
 }

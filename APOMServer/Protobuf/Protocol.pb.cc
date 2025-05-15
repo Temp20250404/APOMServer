@@ -707,8 +707,6 @@ PROTOBUF_CONSTEXPR CS_MONSTER_AI::CS_MONSTER_AI(
     /*decltype(_impl_.targetmovementpos_)*/nullptr
   , /*decltype(_impl_.bosspos_)*/nullptr
   , /*decltype(_impl_.aiid_)*/0u
-  , /*decltype(_impl_.currenthp_)*/0u
-  , /*decltype(_impl_.maxhp_)*/0u
   , /*decltype(_impl_.bossstate_)*/0u
   , /*decltype(_impl_.curspeed_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
@@ -721,6 +719,21 @@ struct CS_MONSTER_AIDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CS_MONSTER_AIDefaultTypeInternal _CS_MONSTER_AI_default_instance_;
+PROTOBUF_CONSTEXPR CS_MONSTER_CONDITION::CS_MONSTER_CONDITION(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.aiid_)*/0u
+  , /*decltype(_impl_.currenthp_)*/0u
+  , /*decltype(_impl_.maxhp_)*/0u
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct CS_MONSTER_CONDITIONDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR CS_MONSTER_CONDITIONDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~CS_MONSTER_CONDITIONDefaultTypeInternal() {}
+  union {
+    CS_MONSTER_CONDITION _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CS_MONSTER_CONDITIONDefaultTypeInternal _CS_MONSTER_CONDITION_default_instance_;
 PROTOBUF_CONSTEXPR CS_MONSTER_ROTATE::CS_MONSTER_ROTATE(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.aiid_)*/0u
@@ -740,8 +753,6 @@ PROTOBUF_CONSTEXPR SC_MONSTER_AI::SC_MONSTER_AI(
     /*decltype(_impl_.targetmovementpos_)*/nullptr
   , /*decltype(_impl_.bosspos_)*/nullptr
   , /*decltype(_impl_.aiid_)*/0u
-  , /*decltype(_impl_.currenthp_)*/0u
-  , /*decltype(_impl_.maxhp_)*/0u
   , /*decltype(_impl_.bossstate_)*/0u
   , /*decltype(_impl_.curspeed_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
@@ -754,6 +765,21 @@ struct SC_MONSTER_AIDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SC_MONSTER_AIDefaultTypeInternal _SC_MONSTER_AI_default_instance_;
+PROTOBUF_CONSTEXPR SC_MONSTER_CONDITION::SC_MONSTER_CONDITION(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.aiid_)*/0u
+  , /*decltype(_impl_.currenthp_)*/0u
+  , /*decltype(_impl_.maxhp_)*/0u
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct SC_MONSTER_CONDITIONDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SC_MONSTER_CONDITIONDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SC_MONSTER_CONDITIONDefaultTypeInternal() {}
+  union {
+    SC_MONSTER_CONDITION _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SC_MONSTER_CONDITIONDefaultTypeInternal _SC_MONSTER_CONDITION_default_instance_;
 PROTOBUF_CONSTEXPR SC_MONSTER_ROTATE::SC_MONSTER_ROTATE(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.aiid_)*/0u
@@ -822,7 +848,7 @@ struct SC_TEST_PACKETDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SC_TEST_PACKETDefaultTypeInternal _SC_TEST_PACKET_default_instance_;
 }  // namespace game
-static ::_pb::Metadata file_level_metadata_Protocol_2eproto[57];
+static ::_pb::Metadata file_level_metadata_Protocol_2eproto[59];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_Protocol_2eproto[1];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Protocol_2eproto = nullptr;
 
@@ -1220,12 +1246,19 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::game::CS_MONSTER_AI, _impl_.aiid_),
-  PROTOBUF_FIELD_OFFSET(::game::CS_MONSTER_AI, _impl_.currenthp_),
-  PROTOBUF_FIELD_OFFSET(::game::CS_MONSTER_AI, _impl_.maxhp_),
   PROTOBUF_FIELD_OFFSET(::game::CS_MONSTER_AI, _impl_.targetmovementpos_),
   PROTOBUF_FIELD_OFFSET(::game::CS_MONSTER_AI, _impl_.bosspos_),
   PROTOBUF_FIELD_OFFSET(::game::CS_MONSTER_AI, _impl_.bossstate_),
   PROTOBUF_FIELD_OFFSET(::game::CS_MONSTER_AI, _impl_.curspeed_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::game::CS_MONSTER_CONDITION, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::game::CS_MONSTER_CONDITION, _impl_.aiid_),
+  PROTOBUF_FIELD_OFFSET(::game::CS_MONSTER_CONDITION, _impl_.currenthp_),
+  PROTOBUF_FIELD_OFFSET(::game::CS_MONSTER_CONDITION, _impl_.maxhp_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::game::CS_MONSTER_ROTATE, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1241,12 +1274,19 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::game::SC_MONSTER_AI, _impl_.aiid_),
-  PROTOBUF_FIELD_OFFSET(::game::SC_MONSTER_AI, _impl_.currenthp_),
-  PROTOBUF_FIELD_OFFSET(::game::SC_MONSTER_AI, _impl_.maxhp_),
   PROTOBUF_FIELD_OFFSET(::game::SC_MONSTER_AI, _impl_.targetmovementpos_),
   PROTOBUF_FIELD_OFFSET(::game::SC_MONSTER_AI, _impl_.bosspos_),
   PROTOBUF_FIELD_OFFSET(::game::SC_MONSTER_AI, _impl_.bossstate_),
   PROTOBUF_FIELD_OFFSET(::game::SC_MONSTER_AI, _impl_.curspeed_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::game::SC_MONSTER_CONDITION, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::game::SC_MONSTER_CONDITION, _impl_.aiid_),
+  PROTOBUF_FIELD_OFFSET(::game::SC_MONSTER_CONDITION, _impl_.currenthp_),
+  PROTOBUF_FIELD_OFFSET(::game::SC_MONSTER_CONDITION, _impl_.maxhp_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::game::SC_MONSTER_ROTATE, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -1335,13 +1375,15 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 369, -1, -1, sizeof(::game::SC_PLAYER_DIE)},
   { 376, -1, -1, sizeof(::game::SC_POSITION_SYNC)},
   { 386, -1, -1, sizeof(::game::CS_MONSTER_AI)},
-  { 399, -1, -1, sizeof(::game::CS_MONSTER_ROTATE)},
-  { 407, -1, -1, sizeof(::game::SC_MONSTER_AI)},
-  { 420, -1, -1, sizeof(::game::SC_MONSTER_ROTATE)},
-  { 428, -1, -1, sizeof(::game::CS_CHECK_TIMEOUT)},
-  { 435, -1, -1, sizeof(::game::CS_TEST_PACKET1)},
-  { 442, -1, -1, sizeof(::game::CS_TEST_PACKET2)},
-  { 449, -1, -1, sizeof(::game::SC_TEST_PACKET)},
+  { 397, -1, -1, sizeof(::game::CS_MONSTER_CONDITION)},
+  { 406, -1, -1, sizeof(::game::CS_MONSTER_ROTATE)},
+  { 414, -1, -1, sizeof(::game::SC_MONSTER_AI)},
+  { 425, -1, -1, sizeof(::game::SC_MONSTER_CONDITION)},
+  { 434, -1, -1, sizeof(::game::SC_MONSTER_ROTATE)},
+  { 442, -1, -1, sizeof(::game::CS_CHECK_TIMEOUT)},
+  { 449, -1, -1, sizeof(::game::CS_TEST_PACKET1)},
+  { 456, -1, -1, sizeof(::game::CS_TEST_PACKET2)},
+  { 463, -1, -1, sizeof(::game::SC_TEST_PACKET)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -1395,8 +1437,10 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::game::_SC_PLAYER_DIE_default_instance_._instance,
   &::game::_SC_POSITION_SYNC_default_instance_._instance,
   &::game::_CS_MONSTER_AI_default_instance_._instance,
+  &::game::_CS_MONSTER_CONDITION_default_instance_._instance,
   &::game::_CS_MONSTER_ROTATE_default_instance_._instance,
   &::game::_SC_MONSTER_AI_default_instance_._instance,
+  &::game::_SC_MONSTER_CONDITION_default_instance_._instance,
   &::game::_SC_MONSTER_ROTATE_default_instance_._instance,
   &::game::_CS_CHECK_TIMEOUT_default_instance_._instance,
   &::game::_CS_TEST_PACKET1_default_instance_._instance,
@@ -1475,61 +1519,64 @@ const char descriptor_table_protodef_Protocol_2eproto[] PROTOBUF_SECTION_VARIABL
   "D\030\001 \001(\r\022\016\n\006damage\030\002 \001(\r\"!\n\rSC_PLAYER_DIE"
   "\022\020\n\010playerID\030\001 \001(\r\"S\n\020SC_POSITION_SYNC\022\020"
   "\n\010playerID\030\001 \001(\r\022\014\n\004posX\030\002 \001(\002\022\014\n\004posY\030\003"
-  " \001(\002\022\021\n\tcameraYaw\030\004 \001(\002\"\260\001\n\rCS_MONSTER_A"
-  "I\022\014\n\004aiID\030\001 \001(\r\022\021\n\tcurrentHp\030\002 \001(\r\022\r\n\005ma"
-  "xHp\030\003 \001(\r\022)\n\021targetMovementPos\030\004 \001(\0132\016.g"
-  "ame.Position\022\037\n\007bossPos\030\005 \001(\0132\016.game.Pos"
-  "ition\022\021\n\tbossState\030\006 \001(\r\022\020\n\010curSpeed\030\007 \001"
-  "(\002\"2\n\021CS_MONSTER_ROTATE\022\014\n\004aiID\030\001 \001(\r\022\017\n"
-  "\007rotateY\030\002 \001(\002\"\260\001\n\rSC_MONSTER_AI\022\014\n\004aiID"
+  " \001(\002\022\021\n\tcameraYaw\030\004 \001(\002\"\216\001\n\rCS_MONSTER_A"
+  "I\022\014\n\004aiID\030\001 \001(\r\022)\n\021targetMovementPos\030\002 \001"
+  "(\0132\016.game.Position\022\037\n\007bossPos\030\003 \001(\0132\016.ga"
+  "me.Position\022\021\n\tbossState\030\004 \001(\r\022\020\n\010curSpe"
+  "ed\030\005 \001(\002\"F\n\024CS_MONSTER_CONDITION\022\014\n\004aiID"
   "\030\001 \001(\r\022\021\n\tcurrentHp\030\002 \001(\r\022\r\n\005maxHp\030\003 \001(\r"
-  "\022)\n\021targetMovementPos\030\004 \001(\0132\016.game.Posit"
-  "ion\022\037\n\007bossPos\030\005 \001(\0132\016.game.Position\022\021\n\t"
-  "bossState\030\006 \001(\r\022\020\n\010curSpeed\030\007 \001(\002\"2\n\021SC_"
-  "MONSTER_ROTATE\022\014\n\004aiID\030\001 \001(\r\022\017\n\007rotateY\030"
-  "\002 \001(\002\"\"\n\020CS_CHECK_TIMEOUT\022\016\n\006bCheck\030\001 \001("
-  "\010\"#\n\017CS_TEST_PACKET1\022\020\n\010tempData\030\001 \003(\r\"5"
-  "\n\017CS_TEST_PACKET2\022\"\n\010tempData\030\001 \003(\0132\020.ga"
-  "me.PlayerInfo\"4\n\016SC_TEST_PACKET\022\"\n\010tempD"
-  "ata\030\001 \003(\0132\020.game.PlayerInfo*\336\t\n\010PacketID"
-  "\022\022\n\016CS_AcceptParty\020\000\022\034\n\030CS_CancelEnterin"
-  "gDungeon\020\001\022\013\n\007CS_Chat\020\002\022\023\n\017CS_CheckTimeo"
-  "ut\020\003\022\024\n\020CS_CreateMonster\020\004\022\024\n\020CS_FindIdR"
-  "equest\020\005\022\024\n\020CS_FindPwRequest\020\006\022\016\n\nCS_Key"
-  "info\020\007\022\023\n\017CS_LoginRequest\020\010\022\020\n\014CS_MakePa"
-  "rty\020\t\022\020\n\014CS_MonsterAi\020\n\022\024\n\020CS_MonsterAtt"
-  "ack\020\013\022\021\n\rCS_MonsterDie\020\014\022\024\n\020CS_MonsterRo"
-  "tate\020\r\022\023\n\017CS_PlayerAttack\020\016\022\020\n\014CS_Player"
-  "Die\020\017\022\023\n\017CS_PositionSync\020\020\022\026\n\022CS_Registe"
-  "rRequest\020\021\022\033\n\027CS_RequestCharacterInfo\020\022\022"
-  "\032\n\026CS_RequestEnterDungeon\020\023\022\026\n\022CS_Reques"
-  "tItemInfo\020\024\022\036\n\032CS_ResponseEnterDungeonEn"
-  "d\020\025\022\024\n\020CS_SignupRequest\020\026\022\025\n\021CS_SpawnCha"
-  "racter\020\027\022\027\n\023CS_StartAiCalculate\020\030\022\026\n\022CS_"
-  "StopAiCalculate\020\031\022\022\n\016CS_TestPacket1\020\032\022\022\n"
-  "\016CS_TestPacket2\020\033\022\022\n\016SC_AcceptParty\020\034\022\034\n"
-  "\030SC_CancelEnteringDungeon\020\035\022\013\n\007SC_Chat\020\036"
-  "\022\024\n\020SC_CreateMonster\020\037\022\025\n\021SC_FindIdRespo"
-  "nse\020 \022\025\n\021SC_FindPwResponse\020!\022\016\n\nSC_Keyin"
-  "fo\020\"\022\024\n\020SC_LoginResponse\020#\022\020\n\014SC_MakePar"
-  "ty\020$\022\020\n\014SC_MonsterAi\020%\022\025\n\021SC_MonsterDama"
-  "ged\020&\022\021\n\rSC_MonsterDie\020\'\022\024\n\020SC_MonsterRo"
-  "tate\020(\022\024\n\020SC_PlayerDamaged\020)\022\020\n\014SC_Playe"
-  "rDie\020*\022\023\n\017SC_PositionSync\020+\022\035\n\031SC_Prepar"
-  "eEnteringDungeon\020,\022\026\n\022SC_RemoveCharacter"
-  "\020-\022\026\n\022SC_RequestItemInfo\020.\022\034\n\030SC_Respons"
-  "eCharacterInfo\020/\022 \n\034SC_ResponseEnterDung"
-  "eonBegin\0200\022\036\n\032SC_ResponseEnterDungeonEnd"
-  "\0201\022\025\n\021SC_SignupResponse\0202\022\025\n\021SC_SpawnCha"
-  "racter\0203\022\027\n\023SC_StartAiCalculate\0204\022\026\n\022SC_"
-  "StopAiCalculate\0205\022\021\n\rSC_TestPacket\0206b\006pr"
-  "oto3"
+  "\"2\n\021CS_MONSTER_ROTATE\022\014\n\004aiID\030\001 \001(\r\022\017\n\007r"
+  "otateY\030\002 \001(\002\"\216\001\n\rSC_MONSTER_AI\022\014\n\004aiID\030\001"
+  " \001(\r\022)\n\021targetMovementPos\030\002 \001(\0132\016.game.P"
+  "osition\022\037\n\007bossPos\030\003 \001(\0132\016.game.Position"
+  "\022\021\n\tbossState\030\004 \001(\r\022\020\n\010curSpeed\030\005 \001(\002\"F\n"
+  "\024SC_MONSTER_CONDITION\022\014\n\004aiID\030\001 \001(\r\022\021\n\tc"
+  "urrentHp\030\002 \001(\r\022\r\n\005maxHp\030\003 \001(\r\"2\n\021SC_MONS"
+  "TER_ROTATE\022\014\n\004aiID\030\001 \001(\r\022\017\n\007rotateY\030\002 \001("
+  "\002\"\"\n\020CS_CHECK_TIMEOUT\022\016\n\006bCheck\030\001 \001(\010\"#\n"
+  "\017CS_TEST_PACKET1\022\020\n\010tempData\030\001 \003(\r\"5\n\017CS"
+  "_TEST_PACKET2\022\"\n\010tempData\030\001 \003(\0132\020.game.P"
+  "layerInfo\"4\n\016SC_TEST_PACKET\022\"\n\010tempData\030"
+  "\001 \003(\0132\020.game.PlayerInfo*\220\n\n\010PacketID\022\022\n\016"
+  "CS_AcceptParty\020\000\022\034\n\030CS_CancelEnteringDun"
+  "geon\020\001\022\013\n\007CS_Chat\020\002\022\023\n\017CS_CheckTimeout\020\003"
+  "\022\024\n\020CS_CreateMonster\020\004\022\024\n\020CS_FindIdReque"
+  "st\020\005\022\024\n\020CS_FindPwRequest\020\006\022\016\n\nCS_Keyinfo"
+  "\020\007\022\023\n\017CS_LoginRequest\020\010\022\020\n\014CS_MakeParty\020"
+  "\t\022\020\n\014CS_MonsterAi\020\n\022\024\n\020CS_MonsterAttack\020"
+  "\013\022\027\n\023CS_MonsterCondition\020\014\022\021\n\rCS_Monster"
+  "Die\020\r\022\024\n\020CS_MonsterRotate\020\016\022\023\n\017CS_Player"
+  "Attack\020\017\022\020\n\014CS_PlayerDie\020\020\022\023\n\017CS_Positio"
+  "nSync\020\021\022\026\n\022CS_RegisterRequest\020\022\022\033\n\027CS_Re"
+  "questCharacterInfo\020\023\022\032\n\026CS_RequestEnterD"
+  "ungeon\020\024\022\026\n\022CS_RequestItemInfo\020\025\022\036\n\032CS_R"
+  "esponseEnterDungeonEnd\020\026\022\024\n\020CS_SignupReq"
+  "uest\020\027\022\025\n\021CS_SpawnCharacter\020\030\022\027\n\023CS_Star"
+  "tAiCalculate\020\031\022\026\n\022CS_StopAiCalculate\020\032\022\022"
+  "\n\016CS_TestPacket1\020\033\022\022\n\016CS_TestPacket2\020\034\022\022"
+  "\n\016SC_AcceptParty\020\035\022\034\n\030SC_CancelEnteringD"
+  "ungeon\020\036\022\013\n\007SC_Chat\020\037\022\024\n\020SC_CreateMonste"
+  "r\020 \022\025\n\021SC_FindIdResponse\020!\022\025\n\021SC_FindPwR"
+  "esponse\020\"\022\016\n\nSC_Keyinfo\020#\022\024\n\020SC_LoginRes"
+  "ponse\020$\022\020\n\014SC_MakeParty\020%\022\020\n\014SC_MonsterA"
+  "i\020&\022\027\n\023SC_MonsterCondition\020\'\022\025\n\021SC_Monst"
+  "erDamaged\020(\022\021\n\rSC_MonsterDie\020)\022\024\n\020SC_Mon"
+  "sterRotate\020*\022\024\n\020SC_PlayerDamaged\020+\022\020\n\014SC"
+  "_PlayerDie\020,\022\023\n\017SC_PositionSync\020-\022\035\n\031SC_"
+  "PrepareEnteringDungeon\020.\022\026\n\022SC_RemoveCha"
+  "racter\020/\022\026\n\022SC_RequestItemInfo\0200\022\034\n\030SC_R"
+  "esponseCharacterInfo\0201\022 \n\034SC_ResponseEnt"
+  "erDungeonBegin\0202\022\036\n\032SC_ResponseEnterDung"
+  "eonEnd\0203\022\025\n\021SC_SignupResponse\0204\022\025\n\021SC_Sp"
+  "awnCharacter\0205\022\027\n\023SC_StartAiCalculate\0206\022"
+  "\026\n\022SC_StopAiCalculate\0207\022\021\n\rSC_TestPacket"
+  "\0208b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Protocol_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Protocol_2eproto = {
-    false, false, 4724, descriptor_table_protodef_Protocol_2eproto,
+    false, false, 4850, descriptor_table_protodef_Protocol_2eproto,
     "Protocol.proto",
-    &descriptor_table_Protocol_2eproto_once, nullptr, 0, 57,
+    &descriptor_table_Protocol_2eproto_once, nullptr, 0, 59,
     schemas, file_default_instances, TableStruct_Protocol_2eproto::offsets,
     file_level_metadata_Protocol_2eproto, file_level_enum_descriptors_Protocol_2eproto,
     file_level_service_descriptors_Protocol_2eproto,
@@ -1602,6 +1649,8 @@ bool PacketID_IsValid(int value) {
     case 52:
     case 53:
     case 54:
+    case 55:
+    case 56:
       return true;
     default:
       return false;
@@ -12294,8 +12343,6 @@ CS_MONSTER_AI::CS_MONSTER_AI(const CS_MONSTER_AI& from)
       decltype(_impl_.targetmovementpos_){nullptr}
     , decltype(_impl_.bosspos_){nullptr}
     , decltype(_impl_.aiid_){}
-    , decltype(_impl_.currenthp_){}
-    , decltype(_impl_.maxhp_){}
     , decltype(_impl_.bossstate_){}
     , decltype(_impl_.curspeed_){}
     , /*decltype(_impl_._cached_size_)*/{}};
@@ -12321,8 +12368,6 @@ inline void CS_MONSTER_AI::SharedCtor(
       decltype(_impl_.targetmovementpos_){nullptr}
     , decltype(_impl_.bosspos_){nullptr}
     , decltype(_impl_.aiid_){0u}
-    , decltype(_impl_.currenthp_){0u}
-    , decltype(_impl_.maxhp_){0u}
     , decltype(_impl_.bossstate_){0u}
     , decltype(_impl_.curspeed_){0}
     , /*decltype(_impl_._cached_size_)*/{}
@@ -12382,49 +12427,33 @@ const char* CS_MONSTER_AI::_InternalParse(const char* ptr, ::_pbi::ParseContext*
         } else
           goto handle_unusual;
         continue;
-      // uint32 currentHp = 2;
+      // .game.Position targetMovementPos = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.currenthp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // uint32 maxHp = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-          _impl_.maxhp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // .game.Position targetMovementPos = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr = ctx->ParseMessage(_internal_mutable_targetmovementpos(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // .game.Position bossPos = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+      // .game.Position bossPos = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr = ctx->ParseMessage(_internal_mutable_bosspos(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // uint32 bossState = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
+      // uint32 bossState = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
           _impl_.bossstate_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // float curSpeed = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 61)) {
+      // float curSpeed = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 45)) {
           _impl_.curspeed_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else
@@ -12465,46 +12494,34 @@ uint8_t* CS_MONSTER_AI::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_aiid(), target);
   }
 
-  // uint32 currentHp = 2;
-  if (this->_internal_currenthp() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_currenthp(), target);
-  }
-
-  // uint32 maxHp = 3;
-  if (this->_internal_maxhp() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(3, this->_internal_maxhp(), target);
-  }
-
-  // .game.Position targetMovementPos = 4;
+  // .game.Position targetMovementPos = 2;
   if (this->_internal_has_targetmovementpos()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(4, _Internal::targetmovementpos(this),
+      InternalWriteMessage(2, _Internal::targetmovementpos(this),
         _Internal::targetmovementpos(this).GetCachedSize(), target, stream);
   }
 
-  // .game.Position bossPos = 5;
+  // .game.Position bossPos = 3;
   if (this->_internal_has_bosspos()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(5, _Internal::bosspos(this),
+      InternalWriteMessage(3, _Internal::bosspos(this),
         _Internal::bosspos(this).GetCachedSize(), target, stream);
   }
 
-  // uint32 bossState = 6;
+  // uint32 bossState = 4;
   if (this->_internal_bossstate() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(6, this->_internal_bossstate(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(4, this->_internal_bossstate(), target);
   }
 
-  // float curSpeed = 7;
+  // float curSpeed = 5;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_curspeed = this->_internal_curspeed();
   uint32_t raw_curspeed;
   memcpy(&raw_curspeed, &tmp_curspeed, sizeof(tmp_curspeed));
   if (raw_curspeed != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(7, this->_internal_curspeed(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(5, this->_internal_curspeed(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -12523,14 +12540,14 @@ size_t CS_MONSTER_AI::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .game.Position targetMovementPos = 4;
+  // .game.Position targetMovementPos = 2;
   if (this->_internal_has_targetmovementpos()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *_impl_.targetmovementpos_);
   }
 
-  // .game.Position bossPos = 5;
+  // .game.Position bossPos = 3;
   if (this->_internal_has_bosspos()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -12542,22 +12559,12 @@ size_t CS_MONSTER_AI::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_aiid());
   }
 
-  // uint32 currentHp = 2;
-  if (this->_internal_currenthp() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_currenthp());
-  }
-
-  // uint32 maxHp = 3;
-  if (this->_internal_maxhp() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_maxhp());
-  }
-
-  // uint32 bossState = 6;
+  // uint32 bossState = 4;
   if (this->_internal_bossstate() != 0) {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_bossstate());
   }
 
-  // float curSpeed = 7;
+  // float curSpeed = 5;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_curspeed = this->_internal_curspeed();
   uint32_t raw_curspeed;
@@ -12594,12 +12601,6 @@ void CS_MONSTER_AI::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
   }
   if (from._internal_aiid() != 0) {
     _this->_internal_set_aiid(from._internal_aiid());
-  }
-  if (from._internal_currenthp() != 0) {
-    _this->_internal_set_currenthp(from._internal_currenthp());
-  }
-  if (from._internal_maxhp() != 0) {
-    _this->_internal_set_maxhp(from._internal_maxhp());
   }
   if (from._internal_bossstate() != 0) {
     _this->_internal_set_bossstate(from._internal_bossstate());
@@ -12640,6 +12641,241 @@ void CS_MONSTER_AI::InternalSwap(CS_MONSTER_AI* other) {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
       file_level_metadata_Protocol_2eproto[49]);
+}
+
+// ===================================================================
+
+class CS_MONSTER_CONDITION::_Internal {
+ public:
+};
+
+CS_MONSTER_CONDITION::CS_MONSTER_CONDITION(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:game.CS_MONSTER_CONDITION)
+}
+CS_MONSTER_CONDITION::CS_MONSTER_CONDITION(const CS_MONSTER_CONDITION& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  CS_MONSTER_CONDITION* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.aiid_){}
+    , decltype(_impl_.currenthp_){}
+    , decltype(_impl_.maxhp_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::memcpy(&_impl_.aiid_, &from._impl_.aiid_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.maxhp_) -
+    reinterpret_cast<char*>(&_impl_.aiid_)) + sizeof(_impl_.maxhp_));
+  // @@protoc_insertion_point(copy_constructor:game.CS_MONSTER_CONDITION)
+}
+
+inline void CS_MONSTER_CONDITION::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.aiid_){0u}
+    , decltype(_impl_.currenthp_){0u}
+    , decltype(_impl_.maxhp_){0u}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+CS_MONSTER_CONDITION::~CS_MONSTER_CONDITION() {
+  // @@protoc_insertion_point(destructor:game.CS_MONSTER_CONDITION)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void CS_MONSTER_CONDITION::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
+
+void CS_MONSTER_CONDITION::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void CS_MONSTER_CONDITION::Clear() {
+// @@protoc_insertion_point(message_clear_start:game.CS_MONSTER_CONDITION)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.aiid_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.maxhp_) -
+      reinterpret_cast<char*>(&_impl_.aiid_)) + sizeof(_impl_.maxhp_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* CS_MONSTER_CONDITION::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // uint32 aiID = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.aiid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint32 currentHp = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.currenthp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint32 maxHp = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          _impl_.maxhp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* CS_MONSTER_CONDITION::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:game.CS_MONSTER_CONDITION)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint32 aiID = 1;
+  if (this->_internal_aiid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_aiid(), target);
+  }
+
+  // uint32 currentHp = 2;
+  if (this->_internal_currenthp() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_currenthp(), target);
+  }
+
+  // uint32 maxHp = 3;
+  if (this->_internal_maxhp() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(3, this->_internal_maxhp(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:game.CS_MONSTER_CONDITION)
+  return target;
+}
+
+size_t CS_MONSTER_CONDITION::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:game.CS_MONSTER_CONDITION)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // uint32 aiID = 1;
+  if (this->_internal_aiid() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_aiid());
+  }
+
+  // uint32 currentHp = 2;
+  if (this->_internal_currenthp() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_currenthp());
+  }
+
+  // uint32 maxHp = 3;
+  if (this->_internal_maxhp() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_maxhp());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData CS_MONSTER_CONDITION::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    CS_MONSTER_CONDITION::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*CS_MONSTER_CONDITION::GetClassData() const { return &_class_data_; }
+
+
+void CS_MONSTER_CONDITION::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<CS_MONSTER_CONDITION*>(&to_msg);
+  auto& from = static_cast<const CS_MONSTER_CONDITION&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:game.CS_MONSTER_CONDITION)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_aiid() != 0) {
+    _this->_internal_set_aiid(from._internal_aiid());
+  }
+  if (from._internal_currenthp() != 0) {
+    _this->_internal_set_currenthp(from._internal_currenthp());
+  }
+  if (from._internal_maxhp() != 0) {
+    _this->_internal_set_maxhp(from._internal_maxhp());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void CS_MONSTER_CONDITION::CopyFrom(const CS_MONSTER_CONDITION& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:game.CS_MONSTER_CONDITION)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CS_MONSTER_CONDITION::IsInitialized() const {
+  return true;
+}
+
+void CS_MONSTER_CONDITION::InternalSwap(CS_MONSTER_CONDITION* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(CS_MONSTER_CONDITION, _impl_.maxhp_)
+      + sizeof(CS_MONSTER_CONDITION::_impl_.maxhp_)
+      - PROTOBUF_FIELD_OFFSET(CS_MONSTER_CONDITION, _impl_.aiid_)>(
+          reinterpret_cast<char*>(&_impl_.aiid_),
+          reinterpret_cast<char*>(&other->_impl_.aiid_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata CS_MONSTER_CONDITION::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
+      file_level_metadata_Protocol_2eproto[50]);
 }
 
 // ===================================================================
@@ -12862,7 +13098,7 @@ void CS_MONSTER_ROTATE::InternalSwap(CS_MONSTER_ROTATE* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata CS_MONSTER_ROTATE::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[50]);
+      file_level_metadata_Protocol_2eproto[51]);
 }
 
 // ===================================================================
@@ -12894,8 +13130,6 @@ SC_MONSTER_AI::SC_MONSTER_AI(const SC_MONSTER_AI& from)
       decltype(_impl_.targetmovementpos_){nullptr}
     , decltype(_impl_.bosspos_){nullptr}
     , decltype(_impl_.aiid_){}
-    , decltype(_impl_.currenthp_){}
-    , decltype(_impl_.maxhp_){}
     , decltype(_impl_.bossstate_){}
     , decltype(_impl_.curspeed_){}
     , /*decltype(_impl_._cached_size_)*/{}};
@@ -12921,8 +13155,6 @@ inline void SC_MONSTER_AI::SharedCtor(
       decltype(_impl_.targetmovementpos_){nullptr}
     , decltype(_impl_.bosspos_){nullptr}
     , decltype(_impl_.aiid_){0u}
-    , decltype(_impl_.currenthp_){0u}
-    , decltype(_impl_.maxhp_){0u}
     , decltype(_impl_.bossstate_){0u}
     , decltype(_impl_.curspeed_){0}
     , /*decltype(_impl_._cached_size_)*/{}
@@ -12982,49 +13214,33 @@ const char* SC_MONSTER_AI::_InternalParse(const char* ptr, ::_pbi::ParseContext*
         } else
           goto handle_unusual;
         continue;
-      // uint32 currentHp = 2;
+      // .game.Position targetMovementPos = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.currenthp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // uint32 maxHp = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-          _impl_.maxhp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // .game.Position targetMovementPos = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr = ctx->ParseMessage(_internal_mutable_targetmovementpos(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // .game.Position bossPos = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+      // .game.Position bossPos = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr = ctx->ParseMessage(_internal_mutable_bosspos(), ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // uint32 bossState = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
+      // uint32 bossState = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
           _impl_.bossstate_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // float curSpeed = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 61)) {
+      // float curSpeed = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 45)) {
           _impl_.curspeed_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else
@@ -13065,46 +13281,34 @@ uint8_t* SC_MONSTER_AI::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_aiid(), target);
   }
 
-  // uint32 currentHp = 2;
-  if (this->_internal_currenthp() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_currenthp(), target);
-  }
-
-  // uint32 maxHp = 3;
-  if (this->_internal_maxhp() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(3, this->_internal_maxhp(), target);
-  }
-
-  // .game.Position targetMovementPos = 4;
+  // .game.Position targetMovementPos = 2;
   if (this->_internal_has_targetmovementpos()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(4, _Internal::targetmovementpos(this),
+      InternalWriteMessage(2, _Internal::targetmovementpos(this),
         _Internal::targetmovementpos(this).GetCachedSize(), target, stream);
   }
 
-  // .game.Position bossPos = 5;
+  // .game.Position bossPos = 3;
   if (this->_internal_has_bosspos()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(5, _Internal::bosspos(this),
+      InternalWriteMessage(3, _Internal::bosspos(this),
         _Internal::bosspos(this).GetCachedSize(), target, stream);
   }
 
-  // uint32 bossState = 6;
+  // uint32 bossState = 4;
   if (this->_internal_bossstate() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(6, this->_internal_bossstate(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(4, this->_internal_bossstate(), target);
   }
 
-  // float curSpeed = 7;
+  // float curSpeed = 5;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_curspeed = this->_internal_curspeed();
   uint32_t raw_curspeed;
   memcpy(&raw_curspeed, &tmp_curspeed, sizeof(tmp_curspeed));
   if (raw_curspeed != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(7, this->_internal_curspeed(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(5, this->_internal_curspeed(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -13123,14 +13327,14 @@ size_t SC_MONSTER_AI::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .game.Position targetMovementPos = 4;
+  // .game.Position targetMovementPos = 2;
   if (this->_internal_has_targetmovementpos()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *_impl_.targetmovementpos_);
   }
 
-  // .game.Position bossPos = 5;
+  // .game.Position bossPos = 3;
   if (this->_internal_has_bosspos()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -13142,22 +13346,12 @@ size_t SC_MONSTER_AI::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_aiid());
   }
 
-  // uint32 currentHp = 2;
-  if (this->_internal_currenthp() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_currenthp());
-  }
-
-  // uint32 maxHp = 3;
-  if (this->_internal_maxhp() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_maxhp());
-  }
-
-  // uint32 bossState = 6;
+  // uint32 bossState = 4;
   if (this->_internal_bossstate() != 0) {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_bossstate());
   }
 
-  // float curSpeed = 7;
+  // float curSpeed = 5;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_curspeed = this->_internal_curspeed();
   uint32_t raw_curspeed;
@@ -13194,12 +13388,6 @@ void SC_MONSTER_AI::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
   }
   if (from._internal_aiid() != 0) {
     _this->_internal_set_aiid(from._internal_aiid());
-  }
-  if (from._internal_currenthp() != 0) {
-    _this->_internal_set_currenthp(from._internal_currenthp());
-  }
-  if (from._internal_maxhp() != 0) {
-    _this->_internal_set_maxhp(from._internal_maxhp());
   }
   if (from._internal_bossstate() != 0) {
     _this->_internal_set_bossstate(from._internal_bossstate());
@@ -13239,7 +13427,242 @@ void SC_MONSTER_AI::InternalSwap(SC_MONSTER_AI* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata SC_MONSTER_AI::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[51]);
+      file_level_metadata_Protocol_2eproto[52]);
+}
+
+// ===================================================================
+
+class SC_MONSTER_CONDITION::_Internal {
+ public:
+};
+
+SC_MONSTER_CONDITION::SC_MONSTER_CONDITION(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:game.SC_MONSTER_CONDITION)
+}
+SC_MONSTER_CONDITION::SC_MONSTER_CONDITION(const SC_MONSTER_CONDITION& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  SC_MONSTER_CONDITION* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.aiid_){}
+    , decltype(_impl_.currenthp_){}
+    , decltype(_impl_.maxhp_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::memcpy(&_impl_.aiid_, &from._impl_.aiid_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.maxhp_) -
+    reinterpret_cast<char*>(&_impl_.aiid_)) + sizeof(_impl_.maxhp_));
+  // @@protoc_insertion_point(copy_constructor:game.SC_MONSTER_CONDITION)
+}
+
+inline void SC_MONSTER_CONDITION::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.aiid_){0u}
+    , decltype(_impl_.currenthp_){0u}
+    , decltype(_impl_.maxhp_){0u}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+SC_MONSTER_CONDITION::~SC_MONSTER_CONDITION() {
+  // @@protoc_insertion_point(destructor:game.SC_MONSTER_CONDITION)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void SC_MONSTER_CONDITION::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
+
+void SC_MONSTER_CONDITION::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void SC_MONSTER_CONDITION::Clear() {
+// @@protoc_insertion_point(message_clear_start:game.SC_MONSTER_CONDITION)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.aiid_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.maxhp_) -
+      reinterpret_cast<char*>(&_impl_.aiid_)) + sizeof(_impl_.maxhp_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* SC_MONSTER_CONDITION::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // uint32 aiID = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.aiid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint32 currentHp = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.currenthp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint32 maxHp = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          _impl_.maxhp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* SC_MONSTER_CONDITION::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:game.SC_MONSTER_CONDITION)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint32 aiID = 1;
+  if (this->_internal_aiid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_aiid(), target);
+  }
+
+  // uint32 currentHp = 2;
+  if (this->_internal_currenthp() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_currenthp(), target);
+  }
+
+  // uint32 maxHp = 3;
+  if (this->_internal_maxhp() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(3, this->_internal_maxhp(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:game.SC_MONSTER_CONDITION)
+  return target;
+}
+
+size_t SC_MONSTER_CONDITION::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:game.SC_MONSTER_CONDITION)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // uint32 aiID = 1;
+  if (this->_internal_aiid() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_aiid());
+  }
+
+  // uint32 currentHp = 2;
+  if (this->_internal_currenthp() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_currenthp());
+  }
+
+  // uint32 maxHp = 3;
+  if (this->_internal_maxhp() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_maxhp());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData SC_MONSTER_CONDITION::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    SC_MONSTER_CONDITION::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*SC_MONSTER_CONDITION::GetClassData() const { return &_class_data_; }
+
+
+void SC_MONSTER_CONDITION::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<SC_MONSTER_CONDITION*>(&to_msg);
+  auto& from = static_cast<const SC_MONSTER_CONDITION&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:game.SC_MONSTER_CONDITION)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_aiid() != 0) {
+    _this->_internal_set_aiid(from._internal_aiid());
+  }
+  if (from._internal_currenthp() != 0) {
+    _this->_internal_set_currenthp(from._internal_currenthp());
+  }
+  if (from._internal_maxhp() != 0) {
+    _this->_internal_set_maxhp(from._internal_maxhp());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void SC_MONSTER_CONDITION::CopyFrom(const SC_MONSTER_CONDITION& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:game.SC_MONSTER_CONDITION)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SC_MONSTER_CONDITION::IsInitialized() const {
+  return true;
+}
+
+void SC_MONSTER_CONDITION::InternalSwap(SC_MONSTER_CONDITION* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(SC_MONSTER_CONDITION, _impl_.maxhp_)
+      + sizeof(SC_MONSTER_CONDITION::_impl_.maxhp_)
+      - PROTOBUF_FIELD_OFFSET(SC_MONSTER_CONDITION, _impl_.aiid_)>(
+          reinterpret_cast<char*>(&_impl_.aiid_),
+          reinterpret_cast<char*>(&other->_impl_.aiid_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata SC_MONSTER_CONDITION::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
+      file_level_metadata_Protocol_2eproto[53]);
 }
 
 // ===================================================================
@@ -13462,7 +13885,7 @@ void SC_MONSTER_ROTATE::InternalSwap(SC_MONSTER_ROTATE* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata SC_MONSTER_ROTATE::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[52]);
+      file_level_metadata_Protocol_2eproto[54]);
 }
 
 // ===================================================================
@@ -13640,7 +14063,7 @@ void CS_CHECK_TIMEOUT::InternalSwap(CS_CHECK_TIMEOUT* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata CS_CHECK_TIMEOUT::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[53]);
+      file_level_metadata_Protocol_2eproto[55]);
 }
 
 // ===================================================================
@@ -13833,7 +14256,7 @@ void CS_TEST_PACKET1::InternalSwap(CS_TEST_PACKET1* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata CS_TEST_PACKET1::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[54]);
+      file_level_metadata_Protocol_2eproto[56]);
 }
 
 // ===================================================================
@@ -14018,7 +14441,7 @@ void CS_TEST_PACKET2::InternalSwap(CS_TEST_PACKET2* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata CS_TEST_PACKET2::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[55]);
+      file_level_metadata_Protocol_2eproto[57]);
 }
 
 // ===================================================================
@@ -14203,7 +14626,7 @@ void SC_TEST_PACKET::InternalSwap(SC_TEST_PACKET* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata SC_TEST_PACKET::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[56]);
+      file_level_metadata_Protocol_2eproto[58]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -14409,6 +14832,10 @@ template<> PROTOBUF_NOINLINE ::game::CS_MONSTER_AI*
 Arena::CreateMaybeMessage< ::game::CS_MONSTER_AI >(Arena* arena) {
   return Arena::CreateMessageInternal< ::game::CS_MONSTER_AI >(arena);
 }
+template<> PROTOBUF_NOINLINE ::game::CS_MONSTER_CONDITION*
+Arena::CreateMaybeMessage< ::game::CS_MONSTER_CONDITION >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::game::CS_MONSTER_CONDITION >(arena);
+}
 template<> PROTOBUF_NOINLINE ::game::CS_MONSTER_ROTATE*
 Arena::CreateMaybeMessage< ::game::CS_MONSTER_ROTATE >(Arena* arena) {
   return Arena::CreateMessageInternal< ::game::CS_MONSTER_ROTATE >(arena);
@@ -14416,6 +14843,10 @@ Arena::CreateMaybeMessage< ::game::CS_MONSTER_ROTATE >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::game::SC_MONSTER_AI*
 Arena::CreateMaybeMessage< ::game::SC_MONSTER_AI >(Arena* arena) {
   return Arena::CreateMessageInternal< ::game::SC_MONSTER_AI >(arena);
+}
+template<> PROTOBUF_NOINLINE ::game::SC_MONSTER_CONDITION*
+Arena::CreateMaybeMessage< ::game::SC_MONSTER_CONDITION >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::game::SC_MONSTER_CONDITION >(arena);
 }
 template<> PROTOBUF_NOINLINE ::game::SC_MONSTER_ROTATE*
 Arena::CreateMaybeMessage< ::game::SC_MONSTER_ROTATE >(Arena* arena) {

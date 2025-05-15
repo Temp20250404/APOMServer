@@ -16,51 +16,53 @@ enum PacketID {
     CS_MakeParty = 9;
     CS_MonsterAi = 10;
     CS_MonsterAttack = 11;
-    CS_MonsterDie = 12;
-    CS_MonsterRotate = 13;
-    CS_PlayerAttack = 14;
-    CS_PlayerDie = 15;
-    CS_PositionSync = 16;
-    CS_RegisterRequest = 17;
-    CS_RequestCharacterInfo = 18;
-    CS_RequestEnterDungeon = 19;
-    CS_RequestItemInfo = 20;
-    CS_ResponseEnterDungeonEnd = 21;
-    CS_SignupRequest = 22;
-    CS_SpawnCharacter = 23;
-    CS_StartAiCalculate = 24;
-    CS_StopAiCalculate = 25;
-    CS_TestPacket1 = 26;
-    CS_TestPacket2 = 27;
+    CS_MonsterCondition = 12;
+    CS_MonsterDie = 13;
+    CS_MonsterRotate = 14;
+    CS_PlayerAttack = 15;
+    CS_PlayerDie = 16;
+    CS_PositionSync = 17;
+    CS_RegisterRequest = 18;
+    CS_RequestCharacterInfo = 19;
+    CS_RequestEnterDungeon = 20;
+    CS_RequestItemInfo = 21;
+    CS_ResponseEnterDungeonEnd = 22;
+    CS_SignupRequest = 23;
+    CS_SpawnCharacter = 24;
+    CS_StartAiCalculate = 25;
+    CS_StopAiCalculate = 26;
+    CS_TestPacket1 = 27;
+    CS_TestPacket2 = 28;
 
 // Server → Client
-    SC_AcceptParty = 28;
-    SC_CancelEnteringDungeon = 29;
-    SC_Chat = 30;
-    SC_CreateMonster = 31;
-    SC_FindIdResponse = 32;
-    SC_FindPwResponse = 33;
-    SC_Keyinfo = 34;
-    SC_LoginResponse = 35;
-    SC_MakeParty = 36;
-    SC_MonsterAi = 37;
-    SC_MonsterDamaged = 38;
-    SC_MonsterDie = 39;
-    SC_MonsterRotate = 40;
-    SC_PlayerDamaged = 41;
-    SC_PlayerDie = 42;
-    SC_PositionSync = 43;
-    SC_PrepareEnteringDungeon = 44;
-    SC_RemoveCharacter = 45;
-    SC_RequestItemInfo = 46;
-    SC_ResponseCharacterInfo = 47;
-    SC_ResponseEnterDungeonBegin = 48;
-    SC_ResponseEnterDungeonEnd = 49;
-    SC_SignupResponse = 50;
-    SC_SpawnCharacter = 51;
-    SC_StartAiCalculate = 52;
-    SC_StopAiCalculate = 53;
-    SC_TestPacket = 54;
+    SC_AcceptParty = 29;
+    SC_CancelEnteringDungeon = 30;
+    SC_Chat = 31;
+    SC_CreateMonster = 32;
+    SC_FindIdResponse = 33;
+    SC_FindPwResponse = 34;
+    SC_Keyinfo = 35;
+    SC_LoginResponse = 36;
+    SC_MakeParty = 37;
+    SC_MonsterAi = 38;
+    SC_MonsterCondition = 39;
+    SC_MonsterDamaged = 40;
+    SC_MonsterDie = 41;
+    SC_MonsterRotate = 42;
+    SC_PlayerDamaged = 43;
+    SC_PlayerDie = 44;
+    SC_PositionSync = 45;
+    SC_PrepareEnteringDungeon = 46;
+    SC_RemoveCharacter = 47;
+    SC_RequestItemInfo = 48;
+    SC_ResponseCharacterInfo = 49;
+    SC_ResponseEnterDungeonBegin = 50;
+    SC_ResponseEnterDungeonEnd = 51;
+    SC_SignupResponse = 52;
+    SC_SpawnCharacter = 53;
+    SC_StartAiCalculate = 54;
+    SC_StopAiCalculate = 55;
+    SC_TestPacket = 56;
 }
 
 
@@ -257,12 +259,15 @@ message SC_POSITION_SYNC {
 }
 message CS_MONSTER_AI {
     uint32 aiID = 1; // 보스의 고유 ID
-    uint32 currentHp = 2; // 보스의 현재 체력
-    uint32 maxHp = 3; // 보스의 최대 체력
-    Position targetMovementPos = 4; // 보스가 이동해야 하는 목표 위치
-    Position bossPos = 5; // 현재 보스의 위치
-    uint32 bossState = 6; // 보스의 현재 상태
-    float curSpeed = 7; // 현재 이동속도
+    Position targetMovementPos = 2; // 보스가 이동해야 하는 목표 위치
+    Position bossPos = 3; // 현재 보스의 위치
+    uint32 bossState = 4; // 보스의 현재 상태
+    float curSpeed = 5; // 현재 이동속도
+}
+message CS_MONSTER_CONDITION {
+    uint32 aiID = 1; // 몬스터의 고유 ID
+    uint32 currentHp = 2; // 몬스터의 현재 체력
+    uint32 maxHp = 3; // 몬스터의 최대 체력
 }
 message CS_MONSTER_ROTATE {
     uint32 aiID = 1; // 보스의 고유 ID
@@ -270,12 +275,15 @@ message CS_MONSTER_ROTATE {
 }
 message SC_MONSTER_AI {
     uint32 aiID = 1; // 보스의 고유 ID
-    uint32 currentHp = 2; // 보스의 현재 체력
-    uint32 maxHp = 3; // 보스의 최대 체력
-    Position targetMovementPos = 4; // 보스가 이동해야 하는 목표 위치
-    Position bossPos = 5; // 현재 보스의 위치
-    uint32 bossState = 6; // 보스의 현재 상태
-    float curSpeed = 7; // 현재 이동속도
+    Position targetMovementPos = 2; // 보스가 이동해야 하는 목표 위치
+    Position bossPos = 3; // 현재 보스의 위치
+    uint32 bossState = 4; // 보스의 현재 상태
+    float curSpeed = 5; // 현재 이동속도
+}
+message SC_MONSTER_CONDITION {
+    uint32 aiID = 1; // 몬스터의 고유 ID
+    uint32 currentHp = 2; // 몬스터의 현재 체력
+    uint32 maxHp = 3; // 몬스터의 최대 체력
 }
 message SC_MONSTER_ROTATE {
     uint32 aiID = 1; // 보스의 고유 ID

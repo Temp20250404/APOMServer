@@ -1835,15 +1835,11 @@ void SC_POSITION_SYNC_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 player
 }
 
 
-void SC_MONSTER_AI_FOR_All(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
+void SC_MONSTER_AI_FOR_All(CSession* pSession, UINT32 aiID, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
 {
     game::SC_MONSTER_AI pkt;
 
     pkt.set_aiid(aiID);
-
-    pkt.set_currenthp(currentHp);
-
-    pkt.set_maxhp(maxHp);
 
     {  // 구조체 단일 필드 시작
         game::Position* sub = pkt.mutable_targetmovementpos();
@@ -1879,15 +1875,11 @@ void SC_MONSTER_AI_FOR_All(CSession* pSession, UINT32 aiID, UINT32 currentHp, UI
     packetPool.Free(Packet);
 }
 
-void SC_MONSTER_AI_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
+void SC_MONSTER_AI_FOR_SINGLE(CSession* pSession, UINT32 aiID, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
 {
     game::SC_MONSTER_AI pkt;
 
     pkt.set_aiid(aiID);
-
-    pkt.set_currenthp(currentHp);
-
-    pkt.set_maxhp(maxHp);
 
     {  // 구조체 단일 필드 시작
         game::Position* sub = pkt.mutable_targetmovementpos();
@@ -1923,15 +1915,11 @@ void SC_MONSTER_AI_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 currentHp,
     packetPool.Free(Packet);
 }
 
-void SC_MONSTER_AI_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, UINT32 currentHp, UINT32 maxHp, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
+void SC_MONSTER_AI_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed)
 {
     game::SC_MONSTER_AI pkt;
 
     pkt.set_aiid(aiID);
-
-    pkt.set_currenthp(currentHp);
-
-    pkt.set_maxhp(maxHp);
 
     {  // 구조체 단일 필드 시작
         game::Position* sub = pkt.mutable_targetmovementpos();
@@ -1956,6 +1944,85 @@ void SC_MONSTER_AI_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, UIN
     header.byCode = dfNETWORK_PACKET_CODE;
     header.bySize = pktSize;
     header.byType = game::PacketID::SC_MonsterAi;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    for(auto& pl: pRoom->m_activePlayers){ if(pl->m_pSession != pSession) UnicastPacket(pl->m_pSession, &header, Packet); }
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+
+void SC_MONSTER_CONDITION_FOR_All(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp)
+{
+    game::SC_MONSTER_CONDITION pkt;
+
+    pkt.set_aiid(aiID);
+
+    pkt.set_currenthp(currentHp);
+
+    pkt.set_maxhp(maxHp);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_MonsterCondition;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    BroadcastData(pSession, Packet, Packet->GetDataSize());
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_MONSTER_CONDITION_FOR_SINGLE(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp)
+{
+    game::SC_MONSTER_CONDITION pkt;
+
+    pkt.set_aiid(aiID);
+
+    pkt.set_currenthp(currentHp);
+
+    pkt.set_maxhp(maxHp);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_MonsterCondition;
+
+    CPacket* Packet = packetPool.Alloc();
+    char buffer[512];
+    pkt.SerializeToArray(buffer, pktSize);
+    Packet->PutData(buffer, pktSize);
+    UnicastPacket(pSession, &header, Packet);
+
+    Packet->Clear();
+    packetPool.Free(Packet);
+}
+
+void SC_MONSTER_CONDITION_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 aiID, UINT32 currentHp, UINT32 maxHp)
+{
+    game::SC_MONSTER_CONDITION pkt;
+
+    pkt.set_aiid(aiID);
+
+    pkt.set_currenthp(currentHp);
+
+    pkt.set_maxhp(maxHp);
+
+    int pktSize = pkt.ByteSizeLong();
+    PACKET_HEADER header;
+    header.byCode = dfNETWORK_PACKET_CODE;
+    header.bySize = pktSize;
+    header.byType = game::PacketID::SC_MonsterCondition;
 
     CPacket* Packet = packetPool.Alloc();
     char buffer[512];

@@ -207,6 +207,14 @@ class PacketHandler
         // TODO: SC_MonsterAi 패킷 처리 로직을 여기에 구현
     }
 
+    // SC_MONSTER_CONDITION 패킷을 처리하는 함수
+    public static void SC_MonsterCondition(PacketSession session, IMessage packet)
+    {
+        SC_MONSTER_CONDITION monsterConditionPacket = packet as SC_MONSTER_CONDITION;
+
+        // TODO: SC_MonsterCondition 패킷 처리 로직을 여기에 구현
+    }
+
     // SC_MONSTER_ROTATE 패킷을 처리하는 함수
     public static void SC_MonsterRotate(PacketSession session, IMessage packet)
     {
