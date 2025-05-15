@@ -500,10 +500,23 @@ void DisconnectSessionProc(CSession* pSession)
             if (!pRoom->GetActivePlayers().empty())
             {
                 CPlayer* pPlayer = pRoom->GetActivePlayers().front();
-                SC_START_AI_CALCULATE_FOR_SINGLE(pPlayer->m_pSession, true);
-                pRoom->authorityPlayerID = pPlayer->m_ID;
+                if (pPlayer)
+                {
+                    SC_START_AI_CALCULATE_FOR_SINGLE(pPlayer->m_pSession, true);
+                    pRoom->authorityPlayerID = pPlayer->m_ID;
+                }
+                else
+                {
+                    pRoom->authorityPlayerID = 0;
+                }
+            }
+            else
+            {
+                pRoom->authorityPlayerID = 0;
             }
         }
+
+
     }
 
     // 플레이어 반환
