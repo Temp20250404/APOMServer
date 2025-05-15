@@ -34,7 +34,7 @@ bool CS_MONSTER_ATTACK(CSession* pSession, UINT32 playerID, UINT32 damage);
 bool CS_MONSTER_DIE(CSession* pSession, UINT32 aiID);
 bool CS_PLAYER_ATTACK(CSession* pSession, UINT32 aiID, UINT32 attackDamage);
 bool CS_PLAYER_DIE(CSession* pSession, UINT32 playerID);
-bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float cameraYaw);
+bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float posZ, float cameraYaw);
 bool CS_MONSTER_AI(CSession* pSession, UINT32 aiID, Position targetMovementPos, Position bossPos, UINT32 bossState, float curSpeed);
 bool CS_MONSTER_CONDITION(CSession* pSession, UINT32 aiID, UINT32 currentHp, UINT32 maxHp);
 bool CS_MONSTER_ROTATE(CSession* pSession, UINT32 aiID, float rotateY);

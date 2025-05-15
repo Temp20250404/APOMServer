@@ -606,6 +606,7 @@ PROTOBUF_CONSTEXPR CS_POSITION_SYNC::CS_POSITION_SYNC(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.posx_)*/0
   , /*decltype(_impl_.posy_)*/0
+  , /*decltype(_impl_.posz_)*/0
   , /*decltype(_impl_.camerayaw_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct CS_POSITION_SYNCDefaultTypeInternal {
@@ -691,6 +692,7 @@ PROTOBUF_CONSTEXPR SC_POSITION_SYNC::SC_POSITION_SYNC(
     /*decltype(_impl_.playerid_)*/0u
   , /*decltype(_impl_.posx_)*/0
   , /*decltype(_impl_.posy_)*/0
+  , /*decltype(_impl_.posz_)*/0
   , /*decltype(_impl_.camerayaw_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct SC_POSITION_SYNCDefaultTypeInternal {
@@ -1189,6 +1191,7 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::game::CS_POSITION_SYNC, _impl_.posx_),
   PROTOBUF_FIELD_OFFSET(::game::CS_POSITION_SYNC, _impl_.posy_),
+  PROTOBUF_FIELD_OFFSET(::game::CS_POSITION_SYNC, _impl_.posz_),
   PROTOBUF_FIELD_OFFSET(::game::CS_POSITION_SYNC, _impl_.camerayaw_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::game::SC_KEYINFO, _internal_metadata_),
@@ -1238,6 +1241,7 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   PROTOBUF_FIELD_OFFSET(::game::SC_POSITION_SYNC, _impl_.playerid_),
   PROTOBUF_FIELD_OFFSET(::game::SC_POSITION_SYNC, _impl_.posx_),
   PROTOBUF_FIELD_OFFSET(::game::SC_POSITION_SYNC, _impl_.posy_),
+  PROTOBUF_FIELD_OFFSET(::game::SC_POSITION_SYNC, _impl_.posz_),
   PROTOBUF_FIELD_OFFSET(::game::SC_POSITION_SYNC, _impl_.camerayaw_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::game::CS_MONSTER_AI, _internal_metadata_),
@@ -1368,22 +1372,22 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 313, -1, -1, sizeof(::game::CS_PLAYER_ATTACK)},
   { 321, -1, -1, sizeof(::game::CS_PLAYER_DIE)},
   { 328, -1, -1, sizeof(::game::CS_POSITION_SYNC)},
-  { 337, -1, -1, sizeof(::game::SC_KEYINFO)},
-  { 346, -1, -1, sizeof(::game::SC_MONSTER_DAMAGED)},
-  { 354, -1, -1, sizeof(::game::SC_MONSTER_DIE)},
-  { 361, -1, -1, sizeof(::game::SC_PLAYER_DAMAGED)},
-  { 369, -1, -1, sizeof(::game::SC_PLAYER_DIE)},
-  { 376, -1, -1, sizeof(::game::SC_POSITION_SYNC)},
-  { 386, -1, -1, sizeof(::game::CS_MONSTER_AI)},
-  { 397, -1, -1, sizeof(::game::CS_MONSTER_CONDITION)},
-  { 406, -1, -1, sizeof(::game::CS_MONSTER_ROTATE)},
-  { 414, -1, -1, sizeof(::game::SC_MONSTER_AI)},
-  { 425, -1, -1, sizeof(::game::SC_MONSTER_CONDITION)},
-  { 434, -1, -1, sizeof(::game::SC_MONSTER_ROTATE)},
-  { 442, -1, -1, sizeof(::game::CS_CHECK_TIMEOUT)},
-  { 449, -1, -1, sizeof(::game::CS_TEST_PACKET1)},
-  { 456, -1, -1, sizeof(::game::CS_TEST_PACKET2)},
-  { 463, -1, -1, sizeof(::game::SC_TEST_PACKET)},
+  { 338, -1, -1, sizeof(::game::SC_KEYINFO)},
+  { 347, -1, -1, sizeof(::game::SC_MONSTER_DAMAGED)},
+  { 355, -1, -1, sizeof(::game::SC_MONSTER_DIE)},
+  { 362, -1, -1, sizeof(::game::SC_PLAYER_DAMAGED)},
+  { 370, -1, -1, sizeof(::game::SC_PLAYER_DIE)},
+  { 377, -1, -1, sizeof(::game::SC_POSITION_SYNC)},
+  { 388, -1, -1, sizeof(::game::CS_MONSTER_AI)},
+  { 399, -1, -1, sizeof(::game::CS_MONSTER_CONDITION)},
+  { 408, -1, -1, sizeof(::game::CS_MONSTER_ROTATE)},
+  { 416, -1, -1, sizeof(::game::SC_MONSTER_AI)},
+  { 427, -1, -1, sizeof(::game::SC_MONSTER_CONDITION)},
+  { 436, -1, -1, sizeof(::game::SC_MONSTER_ROTATE)},
+  { 444, -1, -1, sizeof(::game::CS_CHECK_TIMEOUT)},
+  { 451, -1, -1, sizeof(::game::CS_TEST_PACKET1)},
+  { 458, -1, -1, sizeof(::game::CS_TEST_PACKET2)},
+  { 465, -1, -1, sizeof(::game::SC_TEST_PACKET)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -1509,72 +1513,72 @@ const char descriptor_table_protodef_Protocol_2eproto[] PROTOBUF_SECTION_VARIABL
   "erID\030\001 \001(\r\022\016\n\006damage\030\002 \001(\r\"\036\n\016CS_MONSTER"
   "_DIE\022\014\n\004aiID\030\001 \001(\r\"6\n\020CS_PLAYER_ATTACK\022\014"
   "\n\004aiID\030\001 \001(\r\022\024\n\014attackDamage\030\002 \001(\r\"!\n\rCS"
-  "_PLAYER_DIE\022\020\n\010playerID\030\001 \001(\r\"A\n\020CS_POSI"
-  "TION_SYNC\022\014\n\004posX\030\001 \001(\002\022\014\n\004posY\030\002 \001(\002\022\021\n"
-  "\tcameraYaw\030\003 \001(\002\"B\n\nSC_KEYINFO\022\020\n\010player"
-  "ID\030\001 \001(\r\022\017\n\007keyInfo\030\002 \001(\r\022\021\n\tcameraYaw\030\003"
-  " \001(\002\"2\n\022SC_MONSTER_DAMAGED\022\014\n\004aiID\030\001 \001(\r"
-  "\022\016\n\006damage\030\002 \001(\r\"\036\n\016SC_MONSTER_DIE\022\014\n\004ai"
-  "ID\030\001 \001(\r\"5\n\021SC_PLAYER_DAMAGED\022\020\n\010playerI"
-  "D\030\001 \001(\r\022\016\n\006damage\030\002 \001(\r\"!\n\rSC_PLAYER_DIE"
-  "\022\020\n\010playerID\030\001 \001(\r\"S\n\020SC_POSITION_SYNC\022\020"
-  "\n\010playerID\030\001 \001(\r\022\014\n\004posX\030\002 \001(\002\022\014\n\004posY\030\003"
-  " \001(\002\022\021\n\tcameraYaw\030\004 \001(\002\"\216\001\n\rCS_MONSTER_A"
-  "I\022\014\n\004aiID\030\001 \001(\r\022)\n\021targetMovementPos\030\002 \001"
-  "(\0132\016.game.Position\022\037\n\007bossPos\030\003 \001(\0132\016.ga"
-  "me.Position\022\021\n\tbossState\030\004 \001(\r\022\020\n\010curSpe"
-  "ed\030\005 \001(\002\"F\n\024CS_MONSTER_CONDITION\022\014\n\004aiID"
-  "\030\001 \001(\r\022\021\n\tcurrentHp\030\002 \001(\r\022\r\n\005maxHp\030\003 \001(\r"
-  "\"2\n\021CS_MONSTER_ROTATE\022\014\n\004aiID\030\001 \001(\r\022\017\n\007r"
-  "otateY\030\002 \001(\002\"\216\001\n\rSC_MONSTER_AI\022\014\n\004aiID\030\001"
-  " \001(\r\022)\n\021targetMovementPos\030\002 \001(\0132\016.game.P"
-  "osition\022\037\n\007bossPos\030\003 \001(\0132\016.game.Position"
-  "\022\021\n\tbossState\030\004 \001(\r\022\020\n\010curSpeed\030\005 \001(\002\"F\n"
-  "\024SC_MONSTER_CONDITION\022\014\n\004aiID\030\001 \001(\r\022\021\n\tc"
-  "urrentHp\030\002 \001(\r\022\r\n\005maxHp\030\003 \001(\r\"2\n\021SC_MONS"
-  "TER_ROTATE\022\014\n\004aiID\030\001 \001(\r\022\017\n\007rotateY\030\002 \001("
-  "\002\"\"\n\020CS_CHECK_TIMEOUT\022\016\n\006bCheck\030\001 \001(\010\"#\n"
-  "\017CS_TEST_PACKET1\022\020\n\010tempData\030\001 \003(\r\"5\n\017CS"
-  "_TEST_PACKET2\022\"\n\010tempData\030\001 \003(\0132\020.game.P"
-  "layerInfo\"4\n\016SC_TEST_PACKET\022\"\n\010tempData\030"
-  "\001 \003(\0132\020.game.PlayerInfo*\220\n\n\010PacketID\022\022\n\016"
-  "CS_AcceptParty\020\000\022\034\n\030CS_CancelEnteringDun"
-  "geon\020\001\022\013\n\007CS_Chat\020\002\022\023\n\017CS_CheckTimeout\020\003"
-  "\022\024\n\020CS_CreateMonster\020\004\022\024\n\020CS_FindIdReque"
-  "st\020\005\022\024\n\020CS_FindPwRequest\020\006\022\016\n\nCS_Keyinfo"
-  "\020\007\022\023\n\017CS_LoginRequest\020\010\022\020\n\014CS_MakeParty\020"
-  "\t\022\020\n\014CS_MonsterAi\020\n\022\024\n\020CS_MonsterAttack\020"
-  "\013\022\027\n\023CS_MonsterCondition\020\014\022\021\n\rCS_Monster"
-  "Die\020\r\022\024\n\020CS_MonsterRotate\020\016\022\023\n\017CS_Player"
-  "Attack\020\017\022\020\n\014CS_PlayerDie\020\020\022\023\n\017CS_Positio"
-  "nSync\020\021\022\026\n\022CS_RegisterRequest\020\022\022\033\n\027CS_Re"
-  "questCharacterInfo\020\023\022\032\n\026CS_RequestEnterD"
-  "ungeon\020\024\022\026\n\022CS_RequestItemInfo\020\025\022\036\n\032CS_R"
-  "esponseEnterDungeonEnd\020\026\022\024\n\020CS_SignupReq"
-  "uest\020\027\022\025\n\021CS_SpawnCharacter\020\030\022\027\n\023CS_Star"
-  "tAiCalculate\020\031\022\026\n\022CS_StopAiCalculate\020\032\022\022"
-  "\n\016CS_TestPacket1\020\033\022\022\n\016CS_TestPacket2\020\034\022\022"
-  "\n\016SC_AcceptParty\020\035\022\034\n\030SC_CancelEnteringD"
-  "ungeon\020\036\022\013\n\007SC_Chat\020\037\022\024\n\020SC_CreateMonste"
-  "r\020 \022\025\n\021SC_FindIdResponse\020!\022\025\n\021SC_FindPwR"
-  "esponse\020\"\022\016\n\nSC_Keyinfo\020#\022\024\n\020SC_LoginRes"
-  "ponse\020$\022\020\n\014SC_MakeParty\020%\022\020\n\014SC_MonsterA"
-  "i\020&\022\027\n\023SC_MonsterCondition\020\'\022\025\n\021SC_Monst"
-  "erDamaged\020(\022\021\n\rSC_MonsterDie\020)\022\024\n\020SC_Mon"
-  "sterRotate\020*\022\024\n\020SC_PlayerDamaged\020+\022\020\n\014SC"
-  "_PlayerDie\020,\022\023\n\017SC_PositionSync\020-\022\035\n\031SC_"
-  "PrepareEnteringDungeon\020.\022\026\n\022SC_RemoveCha"
-  "racter\020/\022\026\n\022SC_RequestItemInfo\0200\022\034\n\030SC_R"
-  "esponseCharacterInfo\0201\022 \n\034SC_ResponseEnt"
-  "erDungeonBegin\0202\022\036\n\032SC_ResponseEnterDung"
-  "eonEnd\0203\022\025\n\021SC_SignupResponse\0204\022\025\n\021SC_Sp"
-  "awnCharacter\0205\022\027\n\023SC_StartAiCalculate\0206\022"
-  "\026\n\022SC_StopAiCalculate\0207\022\021\n\rSC_TestPacket"
-  "\0208b\006proto3"
+  "_PLAYER_DIE\022\020\n\010playerID\030\001 \001(\r\"O\n\020CS_POSI"
+  "TION_SYNC\022\014\n\004posX\030\001 \001(\002\022\014\n\004posY\030\002 \001(\002\022\014\n"
+  "\004posZ\030\003 \001(\002\022\021\n\tcameraYaw\030\004 \001(\002\"B\n\nSC_KEY"
+  "INFO\022\020\n\010playerID\030\001 \001(\r\022\017\n\007keyInfo\030\002 \001(\r\022"
+  "\021\n\tcameraYaw\030\003 \001(\002\"2\n\022SC_MONSTER_DAMAGED"
+  "\022\014\n\004aiID\030\001 \001(\r\022\016\n\006damage\030\002 \001(\r\"\036\n\016SC_MON"
+  "STER_DIE\022\014\n\004aiID\030\001 \001(\r\"5\n\021SC_PLAYER_DAMA"
+  "GED\022\020\n\010playerID\030\001 \001(\r\022\016\n\006damage\030\002 \001(\r\"!\n"
+  "\rSC_PLAYER_DIE\022\020\n\010playerID\030\001 \001(\r\"a\n\020SC_P"
+  "OSITION_SYNC\022\020\n\010playerID\030\001 \001(\r\022\014\n\004posX\030\002"
+  " \001(\002\022\014\n\004posY\030\003 \001(\002\022\014\n\004posZ\030\004 \001(\002\022\021\n\tcame"
+  "raYaw\030\005 \001(\002\"\216\001\n\rCS_MONSTER_AI\022\014\n\004aiID\030\001 "
+  "\001(\r\022)\n\021targetMovementPos\030\002 \001(\0132\016.game.Po"
+  "sition\022\037\n\007bossPos\030\003 \001(\0132\016.game.Position\022"
+  "\021\n\tbossState\030\004 \001(\r\022\020\n\010curSpeed\030\005 \001(\002\"F\n\024"
+  "CS_MONSTER_CONDITION\022\014\n\004aiID\030\001 \001(\r\022\021\n\tcu"
+  "rrentHp\030\002 \001(\r\022\r\n\005maxHp\030\003 \001(\r\"2\n\021CS_MONST"
+  "ER_ROTATE\022\014\n\004aiID\030\001 \001(\r\022\017\n\007rotateY\030\002 \001(\002"
+  "\"\216\001\n\rSC_MONSTER_AI\022\014\n\004aiID\030\001 \001(\r\022)\n\021targ"
+  "etMovementPos\030\002 \001(\0132\016.game.Position\022\037\n\007b"
+  "ossPos\030\003 \001(\0132\016.game.Position\022\021\n\tbossStat"
+  "e\030\004 \001(\r\022\020\n\010curSpeed\030\005 \001(\002\"F\n\024SC_MONSTER_"
+  "CONDITION\022\014\n\004aiID\030\001 \001(\r\022\021\n\tcurrentHp\030\002 \001"
+  "(\r\022\r\n\005maxHp\030\003 \001(\r\"2\n\021SC_MONSTER_ROTATE\022\014"
+  "\n\004aiID\030\001 \001(\r\022\017\n\007rotateY\030\002 \001(\002\"\"\n\020CS_CHEC"
+  "K_TIMEOUT\022\016\n\006bCheck\030\001 \001(\010\"#\n\017CS_TEST_PAC"
+  "KET1\022\020\n\010tempData\030\001 \003(\r\"5\n\017CS_TEST_PACKET"
+  "2\022\"\n\010tempData\030\001 \003(\0132\020.game.PlayerInfo\"4\n"
+  "\016SC_TEST_PACKET\022\"\n\010tempData\030\001 \003(\0132\020.game"
+  ".PlayerInfo*\220\n\n\010PacketID\022\022\n\016CS_AcceptPar"
+  "ty\020\000\022\034\n\030CS_CancelEnteringDungeon\020\001\022\013\n\007CS"
+  "_Chat\020\002\022\023\n\017CS_CheckTimeout\020\003\022\024\n\020CS_Creat"
+  "eMonster\020\004\022\024\n\020CS_FindIdRequest\020\005\022\024\n\020CS_F"
+  "indPwRequest\020\006\022\016\n\nCS_Keyinfo\020\007\022\023\n\017CS_Log"
+  "inRequest\020\010\022\020\n\014CS_MakeParty\020\t\022\020\n\014CS_Mons"
+  "terAi\020\n\022\024\n\020CS_MonsterAttack\020\013\022\027\n\023CS_Mons"
+  "terCondition\020\014\022\021\n\rCS_MonsterDie\020\r\022\024\n\020CS_"
+  "MonsterRotate\020\016\022\023\n\017CS_PlayerAttack\020\017\022\020\n\014"
+  "CS_PlayerDie\020\020\022\023\n\017CS_PositionSync\020\021\022\026\n\022C"
+  "S_RegisterRequest\020\022\022\033\n\027CS_RequestCharact"
+  "erInfo\020\023\022\032\n\026CS_RequestEnterDungeon\020\024\022\026\n\022"
+  "CS_RequestItemInfo\020\025\022\036\n\032CS_ResponseEnter"
+  "DungeonEnd\020\026\022\024\n\020CS_SignupRequest\020\027\022\025\n\021CS"
+  "_SpawnCharacter\020\030\022\027\n\023CS_StartAiCalculate"
+  "\020\031\022\026\n\022CS_StopAiCalculate\020\032\022\022\n\016CS_TestPac"
+  "ket1\020\033\022\022\n\016CS_TestPacket2\020\034\022\022\n\016SC_AcceptP"
+  "arty\020\035\022\034\n\030SC_CancelEnteringDungeon\020\036\022\013\n\007"
+  "SC_Chat\020\037\022\024\n\020SC_CreateMonster\020 \022\025\n\021SC_Fi"
+  "ndIdResponse\020!\022\025\n\021SC_FindPwResponse\020\"\022\016\n"
+  "\nSC_Keyinfo\020#\022\024\n\020SC_LoginResponse\020$\022\020\n\014S"
+  "C_MakeParty\020%\022\020\n\014SC_MonsterAi\020&\022\027\n\023SC_Mo"
+  "nsterCondition\020\'\022\025\n\021SC_MonsterDamaged\020(\022"
+  "\021\n\rSC_MonsterDie\020)\022\024\n\020SC_MonsterRotate\020*"
+  "\022\024\n\020SC_PlayerDamaged\020+\022\020\n\014SC_PlayerDie\020,"
+  "\022\023\n\017SC_PositionSync\020-\022\035\n\031SC_PrepareEnter"
+  "ingDungeon\020.\022\026\n\022SC_RemoveCharacter\020/\022\026\n\022"
+  "SC_RequestItemInfo\0200\022\034\n\030SC_ResponseChara"
+  "cterInfo\0201\022 \n\034SC_ResponseEnterDungeonBeg"
+  "in\0202\022\036\n\032SC_ResponseEnterDungeonEnd\0203\022\025\n\021"
+  "SC_SignupResponse\0204\022\025\n\021SC_SpawnCharacter"
+  "\0205\022\027\n\023SC_StartAiCalculate\0206\022\026\n\022SC_StopAi"
+  "Calculate\0207\022\021\n\rSC_TestPacket\0208b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Protocol_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Protocol_2eproto = {
-    false, false, 4850, descriptor_table_protodef_Protocol_2eproto,
+    false, false, 4878, descriptor_table_protodef_Protocol_2eproto,
     "Protocol.proto",
     &descriptor_table_Protocol_2eproto_once, nullptr, 0, 59,
     schemas, file_default_instances, TableStruct_Protocol_2eproto::offsets,
@@ -10741,6 +10745,7 @@ CS_POSITION_SYNC::CS_POSITION_SYNC(const CS_POSITION_SYNC& from)
   new (&_impl_) Impl_{
       decltype(_impl_.posx_){}
     , decltype(_impl_.posy_){}
+    , decltype(_impl_.posz_){}
     , decltype(_impl_.camerayaw_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
@@ -10758,6 +10763,7 @@ inline void CS_POSITION_SYNC::SharedCtor(
   new (&_impl_) Impl_{
       decltype(_impl_.posx_){0}
     , decltype(_impl_.posy_){0}
+    , decltype(_impl_.posz_){0}
     , decltype(_impl_.camerayaw_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
@@ -10814,9 +10820,17 @@ const char* CS_POSITION_SYNC::_InternalParse(const char* ptr, ::_pbi::ParseConte
         } else
           goto handle_unusual;
         continue;
-      // float cameraYaw = 3;
+      // float posZ = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
+          _impl_.posz_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else
+          goto handle_unusual;
+        continue;
+      // float cameraYaw = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 37)) {
           _impl_.camerayaw_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else
@@ -10871,14 +10885,24 @@ uint8_t* CS_POSITION_SYNC::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteFloatToArray(2, this->_internal_posy(), target);
   }
 
-  // float cameraYaw = 3;
+  // float posZ = 3;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_posz = this->_internal_posz();
+  uint32_t raw_posz;
+  memcpy(&raw_posz, &tmp_posz, sizeof(tmp_posz));
+  if (raw_posz != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_posz(), target);
+  }
+
+  // float cameraYaw = 4;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_camerayaw = this->_internal_camerayaw();
   uint32_t raw_camerayaw;
   memcpy(&raw_camerayaw, &tmp_camerayaw, sizeof(tmp_camerayaw));
   if (raw_camerayaw != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_camerayaw(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(4, this->_internal_camerayaw(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -10915,7 +10939,16 @@ size_t CS_POSITION_SYNC::ByteSizeLong() const {
     total_size += 1 + 4;
   }
 
-  // float cameraYaw = 3;
+  // float posZ = 3;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_posz = this->_internal_posz();
+  uint32_t raw_posz;
+  memcpy(&raw_posz, &tmp_posz, sizeof(tmp_posz));
+  if (raw_posz != 0) {
+    total_size += 1 + 4;
+  }
+
+  // float cameraYaw = 4;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_camerayaw = this->_internal_camerayaw();
   uint32_t raw_camerayaw;
@@ -10955,6 +10988,13 @@ void CS_POSITION_SYNC::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   memcpy(&raw_posy, &tmp_posy, sizeof(tmp_posy));
   if (raw_posy != 0) {
     _this->_internal_set_posy(from._internal_posy());
+  }
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_posz = from._internal_posz();
+  uint32_t raw_posz;
+  memcpy(&raw_posz, &tmp_posz, sizeof(tmp_posz));
+  if (raw_posz != 0) {
+    _this->_internal_set_posz(from._internal_posz());
   }
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_camerayaw = from._internal_camerayaw();
@@ -12038,6 +12078,7 @@ SC_POSITION_SYNC::SC_POSITION_SYNC(const SC_POSITION_SYNC& from)
       decltype(_impl_.playerid_){}
     , decltype(_impl_.posx_){}
     , decltype(_impl_.posy_){}
+    , decltype(_impl_.posz_){}
     , decltype(_impl_.camerayaw_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
@@ -12056,6 +12097,7 @@ inline void SC_POSITION_SYNC::SharedCtor(
       decltype(_impl_.playerid_){0u}
     , decltype(_impl_.posx_){0}
     , decltype(_impl_.posy_){0}
+    , decltype(_impl_.posz_){0}
     , decltype(_impl_.camerayaw_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
@@ -12120,9 +12162,17 @@ const char* SC_POSITION_SYNC::_InternalParse(const char* ptr, ::_pbi::ParseConte
         } else
           goto handle_unusual;
         continue;
-      // float cameraYaw = 4;
+      // float posZ = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 37)) {
+          _impl_.posz_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else
+          goto handle_unusual;
+        continue;
+      // float cameraYaw = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 45)) {
           _impl_.camerayaw_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else
@@ -12183,14 +12233,24 @@ uint8_t* SC_POSITION_SYNC::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_posy(), target);
   }
 
-  // float cameraYaw = 4;
+  // float posZ = 4;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_posz = this->_internal_posz();
+  uint32_t raw_posz;
+  memcpy(&raw_posz, &tmp_posz, sizeof(tmp_posz));
+  if (raw_posz != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(4, this->_internal_posz(), target);
+  }
+
+  // float cameraYaw = 5;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_camerayaw = this->_internal_camerayaw();
   uint32_t raw_camerayaw;
   memcpy(&raw_camerayaw, &tmp_camerayaw, sizeof(tmp_camerayaw));
   if (raw_camerayaw != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(4, this->_internal_camerayaw(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(5, this->_internal_camerayaw(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -12232,7 +12292,16 @@ size_t SC_POSITION_SYNC::ByteSizeLong() const {
     total_size += 1 + 4;
   }
 
-  // float cameraYaw = 4;
+  // float posZ = 4;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_posz = this->_internal_posz();
+  uint32_t raw_posz;
+  memcpy(&raw_posz, &tmp_posz, sizeof(tmp_posz));
+  if (raw_posz != 0) {
+    total_size += 1 + 4;
+  }
+
+  // float cameraYaw = 5;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_camerayaw = this->_internal_camerayaw();
   uint32_t raw_camerayaw;
@@ -12275,6 +12344,13 @@ void SC_POSITION_SYNC::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   memcpy(&raw_posy, &tmp_posy, sizeof(tmp_posy));
   if (raw_posy != 0) {
     _this->_internal_set_posy(from._internal_posy());
+  }
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_posz = from._internal_posz();
+  uint32_t raw_posz;
+  memcpy(&raw_posz, &tmp_posz, sizeof(tmp_posz));
+  if (raw_posz != 0) {
+    _this->_internal_set_posz(from._internal_posz());
   }
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_camerayaw = from._internal_camerayaw();

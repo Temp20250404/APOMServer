@@ -78,60 +78,61 @@ namespace Game {
             "YW1hZ2UYAiABKA0iHgoOQ1NfTU9OU1RFUl9ESUUSDAoEYWlJRBgBIAEoDSI2",
             "ChBDU19QTEFZRVJfQVRUQUNLEgwKBGFpSUQYASABKA0SFAoMYXR0YWNrRGFt",
             "YWdlGAIgASgNIiEKDUNTX1BMQVlFUl9ESUUSEAoIcGxheWVySUQYASABKA0i",
-            "QQoQQ1NfUE9TSVRJT05fU1lOQxIMCgRwb3NYGAEgASgCEgwKBHBvc1kYAiAB",
-            "KAISEQoJY2FtZXJhWWF3GAMgASgCIkIKClNDX0tFWUlORk8SEAoIcGxheWVy",
-            "SUQYASABKA0SDwoHa2V5SW5mbxgCIAEoDRIRCgljYW1lcmFZYXcYAyABKAIi",
-            "MgoSU0NfTU9OU1RFUl9EQU1BR0VEEgwKBGFpSUQYASABKA0SDgoGZGFtYWdl",
-            "GAIgASgNIh4KDlNDX01PTlNURVJfRElFEgwKBGFpSUQYASABKA0iNQoRU0Nf",
-            "UExBWUVSX0RBTUFHRUQSEAoIcGxheWVySUQYASABKA0SDgoGZGFtYWdlGAIg",
-            "ASgNIiEKDVNDX1BMQVlFUl9ESUUSEAoIcGxheWVySUQYASABKA0iUwoQU0Nf",
-            "UE9TSVRJT05fU1lOQxIQCghwbGF5ZXJJRBgBIAEoDRIMCgRwb3NYGAIgASgC",
-            "EgwKBHBvc1kYAyABKAISEQoJY2FtZXJhWWF3GAQgASgCIo4BCg1DU19NT05T",
-            "VEVSX0FJEgwKBGFpSUQYASABKA0SKQoRdGFyZ2V0TW92ZW1lbnRQb3MYAiAB",
-            "KAsyDi5nYW1lLlBvc2l0aW9uEh8KB2Jvc3NQb3MYAyABKAsyDi5nYW1lLlBv",
-            "c2l0aW9uEhEKCWJvc3NTdGF0ZRgEIAEoDRIQCghjdXJTcGVlZBgFIAEoAiJG",
-            "ChRDU19NT05TVEVSX0NPTkRJVElPThIMCgRhaUlEGAEgASgNEhEKCWN1cnJl",
-            "bnRIcBgCIAEoDRINCgVtYXhIcBgDIAEoDSIyChFDU19NT05TVEVSX1JPVEFU",
-            "RRIMCgRhaUlEGAEgASgNEg8KB3JvdGF0ZVkYAiABKAIijgEKDVNDX01PTlNU",
-            "RVJfQUkSDAoEYWlJRBgBIAEoDRIpChF0YXJnZXRNb3ZlbWVudFBvcxgCIAEo",
-            "CzIOLmdhbWUuUG9zaXRpb24SHwoHYm9zc1BvcxgDIAEoCzIOLmdhbWUuUG9z",
-            "aXRpb24SEQoJYm9zc1N0YXRlGAQgASgNEhAKCGN1clNwZWVkGAUgASgCIkYK",
-            "FFNDX01PTlNURVJfQ09ORElUSU9OEgwKBGFpSUQYASABKA0SEQoJY3VycmVu",
-            "dEhwGAIgASgNEg0KBW1heEhwGAMgASgNIjIKEVNDX01PTlNURVJfUk9UQVRF",
-            "EgwKBGFpSUQYASABKA0SDwoHcm90YXRlWRgCIAEoAiIiChBDU19DSEVDS19U",
-            "SU1FT1VUEg4KBmJDaGVjaxgBIAEoCCIjCg9DU19URVNUX1BBQ0tFVDESEAoI",
-            "dGVtcERhdGEYASADKA0iNQoPQ1NfVEVTVF9QQUNLRVQyEiIKCHRlbXBEYXRh",
-            "GAEgAygLMhAuZ2FtZS5QbGF5ZXJJbmZvIjQKDlNDX1RFU1RfUEFDS0VUEiIK",
-            "CHRlbXBEYXRhGAEgAygLMhAuZ2FtZS5QbGF5ZXJJbmZvKpAKCghQYWNrZXRJ",
-            "RBISCg5DU19BY2NlcHRQYXJ0eRAAEhwKGENTX0NhbmNlbEVudGVyaW5nRHVu",
-            "Z2VvbhABEgsKB0NTX0NoYXQQAhITCg9DU19DaGVja1RpbWVvdXQQAxIUChBD",
-            "U19DcmVhdGVNb25zdGVyEAQSFAoQQ1NfRmluZElkUmVxdWVzdBAFEhQKEENT",
-            "X0ZpbmRQd1JlcXVlc3QQBhIOCgpDU19LZXlpbmZvEAcSEwoPQ1NfTG9naW5S",
-            "ZXF1ZXN0EAgSEAoMQ1NfTWFrZVBhcnR5EAkSEAoMQ1NfTW9uc3RlckFpEAoS",
-            "FAoQQ1NfTW9uc3RlckF0dGFjaxALEhcKE0NTX01vbnN0ZXJDb25kaXRpb24Q",
-            "DBIRCg1DU19Nb25zdGVyRGllEA0SFAoQQ1NfTW9uc3RlclJvdGF0ZRAOEhMK",
-            "D0NTX1BsYXllckF0dGFjaxAPEhAKDENTX1BsYXllckRpZRAQEhMKD0NTX1Bv",
-            "c2l0aW9uU3luYxAREhYKEkNTX1JlZ2lzdGVyUmVxdWVzdBASEhsKF0NTX1Jl",
-            "cXVlc3RDaGFyYWN0ZXJJbmZvEBMSGgoWQ1NfUmVxdWVzdEVudGVyRHVuZ2Vv",
-            "bhAUEhYKEkNTX1JlcXVlc3RJdGVtSW5mbxAVEh4KGkNTX1Jlc3BvbnNlRW50",
-            "ZXJEdW5nZW9uRW5kEBYSFAoQQ1NfU2lnbnVwUmVxdWVzdBAXEhUKEUNTX1Nw",
-            "YXduQ2hhcmFjdGVyEBgSFwoTQ1NfU3RhcnRBaUNhbGN1bGF0ZRAZEhYKEkNT",
-            "X1N0b3BBaUNhbGN1bGF0ZRAaEhIKDkNTX1Rlc3RQYWNrZXQxEBsSEgoOQ1Nf",
-            "VGVzdFBhY2tldDIQHBISCg5TQ19BY2NlcHRQYXJ0eRAdEhwKGFNDX0NhbmNl",
-            "bEVudGVyaW5nRHVuZ2VvbhAeEgsKB1NDX0NoYXQQHxIUChBTQ19DcmVhdGVN",
-            "b25zdGVyECASFQoRU0NfRmluZElkUmVzcG9uc2UQIRIVChFTQ19GaW5kUHdS",
-            "ZXNwb25zZRAiEg4KClNDX0tleWluZm8QIxIUChBTQ19Mb2dpblJlc3BvbnNl",
-            "ECQSEAoMU0NfTWFrZVBhcnR5ECUSEAoMU0NfTW9uc3RlckFpECYSFwoTU0Nf",
-            "TW9uc3RlckNvbmRpdGlvbhAnEhUKEVNDX01vbnN0ZXJEYW1hZ2VkECgSEQoN",
-            "U0NfTW9uc3RlckRpZRApEhQKEFNDX01vbnN0ZXJSb3RhdGUQKhIUChBTQ19Q",
-            "bGF5ZXJEYW1hZ2VkECsSEAoMU0NfUGxheWVyRGllECwSEwoPU0NfUG9zaXRp",
-            "b25TeW5jEC0SHQoZU0NfUHJlcGFyZUVudGVyaW5nRHVuZ2VvbhAuEhYKElND",
-            "X1JlbW92ZUNoYXJhY3RlchAvEhYKElNDX1JlcXVlc3RJdGVtSW5mbxAwEhwK",
-            "GFNDX1Jlc3BvbnNlQ2hhcmFjdGVySW5mbxAxEiAKHFNDX1Jlc3BvbnNlRW50",
-            "ZXJEdW5nZW9uQmVnaW4QMhIeChpTQ19SZXNwb25zZUVudGVyRHVuZ2VvbkVu",
-            "ZBAzEhUKEVNDX1NpZ251cFJlc3BvbnNlEDQSFQoRU0NfU3Bhd25DaGFyYWN0",
-            "ZXIQNRIXChNTQ19TdGFydEFpQ2FsY3VsYXRlEDYSFgoSU0NfU3RvcEFpQ2Fs",
-            "Y3VsYXRlEDcSEQoNU0NfVGVzdFBhY2tldBA4YgZwcm90bzM="));
+            "TwoQQ1NfUE9TSVRJT05fU1lOQxIMCgRwb3NYGAEgASgCEgwKBHBvc1kYAiAB",
+            "KAISDAoEcG9zWhgDIAEoAhIRCgljYW1lcmFZYXcYBCABKAIiQgoKU0NfS0VZ",
+            "SU5GTxIQCghwbGF5ZXJJRBgBIAEoDRIPCgdrZXlJbmZvGAIgASgNEhEKCWNh",
+            "bWVyYVlhdxgDIAEoAiIyChJTQ19NT05TVEVSX0RBTUFHRUQSDAoEYWlJRBgB",
+            "IAEoDRIOCgZkYW1hZ2UYAiABKA0iHgoOU0NfTU9OU1RFUl9ESUUSDAoEYWlJ",
+            "RBgBIAEoDSI1ChFTQ19QTEFZRVJfREFNQUdFRBIQCghwbGF5ZXJJRBgBIAEo",
+            "DRIOCgZkYW1hZ2UYAiABKA0iIQoNU0NfUExBWUVSX0RJRRIQCghwbGF5ZXJJ",
+            "RBgBIAEoDSJhChBTQ19QT1NJVElPTl9TWU5DEhAKCHBsYXllcklEGAEgASgN",
+            "EgwKBHBvc1gYAiABKAISDAoEcG9zWRgDIAEoAhIMCgRwb3NaGAQgASgCEhEK",
+            "CWNhbWVyYVlhdxgFIAEoAiKOAQoNQ1NfTU9OU1RFUl9BSRIMCgRhaUlEGAEg",
+            "ASgNEikKEXRhcmdldE1vdmVtZW50UG9zGAIgASgLMg4uZ2FtZS5Qb3NpdGlv",
+            "bhIfCgdib3NzUG9zGAMgASgLMg4uZ2FtZS5Qb3NpdGlvbhIRCglib3NzU3Rh",
+            "dGUYBCABKA0SEAoIY3VyU3BlZWQYBSABKAIiRgoUQ1NfTU9OU1RFUl9DT05E",
+            "SVRJT04SDAoEYWlJRBgBIAEoDRIRCgljdXJyZW50SHAYAiABKA0SDQoFbWF4",
+            "SHAYAyABKA0iMgoRQ1NfTU9OU1RFUl9ST1RBVEUSDAoEYWlJRBgBIAEoDRIP",
+            "Cgdyb3RhdGVZGAIgASgCIo4BCg1TQ19NT05TVEVSX0FJEgwKBGFpSUQYASAB",
+            "KA0SKQoRdGFyZ2V0TW92ZW1lbnRQb3MYAiABKAsyDi5nYW1lLlBvc2l0aW9u",
+            "Eh8KB2Jvc3NQb3MYAyABKAsyDi5nYW1lLlBvc2l0aW9uEhEKCWJvc3NTdGF0",
+            "ZRgEIAEoDRIQCghjdXJTcGVlZBgFIAEoAiJGChRTQ19NT05TVEVSX0NPTkRJ",
+            "VElPThIMCgRhaUlEGAEgASgNEhEKCWN1cnJlbnRIcBgCIAEoDRINCgVtYXhI",
+            "cBgDIAEoDSIyChFTQ19NT05TVEVSX1JPVEFURRIMCgRhaUlEGAEgASgNEg8K",
+            "B3JvdGF0ZVkYAiABKAIiIgoQQ1NfQ0hFQ0tfVElNRU9VVBIOCgZiQ2hlY2sY",
+            "ASABKAgiIwoPQ1NfVEVTVF9QQUNLRVQxEhAKCHRlbXBEYXRhGAEgAygNIjUK",
+            "D0NTX1RFU1RfUEFDS0VUMhIiCgh0ZW1wRGF0YRgBIAMoCzIQLmdhbWUuUGxh",
+            "eWVySW5mbyI0Cg5TQ19URVNUX1BBQ0tFVBIiCgh0ZW1wRGF0YRgBIAMoCzIQ",
+            "LmdhbWUuUGxheWVySW5mbyqQCgoIUGFja2V0SUQSEgoOQ1NfQWNjZXB0UGFy",
+            "dHkQABIcChhDU19DYW5jZWxFbnRlcmluZ0R1bmdlb24QARILCgdDU19DaGF0",
+            "EAISEwoPQ1NfQ2hlY2tUaW1lb3V0EAMSFAoQQ1NfQ3JlYXRlTW9uc3RlchAE",
+            "EhQKEENTX0ZpbmRJZFJlcXVlc3QQBRIUChBDU19GaW5kUHdSZXF1ZXN0EAYS",
+            "DgoKQ1NfS2V5aW5mbxAHEhMKD0NTX0xvZ2luUmVxdWVzdBAIEhAKDENTX01h",
+            "a2VQYXJ0eRAJEhAKDENTX01vbnN0ZXJBaRAKEhQKEENTX01vbnN0ZXJBdHRh",
+            "Y2sQCxIXChNDU19Nb25zdGVyQ29uZGl0aW9uEAwSEQoNQ1NfTW9uc3RlckRp",
+            "ZRANEhQKEENTX01vbnN0ZXJSb3RhdGUQDhITCg9DU19QbGF5ZXJBdHRhY2sQ",
+            "DxIQCgxDU19QbGF5ZXJEaWUQEBITCg9DU19Qb3NpdGlvblN5bmMQERIWChJD",
+            "U19SZWdpc3RlclJlcXVlc3QQEhIbChdDU19SZXF1ZXN0Q2hhcmFjdGVySW5m",
+            "bxATEhoKFkNTX1JlcXVlc3RFbnRlckR1bmdlb24QFBIWChJDU19SZXF1ZXN0",
+            "SXRlbUluZm8QFRIeChpDU19SZXNwb25zZUVudGVyRHVuZ2VvbkVuZBAWEhQK",
+            "EENTX1NpZ251cFJlcXVlc3QQFxIVChFDU19TcGF3bkNoYXJhY3RlchAYEhcK",
+            "E0NTX1N0YXJ0QWlDYWxjdWxhdGUQGRIWChJDU19TdG9wQWlDYWxjdWxhdGUQ",
+            "GhISCg5DU19UZXN0UGFja2V0MRAbEhIKDkNTX1Rlc3RQYWNrZXQyEBwSEgoO",
+            "U0NfQWNjZXB0UGFydHkQHRIcChhTQ19DYW5jZWxFbnRlcmluZ0R1bmdlb24Q",
+            "HhILCgdTQ19DaGF0EB8SFAoQU0NfQ3JlYXRlTW9uc3RlchAgEhUKEVNDX0Zp",
+            "bmRJZFJlc3BvbnNlECESFQoRU0NfRmluZFB3UmVzcG9uc2UQIhIOCgpTQ19L",
+            "ZXlpbmZvECMSFAoQU0NfTG9naW5SZXNwb25zZRAkEhAKDFNDX01ha2VQYXJ0",
+            "eRAlEhAKDFNDX01vbnN0ZXJBaRAmEhcKE1NDX01vbnN0ZXJDb25kaXRpb24Q",
+            "JxIVChFTQ19Nb25zdGVyRGFtYWdlZBAoEhEKDVNDX01vbnN0ZXJEaWUQKRIU",
+            "ChBTQ19Nb25zdGVyUm90YXRlECoSFAoQU0NfUGxheWVyRGFtYWdlZBArEhAK",
+            "DFNDX1BsYXllckRpZRAsEhMKD1NDX1Bvc2l0aW9uU3luYxAtEh0KGVNDX1By",
+            "ZXBhcmVFbnRlcmluZ0R1bmdlb24QLhIWChJTQ19SZW1vdmVDaGFyYWN0ZXIQ",
+            "LxIWChJTQ19SZXF1ZXN0SXRlbUluZm8QMBIcChhTQ19SZXNwb25zZUNoYXJh",
+            "Y3RlckluZm8QMRIgChxTQ19SZXNwb25zZUVudGVyRHVuZ2VvbkJlZ2luEDIS",
+            "HgoaU0NfUmVzcG9uc2VFbnRlckR1bmdlb25FbmQQMxIVChFTQ19TaWdudXBS",
+            "ZXNwb25zZRA0EhUKEVNDX1NwYXduQ2hhcmFjdGVyEDUSFwoTU0NfU3RhcnRB",
+            "aUNhbGN1bGF0ZRA2EhYKElNDX1N0b3BBaUNhbGN1bGF0ZRA3EhEKDVNDX1Rl",
+            "c3RQYWNrZXQQOGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Game.PacketID), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -177,13 +178,13 @@ namespace Game {
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_MONSTER_DIE), global::Game.CS_MONSTER_DIE.Parser, new[]{ "AiID" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_PLAYER_ATTACK), global::Game.CS_PLAYER_ATTACK.Parser, new[]{ "AiID", "AttackDamage" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_PLAYER_DIE), global::Game.CS_PLAYER_DIE.Parser, new[]{ "PlayerID" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_POSITION_SYNC), global::Game.CS_POSITION_SYNC.Parser, new[]{ "PosX", "PosY", "CameraYaw" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_POSITION_SYNC), global::Game.CS_POSITION_SYNC.Parser, new[]{ "PosX", "PosY", "PosZ", "CameraYaw" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_KEYINFO), global::Game.SC_KEYINFO.Parser, new[]{ "PlayerID", "KeyInfo", "CameraYaw" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_MONSTER_DAMAGED), global::Game.SC_MONSTER_DAMAGED.Parser, new[]{ "AiID", "Damage" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_MONSTER_DIE), global::Game.SC_MONSTER_DIE.Parser, new[]{ "AiID" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_PLAYER_DAMAGED), global::Game.SC_PLAYER_DAMAGED.Parser, new[]{ "PlayerID", "Damage" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_PLAYER_DIE), global::Game.SC_PLAYER_DIE.Parser, new[]{ "PlayerID" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_POSITION_SYNC), global::Game.SC_POSITION_SYNC.Parser, new[]{ "PlayerID", "PosX", "PosY", "CameraYaw" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.SC_POSITION_SYNC), global::Game.SC_POSITION_SYNC.Parser, new[]{ "PlayerID", "PosX", "PosY", "PosZ", "CameraYaw" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_MONSTER_AI), global::Game.CS_MONSTER_AI.Parser, new[]{ "AiID", "TargetMovementPos", "BossPos", "BossState", "CurSpeed" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_MONSTER_CONDITION), global::Game.CS_MONSTER_CONDITION.Parser, new[]{ "AiID", "CurrentHp", "MaxHp" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.CS_MONSTER_ROTATE), global::Game.CS_MONSTER_ROTATE.Parser, new[]{ "AiID", "RotateY" }, null, null, null, null),
@@ -9726,6 +9727,7 @@ namespace Game {
     public CS_POSITION_SYNC(CS_POSITION_SYNC other) : this() {
       posX_ = other.posX_;
       posY_ = other.posY_;
+      posZ_ = other.posZ_;
       cameraYaw_ = other.cameraYaw_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -9763,8 +9765,20 @@ namespace Game {
       }
     }
 
+    /// <summary>Field number for the "posZ" field.</summary>
+    public const int PosZFieldNumber = 3;
+    private float posZ_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float PosZ {
+      get { return posZ_; }
+      set {
+        posZ_ = value;
+      }
+    }
+
     /// <summary>Field number for the "cameraYaw" field.</summary>
-    public const int CameraYawFieldNumber = 3;
+    public const int CameraYawFieldNumber = 4;
     private float cameraYaw_;
     /// <summary>
     /// 카메라 회전값
@@ -9795,6 +9809,7 @@ namespace Game {
       }
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(PosX, other.PosX)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(PosY, other.PosY)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(PosZ, other.PosZ)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(CameraYaw, other.CameraYaw)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -9805,6 +9820,7 @@ namespace Game {
       int hash = 1;
       if (PosX != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(PosX);
       if (PosY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(PosY);
+      if (PosZ != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(PosZ);
       if (CameraYaw != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(CameraYaw);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -9832,8 +9848,12 @@ namespace Game {
         output.WriteRawTag(21);
         output.WriteFloat(PosY);
       }
-      if (CameraYaw != 0F) {
+      if (PosZ != 0F) {
         output.WriteRawTag(29);
+        output.WriteFloat(PosZ);
+      }
+      if (CameraYaw != 0F) {
+        output.WriteRawTag(37);
         output.WriteFloat(CameraYaw);
       }
       if (_unknownFields != null) {
@@ -9854,8 +9874,12 @@ namespace Game {
         output.WriteRawTag(21);
         output.WriteFloat(PosY);
       }
-      if (CameraYaw != 0F) {
+      if (PosZ != 0F) {
         output.WriteRawTag(29);
+        output.WriteFloat(PosZ);
+      }
+      if (CameraYaw != 0F) {
+        output.WriteRawTag(37);
         output.WriteFloat(CameraYaw);
       }
       if (_unknownFields != null) {
@@ -9872,6 +9896,9 @@ namespace Game {
         size += 1 + 4;
       }
       if (PosY != 0F) {
+        size += 1 + 4;
+      }
+      if (PosZ != 0F) {
         size += 1 + 4;
       }
       if (CameraYaw != 0F) {
@@ -9894,6 +9921,9 @@ namespace Game {
       }
       if (other.PosY != 0F) {
         PosY = other.PosY;
+      }
+      if (other.PosZ != 0F) {
+        PosZ = other.PosZ;
       }
       if (other.CameraYaw != 0F) {
         CameraYaw = other.CameraYaw;
@@ -9922,6 +9952,10 @@ namespace Game {
             break;
           }
           case 29: {
+            PosZ = input.ReadFloat();
+            break;
+          }
+          case 37: {
             CameraYaw = input.ReadFloat();
             break;
           }
@@ -9949,6 +9983,10 @@ namespace Game {
             break;
           }
           case 29: {
+            PosZ = input.ReadFloat();
+            break;
+          }
+          case 37: {
             CameraYaw = input.ReadFloat();
             break;
           }
@@ -11116,6 +11154,7 @@ namespace Game {
       playerID_ = other.playerID_;
       posX_ = other.posX_;
       posY_ = other.posY_;
+      posZ_ = other.posZ_;
       cameraYaw_ = other.cameraYaw_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -11168,8 +11207,20 @@ namespace Game {
       }
     }
 
+    /// <summary>Field number for the "posZ" field.</summary>
+    public const int PosZFieldNumber = 4;
+    private float posZ_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public float PosZ {
+      get { return posZ_; }
+      set {
+        posZ_ = value;
+      }
+    }
+
     /// <summary>Field number for the "cameraYaw" field.</summary>
-    public const int CameraYawFieldNumber = 4;
+    public const int CameraYawFieldNumber = 5;
     private float cameraYaw_;
     /// <summary>
     /// 카메라 회전값
@@ -11201,6 +11252,7 @@ namespace Game {
       if (PlayerID != other.PlayerID) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(PosX, other.PosX)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(PosY, other.PosY)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(PosZ, other.PosZ)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(CameraYaw, other.CameraYaw)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -11212,6 +11264,7 @@ namespace Game {
       if (PlayerID != 0) hash ^= PlayerID.GetHashCode();
       if (PosX != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(PosX);
       if (PosY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(PosY);
+      if (PosZ != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(PosZ);
       if (CameraYaw != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(CameraYaw);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -11243,8 +11296,12 @@ namespace Game {
         output.WriteRawTag(29);
         output.WriteFloat(PosY);
       }
-      if (CameraYaw != 0F) {
+      if (PosZ != 0F) {
         output.WriteRawTag(37);
+        output.WriteFloat(PosZ);
+      }
+      if (CameraYaw != 0F) {
+        output.WriteRawTag(45);
         output.WriteFloat(CameraYaw);
       }
       if (_unknownFields != null) {
@@ -11269,8 +11326,12 @@ namespace Game {
         output.WriteRawTag(29);
         output.WriteFloat(PosY);
       }
-      if (CameraYaw != 0F) {
+      if (PosZ != 0F) {
         output.WriteRawTag(37);
+        output.WriteFloat(PosZ);
+      }
+      if (CameraYaw != 0F) {
+        output.WriteRawTag(45);
         output.WriteFloat(CameraYaw);
       }
       if (_unknownFields != null) {
@@ -11290,6 +11351,9 @@ namespace Game {
         size += 1 + 4;
       }
       if (PosY != 0F) {
+        size += 1 + 4;
+      }
+      if (PosZ != 0F) {
         size += 1 + 4;
       }
       if (CameraYaw != 0F) {
@@ -11315,6 +11379,9 @@ namespace Game {
       }
       if (other.PosY != 0F) {
         PosY = other.PosY;
+      }
+      if (other.PosZ != 0F) {
+        PosZ = other.PosZ;
       }
       if (other.CameraYaw != 0F) {
         CameraYaw = other.CameraYaw;
@@ -11347,6 +11414,10 @@ namespace Game {
             break;
           }
           case 37: {
+            PosZ = input.ReadFloat();
+            break;
+          }
+          case 45: {
             CameraYaw = input.ReadFloat();
             break;
           }
@@ -11378,6 +11449,10 @@ namespace Game {
             break;
           }
           case 37: {
+            PosZ = input.ReadFloat();
+            break;
+          }
+          case 45: {
             CameraYaw = input.ReadFloat();
             break;
           }

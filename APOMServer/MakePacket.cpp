@@ -1750,7 +1750,7 @@ void SC_PLAYER_DIE_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID)
 }
 
 
-void SC_POSITION_SYNC_FOR_All(CSession* pSession, UINT32 playerID, float posX, float posY, float cameraYaw)
+void SC_POSITION_SYNC_FOR_All(CSession* pSession, UINT32 playerID, float posX, float posY, float posZ, float cameraYaw)
 {
     game::SC_POSITION_SYNC pkt;
 
@@ -1759,6 +1759,8 @@ void SC_POSITION_SYNC_FOR_All(CSession* pSession, UINT32 playerID, float posX, f
     pkt.set_posx(posX);
 
     pkt.set_posy(posY);
+
+    pkt.set_posz(posZ);
 
     pkt.set_camerayaw(cameraYaw);
 
@@ -1778,7 +1780,7 @@ void SC_POSITION_SYNC_FOR_All(CSession* pSession, UINT32 playerID, float posX, f
     packetPool.Free(Packet);
 }
 
-void SC_POSITION_SYNC_FOR_SINGLE(CSession* pSession, UINT32 playerID, float posX, float posY, float cameraYaw)
+void SC_POSITION_SYNC_FOR_SINGLE(CSession* pSession, UINT32 playerID, float posX, float posY, float posZ, float cameraYaw)
 {
     game::SC_POSITION_SYNC pkt;
 
@@ -1787,6 +1789,8 @@ void SC_POSITION_SYNC_FOR_SINGLE(CSession* pSession, UINT32 playerID, float posX
     pkt.set_posx(posX);
 
     pkt.set_posy(posY);
+
+    pkt.set_posz(posZ);
 
     pkt.set_camerayaw(cameraYaw);
 
@@ -1806,7 +1810,7 @@ void SC_POSITION_SYNC_FOR_SINGLE(CSession* pSession, UINT32 playerID, float posX
     packetPool.Free(Packet);
 }
 
-void SC_POSITION_SYNC_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, float posX, float posY, float cameraYaw)
+void SC_POSITION_SYNC_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 playerID, float posX, float posY, float posZ, float cameraYaw)
 {
     game::SC_POSITION_SYNC pkt;
 
@@ -1815,6 +1819,8 @@ void SC_POSITION_SYNC_FOR_AROUND(CSession* pSession, CRoom* pRoom, UINT32 player
     pkt.set_posx(posX);
 
     pkt.set_posy(posY);
+
+    pkt.set_posz(posZ);
 
     pkt.set_camerayaw(cameraYaw);
 

@@ -7243,7 +7243,8 @@ class CS_POSITION_SYNC final :
   enum : int {
     kPosXFieldNumber = 1,
     kPosYFieldNumber = 2,
-    kCameraYawFieldNumber = 3,
+    kPosZFieldNumber = 3,
+    kCameraYawFieldNumber = 4,
   };
   // float posX = 1;
   void clear_posx();
@@ -7263,7 +7264,16 @@ class CS_POSITION_SYNC final :
   void _internal_set_posy(float value);
   public:
 
-  // float cameraYaw = 3;
+  // float posZ = 3;
+  void clear_posz();
+  float posz() const;
+  void set_posz(float value);
+  private:
+  float _internal_posz() const;
+  void _internal_set_posz(float value);
+  public:
+
+  // float cameraYaw = 4;
   void clear_camerayaw();
   float camerayaw() const;
   void set_camerayaw(float value);
@@ -7282,6 +7292,7 @@ class CS_POSITION_SYNC final :
   struct Impl_ {
     float posx_;
     float posy_;
+    float posz_;
     float camerayaw_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -8198,7 +8209,8 @@ class SC_POSITION_SYNC final :
     kPlayerIDFieldNumber = 1,
     kPosXFieldNumber = 2,
     kPosYFieldNumber = 3,
-    kCameraYawFieldNumber = 4,
+    kPosZFieldNumber = 4,
+    kCameraYawFieldNumber = 5,
   };
   // uint32 playerID = 1;
   void clear_playerid();
@@ -8227,7 +8239,16 @@ class SC_POSITION_SYNC final :
   void _internal_set_posy(float value);
   public:
 
-  // float cameraYaw = 4;
+  // float posZ = 4;
+  void clear_posz();
+  float posz() const;
+  void set_posz(float value);
+  private:
+  float _internal_posz() const;
+  void _internal_set_posz(float value);
+  public:
+
+  // float cameraYaw = 5;
   void clear_camerayaw();
   float camerayaw() const;
   void set_camerayaw(float value);
@@ -8247,6 +8268,7 @@ class SC_POSITION_SYNC final :
     uint32_t playerid_;
     float posx_;
     float posy_;
+    float posz_;
     float camerayaw_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -12731,7 +12753,27 @@ inline void CS_POSITION_SYNC::set_posy(float value) {
   // @@protoc_insertion_point(field_set:game.CS_POSITION_SYNC.posY)
 }
 
-// float cameraYaw = 3;
+// float posZ = 3;
+inline void CS_POSITION_SYNC::clear_posz() {
+  _impl_.posz_ = 0;
+}
+inline float CS_POSITION_SYNC::_internal_posz() const {
+  return _impl_.posz_;
+}
+inline float CS_POSITION_SYNC::posz() const {
+  // @@protoc_insertion_point(field_get:game.CS_POSITION_SYNC.posZ)
+  return _internal_posz();
+}
+inline void CS_POSITION_SYNC::_internal_set_posz(float value) {
+  
+  _impl_.posz_ = value;
+}
+inline void CS_POSITION_SYNC::set_posz(float value) {
+  _internal_set_posz(value);
+  // @@protoc_insertion_point(field_set:game.CS_POSITION_SYNC.posZ)
+}
+
+// float cameraYaw = 4;
 inline void CS_POSITION_SYNC::clear_camerayaw() {
   _impl_.camerayaw_ = 0;
 }
@@ -13015,7 +13057,27 @@ inline void SC_POSITION_SYNC::set_posy(float value) {
   // @@protoc_insertion_point(field_set:game.SC_POSITION_SYNC.posY)
 }
 
-// float cameraYaw = 4;
+// float posZ = 4;
+inline void SC_POSITION_SYNC::clear_posz() {
+  _impl_.posz_ = 0;
+}
+inline float SC_POSITION_SYNC::_internal_posz() const {
+  return _impl_.posz_;
+}
+inline float SC_POSITION_SYNC::posz() const {
+  // @@protoc_insertion_point(field_get:game.SC_POSITION_SYNC.posZ)
+  return _internal_posz();
+}
+inline void SC_POSITION_SYNC::_internal_set_posz(float value) {
+  
+  _impl_.posz_ = value;
+}
+inline void SC_POSITION_SYNC::set_posz(float value) {
+  _internal_set_posz(value);
+  // @@protoc_insertion_point(field_set:game.SC_POSITION_SYNC.posZ)
+}
+
+// float cameraYaw = 5;
 inline void SC_POSITION_SYNC::clear_camerayaw() {
   _impl_.camerayaw_ = 0;
 }

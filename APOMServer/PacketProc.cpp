@@ -353,6 +353,7 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     {
         float posX;
         float posY;
+        float posZ;
         float cameraYaw;
 
         game::CS_POSITION_SYNC pkt;
@@ -360,9 +361,10 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
 
         posX = pkt.posx();
         posY = pkt.posy();
+        posZ = pkt.posz();
         cameraYaw = pkt.camerayaw();
 
-        return CS_POSITION_SYNC(pSession, posX, posY, cameraYaw);
+        return CS_POSITION_SYNC(pSession, posX, posY, posZ, cameraYaw);
     }
     break;
 
@@ -794,7 +796,7 @@ bool CS_PLAYER_ATTACK(CSession* pSession, UINT32 aiID, UINT32 attackDamage)
     return true;
 }
 
-bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float cameraYaw)
+bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float posZ, float cameraYaw)
 {
     // 1. 연결된 플레이어 추출
     CPlayer* pPlayer = static_cast<CPlayer*>(pSession->pObj);
@@ -802,10 +804,10 @@ bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float cameraYa
     // 2. 방 정보 검색
     CRoom* pRoom = roomManager.GetRoomById(pPlayer->GetRoomId());
 
-    SC_POSITION_SYNC_FOR_AROUND(pSession, pRoom, pPlayer->m_ID, posX, posY, cameraYaw);
+    SC_POSITION_SYNC_FOR_AROUND(pSession, pRoom, pPlayer->m_ID, posX, posY, posZ, cameraYaw);
 
     // 위치 세팅
-    pPlayer->SetPosition(posX, 0, posY);
+    pPlayer->SetPosition(posX, posY, posZ);
 
     return true;
 }

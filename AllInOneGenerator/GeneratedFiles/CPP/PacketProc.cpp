@@ -347,6 +347,7 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
     {
         float posX;
         float posY;
+        float posZ;
         float cameraYaw;
 
         game::CS_POSITION_SYNC pkt;
@@ -354,9 +355,10 @@ bool PacketProc(CSession* pSession, game::PacketID packetType, CPacket* pPacket)
 
         posX = pkt.posx();
         posY = pkt.posy();
+        posZ = pkt.posz();
         cameraYaw = pkt.camerayaw();
 
-        return CS_POSITION_SYNC(pSession, posX, posY, cameraYaw);
+        return CS_POSITION_SYNC(pSession, posX, posY, posZ, cameraYaw);
     }
     break;
 
@@ -586,7 +588,7 @@ bool CS_PLAYER_DIE(CSession* pSession, UINT32 playerID)
     return false;
 }
 
-bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float cameraYaw)
+bool CS_POSITION_SYNC(CSession* pSession, float posX, float posY, float posZ, float cameraYaw)
 {
     return false;
 }

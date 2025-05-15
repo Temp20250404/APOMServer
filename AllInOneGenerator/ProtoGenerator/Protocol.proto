@@ -230,7 +230,8 @@ message CS_PLAYER_DIE {
 message CS_POSITION_SYNC {
     float posX = 1; // 위치 정보 동기화
     float posY = 2;
-    float cameraYaw = 3; // 카메라 회전값
+    float posZ = 3;
+    float cameraYaw = 4; // 카메라 회전값
 }
 message SC_KEYINFO {
     uint32 playerID = 1; // 움직임을 보내는 플레이어의 id
@@ -255,7 +256,8 @@ message SC_POSITION_SYNC {
     uint32 playerID = 1; // 위치를 보내는 플레이어의 id
     float posX = 2; // 위치 정보 동기화
     float posY = 3;
-    float cameraYaw = 4; // 카메라 회전값
+    float posZ = 4;
+    float cameraYaw = 5; // 카메라 회전값
 }
 message CS_MONSTER_AI {
     uint32 aiID = 1; // 보스의 고유 ID
